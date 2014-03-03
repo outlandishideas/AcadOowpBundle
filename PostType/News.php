@@ -3,16 +3,17 @@
 namespace Outlandish\AcadOowpBundle\PostType;
 
 
-abstract class Person extends Post {
+abstract class News extends Post {
 
-    //connected to document, event, news, place, project, role
+    //connected to document, event, person, place, project
     public static function onRegistrationComplete() {
+        self::registerConnection(Person::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
         self::registerConnection(Place::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
         self::registerConnection(Project::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
     }
 
     public static function friendlyNamePlural(){
-        return "People";
+        return "News";
     }
 
-} 
+}
