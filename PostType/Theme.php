@@ -5,7 +5,6 @@ namespace Outlandish\AcadOowpBundle\PostType;
 
 abstract class Theme extends Post {
 
-    //connects to page
-
+    //connected to document, event, news, person, project
 
 }
