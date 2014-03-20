@@ -6,13 +6,13 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 use Outlandish\RoutemasterBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Outlandish\RoutemasterBundle\Annotation\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends BaseController {
 
 	/**
 	 * Route is specified in routing.yml because it needs to come last
-	 * @Template
+	 * @Template("OutlandishAcadOowpBundle:Default:defaultPost.html.twig")
 	 */
 	public function defaultPostAction($slugs) {
 		$slugBits = explode('/', trim($slugs, '/'));
@@ -23,7 +23,7 @@ class DefaultController extends BaseController {
 
 	/**
 	 * @Route("/")
-	 * @Template("OutlandishAcadOowpBundle:Default:defaultPost.html.php")
+	 * @Template("OutlandishAcadOowpBundle:Default:defaultPost.html.twig")
 	 */
 	public function frontPageAction() {
 		$post = $this->querySingle(array('page_id' => get_option('page_on_front')));
