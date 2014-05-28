@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Outlandish\SiteBundle\Controller;
+namespace Outlandish\AcadOowpBundle\Controller;
 
 
 use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
