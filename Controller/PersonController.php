@@ -12,25 +12,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class PersonController extends BaseController {
 
-	/**
-	 * @Route("/people/{name}/", name="person")
-	 * @Template("OutlandishAcadOowpBundle:Person:personPost.html.twig")
-	 */
-	public function personAction($name) {
-        $response = array();
-
-        $post = $this->querySingle(array('name' => $name, 'post_type' => Person::postType()));
-        if(!$post) return $this->redirect($this->generateUrl("home"));
-
-        $response['post'] = $post;
-		return $response;
-	}
-
     /**
-     * @Route("/people/", name="person-index")
+     * @Route("/people/")
      * @Template("OutlandishAcadOowpBundle:Person:personIndex.html.twig")
      */
-    public function personIndexAction() {
+    public function indexAction() {
         $response = array();
 
         $post = $this->querySingle(array('page_id' => Person::postTypeParentId()));
@@ -40,6 +26,20 @@ class PersonController extends BaseController {
 
         $response['post'] = $post;
         $response['items'] = $people;
+        return $response;
+    }
+
+    /**
+     * @Route("/people/{name}/", name="person")
+     * @Template("OutlandishAcadOowpBundle:Person:personPost.html.twig")
+     */
+    public function singleAction($name) {
+        $response = array();
+
+        $post = $this->querySingle(array('name' => $name, 'post_type' => Person::postType()));
+        if(!$post) return $this->redirect($this->generateUrl("home"));
+
+        $response['post'] = $post;
         return $response;
     }
 

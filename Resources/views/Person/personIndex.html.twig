@@ -5,11 +5,4 @@
 {% block content %}
     <h1>{{ post.title() }} - Person Index</h1>
 
-    {{ post.content() }}
-
-    <ul>
-        {% for item in items %}
-            <li><a href="{{ item.permalink() }}">{{ item.title() }}</a></li>
-        {% endfor %}
-    </ul>
 {% endblock %}
