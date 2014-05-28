@@ -36,7 +36,10 @@ class PersonController extends BaseController {
         $post = $this->querySingle(array('page_id' => Person::postTypeParentId()));
         if(!$post) return $this->redirect($this->generateUrl("home"));
 
+        $people = Person::fetchAll();
+
         $response['post'] = $post;
+        $response['items'] = $people;
         return $response;
     }
 
