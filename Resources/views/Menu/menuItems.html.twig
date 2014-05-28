@@ -1,0 +1,3 @@
+{% for post in posts %}
+    {% include "OutlandishOowpBundle:Helper:menuItem.html.twig" with { post: post, queryArgs: queryArgs, menuArgs: menuArgs } %}
+{% endfor %}
