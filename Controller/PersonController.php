@@ -5,6 +5,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 
 use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
+use Outlandish\AcadOowpBundle\AcaSearch\AcaSearch;
 use Outlandish\AcadOowpBundle\PostType\Post;
 use Outlandish\SiteBundle\PostType\Person;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -22,7 +23,10 @@ class PersonController extends BaseController {
         $post = $this->querySingle(array('page_id' => Person::postTypeParentId()));
         if(!$post) return $this->redirect($this->generateUrl("home"));
 
-        $people = Person::fetchAll();
+        /** @var AcaSearch $search */
+        $search = $this->container->get('aca.search');
+
+        $people = $search->search();
 
         $response['post'] = $post;
         $response['items'] = $people;

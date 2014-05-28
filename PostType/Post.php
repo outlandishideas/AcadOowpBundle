@@ -18,4 +18,15 @@ abstract class Post extends BasePost {
     public function newMethod(){
         return "This is new";
     }
+
+    /**
+     * Create search args for this post type
+     * To be passed through when adding this as a filter to FacetedSearch
+     * @return array
+     */
+    public function getSearchArgs()
+    {
+        //todo: construct search args
+        return array();
+    }
 } 
