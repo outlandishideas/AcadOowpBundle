@@ -14,7 +14,7 @@ class PersonController extends BaseController {
 
 	/**
 	 * @Route("/people/{name}/", name="person")
-	 * @Template("OutlandishAcadOowpBundle:Default:defaultPost.html.twig")
+	 * @Template("OutlandishAcadOowpBundle:Person:personPost.html.twig")
 	 */
 	public function personAction($name) {
         $response = array();
@@ -28,7 +28,7 @@ class PersonController extends BaseController {
 
     /**
      * @Route("/people/", name="person-index")
-     * @Template("OutlandishAcadOowpBundle:Default:defaultPost.html.twig")
+     * @Template("OutlandishAcadOowpBundle:Person:personIndex.html.twig")
      */
     public function personIndexAction() {
         $response = array();
