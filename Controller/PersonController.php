@@ -24,9 +24,10 @@ class PersonController extends BaseController {
         if(!$post) return $this->redirect($this->generateUrl("home"));
 
         /** @var AcaSearch $search */
-        $search = $this->container->get('aca.search');
+        //todo: meed to sort our faceted search first
+//        $search = $this->container->get('aca.search');
 
-        $people = $search->search();
+        $people = Person::fetchAll();
 
         $response['post'] = $post;
         $response['items'] = $people;
