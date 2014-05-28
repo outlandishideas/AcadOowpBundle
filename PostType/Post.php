@@ -19,6 +19,8 @@ abstract class Post extends BasePost {
         return "This is new";
     }
 
+    //todo: this is a possible route to go for the faceted search
+    //I can't be bothered to write it here, but come and ask me if questions
     /**
      * Create search args for this post type
      * To be passed through when adding this as a filter to FacetedSearch
