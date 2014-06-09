@@ -22,8 +22,8 @@ class DefaultController extends BaseController {
 	}
 
 	/**
-	 * @Route("/")
-	 * @Template("OutlandishAcadOowpBundle:Default:defaultPost.html.twig")
+	 * @Route("/", name="home")
+	 * @Template("OutlandishAcadOowpBundle:Default:frontPage.html.twig")
 	 */
 	public function frontPageAction() {
 		$post = $this->querySingle(array('page_id' => get_option('page_on_front')));
