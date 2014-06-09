@@ -1,0 +1,12 @@
+.main-title {
+    font-size: 24px;
+}
+
+/* main search */
+.main-search {
+    background-color: #000;
+}
+
+.main-search label {
+    display: none;
+}
