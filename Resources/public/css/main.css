@@ -1,12 +1,166 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,700);
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight : bold;
+    font-size : 2.25rem;
+    line-height : 2.75rem;
+    letter-spacing : 1.2px;
+    color : #000000;
+    color : rgb(0, 0, 0);
+}
+
+h1 a {
+    font-family: 'Roboto', sans-serif;
+    font-weight : bold;
+    font-size : 2.25rem;
+    line-height : 2.75rem;
+    letter-spacing : 1.2px;
+    color : #000000;
+    color : rgb(0, 0, 0);
+    text-decoration : underline;
+}
+
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight : bold;
+    font-size : 24px;
+    color : #000000;
+    color : rgb(0, 0, 0);
+    text-decoration : underline;
+}
+
+h2 a {
+    font-family: 'Roboto', sans-serif;
+    font-weight : bold;
+    font-size : 24px;
+    color : #000000;
+    color : rgb(0, 0, 0);
+    text-decoration : underline;
+}
+
+h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight : bold;
+    font-size : 18px;
+    letter-spacing : 0.9px;
+    color : #000000;
+    color : rgb(0, 0, 0);
+}
+
+h6.subhead {
+    font-family: 'Roboto', sans-serif;
+    font-weight : bold;
+    font-size : 16px;
+    line-height : 19.2px;
+    letter-spacing : 0.8px;
+    color : #000000;
+    color : rgb(0, 0, 0);
+    text-decoration : underline;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    font-size : 18px;
+    line-height : 24px;
+    letter-spacing : 0.9px;
+    color : #000000;
+    color : rgb(0, 0, 0);
+}
+
 .main-title {
     font-size: 24px;
+}
+
+.section {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #000;
+    margin-bottom: 1rem;
+}
+
+.stand-in-image {
+    height: 300px;
+    width: 100%;
+    background-color: #000;
+}
+
+/* inputs */
+
+input[type="text"] {
+    padding: 4px 8px;
+    height: 2rem;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+
+}
+
+/* main nav */
+
+nav {
+    margin-top: 3rem;
+}
+
+nav .inline-list {
+    margin: 0;
+    margin-bottom: 0.5rem;
+}
+
+nav .inline-list li a{
+    color: #000;
 }
 
 /* main search */
 .main-search {
     background-color: #000;
 }
+.main-search form {
+    margin: 0;
+}
 
 .main-search label {
     display: none;
+}
+
+.main-search input[type="text"] {
+    margin: 0.25rem 0;
+    padding-right: 2rem;
+}
+
+.main-search button {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    top: 0.25rem;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    color: #000;
+}
+
+.main-search .filter {
+    display: block;
+    height: 2.5rem;
+    padding: 0.75rem 0;
+    color: #fff;
+}
+
+/* breadcrumbs */
+
+.breadcrumbs {
+    border: none;
+    background: #fff;
+}
+
+.breadcrumbs .inline-list {
+    margin: 0;
+}
+
+.breadcrumbs .inline-list li a {
+    color: #000;
 }
