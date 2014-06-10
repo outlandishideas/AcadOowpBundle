@@ -6,6 +6,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 use Outlandish\RoutemasterBundle\Controller\BaseController;
 use Outlandish\SiteBundle\PostType\News;
+use Outlandish\SiteBundle\PostType\Page;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -27,15 +28,9 @@ class DefaultController extends BaseController {
 	 * @Template("OutlandishAcadOowpBundle:Default:frontPage.html.twig")
 	 */
 	public function frontPageAction() {
+        /** @var Page $post */
 		$post = $this->querySingle(array('page_id' => get_option('page_on_front')));
-        $news = News::fetchAll();
-        $sections = array(
-            array(
-                'title' => 'Latest News',
-                'items' => $news->posts,
-                'type' => 'featured'
-            )
-        );
+        $sections = $post->sections();
 		return array(
             'post' => $post,
             'sections' => $sections

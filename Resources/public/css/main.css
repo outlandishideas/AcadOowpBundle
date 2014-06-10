@@ -157,6 +157,10 @@ nav .inline-list li a{
 
 /* breadcrumbs */
 
+#breadcrumbs {
+    padding-bottom: 0;
+}
+
 .breadcrumbs {
     border: none;
     background: #fff;

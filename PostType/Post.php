@@ -31,4 +31,26 @@ abstract class Post extends BasePost {
         //todo: construct search args
         return array();
     }
+
+    public function sections()
+    {
+        $sections = $this->metadata('sections');
+        foreach($sections as $s => $section){
+            $items = $section['items'];
+            $ids = array();
+            foreach($items as $item){
+                if($item instanceof \WP_Post){
+                    $ids[] = $item->ID;
+                }
+            }
+            $query = Post::fetchAll(array('post_type' => 'any', 'post__in' => $ids));
+            if(count($query->posts) > 0){
+                $items = $query->posts;
+            } else {
+                $items = array();
+            }
+            $sections[$s]['items'] = $items;
+        }
+        return $sections;
+    }
 } 
