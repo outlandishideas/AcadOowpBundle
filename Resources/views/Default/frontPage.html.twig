@@ -14,28 +14,6 @@
         </div>
     </div>
     {% for section in sections %}
-        <div class="section">
-            <div class="row">
-                <div class="large-24 columns">
-                    <h2>{{ section.title }}</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="large-12 columns">
-                    {% set item = section.items | first  %}
-                    {% include 'OutlandishSiteBundle:Default:defaultItem.html.twig' with {
-                        'item': item,
-                        'classes': 'main',
-                        'image': 'large'} %}
-                </div>
-                <div class="large-12 columns">
-                    {% for item in section.items %}
-                        {% if not loop.first and loop.index <= 4 %}
-                            {% include 'OutlandishSiteBundle:Default:defaultItem.html.twig' with {'item': item, 'classes': ''} %}
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
+        {% include 'OutlandishSiteBundle:Section:' ~ section.layout ~ '.html.twig' %}
     {% endfor %}
 {% endblock %}

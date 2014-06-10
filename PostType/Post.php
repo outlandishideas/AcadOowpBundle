@@ -35,6 +35,9 @@ abstract class Post extends BasePost {
     public function sections()
     {
         $sections = $this->metadata('sections');
+        if(!$sections){
+            return array();
+        }
         foreach($sections as $s => $section){
             $items = $section['items'];
             $ids = array();
