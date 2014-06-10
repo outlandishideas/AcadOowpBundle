@@ -50,6 +50,11 @@ h3 {
     letter-spacing : 0.9px;
     color : #000000;
     color : rgb(0, 0, 0);
+    margin-bottom: 0.25rem;
+}
+
+a h3 {
+    text-decoration : underline;
 }
 
 h6.subhead {
@@ -163,4 +168,34 @@ nav .inline-list li a{
 
 .breadcrumbs .inline-list li a {
     color: #000;
+}
+
+/* post-item */
+
+.post-item {
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.post-item:last-child {
+    margin-bottom: 0;
+}
+
+.post-item .subtitle {
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.post-item.main>.row,
+.post-item.main>.row>.columns {
+    margin: 0;
+    padding: 0;
+    float: none;
+    width: 100%;
+}
+
+.post-item.main .subtitle {
+    margin-top: 1rem;
 }
