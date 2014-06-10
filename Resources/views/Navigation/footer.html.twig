@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="large-24 columns">
+
+        {% if organisations | length > 0 %}
+            {% block associated_organisations %}
+                <div id="associated-organisations" class="section">
+                    <ul class="large-block-grid-5">
+                        {% for org in organisations %}
+                            <li>{{ org.title }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endblock %}
+        {% endif %}
+
+        {% block main_footer %}
+
+            <div class="section">
+                <div class="row">
+                    <div class="large-4 columns">
+                        <h2>Navigation</h2>
+                        <nav>
+                            <ul>
+                                {% for page in pages %}
+                                    <li><a href="{{ page.permalink() }}">{{ page.title() }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                    </div>
+                    {% for section in sections %}
+                        {% if loop.index < 4 %}
+                            <div class="large-4 columns">
+                                <h2>{{ section.title }}</h2>
+                                {% set item = section.items | first %}
+                                <a href="{{ item.permalink() }}" class="post-item">
+                                    <p class="subtitle">{{ item.date() }}</p>
+                                    <h3>{{ item.title() }}</h3>
+                                    <p>{{ item.excerpt(150) }}</p>
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="large-4 columns">
+
+                    </div>
+                </div>
+            </div>
+
+        {% endblock %}
+
+        <div id="copyright">
+            &copy; logo 2014
+        </div>
+
+
+    </div>
+</div>

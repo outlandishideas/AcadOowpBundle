@@ -203,3 +203,46 @@ nav .inline-list li a{
 .post-item.main .subtitle {
     margin-top: 1rem;
 }
+
+/* footer */
+
+#footer h2 {
+    font-size: 1.2rem;
+}
+
+#footer p,
+#footer .post-item h3,
+#footer .subtitle {
+    font-size: 0.8rem;
+}
+
+#footer p {
+    line-height: 1rem;
+}
+
+#footer nav {
+    margin-top: 0;
+}
+
+#footer nav ul {
+    margin-left: 0;
+}
+
+#footer nav ul li {
+    list-style: none;
+}
+
+#footer nav ul li a {
+    color: #000;
+    text-decoration: underline;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+#footer #copyright {
+    font-size: 0.8rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-decoration: underline;
+    font-weight: bold;
+}

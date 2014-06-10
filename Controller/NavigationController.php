@@ -8,6 +8,36 @@ use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 
 class NavigationController extends BaseController {
 
+    public function renderFooterAction(){
+        $this->queryManager = $this->get('outlandish_oowp.query_manager');
+        $this->postManager = $this->get('outlandish_oowp.post_manager');
+
+        $homePage = $this->queryManager->query(array(
+            'page_id' => get_option('page_on_front')
+            ))->post;
+
+        $pages = $this->queryManager->query(array(
+           'post_type' => 'page',
+            'orderby' => 'menu_order',
+            'order' => 'asc'
+        ));
+
+        $sections = $homePage->sections();
+        $organisations = get_field('associated_organisations', 'options');
+        $address = get_field('address', 'options');
+        $phoneNumber = get_field('phone_number', 'options');
+        return $this->render(
+            'OutlandishAcadOowpBundle:Navigation:footer.html.twig',
+            array(
+                'sections' => $sections,
+                'pages' => $pages->posts,
+                'organisations' => $organisations,
+                'address' => $address,
+                'phonenumber' => $phoneNumber
+            )
+        );
+    }
+
 	public function renderMenuAction( $maxDepth = 1 ){
 
 		//$menu = $this->get('outlandish_oowp.helper.menu');
