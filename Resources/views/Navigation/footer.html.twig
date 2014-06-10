@@ -41,7 +41,21 @@
                         {% endif %}
                     {% endfor %}
                     <div class="large-4 columns">
-
+                        {% if socialmedia | length > 0 %}
+                            <ul class="social-media inline-list">
+                                {% for media in socialmedia %}
+                                    <li>
+                                        <a href="{{ media.permalink() }}" class="fa {{ media.type }}"></a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <h2>logo</h2>
+                        <p>{{ address | raw }}</p>
+                        <p>
+                            <span>email@emailaddress.com</span><br/>
+                            <span>{{ phonenumber }}</span>
+                        </p>
                     </div>
                 </div>
             </div>

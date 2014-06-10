@@ -24,12 +24,14 @@ class NavigationController extends BaseController {
 
         $sections = $homePage->sections();
         $organisations = get_field('associated_organisations', 'options');
+        $socialMedia = get_field('social_media', 'options');
         $address = get_field('address', 'options');
         $phoneNumber = get_field('phone_number', 'options');
         return $this->render(
             'OutlandishAcadOowpBundle:Navigation:footer.html.twig',
             array(
                 'sections' => $sections,
+                'socialmedia' => $socialMedia,
                 'pages' => $pages->posts,
                 'organisations' => $organisations,
                 'address' => $address,
