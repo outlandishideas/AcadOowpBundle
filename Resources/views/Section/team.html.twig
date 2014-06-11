@@ -9,12 +9,7 @@
             <ul class="large-block-grid-4">
                 {% for item in section.items %}
                     {% if loop.index <= 3 %}
-                        <li>
-                            <a href="{{ item.permalink() }}" class="post-item">
-                                <h3>{{ item.title() }}</h3>
-                                <p>{{ item.excerpt() }}</p>
-                            </a>
-                        </li>
+                        <li>{% include "OutlandishSiteBundle:Default:defaultItem.html.twig" with {'item': item, 'image': 'none'} %}</li>
                     {% endif %}
                 {% endfor %}
             </ul>

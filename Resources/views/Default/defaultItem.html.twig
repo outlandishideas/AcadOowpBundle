@@ -1,16 +1,19 @@
 {% if not image %}{% set image = "thumbnail" %}{% endif %}
 {% if not excerpt_length %}{% set excerpt_length = 400 %}{% endif %}
 
-
-<a href="{{ item.permalink() }}" class="post-item {{ classes }}">
-    <div class="row">
-        <div class="columns large-6">
-            {% block item_image %}{{ item.featuredImage(image) | raw }}{% endblock %}
+{% if image == "none" %}
+    <a href="{{ item.permalink() }}" class="post-item {{ classes }}">
+        {% include 'OutlandishSiteBundle:Item:itemContent.html.twig' with {'item': item } %}
+    </a>
+{% else %}
+    <a href="{{ item.permalink() }}" class="post-item {{ classes }}">
+        <div class="row">
+            <div class="columns large-6">
+                {% block item_image %}{{ item.featuredImage(image) | raw }}{% endblock %}
+            </div>
+            <div class="columns large-18">
+                {% include 'OutlandishSiteBundle:Item:itemContent.html.twig' with {'item': item} %}
+            </div>
         </div>
-        <div class="columns large-18">
-            {% block item_subtitle %}<p class="subtitle">{{ item.date }}</p>{% endblock %}
-            {% block item_title %}<h3>{{ item.title() }}</h3>{% endblock %}
-            {% block item_content %}<p>{{ item.excerpt(excerpt_length) }}</p>{% endblock %}
-        </div>
-    </div>
-</a>
+    </a>
+{% endif %}
