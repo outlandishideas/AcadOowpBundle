@@ -5,10 +5,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="large-24 columns">
-            <ul class="large-block-grid-4">
+        <div class="large-12 columns">
+            {% set item = section.items | first  %}
+            {% include 'OutlandishSiteBundle:Default:defaultItem.html.twig' with {
+            'item': item,
+            'classes': 'main',
+            'image': 'large'} %}
+        </div>
+        <div class="large-12 columns">
+            <ul class="large-block-grid-2">
                 {% for item in section.items %}
-                    {% if loop.index <= 8 %}
+                    {% if not loop.first and loop.index <= 3 %}
                         <li>{% include 'OutlandishSiteBundle:Default:defaultItem.html.twig' with {
                             'item': item,
                             'classes': 'main',

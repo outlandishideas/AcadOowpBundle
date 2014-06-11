@@ -1,23 +1,29 @@
 <div class="section">
     <div class="row">
-        <div class="large-24 columns">
+        <div class="large-8 columns">
             <h2>{{ section.title }}</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="large-12 columns">
             {% set item = section.items | first  %}
-            {% include 'OutlandishSiteBundle:Default:defaultItem.html.twig' with {
-            'item': item,
-            'classes': 'main',
-            'image': 'large'} %}
+            <a href="{{ item.permalink() }}" class="post-item">
+                <p class="subtitle">{{ item.date() }}</p>
+                <h3>{{ item.title() }}</h3>
+                <p>{{ item.excerpt() }}</p>
+            </a>
         </div>
-        <div class="large-12 columns">
-            {% for item in section.items %}
-                {% if not loop.first and loop.index <= 4 %}
-                    {% include 'OutlandishSiteBundle:Default:defaultItem.html.twig' with {'item': item, 'classes': ''} %}
-                {% endif %}
-            {% endfor %}
+        <div class="large-16 columns">
+            {{ item.featuredImage('large') | raw }}
+            <div class="row">
+                {% for item in section.items %}
+                    {% if not loop.first and loop.index <= 3 %}
+                        <div class="large-12 columns">
+                            <a href="{{ item.permalink() }}" class="post-item">
+                                <p class="subtitle">{{ item.date() }}</p>
+                                <h3>{{ item.title() }}</h3>
+                                <p>{{ item.excerpt(150) }}</p>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

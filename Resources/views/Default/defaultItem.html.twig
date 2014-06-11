@@ -1,4 +1,6 @@
 {% if not image %}{% set image = "thumbnail" %}{% endif %}
+{% if not excerpt_length %}{% set excerpt_length = 400 %}{% endif %}
+
 
 <a href="{{ item.permalink() }}" class="post-item {{ classes }}">
     <div class="row">
@@ -8,7 +10,7 @@
         <div class="columns large-18">
             {% block item_subtitle %}<p class="subtitle">{{ item.date }}</p>{% endblock %}
             {% block item_title %}<h3>{{ item.title() }}</h3>{% endblock %}
-            {% block item_content %}<p>{{ item.excerpt() }}</p>{% endblock %}
+            {% block item_content %}<p>{{ item.excerpt(excerpt_length) }}</p>{% endblock %}
         </div>
     </div>
 </a>
