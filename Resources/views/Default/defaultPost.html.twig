@@ -13,16 +13,16 @@
             </div>
         </div>
         <div class="row">
-            <div class="large-16 columns">
+            <div class="medium-8 medium-push-16 columns">
+                {% include "OutlandishSiteBundle:Partial:author.html.twig" %}
+            </div>
+            <div class="medium-16 medium-pull-8 columns">
                 {{ post.featuredImage('large') | raw }}
                 <div class="row">
                     <div class="large-20 columns">
                         {{ post.content() | raw }}
                     </div>
                 </div>
-            </div>
-            <div class="large-8 columns">
-                {% include "OutlandishSiteBundle:Partial:author.html.twig" %}
             </div>
         </div>
     </article>

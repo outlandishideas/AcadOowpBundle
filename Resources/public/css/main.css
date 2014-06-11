@@ -93,6 +93,12 @@ p {
     background-color: #000;
 }
 
+.stand-in-image.small {
+    height: 150px;
+    width: 100%;
+    background-color: #000;
+}
+
 /* inputs */
 
 input[type="text"] {
@@ -141,7 +147,7 @@ nav .inline-list li a{
     width: 2rem;
     height: 2rem;
     top: 0.25rem;
-    right: 0;
+    right: 1rem;
     margin: 0;
     padding: 0;
     background: #fff;
