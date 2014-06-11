@@ -28,13 +28,4 @@ class DocumentController extends BaseController {
         );
     }
 
-//    /**
-//     * @Route("/")
-//     * @Template("OutlandishAcadOowpBundle:Default:defaultPost.html.php")
-//     */
-//    public function frontPageAction() {
-//        $post = $this->querySingle(array('page_id' => get_option('page_on_front')));
-//        return array('post' => $post);
-//    }
-
 }
