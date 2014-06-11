@@ -246,3 +246,27 @@ nav .inline-list li a{
     text-decoration: underline;
     font-weight: bold;
 }
+
+/* article default */
+
+article img {
+    width: 100%;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+/* author partial */
+
+.post-author>.section {
+    padding: 0;
+}
+
+.post-author .author-title {
+    margin: 0;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.post-author .author-desc {
+    margin: 0;
+}

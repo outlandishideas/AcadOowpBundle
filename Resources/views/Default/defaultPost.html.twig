@@ -3,7 +3,27 @@
 {% block title %}{{ post.title() }}{% endblock %}
 
 {% block content %}
-    <h1>{{ post.title() }}</h1>
-
-    {{ post.content() }}
+    <article class="section">
+        <div class="row">
+            <div class="large-20 columns">
+                <h1>{{ post.title() }}</h1>
+                {% if post.subtitle() %}
+                    <p class="subtitle">{{ post.subtitle() }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-16 columns">
+                {{ post.featuredImage('large') | raw }}
+                <div class="row">
+                    <div class="large-20 columns">
+                        {{ post.content() | raw }}
+                    </div>
+                </div>
+            </div>
+            <div class="large-8 columns">
+                {% include "OutlandishSiteBundle:Partial:author.html.twig" %}
+            </div>
+        </div>
+    </article>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace Outlandish\AcadOowpBundle\PostType;
 
 use Outlandish\OowpBundle\PostType\RoutemasterPost as BasePost;
+use Outlandish\SiteBundle\PostType\Person;
 
 
 abstract class Post extends BasePost {
@@ -55,5 +56,48 @@ abstract class Post extends BasePost {
             $sections[$s]['items'] = $items;
         }
         return $sections;
+    }
+
+    public function subtitle()
+    {
+        return $this->metadata('subtitle');
+    }
+
+    public function authorName()
+    {
+        return $this->metadata('author_name');
+    }
+
+    public function authorDesc()
+    {
+        return $this->metadata('author_description');
+    }
+
+    public function author()
+    {
+        $authorType = $this->get('author_type');
+
+        if(!$authorType) return null;
+
+        switch($authorType){
+            case 'acf':
+                return array(
+                    'name' => $this->authorName(),
+                    'description' => $this->authorDesc()
+                );
+            break;
+            case 'post':
+                return $this->connected(Person::postType())->posts;
+            break;
+            default:
+//                $author = new \WP_User( $this->post_author);
+//                $person = Person::fetchByUser($author, true);
+//                if($person)
+        }
+    }
+
+    public function fetchByUser($user, $single = true)
+    {
+
     }
 } 
