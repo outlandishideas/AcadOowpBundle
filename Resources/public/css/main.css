@@ -261,6 +261,10 @@ article img {
     margin-bottom: 1rem;
 }
 
+article .subtitle {
+    font-size: 2rem;
+}
+
 /* author partial */
 
 .post-author>.section {
