@@ -9,6 +9,7 @@
 namespace Outlandish\AcadOowpBundle\FacetedSearch;
 
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostType;
+use Outlandish\AcadOowpBundle\FacetedSearch\Facets\Facet;
 use Outlandish\OowpBundle\Manager\QueryManager;
 use Outlandish\OowpBundle\Manager\PostManager;
 
@@ -34,12 +35,6 @@ class Search {
         return $this->addFacet($facet);
     }
 
-    public function addFacetConnected()
-    {
-        $facet = new FacetConnected();
-        return $this->addFacet($facet);
-    }
-
     public function search()
     {
         $args = $this->generateArguments();
@@ -48,13 +43,18 @@ class Search {
 
     public function generateArguments()
     {
-        $args = array();
+        $args = $this->defaults;
         foreach($this->facets as $facet) {
             /** @var Facet $facet */
-            $args[] = $facet->generateArguments();
+            $args = wp_parse_args($args, $facet->generateArguments());
         }
         return $args;
-
     }
+
+    public $defaults = array(
+        'post_type' => 'any',
+        'post_count' => 10,
+        'page' => 1,
+    );
 
 } 
