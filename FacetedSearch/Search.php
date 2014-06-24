@@ -17,10 +17,11 @@ class Search {
 
     protected $facets = array();
 
-    function __construct(QueryManager $queryManager, PostManager $postManager)
+    function __construct(QueryManager $queryManager, PostManager $postManager, array $params = array())
     {
         $this->queryManager = $queryManager;
         $this->postManager = $postManager;
+        $this->params = $params;
     }
 
     public function addFacet($facet)
@@ -46,9 +47,15 @@ class Search {
         $args = $this->defaults;
         foreach($this->facets as $facet) {
             /** @var Facet $facet */
+            $facet->setSelected($this->params);
             $args = array_merge($args, $facet->generateArguments());
         }
         return $args;
+    }
+
+    public function setParams(array $params)
+    {
+        $this->params = $params;
     }
 
     public $defaults = array(

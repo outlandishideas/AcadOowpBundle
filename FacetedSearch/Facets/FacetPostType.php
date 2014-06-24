@@ -20,9 +20,11 @@ class FacetPostType extends Facet{
 
         foreach($this->options as $option){
             if($option['selected']){
-                $args['post_type'][] = $option['selected'];
+                $args['post_type'][] = $option['name'];
             }
         }
+
+
 
         return array_merge($args, $parentArgs);
     }

@@ -34,22 +34,24 @@ abstract class Facet {
 
     public function setSelected(array $params)
     {
+        $setOne = false;
+
         if(array_key_exists($this->name, $params)){
             $selectedValues = $params[$this->name];
             if(!is_array($selectedValues)) $selectedValues = explode(',', $selectedValues);
 
             foreach($selectedValues as $value){
                 if(array_key_exists($value, $this->options)){
+                    $setOne = true;
                     $this->options[$value]['selected'] = true;
 
                     if($this->exclusive) break;
                 }
             }
-        } else {
-            if($this->defaultAll){
-                foreach($this->options as $p => $option){
-                    $this->options[$p]['selected'] = true;
-                }
+        }
+        if(!$setOne && $this->defaultAll){
+            foreach($this->options as $p => $option){
+                $this->options[$p]['selected'] = true;
             }
         }
         return $this;
