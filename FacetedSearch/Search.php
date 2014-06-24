@@ -46,7 +46,7 @@ class Search {
         $args = $this->defaults;
         foreach($this->facets as $facet) {
             /** @var Facet $facet */
-            $args = wp_parse_args($args, $facet->generateArguments());
+            $args = array_merge($args, $facet->generateArguments());
         }
         return $args;
     }

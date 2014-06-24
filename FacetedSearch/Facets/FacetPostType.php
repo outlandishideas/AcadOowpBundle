@@ -24,7 +24,7 @@ class FacetPostType extends Facet{
             }
         }
 
-        return wp_parse_args($args, $parentArgs);
+        return array_merge($args, $parentArgs);
     }
 
 
