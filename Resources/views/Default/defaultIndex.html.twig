@@ -1,13 +1,76 @@
 {% extends '::layout.html.twig' %}
 
 {% block content %}
-    <h1>{{ hello }}</h1>
 
-    {{ post.content() }}
+    {% if items | length > 0 %}
 
-    <ul>
-        {% for item in items %}
-            <li><a href="{{ item.permalink() }}">{{ item.title() }}</a></li>
+        {% if featuredItem %}
+
+        {% endif %}
+
+        <div class="row">
+
+            <div class="columns large-16">
+
+                <div class="row">
+                    <div class="columns large-12">
+                        <h2>{{ post.title() }}</h2>
+                    </div>
+                    <div class="columns large-12">
+                        Sort by <a href="#" class="selected">Date</a> - <a href="#">Relevance</a> - <a href="#">Popularity</a>
+                    </div>
+                </div>
+
+                <ul class="search-results">
+                    {% for item in items %}
+                        <li>
+                            {% include 'OutlandishSiteBundle:Default:defaultItem.html.twig' with {
+                                'item': item,
+                                'excerpt_length': 300,
+                                'image': 'medium'} %}
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+            <div class="columns large-7">
+                {% if sideItems | length > 0 %}
+                <h2>Other Content</h2>
+                <ul class="search-results sidebar">
+                    {% for type in sideItems %}
+                        {% if type.items | length > 0 %}
+                            <li>
+                                <h3>{{ type.title }}</h3>
+                                <ul>
+                                    {% for item in type.items %}
+                                        {% include 'OutlandishSiteBundle:Default:defaultItem.html.twig' with {
+                                        'item': item,
+                                        'excerpt_length': 150,
+                                        'image': 'none'} %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+
+        </div>
+
+    {% elseif sections | length > 0 %}
+        {% for section in sections %}
+            {% include 'OutlandishSiteBundle:Section:' ~ section.layout ~ '.html.twig' %}
         {% endfor %}
-    </ul>
+    {% else %}
+
+        <h1>{{ post.title() }}</h1>
+
+        {{ post.content() | raw }}
+
+    {% endif %}
+
+
+
 {% endblock %}

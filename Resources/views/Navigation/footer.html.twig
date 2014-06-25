@@ -48,7 +48,7 @@
                                 <ul class="social-media inline-list">
                                     {% for media in socialmedia %}
                                         <li>
-                                            <a href="{{ media.permalink() }}" class="fa {{ media.type }}"></a>
+                                            <a href="{{ media.permalink() }}" class="fa {{ media.type }} fa-fw"></a>
                                         </li>
                                     {% endfor %}
                                 </ul>
