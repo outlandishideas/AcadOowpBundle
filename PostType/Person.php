@@ -10,6 +10,7 @@ abstract class Person extends Post {
         self::registerConnection(Place::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
         self::registerConnection(Project::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
         self::registerConnection(Theme::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
+        self::registerConnection('user',  array('sortable' => 'any','cardinality' => 'one-to-one'));
         if(function_exists("register_field_group"))
         {
             register_field_group(array (
@@ -107,6 +108,18 @@ abstract class Person extends Post {
         return "People";
     }
 
-
+    /**
+     * @param $userId
+     * @return void|Person
+     */
+    public static function fetchByUser($userId)
+    {
+        $user = new \WP_User($userId);
+        $connectionName = self::getConnectionName('user');
+        return self::fetchOne(array(
+                'connected_type' => $connectionName,
+                'connected_items' => $user
+            ));
+    }
 
 } 

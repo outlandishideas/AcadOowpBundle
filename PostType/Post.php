@@ -75,7 +75,7 @@ abstract class Post extends BasePost {
 
     public function author()
     {
-        $authorType = $this->get('author_type');
+        $authorType = $this->metadata('author_type');
 
         if(!$authorType) return null;
 
@@ -90,14 +90,12 @@ abstract class Post extends BasePost {
                 return $this->connected(Person::postType())->posts;
             break;
             default:
-//                $author = new \WP_User( $this->post_author);
-//                $person = Person::fetchByUser($author, true);
-//                if($person)
+                $person = Person::fetchByUser($this->post_author);
+                if($person) {
+                    return $person;
+                } else {
+                    return new \WP_User( $this->post_author);
+                }
         }
-    }
-
-    public function fetchByUser($user, $single = true)
-    {
-
     }
 } 

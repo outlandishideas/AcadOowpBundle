@@ -7,6 +7,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 use Outlandish\RoutemasterBundle\Controller\BaseController;
 use Outlandish\SiteBundle\PostType\News;
 use Outlandish\SiteBundle\PostType\Page;
+use Outlandish\SiteBundle\PostType\Post;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -19,9 +20,14 @@ class DefaultController extends BaseController {
 	public function defaultPostAction($slugs)
     {
 		$slugBits = explode('/', trim($slugs, '/'));
+        /** @var Post $post */
 		$post = $this->querySingle(array('name' => $slugBits[count($slugBits) - 1], 'post_type' => 'any'), true);
+        $author = $post->author();
 
-		return array('post' => $post);
+		return array(
+            'post' => $post,
+            'author' => $author
+        );
 	}
 
 	/**
