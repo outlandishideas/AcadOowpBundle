@@ -7,7 +7,7 @@
     <div class="row">
         <div class="large-12 columns">
             {% set item = section.items | first  %}
-            {% include 'OutlandishSiteBundle:Default:defaultItem.html.twig' with {
+            {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
             'item': item,
             'classes': 'main',
             'image': 'large'} %}
@@ -16,7 +16,7 @@
             <ul class="large-block-grid-2">
                 {% for item in section.items %}
                     {% if not loop.first and loop.index <= 3 %}
-                        <li>{% include 'OutlandishSiteBundle:Default:defaultItem.html.twig' with {
+                        <li>{% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                             'item': item,
                             'classes': 'main',
                             'image':'large',

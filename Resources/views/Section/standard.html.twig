@@ -9,7 +9,7 @@
             <ul class="large-block-grid-4">
                 {% for item in section.items %}
                     {% if loop.index <= 8 %}
-                        <li>{% include 'OutlandishSiteBundle:Default:defaultItem.html.twig' with {
+                        <li>{% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                             'item': item,
                             'classes': 'main',
                             'image':'large',

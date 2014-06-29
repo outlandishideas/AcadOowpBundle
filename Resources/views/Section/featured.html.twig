@@ -15,7 +15,7 @@
                 {% for item in section.items %}
                     {% if not loop.first and loop.index <= 3 %}
                         <div class="large-12 columns">
-                            {% include "OutlandishSiteBundle:Default:defaultItem.html.twig" with {'item': item, 'image': 'none', 'excerpt_length': 150} %}
+                            {% include "OutlandishAcadOowpBundle:Default:defaultItem.html.twig" with {'item': item, 'image': 'none', 'excerpt_length': 150} %}
                         </div>
                     {% endif %}
                 {% endfor %}

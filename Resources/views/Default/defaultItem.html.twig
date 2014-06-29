@@ -3,7 +3,7 @@
 
 {% if image == "none" %}
     <a href="{{ item.permalink() }}" class="post-item {{ classes }}">
-        {% include 'OutlandishSiteBundle:Item:itemContent.html.twig' with {'item': item } %}
+        {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {'item': item } %}
     </a>
 {% else %}
     <a href="{{ item.permalink() }}" class="post-item {{ classes }}">
@@ -12,7 +12,7 @@
                 {% block item_image %}{{ item.featuredImage(image) | raw }}{% endblock %}
             </div>
             <div class="columns large-18">
-                {% include 'OutlandishSiteBundle:Item:itemContent.html.twig' with {'item': item} %}
+                {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {'item': item} %}
             </div>
         </div>
     </a>

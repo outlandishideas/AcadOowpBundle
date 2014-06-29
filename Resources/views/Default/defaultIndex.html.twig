@@ -24,7 +24,7 @@
                 <ul class="search-results">
                     {% for item in items %}
                         <li>
-                            {% include 'OutlandishSiteBundle:Default:defaultItem.html.twig' with {
+                            {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                                 'item': item,
                                 'excerpt_length': 300,
                                 'image': 'medium'} %}
@@ -44,7 +44,7 @@
                                 <h3>{{ type.title }}</h3>
                                 <ul>
                                     {% for item in type.items %}
-                                        {% include 'OutlandishSiteBundle:Default:defaultItem.html.twig' with {
+                                        {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                                         'item': item,
                                         'excerpt_length': 150,
                                         'image': 'none'} %}
@@ -61,7 +61,7 @@
 
     {% elseif sections | length > 0 %}
         {% for section in sections %}
-            {% include 'OutlandishSiteBundle:Section:' ~ section.layout ~ '.html.twig' %}
+            {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' %}
         {% endfor %}
     {% else %}
 

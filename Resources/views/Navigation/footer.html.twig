@@ -34,7 +34,7 @@
                                 {% block footer_item %}
                                     <h2>{{ section.title }}</h2>
                                     {% set item = section.items | first %}
-                                    {% include 'OutlandishSiteBundle:Default:defaultItem.html.twig' with {
+                                    {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                                     'item': item,
                                     'excerpt_length': 150,
                                     'image': 'none'} %}
