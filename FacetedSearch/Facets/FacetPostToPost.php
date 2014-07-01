@@ -16,20 +16,21 @@ class FacetPostToPost extends Facet{
         $parentArgs = parent::generateArguments();
         $args = array();
 
-        $args['connections'] = array();
+        $connectionNames = array();
 
         foreach($args['post_type'] as $postType) {
-            $connectionName = $this->getConnectionName($postType);
-            foreach($this->options as $option){
-                if($option['selected']){
-                    $argument = array(
-                        'connection' => $connectionName,
-                        'post' => $option['name']
-                    );
-                    $args['connections'][] = $argument;
-                }
-            }
+            $connectionNames[] = $this->getConnectionName($postType);
         }
+
+        $connectedItems = $this->getSelectedOptions();
+
+        if(!isset($args['connected_type']) || !is_array($args[''])) {
+            $args['connected_type'] = array();
+            $args[''] = array();
+        }
+
+        $args['connected_type'] = array_merge($connectionNames, $args['']);
+        $args[''] = array_merge($connectedItems, $args['']);
 
         return array_merge($args, $parentArgs);
     }

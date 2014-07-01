@@ -124,5 +124,15 @@ class SearchTest extends WebTestCase
         $this->search->addFacet($facet);
         $this->assertEquals($expected, $this->search->generateArguments());
     }
+
+    public function test_search_with_post_to_post_facet()
+    {
+        $expected = array(
+            'post_type' => array(Person::postType(), News::postType()),
+            'post_count' => 10,
+            'page' => 1,
+            ''
+        );
+    }
 }
  

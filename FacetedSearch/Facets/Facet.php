@@ -32,6 +32,13 @@ abstract class Facet {
         return $this;
     }
 
+    public function getSelectedOptions()
+    {
+        return array_filter($this->options, function($a){
+            return $a->selected;
+        });
+    }
+
     public function setSelected(array $params)
     {
         $setOne = false;
