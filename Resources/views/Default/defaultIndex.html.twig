@@ -24,10 +24,12 @@
                 <ul class="search-results">
                     {% for item in items %}
                         <li>
-                            {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
-                                'item': item,
-                                'excerpt_length': 300,
-                                'image': 'medium'} %}
+                            {% block itemInclude %}
+                                {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                                    'item': item,
+                                    'excerpt_length': 300,
+                                    'image': 'medium'} %}
+                            {% endblock %}
                         </li>
                     {% endfor %}
                 </ul>
@@ -44,10 +46,12 @@
                                 <h3>{{ type.title }}</h3>
                                 <ul>
                                     {% for item in type.items %}
-                                        {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
-                                        'item': item,
-                                        'excerpt_length': 150,
-                                        'image': 'none'} %}
+                                        {% block itemIncludeSide %}
+                                            {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                                            'item': item,
+                                            'excerpt_length': 150,
+                                            'image': 'none'} %}
+                                        {% endblock %}
                                     {% endfor %}
                                 </ul>
                             </li>

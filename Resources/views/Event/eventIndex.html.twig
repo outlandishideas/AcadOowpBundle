@@ -1,1 +1,17 @@
 {% extends 'OutlandishAcadOowpBundle:Default:defaultIndex.html.twig' %}
+
+ {% block itemInclude %}
+     {% include 'OutlandishAcadOowpBundle:Event:eventItem.html.twig' with {
+     'item': item,
+     'excerpt_length': 300,
+     'image': 'medium'} %}
+ {% endblock %}
+
+ {% block itemIncludeSide %}
+     {% include 'OutlandishAcadOowpBundle:Event:eventItem.html.twig' with {
+     'item': item,
+     'excerpt_length': 150,
+     'image': 'none'} %}
+ {% endblock %}
+
+
