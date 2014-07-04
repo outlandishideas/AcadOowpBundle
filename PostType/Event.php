@@ -76,4 +76,24 @@ abstract class Event extends Post {
         }
     }
 
+    public function eventStartAndEndDate() {
+        if ($this->eventEndDate()) {
+            $date = date("jS F",strtotime($this->metadata('start_date')))." - ".$this->eventEndDate();
+        } else {
+            $date = $this->eventStartDate();
+        }
+        return $date;
+    }
+
+    public function eventStartDate(){
+        return date("jS F Y",strtotime($this->metadata('start_date')));
+    }
+
+    public function eventEndDate(){
+        $endDate = date("jS F Y",strtotime($this->metadata('end_date')));
+        if ($endDate == $this->eventStartDate()) {
+            $endDate = '';
+        }
+       return $endDate;
+    }
 }
