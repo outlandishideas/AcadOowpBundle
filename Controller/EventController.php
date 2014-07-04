@@ -28,19 +28,49 @@ class EventController extends BaseController {
 
         /** @var AcaSearch $search */
 
-        $items = Event::fetchAll();
+        //only future events fetched here
+        $items = Event::fetchAll(
+            array (
+                'posts_per_page' => 10,
+                'meta_query'=>array(
+                    array(
+                        'key'=>'start_date',
+                        'value'=> date('Y/m/d'),
+                        'compare'=>'>',
+                        'type'=>'DATE'
+                    )
+                ),
+                'orderby' => 'meta_value',
+                'meta_key' => 'start_date',
+                'order' => 'asc'
+            )
+        );
 
-        //todo: fetch only past events here
+        //only past events fetched here
         $sideItems = array(
             array(
                 'title' => 'Past events',
-                'items' => Event::fetchAll(array('posts_per_page' => 3))
+                'items' => Event::fetchAll(
+                    array (
+                        'posts_per_page' => 3,
+                        'meta_query'=>array(
+                            array(
+                                'key'=>'end_date',
+                                'value'=> date('Y/m/d'),
+                                'compare'=>'<=',
+                                'type'=>'DATE'
+                            )
+                        ),
+                        'orderby' => 'meta_value',
+                        'meta_key' => 'start_date',
+                        'order' => 'desc'
+                    )
+                 )
             )
         );
 
         $response['post'] = $post;
         $response['items'] = $items;
-        //todo: fetch only future events here
         $response['sections'] = $post->sections();
         $response['sideItems'] = $sideItems;
         return $response;
