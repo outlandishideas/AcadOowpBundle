@@ -35,7 +35,7 @@ abstract class Facet {
     public function getSelectedOptions()
     {
         return array_filter($this->options, function($a){
-            return $a->selected;
+            return $a['selected'];
         });
     }
 
@@ -73,9 +73,9 @@ abstract class Facet {
         return $this;
     }
 
-    public function generateArguments()
+    public function generateArguments($args = array())
     {
-        $args = array();
+        $args = array_merge($args, array());
         return $args;
     }
 }

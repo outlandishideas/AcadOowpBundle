@@ -11,12 +11,14 @@ namespace Outlandish\AcadOowpBundle\FacetedSearch\Facets;
 
 class FacetPostType extends Facet{
 
-    public function generateArguments()
+    public function generateArguments($args = array())
     {
-        $parentArgs = parent::generateArguments();
-        $args = array(
-            'post_type' => array()
-        );
+        $args = parent::generateArguments($args);
+
+        if(!$args['post_type'] || !is_array($args['post_type'])) {
+            $args['post_type'] = array();
+        }
+
 
         foreach($this->options as $option){
             if($option['selected']){
@@ -24,9 +26,7 @@ class FacetPostType extends Facet{
             }
         }
 
-
-
-        return array_merge($args, $parentArgs);
+        return $args;
     }
 
 

@@ -8,7 +8,11 @@
 
 namespace Outlandish\AcadOowpBundle\Tests\FacetedSearch;
 
+require_once __DIR__ . '/../../../../../web/wp-config.php';
+require_once __DIR__ . '/../../../../../web/wp-settings.php';
+
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostType;
+use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostToPost;
 use Outlandish\AcadOowpBundle\FacetedSearch\Search;
 use Outlandish\SiteBundle\PostType\News;
 use Outlandish\SiteBundle\PostType\Person;
@@ -125,14 +129,85 @@ class SearchTest extends WebTestCase
         $this->assertEquals($expected, $this->search->generateArguments());
     }
 
-    public function test_search_with_post_to_post_facet()
+    public function test_search_with_post_to_post_facet_and_nothing_selected()
     {
         $expected = array(
             'post_type' => array(Person::postType(), News::postType()),
             'post_count' => 10,
-            'page' => 1,
-            ''
+            'page' => 1
         );
+        $facet = new FacetPostType('test_name', 'test_section');
+        $facet->addOption(Person::postType(), Person::friendlyName());
+        $facet->addOption(News::postType(), News::friendlyName());
+        $this->search->addFacet($facet);
+
+        $facet = new FacetPostToPost('p2p', 'p2p_section', 'person');
+        $facet->addOption(44, 'Chris Williams');
+        $facet->addOption(7, 'Penny Green');
+        $this->search->addFacet($facet);
+
+        $this->assertEquals($expected, $this->search->generateArguments());
+
+    }
+
+    public function test_search_with_post_to_post_facet_with_a_post_selected()
+    {
+        $expected = array(
+            'post_type' => array(News::postType()),
+            'post_count' => 10,
+            'page' => 1,
+            'connected_type' => array('news_person'),
+            'connected_items' => array(44)
+        );
+
+        $this->search->setParams(
+            array(
+                'test_name' => array(News::postType()),
+                'p2p' => 44
+            )
+        );
+
+        $facet = new FacetPostType('test_name', 'test_section');
+        $facet->addOption(Person::postType(), Person::friendlyName());
+        $facet->addOption(News::postType(), News::friendlyName());
+        $this->search->addFacet($facet);
+
+        $facet = new FacetPostToPost('p2p', 'p2p_section', Person::postType());
+        $facet->addOption(44, 'Chris Williams');
+        $facet->addOption(7, 'Penny Green');
+        $this->search->addFacet($facet);
+
+        $this->assertEquals($expected, $this->search->generateArguments());
+    }
+
+    public function test_search_with_post_to_post_facet_with_two_posts_selected()
+    {
+        $expected = array(
+            'post_type' => array(News::postType()),
+            'post_count' => 10,
+            'page' => 1,
+            'connected_type' => array('news_person'),
+            'connected_items' => array(44, 7)
+        );
+
+        $this->search->setParams(
+            array(
+                'test_name' => array(News::postType()),
+                'p2p' => array(44, 7)
+            )
+        );
+
+        $facet = new FacetPostType('test_name', 'test_section');
+        $facet->addOption(Person::postType(), Person::friendlyName());
+        $facet->addOption(News::postType(), News::friendlyName());
+        $this->search->addFacet($facet);
+
+        $facet = new FacetPostToPost('p2p', 'p2p_section', Person::postType());
+        $facet->addOption(44, 'Chris Williams');
+        $facet->addOption(7, 'Penny Green');
+        $this->search->addFacet($facet);
+
+        $this->assertEquals($expected, $this->search->generateArguments());
     }
 }
  
