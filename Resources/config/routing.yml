@@ -8,4 +8,4 @@ default_post:
     requirements:
         slugs: "[\w-\/]+"
     defaults:
-        _controller: AcadOowpBundle:Default:defaultPost
+        _controller: OutlandishAcadOowpBundle:Default:defaultPost

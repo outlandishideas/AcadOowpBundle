@@ -6,7 +6,6 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 use Outlandish\AcadOowpBundle\AcaSearch\AcaSearch;
-use Outlandish\AcadOowpBundle\PostType\Post;
 use Outlandish\SiteBundle\PostType\News;
 use Outlandish\SiteBundle\PostType\Person;
 use Outlandish\SiteBundle\PostType\Role;
@@ -23,7 +22,6 @@ class NewsController extends BaseController {
         $response = array();
 
         $post = $this->querySingle(array('page_id' => News::postTypeParentId()));
-        if(!$post) return $this->redirect($this->generateUrl("home"));
 
         /** @var AcaSearch $search */
         //todo: meed to sort our faceted search first
@@ -57,7 +55,6 @@ class NewsController extends BaseController {
         $response = array();
 
         $post = $this->querySingle(array('name' => $name, 'post_type' => News::postType()));
-        if(!$post) return $this->redirect($this->generateUrl("home"));
 
         $response['post'] = $post;
         return $response;

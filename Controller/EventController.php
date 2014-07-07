@@ -24,7 +24,6 @@ class EventController extends BaseController {
         $response = array();
 
         $post = $this->querySingle(array('page_id' => Event::postTypeParentId()));
-        if(!$post) return $this->redirect($this->generateUrl("home"));
 
         /** @var AcaSearch $search */
 
@@ -84,7 +83,6 @@ class EventController extends BaseController {
         $response = array();
 
         $post = $this->querySingle(array('name' => $name, 'post_type' => Event::postType()));
-        if(!$post) return $this->redirect($this->generateUrl("home"));
 
         $response['post'] = $post;
         return $response;

@@ -21,7 +21,6 @@ class PersonController extends BaseController {
         $response = array();
 
         $post = $this->querySingle(array('page_id' => Person::postTypeParentId()));
-        if(!$post) return $this->redirect($this->generateUrl("home"));
 
         /** @var AcaSearch $search */
         //todo: meed to sort our faceted search first
@@ -42,7 +41,6 @@ class PersonController extends BaseController {
         $response = array();
 
         $post = $this->querySingle(array('name' => $name, 'post_type' => Person::postType()));
-        if(!$post) return $this->redirect($this->generateUrl("home"));
 
         $response['post'] = $post;
         return $response;
