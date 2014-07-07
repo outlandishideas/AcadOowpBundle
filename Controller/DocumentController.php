@@ -10,22 +10,36 @@ use Outlandish\RoutemasterBundle\Annotation\Template;
 
 class DocumentController extends BaseController {
 
-    const INDEX_PAGE_ID = 22;
+    /**
+     * @Route("/documents/", name="documentsIndex")
+     * @Template("OutlandishAcadOowpBundle:Document:documentIndex.html.twig")
+     */
+    public function indexAction()
+    {
+        $response = array();
+
+        $post = $this->querySingle(array('page_id' => Document::postTypeParentId()));
+
+        $items = Document::fetchAll();
+
+        $response['post'] = $post;
+        $response['items'] = $items;
+        $response['sections'] = $post->sections();
+
+        return $response;
+    }
 
     /**
-     * @Route("/documents-index/", name="documents-index")
-     * @Template
+     * @Route("/documents/{name}/", name="documentsPost")
+     * @Template("OutlandishAcadOowpBundle:Document:documentPost.html.twig")
      */
-    public function indexAction() {
-        $post = $this->querySingle(array('page_id' => self::INDEX_PAGE_ID));
+    public function singleAction($name)
+    {
+        $response = array();
 
-//        $slugBits = explode('/', trim($slugs, '/'));
-//        $post = $this->querySingle(array('name' => $slugBits[count($slugBits) - 1], 'post_type' => 'any'), true);
+        $response['post'] = $this->querySingle(array('name' => $name, 'post_type' => Document::postType()));
 
-        return array(
-            'documents' => Document::fetchAllHighlightedFirst(),
-            'post' => $post
-        );
+        return $response;
     }
 
 }
