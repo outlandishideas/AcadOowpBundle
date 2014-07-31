@@ -39,28 +39,37 @@
         {% if contact_people | length > 0 %}
             {% for person in contact_people %}
                 <div class="row">
-                    <div class="large-10 columns large-centered small-centered">
-                        {% if person.name.content | length > 0 %}
-                            <p class="person-name">
-                                {{ person.name.prefix }}
-                                {{ person.name.content }}
-                                {{ person.name.suffix }}
-                            </p>
-                        {% endif %}
-                        {% if person.phone.content | length > 0 %}
-                            <p>
-                                {{ person.phone.prefix }}
-                                {{ person.phone.content }}
-                                {{ person.phone.suffix }}
-                            </p>
-                        {% endif %}
-                        {% if person.email.content | length > 0 %}
-                            <p>
-                                {{ person.email.prefix }}
-                                {{ person.email.content }}
-                                {{ person.email.suffix }}
-                            </p>
-                        {% endif %}
+                    <div class="large-12 columns small-centered large-centered">
+                        <div class="row">
+                            {% if person.image.url | length > 0 %}
+                                <div class="large-12 columns">
+                                    <img src="{{ person.image.url }}">
+                                </div>
+                            {% endif %}
+                            <div class="large-12 columns">
+                                {% if person.name.content | length > 0 %}
+                                    <p class="person-name">
+                                        {{ person.name.prefix }}
+                                        {{ person.name.content }}
+                                        {{ person.name.suffix }}
+                                    </p>
+                                {% endif %}
+                                {% if person.phone.content | length > 0 %}
+                                    <p>
+                                        {{ person.phone.prefix }}
+                                        {{ person.phone.content }}
+                                        {{ person.phone.suffix }}
+                                    </p>
+                                {% endif %}
+                                {% if person.email.content | length > 0 %}
+                                    <p>
+                                        {{ person.email.prefix }}
+                                        {{ person.email.content }}
+                                        {{ person.email.suffix }}
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             {% endfor %}

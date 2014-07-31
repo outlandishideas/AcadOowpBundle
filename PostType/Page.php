@@ -87,6 +87,9 @@ abstract class Page extends Post {
                     'content' => null,
                     'suffix' => ""
                 ),
+                'image' => array(
+                    'url' => null,
+                )
             );
             if ($person['contact_person_type'] == 'existing_contact_person') {
                 $wpPost = $person['contact_person_existing'];
@@ -98,16 +101,23 @@ abstract class Page extends Post {
                         $contactPerson['name']['content'] = $personObject->title();
                         $contactPerson['email']['content'] = $personObject->email();
                         $contactPerson['phone']['content'] = $personObject->phone();
+                        $contactPerson['image']['url'] = $personObject->featuredImageUrl('medium');
                     }
                 }
             } else {
                 $contactPerson['name']['content'] = $person['contact_person_name'];
                 $contactPerson['email']['content'] = $person['contact_person_email'];
                 $contactPerson['phone']['content'] = $person['contact_person_phone'];
+                $contactPerson['image']['url'] = $this->imageUrlOnPage($person['contact_person_image'], 'medium');
             }
             $contactPeople[] = $contactPerson;
         }
         return $contactPeople;
+    }
+
+    public function imageUrlOnPage($id, $image_size = 'thumbnail'){
+        $image = wp_get_attachment_image_src($id, $image_size);
+        return $image[0];
     }
 
 }
