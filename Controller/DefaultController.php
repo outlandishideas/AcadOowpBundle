@@ -55,6 +55,7 @@ class DefaultController extends BaseController {
         $post = $response['post'];
 
         $response['map']  = $post->metadata('map');
+        $response['contact_people'] = $post->metadata('contact_people');
         return $response;
     }
 

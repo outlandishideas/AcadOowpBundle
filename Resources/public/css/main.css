@@ -338,3 +338,11 @@ ul.search-results.sidebar>li>ul {
 .google-map .map {
     height: 350px;
 }
+
+.contact-person {
+    margin: 20px 0;
+}
+
+.contact-person .contact-person-name p {
+    font-weight: bold;
+}

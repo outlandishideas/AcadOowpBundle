@@ -29,6 +29,32 @@
                 </div>
             </div>
         </div>
+        {% if contact_people | length > 0 %}
+            <div class="contact-people">
+                {% for person in contact_people %}
+                    <div class="row">
+                        <div class="contact-person large-10 columns">
+                            {% if person.contact_person_existing | length > 0 %}
+                                {#todo: add some more fields to person post type, like email, phone etc#}
+                                <div class="contact-person-name">
+                                    <p>{{ person.contact_person_existing.post_title }}</p>
+                                </div>
+                            {% else %}
+                                <div class="contact-person-name">
+                                    <p>{{ person.contact_person_name }}</p>
+                                </div>
+                                <div class="contact-person-phone">
+                                    <p>T: {{ person.contact_person_phone }}</p>
+                                </div>
+                                <div class="contact-person-email">
+                                    <p>E: {{ person.contact_person_email }}</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
     </article>
 {% endblock %}
 
