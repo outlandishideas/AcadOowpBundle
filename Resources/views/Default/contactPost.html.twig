@@ -1,12 +1,12 @@
-{% extends '::layout.html.twig' %}
-
-{% block title %}{{ post.title() }}{% endblock %}
+{% extends 'OutlandishAcadOowpBundle:Default:defaultPost.html.twig' %}
 
 {% block content %}
 
-    <div class="full-width google-map">
-        <div class="map" data-marker="true" data-lat="{{ map.lat | raw  }}" data-lng="{{ map.lng | raw  }}" data-zoom="16"></div>
-    </div>
+    {% if map | length > 0 %}
+        <div class="google-map">
+            <div class="map" data-marker="true" data-lat="{{ map.lat | raw  }}" data-lng="{{ map.lng | raw  }}" data-zoom="16"></div>
+        </div>
+    {% endif %}
     <article class="section">
         <div class="row">
             <div class="large-20 columns">
@@ -17,11 +17,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="medium-8 medium-push-16 columns">
-                {% include "OutlandishAcadOowpBundle:Partial:author.html.twig" %}
-            </div>
-            <div class="medium-16 medium-pull-8 columns">
-                {{ post.featuredImage('large') | raw }}
+            <div class="medium-16 columns">
                 <div class="row">
                     <div class="large-20 columns">
                         {{ post.content() | raw }}
@@ -29,31 +25,43 @@
                 </div>
             </div>
         </div>
-        {% if contact_people | length > 0 %}
-            <div class="contact-people">
-                {% for person in contact_people %}
-                    <div class="row">
-                        <div class="contact-person large-10 columns">
-                            {% if person.contact_person_existing | length > 0 %}
-                                {#todo: add some more fields to person post type, like email, phone etc#}
-                                <div class="contact-person-name">
-                                    <p>{{ person.contact_person_existing.post_title }}</p>
-                                </div>
-                            {% else %}
-                                <div class="contact-person-name">
-                                    <p>{{ person.contact_person_name }}</p>
-                                </div>
-                                <div class="contact-person-phone">
-                                    <p>T: {{ person.contact_person_phone }}</p>
-                                </div>
-                                <div class="contact-person-email">
-                                    <p>E: {{ person.contact_person_email }}</p>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endfor %}
+
+        {% if map | length > 0 %}
+        <div class="row">
+            <div class="large-10 columns">
+                {{ map.address | raw }}
             </div>
+        </div>
+        {% endif %}
+
+        {% if contact_people | length > 0 %}
+            {% for person in contact_people %}
+                <div class="row">
+                    <div class="large-10 columns">
+                        {% if person.name.content | length > 0 %}
+                            <p class="person-name">
+                                {{ person.name.prefix }}
+                                {{ person.name.content }}
+                                {{ person.name.suffix }}
+                            </p>
+                        {% endif %}
+                        {% if person.phone.content | length > 0 %}
+                            <p>
+                                {{ person.phone.prefix }}
+                                {{ person.phone.content }}
+                                {{ person.phone.suffix }}
+                            </p>
+                        {% endif %}
+                        {% if person.email.content | length > 0 %}
+                            <p>
+                                {{ person.email.prefix }}
+                                {{ person.email.content }}
+                                {{ person.email.suffix }}
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
         {% endif %}
     </article>
 {% endblock %}

@@ -122,4 +122,22 @@ abstract class Person extends Post {
             ));
     }
 
+    /**
+     * todo: get metadata from person object
+     * @return string
+     */
+    public function email()
+    {
+        return "test@email.com";
+    }
+
+    /**
+     * todo: get metadata from persnn object
+     * @return string
+     */
+    public function phone()
+    {
+        return "01234 567 890";
+    }
+
 } 

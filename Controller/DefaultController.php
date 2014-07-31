@@ -8,6 +8,7 @@ use Outlandish\RoutemasterBundle\Controller\BaseController;
 use Outlandish\SiteBundle\PostType\News;
 use Outlandish\SiteBundle\PostType\Page;
 use Outlandish\SiteBundle\PostType\Post;
+use Outlandish\SiteBundle\PostType\Person;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -51,11 +52,12 @@ class DefaultController extends BaseController {
      * @Template("OutlandishAcadOowpBundle:Default:contactPost.html.twig")
      */
     public function contactPostAction() {
-        $response = $this->defaultPostAction('contact');
-        $post = $response['post'];
+        /** @var Page $post */
+        $post = $this->querySingle(array('page_id' => Page::CONTACT_PAGE_ID));
 
-        $response['map']  = $post->metadata('map');
-        $response['contact_people'] = $post->metadata('contact_people');
+        $response['contact_people'] = $post->contactPeople();
+        $response['map']  = $post->contactMap();
+
         return $response;
     }
 
