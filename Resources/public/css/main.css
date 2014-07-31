@@ -99,6 +99,10 @@ p {
     background-color: #000;
 }
 
+.small-centered, .large-centered {
+    text-align: center;
+}
+
 /* inputs */
 
 input[type="text"] {
@@ -108,6 +112,17 @@ input[type="text"] {
     box-shadow: none;
     border: none;
 
+}
+
+/* content types*/
+
+.address {
+    font-weight: bold;
+}
+
+.address.main {
+    font-size: 28px;
+    margin: 20px 0;
 }
 
 /* main nav */

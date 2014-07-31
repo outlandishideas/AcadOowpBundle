@@ -9,7 +9,7 @@
     {% endif %}
     <article class="section">
         <div class="row">
-            <div class="large-20 columns">
+            <div class="large-20 columns large-centered small-centered">
                 {% block postTitle %}<h1>{{ post.title() }}</h1>{% endblock %}
                 {% if post.subtitle() %}
                     <p class="subtitle">{{ post.subtitle() }}</p>
@@ -17,9 +17,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="medium-16 columns">
+            <div class="medium-16 columns large-centered small-centered">
                 <div class="row">
-                    <div class="large-20 columns">
+                    <div class="large-20 columns large-centered small-centered">
                         {{ post.content() | raw }}
                     </div>
                 </div>
@@ -28,8 +28,10 @@
 
         {% if map | length > 0 %}
         <div class="row">
-            <div class="large-10 columns">
-                {{ map.address | raw }}
+            <div class="large-10 columns large-centered small-centered">
+                <div class="address main">
+                    {{ map.address | raw }}
+                </div>
             </div>
         </div>
         {% endif %}
@@ -37,7 +39,7 @@
         {% if contact_people | length > 0 %}
             {% for person in contact_people %}
                 <div class="row">
-                    <div class="large-10 columns">
+                    <div class="large-10 columns large-centered small-centered">
                         {% if person.name.content | length > 0 %}
                             <p class="person-name">
                                 {{ person.name.prefix }}
