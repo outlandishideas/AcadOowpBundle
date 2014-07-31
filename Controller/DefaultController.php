@@ -56,8 +56,9 @@ class DefaultController extends BaseController {
         $post = $this->querySingle(array('page_id' => Page::CONTACT_PAGE_ID));
 
         $response['post'] = $post;
-        $response['contact_people'] = $post->contactPeople();
         $response['map']  = $post->contactMap();
+        $response['address'] = get_field('address', 'options');
+        $response['contact_people'] = $post->contactPeople();
 
         return $response;
     }
