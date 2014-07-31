@@ -354,6 +354,10 @@ ul.search-results.sidebar>li>ul {
     height: 350px;
 }
 
-p.person-name {
+img.contact-image {
+    max-width: 200px;
+}
+
+p.contact-name {
     font-weight: bold;
 }
