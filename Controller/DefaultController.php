@@ -47,6 +47,18 @@ class DefaultController extends BaseController {
     }
 
     /**
+     * @Route("/contact/", name="contact")
+     * @Template("OutlandishAcadOowpBundle:Default:contactPost.html.twig")
+     */
+    public function contactPostAction() {
+        $response = $this->defaultPostAction('contact');
+        $post = $response['post'];
+
+        $response['map']  = $post->metadata('map');
+        return $response;
+    }
+
+    /**
      * this method checks to see whether page should show search results
      * it will add a variable to the args for that page depending on what type of page it is
      *

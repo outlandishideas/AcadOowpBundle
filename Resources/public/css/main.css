@@ -332,3 +332,9 @@ ul.search-results.sidebar>li>ul {
     margin: 0;
     padding: 0;
 }
+
+/*contact page*/
+
+.google-map .map {
+    height: 350px;
+}
