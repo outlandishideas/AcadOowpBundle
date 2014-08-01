@@ -5,22 +5,25 @@
 {% block content %}
     <article class="section">
         <div class="row">
-            <div class="large-20 columns">
-                <h1>{{ post.title() }}</h1>
-                {% if post.subtitle() %}
-                    <p class="subtitle">{{ post.subtitle() }}</p>
-                {% endif %}
-            </div>
-        </div>
-        <div class="row">
             <div class="medium-8 medium-push-16 columns">
-                {% include "OutlandishAcadOowpBundle:Partial:author.html.twig" %}
+                {% block sideBar %}
+                    {% include "OutlandishAcadOowpBundle:Partial:author.html.twig" %}
+                {% endblock %}
             </div>
             <div class="medium-16 medium-pull-8 columns">
-                {{ post.featuredImage('large') | raw }}
-                <div class="row">
-                    <div class="large-20 columns">
-                        {{ post.content() | raw }}
+                <div class="content main">
+                    {% block postDate %}{% endblock %}
+                    {% block postTitle %}<h1>{{ post.title() }}</h1>{% endblock %}
+                    {% if post.subtitle() %}
+                        <p class="subtitle">{{ post.subtitle() }}</p>
+                    {% endif %}
+                    {{ post.featuredImage('large') | raw }}
+                    <div class="row">
+                        <div class="large-24 columns">
+                            <div class="content post">
+                                {{ post.content() | raw }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
