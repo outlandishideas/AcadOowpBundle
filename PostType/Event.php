@@ -158,7 +158,7 @@ abstract class Event extends Post {
      */
     public function latitudeLongitude()
     {
-        return $this->metadata('event_latitude_longitude', true);
+        return $this->metadata('event_latitude_longitude') != self::NOT_FOUND_MESSAGE ? $this->metadata('event_latitude_longitude') : '';
     }
 
     /**
