@@ -14,6 +14,7 @@ require_once __DIR__ . '/../../../../../web/wp-settings.php';
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostType;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostToPost;
 use Outlandish\AcadOowpBundle\FacetedSearch\Search;
+use Outlandish\AcadOowpBundle\PostType\Document;
 use Outlandish\SiteBundle\PostType\News;
 use Outlandish\SiteBundle\PostType\Person;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -205,6 +206,42 @@ class SearchTest extends WebTestCase
         $facet = new FacetPostToPost('p2p', 'p2p_section', Person::postType());
         $facet->addOption(44, 'Chris Williams');
         $facet->addOption(7, 'Penny Green');
+        $this->search->addFacet($facet);
+
+        $this->assertEquals($expected, $this->search->generateArguments());
+    }
+
+    public function test_search_with_two_post_to_post_facet()
+    {
+        $expected = array(
+            'post_type' => array(News::postType()),
+            'post_count' => 10,
+            'page' => 1,
+            'connected_type' => array('document_news', 'news_person'),
+            'connected_items' => array(1, 2, 44, 7)
+        );
+
+        $this->search->setParams(
+            array(
+                'test_name' => array(News::postType()),
+                'p2p1' => array(7, 44),
+                'p2p2' => array(1, 2)
+            )
+        );
+
+        $facet = new FacetPostType('test_name', 'test_section');
+        $facet->addOption(Person::postType(), Person::friendlyName());
+        $facet->addOption(News::postType(), News::friendlyName());
+        $this->search->addFacet($facet);
+
+        $facet = new FacetPostToPost('p2p1', 'p2p_section_1', Person::postType());
+        $facet->addOption(44, 'Chris Williams');
+        $facet->addOption(7, 'Penny Green');
+        $this->search->addFacet($facet);
+
+        $facet = new FacetPostToPost('p2p2', 'p2p_section_2', Document::postType());
+        $facet->addOption(1, 'Chris Williams');
+        $facet->addOption(2, 'Penny Green');
         $this->search->addFacet($facet);
 
         $this->assertEquals($expected, $this->search->generateArguments());
