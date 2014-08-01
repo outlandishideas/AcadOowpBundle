@@ -117,6 +117,10 @@ class Search {
     {
         $args = $this->defaults;
 
+        if(array_key_exists('q', $this->params)){
+            $args['s'] = $this->params['q'];
+        }
+
         foreach($this->facets as $facet) {
             /** @var Facet $facet */
             $facet->setSelected($this->params);
