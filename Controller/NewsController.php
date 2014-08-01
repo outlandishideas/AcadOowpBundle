@@ -23,12 +23,6 @@ class NewsController extends BaseController {
 
         $post = $this->querySingle(array('page_id' => News::postTypeParentId()));
 
-        /** @var AcaSearch $search */
-        //todo: meed to sort our faceted search first
-//        $search = $this->container->get('aca.search');
-
-//        $items = News::fetchAll();
-
         $sideItems = array(
             array(
                 'title' => 'People',
