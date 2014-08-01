@@ -4,7 +4,9 @@ namespace Outlandish\AcadOowpBundle\PostType;
 
 abstract class Event extends Post {
 
-   //connected to document, news, person, place, project, theme
+    const NOT_FOUND_MESSAGE = 'NOT_FOUND_ENTER_POSTCODE_OR_ENTER_ADDRESS_OR_AMEND_TITLE';
+
+    //connected to document, news, person, place, project, theme
     public static function onRegistrationComplete() {
         self::registerConnection(News::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
         self::registerConnection(Person::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
@@ -76,24 +78,126 @@ abstract class Event extends Post {
         }
     }
 
-    public function eventStartAndEndDate() {
-        if ($this->eventEndDate()) {
-            $date = date("jS F",strtotime($this->metadata('start_date')))." - ".$this->eventEndDate();
+    /**
+     * return start date and end date for event as string in format dd/mm - dd/mm/yy
+     * @return int|string
+     */
+    public function startAndEndDateString() {
+        if ($this->endDateString()) {
+            $date = $this->startDateString("jS F") . " - " . $this->endDateString();
         } else {
-            $date = $this->eventStartDate();
+            $date = $this->startDateString();
         }
         return $date;
     }
 
-    public function eventStartDate(){
-        return date("jS F Y",strtotime($this->metadata('start_date')));
+    /**
+     * return start date for event as string
+     * @param string $format | put in date format here
+     * @return bool|string
+     */
+    public function startDateString($format = "jS F Y"){
+        return date($format, $this->startDate());
     }
 
-    public function eventEndDate(){
-        $endDate = date("jS F Y",strtotime($this->metadata('end_date')));
-        if ($endDate == $this->eventStartDate()) {
-            $endDate = '';
+    /**
+     * return the end date for event as a String
+     * @param string $format
+     * @return bool|string
+     */
+    public function endDateString($format = "jS F Y"){
+        return date($format, $this->endDate());
+    }
+
+    /**
+     * return the start date as a DateTime object
+     * @return int
+     */
+    public function startDate(){
+        return strtotime($this->metadata('start_date'));
+    }
+
+    /**
+     * return the end date as a DateTime object
+     * @return int
+     */
+    public function endDate(){
+        return strtotime($this->metadata('end_date'));
+    }
+
+    /**
+     * @return array|string
+     */
+    public function address()  {
+        return $this->metadata('event_address', true);
+    }
+
+    /**
+     * @return array|string
+     */
+    public function postcode()  {
+        return $this->metadata('event_postcode', true);
+    }
+
+    /**
+     * @return int
+     */
+    function latitude() {
+        return $this->latitudeLongitudeNumber(0);
+    }
+
+    /**
+     * @return int
+     */
+    function longitude() {
+        return $this->latitudeLongitudeNumber(1);
+    }
+
+    /**
+     * @return array|string
+     */
+    public function latitudeLongitude()
+    {
+        return $this->metadata('event_latitude_longitude', true);
+    }
+
+    /**
+     * Get latitude(index = 0) and longitude (index = 1) for event by their index number
+     * Return false if latitudeLongitude not found, or if index parameter is > 2 or < 0
+     *
+     * @param $index
+     * @return bool
+     */
+    public function latitudeLongitudeNumber($index)
+    {
+        if(!$this->latitudeLongitude()) return false;
+        $lat_lng = explode(",", $this->latitudeLongitude());
+        if(count($lat_lng) > 2 || $index > 1 || $index < 0) return false;
+
+        return $lat_lng[$index];
+    }
+
+    /**
+     * Attempt to save event coordinates from
+     * (1) event address acf and postcode acf
+     * (2) event postcode acf
+     * * If unsuccessful, insert NOT_FOUND_MESSAGE in 'event_latitude_longitude' acf    *
+     *
+     * return false
+     * */
+    public function onSave($postData) {
+        if ($this->post_type == Event::postType() && ($this->latitudeLongitude() == '' || $this->latitudeLongitude() == self::NOT_FOUND_MESSAGE )){
+            $location = urlencode($this->address() . $this->postcode());
+            $data = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address={$location}&sensor=false"));
+            if ($data->status == 'OK') {
+                $lat = $data->results[0]->geometry->location->lat;
+                $lng = $data->results[0]->geometry->location->lng;
+                $value = $lat . "," . $lng;
+            } else {
+                $value = self::NOT_FOUND_MESSAGE;
+            }
+            update_post_meta($this->ID, "event_latitude_longitude", $value);
         }
-       return $endDate;
+        return false;
     }
 }

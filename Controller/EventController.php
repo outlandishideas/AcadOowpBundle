@@ -85,6 +85,9 @@ class EventController extends BaseController {
         $post = $this->querySingle(array('name' => $name, 'post_type' => Event::postType()));
 
         $response['post'] = $post;
+        $response['event_latitude'] =  $post->latitude();
+        $response['event_longitude'] = $post->longitude();
+
         return $response;
     }
 

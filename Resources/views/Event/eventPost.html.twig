@@ -1,1 +1,17 @@
 {% extends 'OutlandishAcadOowpBundle:Default:defaultPost.html.twig' %}
+
+{% block content %}
+
+    {{ parent() }}
+
+    {% if event_latitude | length > 0 and event_longitude | length > 0  %}
+        <div class="google-map">
+            <div class="map" data-marker="true" data-lat="{{ event_latitude | raw  }}" data-lng="{{ event_longitude | raw  }}" data-zoom="16"></div>
+        </div>
+    {% endif %}
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+{% endblock %}
+
+
+
