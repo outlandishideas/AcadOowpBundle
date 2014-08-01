@@ -4,6 +4,7 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 
+use Outlandish\OowpBundle\PostType\MiscPost;
 use Outlandish\RoutemasterBundle\Controller\BaseController;
 use Outlandish\SiteBundle\PostType\News;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,6 +63,28 @@ class DefaultController extends BaseController {
         $response['address'] = get_field('address', 'options');
         $response['contact_people'] = $post->contactPeople();
 
+        return $response;
+    }
+
+    /**
+     * method to generate response for index pages
+     * returns either a response with items (if a search has been placed)
+     * or a response with sections if sections have been created for a page
+     * @param \Outlandish\OowpBundle\PostType\Post $post
+     * @param Request $request
+     * @param array $postType
+     * @return array
+     */
+    public function indexResponse(\Outlandish\OowpBundle\PostType\Post $post, Request $request, $postType = array())
+    {
+        $response = array();
+        $response['post'] = $post;
+        $items = $this->items($request, array(News::postType()));
+        if($items){
+            $response['items'] = $items;
+        } else {
+            $response['sections'] = $this->sections($post->sections());
+        }
         return $response;
     }
 

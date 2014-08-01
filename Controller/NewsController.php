@@ -17,6 +17,8 @@ class NewsController extends BaseController {
     /**
      * @Route("/news/", name="newsIndex")
      * @Template("OutlandishAcadOowpBundle:News:newsIndex.html.twig")
+     * @param Request $request
+     * @return array
      */
     public function indexAction(Request $request) {
         $response = array();
@@ -34,13 +36,7 @@ class NewsController extends BaseController {
             )
         );
 
-        $response['post'] = $post;
-        $items = $this->items($request, array(News::postType()));
-        if($items){
-            $response['items'] = $items;
-        } else {
-            $response['sections'] = $this->sections($post->sections());
-        }
+        $response = $this->indexResponse($post, $request, array(News::postType()));
         $response['sideItems'] = $sideItems;
         return $response;
     }
