@@ -13,5 +13,10 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 {% endblock %}
 
+{% block postDate %}<p class="date font-large">{{ post.startAndEndDateString() }}</p>{% endblock %}
 
+{% block sideBar %}
+    {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" %}
+
+{% endblock %}
 
