@@ -9,7 +9,7 @@
 namespace Outlandish\AcadOowpBundle\FacetedSearch\Facets;
 
 
-class FacetPostType extends Facet{
+class FacetPostType extends Facet {
 
     public function generateArguments($args = array())
     {

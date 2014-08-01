@@ -8,6 +8,7 @@
 
 namespace Outlandish\AcadOowpBundle\FacetedSearch;
 
+use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostToPost;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostType;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\Facet;
 use Outlandish\OowpBundle\Manager\QueryManager;
@@ -54,7 +55,7 @@ class Search {
     public function addFacet(Facet $facet)
     {
         $this->facets[] = $facet;
-        usort($this->facets, '$this->sortFacets');
+        usort($this->facets, array($this, 'sortFacets'));
 
         return $facet;
     }
@@ -72,16 +73,28 @@ class Search {
     }
 
     /**
+     * Shortcut function for adding a FacetPostType object
+     * @param $name
+     * @param $section
+     * @return FacetPostType
+     */
+    public function addFacetPostToPost($name, $section, $postType)
+    {
+        $facet = new FacetPostToPost($name, $section, $postType);
+        return $this->addFacet($facet);
+    }
+
+    /**
      * custom sorting function to sort facets so that FacetPostType come first
      * need this because when generatingArguments() we need post_type defined
      * @param $a
      * @param $b
      * @return int
      */
-    public function sortFacets($a, $b)
+    public static function sortFacets(Facet $a, Facet $b)
     {
         if($a == $b) return 0;
-        return $a instanceof FacetPostType ? 1 : -1;
+        return $a instanceof FacetPostType ? -1 : 1;
     }
 
     /**
@@ -107,7 +120,7 @@ class Search {
         foreach($this->facets as $facet) {
             /** @var Facet $facet */
             $facet->setSelected($this->params);
-            $args = wp_parse_args($facet->generateArguments($args), $args);
+            $args = $facet->generateArguments($args);
         }
         return $args;
     }
