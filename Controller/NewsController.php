@@ -27,7 +27,7 @@ class NewsController extends BaseController {
         //todo: meed to sort our faceted search first
 //        $search = $this->container->get('aca.search');
 
-        $items = News::fetchAll();
+//        $items = News::fetchAll();
 
         $sideItems = array(
             array(
@@ -41,8 +41,8 @@ class NewsController extends BaseController {
         );
 
         $response['post'] = $post;
-        $response['items'] = $items;
-        $response['sections'] = $post->sections();
+//        $response['items'] = $items;
+        $response['sections'] = $this->sections($post->sections());
         $response['sideItems'] = $sideItems;
         return $response;
     }

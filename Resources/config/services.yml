@@ -1,9 +1,4 @@
 services:
-    outlandish_acadoowp.search:
+    outlandish_acadoowp.faceted_search.search:
         class: Outlandish\AcadOowpBundle\FacetedSearch\Search
         arguments: [@outlandish_routemaster.query_manager, @outlandish_oowp.post_manager]
-
-    outlandish.twig.layout_extension:
-        class: Outlandish\AcadOowpBundle\Twig\LayoutExtension
-        tags:
-            - { name: twig.extension }
