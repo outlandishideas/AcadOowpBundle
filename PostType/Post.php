@@ -78,4 +78,29 @@ abstract class Post extends BasePost {
                 }
         }
     }
+
+    /**
+     *  Returns date as
+     *  (1) dd/mm - dd/mm/yyyy for events if end date set
+     *  (2) dd/mm/yyyy for everything else
+     * @return int|string
+     */
+    public function dateString() {
+
+        $date = '';
+
+        if ($this->post_type == Event::postType()) {
+            if ($this->endDateString()) {
+                $date = $this->startDateString("j F") . " - " . $this->endDateString();
+            } else {
+                $date = $this->startDateString();
+            }
+        }
+
+        if (!$date) {
+            $date = date("j F Y", strtotime($this->post_date));
+        }
+
+        return $date;
+    }
 } 
