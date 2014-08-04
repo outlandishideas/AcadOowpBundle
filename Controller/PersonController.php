@@ -8,6 +8,7 @@ use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 use Outlandish\AcadOowpBundle\AcaSearch\AcaSearch;
 use Outlandish\AcadOowpBundle\PostType\Post;
 use Outlandish\SiteBundle\PostType\Person;
+use Outlandish\SiteBundle\PostType\Role;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -26,10 +27,19 @@ class PersonController extends BaseController {
         //todo: meed to sort our faceted search first
 //        $search = $this->container->get('aca.search');
 
-        $people = Person::fetchAll();
+		$roles = Role::fetchAll();
+		if ( $roles ) {
+			foreach ( $roles as &$role ) {
+				$role->people = $role->connected( Person::postType() );
+			}
+		} else {
+			$people            = Person::fetchAll();
+			$response['items'] = $people;
+		}
 
         $response['post'] = $post;
-        $response['items'] = $people;
+        $response['roles'] = $roles;
+
         return $response;
     }
 
