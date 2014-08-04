@@ -5,6 +5,8 @@ namespace Outlandish\AcadOowpBundle\PostType;
 
 abstract class News extends Post {
 
+	public static $menu_icon = 'dashicons-megaphone';
+
     //connected to document, event, person, place, project, theme
     public static function onRegistrationComplete() {
         self::registerConnection(Person::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
