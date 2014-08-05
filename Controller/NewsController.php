@@ -5,7 +5,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 
 use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
-use Outlandish\AcadOowpBundle\AcaSearch\AcaSearch;
+use Symfony\Component\HttpFoundation\Request;
 use Outlandish\SiteBundle\PostType\News;
 use Outlandish\SiteBundle\PostType\Person;
 use Outlandish\SiteBundle\PostType\Role;
@@ -17,8 +17,10 @@ class NewsController extends BaseController {
     /**
      * @Route("/news/", name="newsIndex")
      * @Template("OutlandishAcadOowpBundle:News:newsIndex.html.twig")
+     * @param Request $request
+     * @return array
      */
-    public function indexAction() {
+    public function indexAction(Request $request) {
         $response = array();
 
         $post = $this->querySingle(array('page_id' => News::postTypeParentId()));
@@ -34,9 +36,7 @@ class NewsController extends BaseController {
             )
         );
 
-        $response['post'] = $post;
-//        $response['items'] = $items;
-        $response['sections'] = $this->sections($post->sections());
+        $response = $this->indexResponse($post, $request, array(News::postType()));
         $response['sideItems'] = $sideItems;
         return $response;
     }

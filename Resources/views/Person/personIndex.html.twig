@@ -1,1 +1,57 @@
-{% extends 'OutlandishAcadOowpBundle:Default:defaultIndex.html.twig' %}
+{% extends '::layout.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="columns medium-{% if post.featuredImage('large') %}12{% else %}24{% endif %}">
+            <h2>{{ post.title() }}</h2>
+            {{ post.content() | raw }}
+        </div>
+        {% if post.featuredImage('large') %}
+            <div class="columns medium-12">
+                {% block item_image %}{{ post.featuredImage('large') | raw }}{% endblock %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        <div class="columns large-24">
+            {% if roles | length > 0 %}
+                <ul class="search-results">
+                    {% for role in roles %}
+                        <li>
+                            {% block roleInclude %}
+                                <h3>{{ role.title() }}</h3>
+                                {{ role.content() | raw }}
+
+                                {% for person in role.people %}
+                                    <a href="{{ person.permalink() }}" class="people-item">
+                                        {% if person.featuredImage('medium') %}
+                                            {{ person.featuredImage('medium') | raw }}
+                                        {% else %}
+                                            <img src="{{ asset('bundles/outlandishacadoowp/images/no-profile.png') }}" alt="No image for {{ person.title() }}">
+                                        {% endif %}
+                                        <h4>{{ person.title() }}</h4>
+                                    </a>
+                                {% endfor %}
+                            {% endblock %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <ul class="search-results">
+                    {% for item in items %}
+                        <li>
+                            {% block itemInclude %}
+                                {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                                'item': item,
+                                'excerpt_length': 300,
+                                'image': 'medium'} %}
+                            {% endblock %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

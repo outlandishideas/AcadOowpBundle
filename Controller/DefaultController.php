@@ -4,8 +4,10 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 
+use Outlandish\OowpBundle\PostType\MiscPost;
 use Outlandish\RoutemasterBundle\Controller\BaseController;
 use Outlandish\SiteBundle\PostType\News;
+use Symfony\Component\HttpFoundation\Request;
 use Outlandish\SiteBundle\PostType\Page;
 use Outlandish\SiteBundle\PostType\Post;
 use Outlandish\AcadOowpBundle\FacetedSearch\Search;
@@ -65,30 +67,46 @@ class DefaultController extends BaseController {
     }
 
     /**
-     * this method checks to see whether page should show search results
-     * it will add a variable to the args for that page depending on what type of page it is
-     *
+     * method to generate response for index pages
+     * returns either a response with items (if a search has been placed)
+     * or a response with sections if sections have been created for a page
+     * @param \Outlandish\OowpBundle\PostType\Post $post
+     * @param Request $request
+     * @param array $postType
+     * @return array
      */
-    public function addSearchPageVariable(&$args, $override = null)
+    public function indexResponse(\Outlandish\OowpBundle\PostType\Post $post, Request $request, $postType = array())
     {
-        if($override === null || !is_bool($override)){
-            $result = $this->isSearchPage($args);
+        $response = array();
+        $response['post'] = $post;
+        $items = $this->items($request, array(News::postType()));
+        if($items){
+            $response['items'] = $items;
         } else {
-            $result = $override;
+            $response['sections'] = $this->sections($post->sections());
         }
-        $args['isSearchPage'] = $result;
+        return $response;
     }
 
-    public function isSearchPage($args)
-    {
-        if(array_key_exists('q', $args)){
-            return true;
-        } else if (!array_key_exists('sections', $args)) {
-            return true;
-        } else if (empty($args['sections'])){
-            return true;
+    public function items(Request $request, $postTypes = array()){
+        if(!$request->query->has('q')) return false;
+        $params = $request->query->all();
+
+        /** @var Search $search */
+        $search = $this->get('outlandish_acadoowp.faceted_search.search');
+        if(!empty($postTypes)){
+            $params['post_types'] = $postTypes;
+            $facet = $search->addFacetPostType('post_types', "");
+            foreach($postTypes as $postType){
+                $facet->addOption($postType, "");
+            }
+        }
+        $search->setParams($params);
+        $query = $search->search();
+        if($query->post_count > 0){
+            return $query->posts;
         } else {
-            return false;
+            return array();
         }
     }
 
@@ -156,6 +174,8 @@ class DefaultController extends BaseController {
                     foreach($section['items'] as $item){
                         if($item instanceof \WP_Post){
                             $ids[] = $item->ID;
+                        } else {
+                            $ids[] = $item;
                         }
                     }
                     $query = Post::fetchAll(array('post_type' => 'any', 'post__in' => $ids));
