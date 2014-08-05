@@ -3,7 +3,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    color: #434547;
+    color: #565859;
 }
 
 h1 {
@@ -12,10 +12,8 @@ h1 {
     font-size : 2.25rem;
     line-height : 2.75rem;
     letter-spacing : 1.2px;
-    /*color : #000000;*/
-    /*color : rgb(0, 0, 0);*/
-    color: #434547;
-    color : rgb(67, 69, 71);
+    color: #565859;
+    color : rgb(86, 88, 89);
     margin-bottom: 2rem;
 }
 
@@ -25,10 +23,8 @@ h1 a {
     font-size : 2.25rem;
     line-height : 2.75rem;
     letter-spacing : 1.2px;
-    /*color : #000000;*/
-    /*color : rgb(0, 0, 0);*/
-    color: #434547;
-    color : rgb(67, 69, 71);
+    color: #565859;
+    color : rgb(86, 88, 89);
     text-decoration : underline;
 }
 
@@ -36,20 +32,16 @@ h2 {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size : 24px;
-    /*color : #000000;*/
-    /*color : rgb(0, 0, 0);*/
-    color: #434547;
-    color : rgb(67, 69, 71);
+    color: #565859;
+    color : rgb(86, 88, 89);
 }
 
 h2 a {
     font-family: 'Roboto', sans-serif;
     font-weight : bold;
     font-size : 24px;
-    /*color : #000000;*/
-    /*color : rgb(0, 0, 0);*/
-    color: #434547;
-    color : rgb(67, 69, 71);
+    color: #565859;
+    color : rgb(86, 88, 89);
     text-decoration : underline;
 }
 
@@ -58,18 +50,33 @@ h3 {
     font-weight: 400;
     font-size : 18px;
     letter-spacing : 0.9px;
-    /*color : #000000;*/
-    /*color : rgb(0, 0, 0);*/
-    color: #434547;
-    color : rgb(67, 69, 71);
+    color: #565859;
+    color : rgb(86, 88, 89);
     margin-bottom: 0.25rem;
 }
 
-h3.small-block-heading {
-
+h4 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size : 15px;
+    letter-spacing : 0.9px;
+    color: #565859;
+    color : rgb(86, 88, 89);
+    margin-bottom: 0.25rem;
 }
 
-h3.small-block-heading:before {
+h3.block-heading, p.date {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    margin-bottom: 0;
+}
+
+h3.block-heading {
+    margin: 0 0 2em 0;
+}
+
+h3.block-heading:before {
     content: "/";
     padding-right: 7px;
 }
@@ -84,10 +91,8 @@ h6.subhead {
     font-size : 16px;
     line-height : 19.2px;
     letter-spacing : 0.8px;
-    /*color : #000000;*/
-    /*color : rgb(0, 0, 0);*/
-    color: #434547;
-    color : rgb(67, 69, 71);
+    color: #565859;
+    color : rgb(86, 88, 89);
     text-decoration : underline;
 }
 
@@ -97,10 +102,8 @@ p {
     font-size : 18px;
     line-height : 24px;
     letter-spacing : 0.9px;
-    /*color : #000000;*/
-    /*color : rgb(0, 0, 0);*/
-    color: #434547;
-    color : rgb(67, 69, 71);
+    color: #565859;
+    color : rgb(86, 88, 89);
 }
 
 hr {
@@ -139,17 +142,21 @@ hr {
     font-size: 2.25rem;
 }
 
+.font-theme-colour {
+    color: #00A89B;
+}
+
 /*page sections*/
 
 .content {
     padding-top: 2rem;
 }
 
-/* content types*/
-
-.date {
+.content p.date {
     font-weight: 200;
 }
+
+/* content types*/
 
 .date.large {
     margin-bottom: 1rem;
@@ -252,6 +259,13 @@ nav .inline-list li a{
     display: block;
 }
 
+.post-item h3 {
+    font-size: 25px;
+    text-decoration: none;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+}
+
 .post-item:last-child {
     margin-bottom: 0;
 }
@@ -262,6 +276,7 @@ nav .inline-list li a{
     font-weight: bold;
 }
 
+/*these classes make elements in post items be container-wide so that image sits over text*/
 .post-item.main>.row,
 .post-item.main>.row>.columns {
     margin: 0;
@@ -272,6 +287,63 @@ nav .inline-list li a{
 
 .post-item.main .subtitle {
     margin-top: 1rem;
+}
+
+.post-item .image-overlay-columns {
+    /*margin-left: 0.9375em;*/
+    /*margin-right: 0.9375em;*/
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.post-item .image-overlay{
+    padding-left: 0.9375em;
+    padding-right: 0.9375em;
+}
+
+.post-item .image-overlay p {
+    position: absolute;
+    left: 0;
+    right: 0;
+    color: #fff;
+    text-align: center;
+    font-size: 35px;
+    line-height: 35px;
+    z-index: 100;
+    /*fix this*/
+    margin-top: 50px;
+
+}
+
+.post-item .image-overlay:after {
+    content: '';
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    background: #00A89B;
+    opacity: 0.6;
+}
+
+.post-item .image-overlay:hover:after {
+    opacity: 1;
+    background: transparent;
+}
+
+.post-item .image-overlay:hover p {
+    color: transparent;
+}
+
+
+.box.colour.b-stretch .backstretch:after, .colour .plain-image {
+
+}
+
+.post-item img:hover {
+    opacity: 1;
 }
 
 /* footer */
@@ -329,6 +401,34 @@ article .subtitle {
     font-size: 2rem;
 }
 
+/*sorting filter*/
+
+.sort-filter {
+    color: #A0A1A3;
+    background: #ECECED;
+    width: 100%;
+    display: block;
+    padding: 11px 0 11px 15px;
+    border-bottom: 1px solid #A0A1A3;
+    font-size: 15px;
+    line-height: 15px;
+}
+
+.sort-filter a {
+    text-transform: uppercase;
+    font-size: 20px;
+    line-height: 20px;
+    margin: 0 15px;
+    padding: 8px 20px;
+    font-weight: 400;
+    color: #A0A1A3;
+}
+
+.sort-filter a.selected {
+    background: #00A89B;
+    color: #fff;
+}
+
 /* author partial */
 
 .post-author>.section {
@@ -369,7 +469,6 @@ ul.search-results {
 
 ul.search-results>li {
     list-style: none;
-    border-top: 1px solid #000;
     padding: 2rem 0;
 }
 

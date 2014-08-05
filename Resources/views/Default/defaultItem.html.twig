@@ -12,11 +12,13 @@
 {% else %}
     <a href="{{ item.permalink() }}" class="post-item {{ classes }}">
         <div class="row">
-            <div class="columns large-6">
-                {% block item_image %}{{ item.featuredImage(image) | raw }}{% endblock %}
+            <div class="columns large-11 image-overlay-columns">
+                <div class="image-overlay">
+                    <p class="date">{{ item.dateString() }}</p>
+                    {% block item_image %}{{ item.featuredImage('large') | raw }}{% endblock %}
+                </div>
             </div>
-            <div class="columns large-18">
-
+            <div class="columns large-13">
                 {% block itemInclude %}
                     {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {'item': item} %}
                 {% endblock %}
