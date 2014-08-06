@@ -124,6 +124,16 @@ abstract class Person extends Post {
             ));
     }
 
+	/**
+	 * Get the role for th person
+	 *
+	 * @return mixed|string|void
+	 */
+	public function role() {
+		$role = $this->connected( Role::postType(), true );
+
+		return ( $role ) ? $role->title() : '';
+	}
     /**
      * todo: get metadata from person object
      * @return string

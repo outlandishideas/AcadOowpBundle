@@ -1,1 +1,42 @@
-{% extends 'OutlandishAcadOowpBundle:Default:defaultPost.html.twig' %}
+{% extends '::layout.html.twig' %}
+
+{% block title %}{{ post.title() }}{% endblock %}
+
+{% block content %}
+    <article class="section">
+        <div class="row">
+            <div class="medium-8 medium-push-16 columns">
+                {% block sideBar %}
+                    {#{% include "OutlandishAcadOowpBundle:Partial:author.html.twig" %}#}
+                    {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
+                    'post': post } %}
+                {% endblock %}
+            </div>
+            <div class="medium-16 medium-pull-8 columns">
+                <div class="content main">
+                    {% block postAvatar %}
+                    <div class="medium-4 columns">
+                        {% include "OutlandishAcadOowpBundle:Partial:avatar.html.twig" with {
+                        'post': post } %}
+                    </div>
+                    {% endblock %}
+
+                    {% block postTitle %}
+                        <div class="medium-20 columns">
+                            <h1>{{ post.title() }}</h1>
+                            {{ post.role() }}
+                        </div>
+                    {% endblock %}
+
+                    <div class="row">
+                        <div class="large-24 columns">
+                            <div class="content post">
+                                {{ post.content() | raw }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

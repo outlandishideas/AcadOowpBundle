@@ -1,8 +1,5 @@
 <a href="{{ person.permalink() }}" class="people-item">
-    {% if person.featuredImage('medium') %}
-        <img src="{{ person.featuredImageUrl('small') }}" alt="{{ person.title() }} profile image">
-    {% else %}
-        <img class="no-profile" src="{{ asset('bundles/outlandishacadoowp/images/no-profile.png') }}" alt="No image for {{ person.title() }}">
-    {% endif %}
+    {% include "OutlandishAcadOowpBundle:Partial:avatar.html.twig" with {
+    'post': person } %}
     <h4>{{ person.title() }}</h4>
 </a>

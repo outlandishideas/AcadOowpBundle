@@ -542,7 +542,7 @@ ul.search-results.no-roles li {
 	font-size: 0.9rem;
 }
 
-.people-item img {
+.avatar {
 	width: 100px;
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
