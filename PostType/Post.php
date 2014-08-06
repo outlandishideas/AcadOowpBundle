@@ -83,22 +83,24 @@ abstract class Post extends BasePost {
      *  Returns date as
      *  (1) dd/mm - dd/mm/yyyy for events if end date set
      *  (2) dd/mm/yyyy for everything else
+     * @param bool $shortMonth (return 'Sep' instead of 'September')
      * @return int|string
      */
-    public function dateString() {
+    public function dateString($format = "j F Y", $shortMonth = false) {
 
         $date = '';
 
         if ($this->post_type == Event::postType()) {
+
             if ($this->endDateString()) {
-                $date = $this->startDateString("j F") . " - " . $this->endDateString();
+                $date = $shortMonth ? $this->startDateString("j M")." - " . $this->endDateString("j M Y") : $this->startDateString("j F")." - " . $this->endDateString("j F Y");
             } else {
-                $date = $this->startDateString();
+                $date = $this->startDateString($format);
             }
         }
 
         if (!$date) {
-            $date = date("j F Y", strtotime($this->post_date));
+            $date = date($format, strtotime($this->post_date));
         }
 
         return $date;

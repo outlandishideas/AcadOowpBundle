@@ -14,7 +14,7 @@
         <div class="row">
             <div class="columns large-11 image-overlay-columns">
                 <div class="image-overlay">
-                    <p class="date">{{ item.dateString() }}</p>
+                    <p class="date">{{ item.dateString("j M Y", true) }}</p>
                     {% block item_image %}{{ item.featuredImage('large') | raw }}{% endblock %}
                 </div>
             </div>
