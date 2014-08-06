@@ -16,7 +16,9 @@
 {% block postDate %}<p class="date font-large">{{ post.dateString() }}</p>{% endblock %}
 
 {% block sideBar %}
-    {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" %}
+    {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
+    'post': post,
+    'title': 'event'} %}
 
 {% endblock %}
 

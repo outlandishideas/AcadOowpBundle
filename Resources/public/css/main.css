@@ -535,3 +535,32 @@ ul.search-results.no-roles li {
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
 }
+
+/* Social Sharing */
+
+ul.social {
+	list-style: none;
+	margin: 0;
+}
+
+ul.social li {
+	float: left;
+}
+
+ul.social li a  {
+	color: #00AA9D;
+}
+
+.share {
+	border-top: 1px solid;
+	padding-top: 10px;
+}
+.share h3 {
+	text-transform: uppercase;
+}
+
+.share h3:before {
+	content: "\2215";
+	margin-right: 10px;
+}
+
