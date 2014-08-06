@@ -18,6 +18,13 @@ app.init = {
 		'.google-map': function( $map_wrap ) {
 			$map = $map_wrap.find('.map');
 			app.mapping.init( $map );
+		},
+
+		'.search-toggle': function( $toggle ) {
+			$toggle.on('click', function (e) {
+				e.preventDefault();
+				$('.main-search').toggle();
+			});
 		}
 
 	}
