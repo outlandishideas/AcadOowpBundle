@@ -289,7 +289,7 @@ nav .inline-list li a{
     margin-top: 1rem;
 }
 
-.post-item.image-overlay .row:first-of-type {
+.columns:first-of-type .post-item.image-overlay .row:first-of-type {
     padding-left: 0.9375em;
 }
 
@@ -312,6 +312,10 @@ nav .inline-list li a{
     margin-left: -0.9375em;
 }
 
+.post-item.image-overlay.dark .columns:first-of-type:after {
+    background: #606366;
+}
+
 .post-item.image-overlay .columns:first-of-type:hover:after {
     opacity: 1;
     background: transparent;
@@ -331,7 +335,6 @@ nav .inline-list li a{
     /*fix this*/
     margin-top: 80px;
 }
-
 
 .post-item.image-overlay .columns:first-of-type:hover:after {
     opacity: 1;
@@ -495,6 +498,10 @@ ul.search-results.sidebar>li:first-child {
 ul.search-results.sidebar>li>ul {
     margin: 0;
     padding: 0;
+}
+
+ul.search-results.sidebar .main p.date {
+    margin-top: 20px;
 }
 
 /*contact page*/
