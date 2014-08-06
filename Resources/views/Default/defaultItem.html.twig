@@ -1,8 +1,8 @@
 {% if not image %}{% set image = "thumbnail" %}{% endif %}
 {% if not excerpt_length %}{% set excerpt_length = 400 %}{% endif %}
 
-{% if image == "none" %}
-    <a href="{{ item.permalink() }}" class="post-item {{ classes }}">
+{% if not item.featuredImage() %}
+    <a href="{{ item.permalink() }}" class="post-item main {{ classes }}">
 
         {% block itemNoImageInclude %}
             {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {'item': item} %}
@@ -12,11 +12,13 @@
 {% else %}
     <a href="{{ item.permalink() }}" class="post-item {{ classes }}">
         <div class="row">
-            <div class="columns large-6">
-                {% block item_image %}{{ item.featuredImage(image) | raw }}{% endblock %}
+            <div class="columns large-11 image-overlay-columns">
+                <div class="image-overlay">
+                    <p class="date">{{ item.dateString("j M Y", true) }}</p>
+                    {% block item_image %}{{ item.featuredImage('large') | raw }}{% endblock %}
+                </div>
             </div>
-            <div class="columns large-18">
-
+            <div class="columns large-13">
                 {% block itemInclude %}
                     {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {'item': item} %}
                 {% endblock %}

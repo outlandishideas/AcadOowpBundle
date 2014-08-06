@@ -81,24 +81,11 @@ abstract class Event extends Post {
     }
 
     /**
-     * return start date and end date for event as string in format dd/mm - dd/mm/yy
-     * @return int|string
-     */
-    public function startAndEndDateString() {
-        if ($this->endDateString()) {
-            $date = $this->startDateString("jS F") . " - " . $this->endDateString();
-        } else {
-            $date = $this->startDateString();
-        }
-        return $date;
-    }
-
-    /**
      * return start date for event as string
      * @param string $format | put in date format here
      * @return bool|string
      */
-    public function startDateString($format = "jS F Y"){
+    public function startDateString($format = "j F Y"){
         return date($format, $this->startDate());
     }
 
@@ -107,7 +94,7 @@ abstract class Event extends Post {
      * @param string $format
      * @return bool|string
      */
-    public function endDateString($format = "jS F Y"){
+    public function endDateString($format = "j F Y"){
         return date($format, $this->endDate());
     }
 
