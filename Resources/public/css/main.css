@@ -307,12 +307,8 @@ nav .inline-list li a{
     right: 0.5em;
     color: #fff;
     text-align: center;
-    font-size: 35px;
     line-height: 35px;
     z-index: 100;
-    /*fix this*/
-    margin-top: 60px;
-
 }
 
 .post-item .image-overlay:after {
@@ -338,13 +334,12 @@ nav .inline-list li a{
     color: transparent;
 }
 
-
-.box.colour.b-stretch .backstretch:after, .colour .plain-image {
-
-}
-
 .post-item img:hover {
     opacity: 1;
+}
+
+#content .post-item .image-overlay p {
+    font-size: 35px;
 }
 
 /* footer */
