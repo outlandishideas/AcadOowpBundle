@@ -69,6 +69,7 @@ h3.block-heading, p.date {
     font-weight: 700;
     letter-spacing: 1.2px;
     margin-bottom: 0;
+    font-size: 16px;
 }
 
 h3.block-heading {
@@ -463,7 +464,7 @@ ul.social-media li a {
 /* search results */
 
 ul.search-results {
-    margin: 0;
+    margin: 20px 0 0 0;
     padding: 0;
 }
 
