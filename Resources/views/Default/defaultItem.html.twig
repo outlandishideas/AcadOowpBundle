@@ -1,7 +1,7 @@
 {% if not image %}{% set image = "thumbnail" %}{% endif %}
 {% if not excerpt_length %}{% set excerpt_length = 400 %}{% endif %}
 
-{% if not item.featuredImage() %}
+{% if image == 'none' or not item.featuredImage() %}
     <a href="{{ item.permalink() }}" class="post-item main {{ classes }}">
 
         {% block itemNoImageInclude %}
@@ -12,11 +12,9 @@
 {% else %}
     <a href="{{ item.permalink() }}" class="post-item {{ classes }}">
         <div class="row">
-            <div class="columns large-11 image-overlay-columns">
-                <div class="image-overlay">
+            <div class="columns large-11">
                     <p class="date">{{ item.dateString("j M Y", true) }}</p>
                     {% block item_image %}{{ item.featuredImage('large') | raw }}{% endblock %}
-                </div>
             </div>
             <div class="columns large-13">
                 {% block itemInclude %}

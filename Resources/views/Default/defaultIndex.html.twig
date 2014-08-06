@@ -37,7 +37,8 @@
                                 {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                                     'item': item,
                                     'excerpt_length': 300,
-                                    'image': 'medium'} %}
+                                    'image': 'medium',
+                                    'classes': 'image-overlay'} %}
                             {% endblock %}
                         </li>
                     {% endfor %}
@@ -60,7 +61,7 @@
                                             {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                                             'item': item,
                                             'excerpt_length': 150,
-                                            'image': 'none'} %}
+                                            'classes' : 'main image-overlay dark'} %}
                                         {% endblock %}
                                     {% endfor %}
                                 </ul>
