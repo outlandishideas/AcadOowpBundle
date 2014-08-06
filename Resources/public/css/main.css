@@ -562,17 +562,3 @@ ul.social li {
 ul.social li a  {
 	color: #00AA9D;
 }
-
-.share {
-	border-top: 1px solid;
-	padding-top: 10px;
-}
-.share h3 {
-	text-transform: uppercase;
-}
-
-.share h3:before {
-	content: "\2215";
-	margin-right: 10px;
-}
-
