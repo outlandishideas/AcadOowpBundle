@@ -123,6 +123,10 @@ hr {
 	background: #00a99d;
 }
 
+.header .bottom-header .columns {
+	padding: 0;
+}
+
 .main-title a {
 	color: #FFFFFF;
 	font-size: 1.5rem;
@@ -235,8 +239,11 @@ a.search-toggle {
 }
 
 /* main search */
-.main-search {
+.main-search,
+.main-search input[type="text"]{
 	background: #134643;
+}
+.main-search {
 	display: none;
 	position: absolute;
 	bottom: 0;
@@ -254,9 +261,31 @@ a.search-toggle {
 
 .main-search input[type="text"] {
     margin: 0.25rem 0;
-    padding-right: 2rem;
-	width: 60%;
+	width: 35%;
 	float: right;
+	height: 1.7rem;
+	color: #ffffff;
+	border-bottom: 1px solid #ffffff;
+}
+
+.main-search input[type="text"]:focus {
+	box-shadow: none;
+}
+
+.main-search input[type="text"]::-webkit-input-placeholder {
+	color: #ffffff;
+}
+
+.main-search input[type="text"]:-moz-placeholder { /* Firefox 18- */
+	color: #ffffff;
+}
+
+.main-search input[type="text"]::-moz-placeholder {  /* Firefox 19+ */
+	color: #ffffff;
+}
+
+.main-search input[type="text"]:-ms-input-placeholder {
+	color: #ffffff;
 }
 
 .main-search button {
@@ -297,6 +326,24 @@ a.search-toggle {
 .breadcrumbs .inline-list li a {
     color: #000;
 }
+
+.breadcrumbs .inline-list li:before {
+	content: "/";
+	padding-right: 7px;
+}
+
+.breadcrumbs .inline-list>li>a {
+	display: inline-block;
+}
+
+.breadcrumbs>*:hover a, .breadcrumbs>*:focus a {
+	text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+	text-decoration: underline;
+}
+
 
 /* post-item */
 

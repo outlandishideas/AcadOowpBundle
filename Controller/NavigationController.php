@@ -5,6 +5,14 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 
 use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
+use Symfony\Component\HttpFoundation\Response;
+use Outlandish\SiteBundle\PostType\News;
+use Outlandish\SiteBundle\PostType\Person;
+use Outlandish\SiteBundle\PostType\Role;
+use Outlandish\SiteBundle\PostType\Event;
+use Outlandish\SiteBundle\PostType\Document;
+use Outlandish\SiteBundle\PostType\Place;
+use Outlandish\SiteBundle\PostType\Theme;
 
 class NavigationController extends BaseController {
 
@@ -88,5 +96,41 @@ class NavigationController extends BaseController {
             'phonenumber' => $phoneNumber
         );
     }
-	
+
+	public function renderBreadcrumbsAction() {
+		global $wp_query;
+		$post = $wp_query->get_queried_object();
+
+		$this->queryManager = $this->get('outlandish_oowp.query_manager');
+		$this->postManager = $this->get('outlandish_oowp.post_manager');
+		$postType = $post->post_type;
+
+		$html =  '<ul class="bread-nav inline-list">';
+
+		if ( $post->ID != get_option('page_on_front') ) {
+			$html .= '<li><a href="' . home_url() . '">Home</a></li>';
+		}
+
+		if ( is_search() ) {
+			$html .= "<li>  Search Results</li>";
+		} elseif ( is_404() ) {
+			$html .= "<li>  404 Not Found</li>";
+		} elseif ( is_single() ) {
+			$class = $this->postManager->postTypeClass($postType);
+			$parent_id  = $class::postTypeParentId();
+
+			$html .= '<li>  ' . '<a href="' . esc_url( get_permalink( $parent_id ) ) . '" title="">'. get_the_title( $parent_id ).'</a> </li>';
+			$html .= '<li>' .the_title( '', '', false ) . "</li>";
+		} elseif ( is_page() ) {
+				// todo look for parents of page
+				$html .= "<li>  " . the_title( '', '', false ) . "</li>";
+		}
+		$html .= "</ul>";
+		echo $html;
+
+		return new Response();
+	}
+
+
+
 }
