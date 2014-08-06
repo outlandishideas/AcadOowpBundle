@@ -16,23 +16,24 @@
     <div class="row">
         <div class="columns large-24">
             {% if roles | length > 0 %}
-                <ul class="search-results">
+                <ul class="search-results people">
                     {% for role in roles %}
                         <li>
                             {% block roleInclude %}
                                 <h3>{{ role.title() }}</h3>
                                 {{ role.content() | raw }}
-
-                                {% for person in role.people %}
-                                    <a href="{{ person.permalink() }}" class="people-item">
-                                        {% if person.featuredImage('medium') %}
-                                            {{ person.featuredImage('medium') | raw }}
-                                        {% else %}
-                                            <img src="{{ asset('bundles/outlandishacadoowp/images/no-profile.png') }}" alt="No image for {{ person.title() }}">
-                                        {% endif %}
-                                        <h4>{{ person.title() }}</h4>
-                                    </a>
-                                {% endfor %}
+                                <div class="people-items">
+                                    {% for person in role.people %}
+                                        <a href="{{ person.permalink() }}" class="people-item">
+                                            {% if person.featuredImage('medium') %}
+                                                <img src="{{ person.featuredImageUrl('small') }}" alt="{{ person.title() }} profile image">
+                                            {% else %}
+                                                <img class="no-profile" src="{{ asset('bundles/outlandishacadoowp/images/no-profile.png') }}" alt="No image for {{ person.title() }}">
+                                            {% endif %}
+                                            <h4>{{ person.title() }}</h4>
+                                        </a>
+                                    {% endfor %}
+                                </div>
                             {% endblock %}
                         </li>
                     {% endfor %}

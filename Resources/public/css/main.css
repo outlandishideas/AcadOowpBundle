@@ -410,3 +410,25 @@ img.contact-image {
 p.contact-name {
     font-weight: bold;
 }
+
+/* People Pages */
+
+ul.search-results.people li {
+	float: left;
+}
+
+.people-item {
+	float: left;
+	margin: 0 20px 10px 0;
+	text-align: center;
+}
+
+.people-item h4 {
+	font-size: 0.9rem;
+}
+
+.people-item img {
+	width: 100px;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
