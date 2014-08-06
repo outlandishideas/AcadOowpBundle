@@ -143,7 +143,7 @@ hr {
 }
 
 .font-theme-colour {
-    color: #278A85;
+    color: #33BBB1;
 }
 
 /*page sections*/
@@ -307,7 +307,7 @@ nav .inline-list li a{
     height: 100%;
     display: block;
     position: absolute;
-    background: #278A85;
+    background: #00A99E;
     opacity: 0.8;
     margin-left: -0.9375em;
 }
