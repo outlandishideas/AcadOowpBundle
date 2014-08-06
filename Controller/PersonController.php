@@ -28,13 +28,13 @@ class PersonController extends BaseController {
 //        $search = $this->container->get('aca.search');
 
 		$roles = Role::fetchAll();
-		if ( $roles ) {
+		if ( $roles && $roles->post_count > 0 ) {
 			foreach ( $roles as &$role ) {
 				$role->people = $role->connected( Person::postType() );
 			}
 		} else {
 			$people            = Person::fetchAll();
-			$response['items'] = $people;
+			$response['people'] = $people;
 		}
 
         $response['post'] = $post;

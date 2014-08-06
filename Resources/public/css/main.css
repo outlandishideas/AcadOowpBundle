@@ -415,6 +415,14 @@ p.contact-name {
 
 ul.search-results.people li {
 	float: left;
+	border: none;
+}
+
+ul.search-results.no-roles {
+	margin-top: 1.9rem;
+}
+ul.search-results.no-roles li {
+	padding: 1rem 0;
 }
 
 .people-item {
