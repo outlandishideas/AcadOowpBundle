@@ -1,6 +1,6 @@
 {% extends '::layout.html.twig' %}
 
-{% block title %}{{ post.title() }}{% endblock %}
+{% block title %}{{ post.title() | raw }}{% endblock %}
 
 {% block content %}
     <article class="section">
@@ -13,7 +13,7 @@
             <div class="medium-15 end medium-pull-8 columns">
                 <div class="content main">
                     {% block postDate %}{% endblock %}
-                    {% block postTitle %}<h1>{{ post.title() }}</h1>{% endblock %}
+                    {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
                     {% if post.subtitle() %}
                         <p class="subtitle">{{ post.subtitle() }}</p>
                     {% endif %}
