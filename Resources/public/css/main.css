@@ -142,6 +142,7 @@ hr {
 
 .section {
     padding-bottom: 1rem;
+    border-bottom: 1px solid #000;
     margin-bottom: 1rem;
 }
 
