@@ -10,6 +10,13 @@
                     {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
                     'post': post } %}
                 {% endblock %}
+
+                <div class="person-details">
+                    <h3 class="block-heading">Contact Details</h3>
+                    <p>Email: <span class="email">{{ post.metadata('email') }}</span></p>
+                    <p>Telephone: <span class="tel">{{ post.metadata('tel') }}</span></p>
+                </div>
+
             </div>
             <div class="medium-16 medium-pull-8 columns">
                 <div class="content main">
@@ -37,7 +44,7 @@
                     {% endblock %}
 
                     <div class="row">
-                        <div class="large-24 columns">
+                        <div class="large-20 columns">
                             <div class="content post note">
                                 {{ post.content() | raw }}
                             </div>
