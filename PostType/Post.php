@@ -108,11 +108,13 @@ abstract class Post extends BasePost {
 
 	public static function childTypes( $isChild = true ) {
 		$types = array();
+		$self = get_called_class();
 		foreach (self::$postManager->postTypeMapping() as $postType => $class) {
-			if ( $class instanceof self && $isChild ) {
+
+			if ( in_array( $self, class_parents( $class) ) && $isChild ) {
 				// if the class is a child of self and we are looking for children
 				$types[] = $postType;
-			} else if (	! $class instanceof self && ! $isChild) {
+			} else if (	! in_array( $self, class_parents( $class) ) && ! $isChild) {
 				// if class not child of self and we are not looking for children
 				$types[] = $postType;
 			}

@@ -1,0 +1,4 @@
+{% for item in items %}
+    {% set twig_template = "OutlandishAcadOowpBundle:" ~ item.post_type|capitalize ~ ":" ~ item.post_type ~ "Item.html.twig"  %}
+    {% include twig_template  with { post: item } %}
+{% endfor %}

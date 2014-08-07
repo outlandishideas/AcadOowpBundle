@@ -13,7 +13,9 @@
 
                 <div class="person-details">
                     <h3 class="block-heading">Contact Details</h3>
+
                     <p>Email: <span class="email">{{ post.metadata('email') }}</span></p>
+
                     <p>Telephone: <span class="tel">{{ post.metadata('tel') }}</span></p>
                 </div>
 
@@ -54,10 +56,18 @@
             </div>
         </div>
     </article>
+
+    <div class="related-items">
+        <div class="large-20 columns">
+            <h3 class="block-heading">Related Content</h3>
+        </div>
+        {% block related %}
+            {{ render(controller('OutlandishAcadOowpBundle:Related:renderResources', {
+            'post': post
+            })) }}
+        {% endblock %}
+    </div>
+
+
 {% endblock %}
 
- {% block related %}
-     {{ render(controller('OutlandishAcadOowpBundle:Related:renderResources', {
-     'post': post
-     })) }}
- {% endblock %}
