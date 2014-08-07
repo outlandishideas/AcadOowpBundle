@@ -50,7 +50,7 @@ class FacetOrderBy extends Facet {
 
         //foreach option that is selected insert option as post_type
         $option = array_values($this->getSelectedOptions());
-        $args['orderby'] = $option[0];
+        $args['orderby'] = $option[0]['name'];
 
         return $args;
     }

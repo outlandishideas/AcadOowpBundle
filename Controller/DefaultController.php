@@ -165,6 +165,16 @@ class DefaultController extends BaseController {
                     }
                     unset($section['connected_to']);
 
+                    if(!empty($section['order'])){
+                        $search->addFacetOrder('order', "");
+                        $params['order'] = $section['order'];
+                    }
+
+                    if(!empty($section['orderby'])){
+                        $search->addFacetOrderBy('orderby', "");
+                        $params['orderby'] = $section['orderby'];
+                    }
+
                     $search->setParams($params);
                     $sections[$s]['items'] = $search->search();
                     break;
