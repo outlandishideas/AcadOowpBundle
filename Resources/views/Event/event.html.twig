@@ -11,13 +11,21 @@
             {% else %}
                 <p>Date: {{ post.startDateString("j F Y") }}</p>
             {% endif %}
-            <p>Time: {{ post.startTime() }}</p>
-            <p>Location: {{ post.address() }}</p>
+
+            {%  if post.startTime() %}
+                <p>Time: {{ post.startTime() }}</p>
+            {% endif %}
+
+            {%  if post.address() %}
+                <p>Location: {{ post.address() }}</p>
+            {% endif %}
 
             {% if latitude | length > 0 and longitude | length > 0  %}
                 <div class="google-map">
                     <div class="map" data-marker="true" data-lat="{{ latitude | raw  }}" data-lng="{{ longitude | raw  }}" data-zoom="12"></div>
                 </div>
+            {% else %}
+                <hr>
             {% endif %}
 
         </div>
