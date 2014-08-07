@@ -25,10 +25,29 @@ app.init = {
 				e.preventDefault();
 				$('.main-search').toggle();
 			});
-		}
+		},
 
+		'.accordion-item': function( $accordian ) {
+			$accordian.on('click', 'a.accordion-toggle', function (e) {
+				e.preventDefault();
+				var $item = $(this).closest('.accordion-item');
+				var open = $item.hasClass('open');
+				$('.accordion-item').removeClass('open');
+				if ( ! open ) {
+					$item.addClass('open');
+				}
+				scrollIntoView($item, 30);
+			});
+		},
+
+		'.accordion.first-open': function( $accordian ) {
+			$accordian.each(function () {
+				$accordian.find(".accordion-item:first").addClass('open');
+			});
+		}
 	}
 };
+
 
 app.mapping = {
 	init: function( $el ) {
@@ -61,4 +80,17 @@ app.mapping = {
 }
 
 app.init.bootstrap();
+
+
+function scrollIntoView($item, offset, speed) {
+	if (typeof offset == 'undefined') {
+		offset = 0;
+	}
+	if (typeof speed == 'undefined') {
+		speed = 500;
+	}
+	$('html, body').animate({
+		scrollTop: $item.offset().top - offset
+	}, speed);
+}
 
