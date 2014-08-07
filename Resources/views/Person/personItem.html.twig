@@ -1,5 +1,6 @@
 <a href="{{ person.permalink() }}" class="people-item">
     {% include "OutlandishAcadOowpBundle:Partial:avatar.html.twig" with {
-    'post': person } %}
+    'post': person,
+    'size': 'avatar-square' } %}
     <h4>{{ person.title() }}</h4>
 </a>

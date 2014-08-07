@@ -108,7 +108,7 @@ class NavigationController extends BaseController {
 		$html =  '<ul class="bread-nav inline-list">';
 
 		if ( $post->ID != get_option('page_on_front') ) {
-			$html .= '<li><a href="' . home_url() . '">Home</a></li>';
+			$html .= '<li><a title="Back to Home" href="' . home_url() . '">Home</a></li>';
 		}
 
 		if ( is_search() ) {
@@ -118,8 +118,8 @@ class NavigationController extends BaseController {
 		} elseif ( is_single() ) {
 			$class = $this->postManager->postTypeClass($postType);
 			$parent_id  = $class::postTypeParentId();
-
-			$html .= '<li>  ' . '<a href="' . esc_url( get_permalink( $parent_id ) ) . '" title="">'. get_the_title( $parent_id ).'</a> </li>';
+			$parent_title = get_the_title( $parent_id );
+			$html .= '<li><a href="' . esc_url( get_permalink( $parent_id ) ) . '" title="Back to '. $parent_title .'">'. $parent_title.'</a> </li>';
 			$html .= '<li>' .the_title( '', '', false ) . "</li>";
 		} elseif ( is_page() ) {
 				// todo look for parents of page

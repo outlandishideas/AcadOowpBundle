@@ -1,5 +1,9 @@
-{% if post.featuredImage('medium') %}
-    <img class="avatar" src="{{ post.featuredImageUrl('small') }}" alt="{{ post.title() }} profile image">
+{% if size is not defined %}
+    {%  set size = 'small' %}
+{% endif %}
+
+{% if post.featuredImage( size ) %}
+    <img class="avatar {{ classes }}" src="{{ post.featuredImageUrl( size ) }}" alt="{{ post.title() }} profile image">
 {% else %}
-    <img class="avatar no-profile" src="{{ asset('bundles/outlandishacadoowp/images/no-profile.png') }}" alt="No image for {{ post.title() }}">
+    <img class="avatar no-profile {{ classes }}" src="{{ asset('bundles/outlandishacadoowp/images/no-profile.png') }}" alt="No image for {{ post.title() }}">
 {% endif %}

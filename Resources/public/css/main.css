@@ -652,7 +652,32 @@ ul.search-results.no-roles li {
 	border-radius: 50%;
 }
 
+.person-details {
+	border: 20px solid #f2f2f2;
+	padding: 20px;
+}
+
+.vcard .avatar {
+	width:200px;
+}
+.vcard.section {
+	border: none;
+	border-bottom: 1px solid #000;
+}
+.vcard .n {
+	display: none;
+}
+
+.vcard h1 .fn {
+	font-weight: normal;
+	font-size: 2.25rem;
+}
+
 /* Social Sharing */
+
+.share {
+	margin-bottom: 2rem;
+}
 
 ul.social {
 	list-style: none;
