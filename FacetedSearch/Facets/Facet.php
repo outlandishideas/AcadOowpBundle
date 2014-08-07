@@ -93,10 +93,11 @@ abstract class Facet {
     /**
      * set the selected options as selected so we can generate the correct arguments
      * @param array $params | these will normally be the $_GET params
-     * @return $this
+     * @return int $optionsSet | return the number of options that were set
      */
     public function setSelected(array $params)
     {
+        $optionsSet = 0;
         if(array_key_exists($this->name, $params)){
             $selectedValues = $params[$this->name];
             if(!is_array($selectedValues)) $selectedValues = explode(',', $selectedValues);
@@ -104,11 +105,12 @@ abstract class Facet {
             foreach($selectedValues as $value){
                 if(array_key_exists($value, $this->options)){
                     $this->options[$value]['selected'] = true;
+                    $optionsSet++;
                     if($this->exclusive) break;
                 }
             }
         }
-        return $this;
+        return $optionsSet;
     }
 
     /**
