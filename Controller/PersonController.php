@@ -50,10 +50,13 @@ class PersonController extends BaseController {
     public function singleAction($name) {
         $response = array();
 
-        $post = $this->querySingle(array('name' => $name, 'post_type' => Person::postType()));
+		$post = $this->querySingle(array('name' => $name, 'post_type' => Person::postType()));
 
         $response['post'] = $post;
+
         return $response;
     }
+
+
 
 }

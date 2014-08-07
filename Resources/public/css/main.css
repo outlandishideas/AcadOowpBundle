@@ -721,7 +721,6 @@ ul.search-results.people li.accordion-item.open .accordion-toggle:after {
 }
 .vcard.section {
 	border: none;
-	border-bottom: 1px solid #000;
 }
 .vcard .n {
 	display: none;
