@@ -3,7 +3,7 @@
 {% endif %}
 
 {% if post.featuredImage( size ) %}
-    <img class="avatar {{ classes }}" src="{{ post.featuredImageUrl( size ) }}" alt="{{ post.title() }} profile image">
+    <img class="avatar {{ classes }}" src="{{ post.featuredImageUrl( size ) }}" alt="{{ post.title() | raw }} profile image">
 {% else %}
     <img class="avatar no-profile {{ classes }}" src="{{ asset('bundles/outlandishacadoowp/images/no-profile.png') }}" alt="No image for {{ post.title() }}">
 {% endif %}

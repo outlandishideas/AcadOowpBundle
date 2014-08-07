@@ -9,7 +9,7 @@
                     <nav>
                         <ul>
                             {% for page in pages %}
-                                <li><a class="font-theme-colour" href="{{ page.permalink() }}">{{ page.title() }}</a></li>
+                                <li><a class="font-theme-colour" href="{{ page.permalink() }}">{{ page.title() | raw }}</a></li>
                             {% endfor %}
                         </ul>
                     </nav>

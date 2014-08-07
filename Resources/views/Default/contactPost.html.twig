@@ -10,7 +10,7 @@
     <article class="section">
         <div class="row">
             <div class="large-20 columns large-centered small-centered">
-                {% block postTitle %}<h1>{{ post.title() }}</h1>{% endblock %}
+                {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
                 {% if post.subtitle() %}
                     <p class="subtitle">{{ post.subtitle() }}</p>
                 {% endif %}
