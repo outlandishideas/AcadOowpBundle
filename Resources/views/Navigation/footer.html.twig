@@ -1,51 +1,58 @@
 {% block footer_main %}
 
-    <div class="section">
-        <div class="row">
-            <div class="large-4 columns">
+    <div class="row">
+        <div class="large-6 columns">
+            <div id="useful-links">
+                <hr>
                 {% block footer_navigation %}
-                    <h2>Navigation</h2>
+                    <h3 class="block-heading">Navigation</h3>
                     <nav>
                         <ul>
                             {% for page in pages %}
-                                <li><a href="{{ page.permalink() }}">{{ page.title() }}</a></li>
+                                <li><a class="font-theme-colour" href="{{ page.permalink() }}">{{ page.title() }}</a></li>
                             {% endfor %}
                         </ul>
                     </nav>
                 {% endblock %}
             </div>
-            {% for section in sections %}
-                {% if loop.index < 5 %}
-                    <div class="large-4 columns">
-                        {% block footer_item %}
-                            <h2>{{ section.title }}</h2>
-                            {% set item = section.items | first %}
-                            {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
-                            'item': item,
-                            'excerpt_length': 150,
-                            'image': 'none'} %}
-                        {% endblock %}
-                    </div>
-                {% endif %}
-            {% endfor %}
-            <div class="large-4 columns">
+        </div>
+        <div class="large-6 columns">
+            <hr>
+            <h3 class="block-heading">News</h3>
+            <p class="date">7 Jul 2014</p>
+            <h4 class="font-theme-colour">Nam sim amet nunc dui</h4>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+        </div>
+        <div class="large-6 columns">
+            <hr>
+            <h3 class="block-heading">Events</h3>
+            <p class="date">13 Sep - 20 Sep 2014</p>
+            <h4 class="font-theme-colour">Sed ultrices</h4>
+            <p>
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                eu fugiat nulla pariatur.
+            </p>
+        </div>
+        <div class="large-6 columns">
+            <div class="get-in-touch">
+                <hr>
+                <h3 class="block-heading">Get in touch</h3>
                 {% block footer_address %}
-                    {% if socialmedia | length > 0 %}
-                        <ul class="social-media inline-list">
-                            {% for media in socialmedia %}
-                                <li>
-                                    <a href="{{ media.permalink() }}" class="fa {{ media.type }} fa-fw"></a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                    <h2>logo</h2>
-                    <p>{{ address | raw }}</p>
+
                     <p>
                         <span>email@emailaddress.com</span><br/>
                         <span>{{ phonenumber }}</span>
                     </p>
+
+                    <p>{{ address | raw }}</p>
+
                 {% endblock %}
+                {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
+                'post': post,
+                'title': 'event'} %}
             </div>
         </div>
     </div>
@@ -53,5 +60,12 @@
 {% endblock %}
 
 <div id="copyright">
-    &copy; logo 2014
+    <div class="row">
+        <div class="large-6 columns pull-left">
+            <p>&copy; State Crime 2014</p>
+        </div>
+        <div class="large-6 columns pull-right">
+            <p>An Outlandish website</p>
+        </div>
+    </div>
 </div>
