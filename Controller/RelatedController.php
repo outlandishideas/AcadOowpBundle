@@ -9,13 +9,13 @@ class RelatedController {
 	public function renderResourcesAction( $post ) {
 		$types = Theme::childTypes( false );
 		unset( $types['people'] );
-		$types = $post->connectedTypes( $types );
+		$connected_types = $post->connectedTypes( $types );
 
 
 
 		return $this->render(
-					'OutlandishAcadOowpBundle:Related:footer.html.twig',
-						$post
+					'OutlandishAcadOowpBundle:Related:items.html.twig',
+						$items
 		);
 
 	}
