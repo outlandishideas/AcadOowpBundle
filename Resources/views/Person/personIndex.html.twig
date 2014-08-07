@@ -5,7 +5,9 @@
     <div class="row">
         <div class="columns medium-{% if post.featuredImage('large') %}12{% else %}24{% endif %}">
             <h2>{{ post.title() }}</h2>
-            {{ post.content() | raw }}
+            <div class="people-intro">
+                {{ post.content() | raw }}
+            </div>
         </div>
         {% if post.featuredImage('large') %}
             <div class="columns medium-12">

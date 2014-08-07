@@ -650,6 +650,12 @@ ul.search-results.people li.accordion-item.open .accordion-toggle:after {
 	font-size: 0.9rem;
 }
 
+.people-intro p {
+   font-size: 2rem;
+   font-weight: lighter;
+   line-height: 1.4;
+}
+
 .avatar {
 	width: 100px;
 	-webkit-border-radius: 50%;
