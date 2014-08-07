@@ -1,5 +1,24 @@
 {% extends 'OutlandishAcadOowpBundle:Default:defaultPost.html.twig' %}
 
+{% block content %}
+
+    {{ parent() }}
+
+    {% for item in selected_items %}
+        <li>
+            {% block itemInclude %}
+                {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                'item': item,
+                'excerpt_length': 300,
+                'image': 'medium',
+                'classes': 'image-overlay'} %}
+            {% endblock %}
+        </li>
+    {% endfor %}
+
+
+{% endblock %}
+
 {% block postDate %}<p class="date font-large">{{ post.dateString() }}</p>{% endblock %}
 
 {% block sideBar %}
