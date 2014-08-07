@@ -80,6 +80,62 @@ abstract class Event extends Post {
         }
     }
 
+    public static function fetchFutureEvents($queryArgs = array()) {
+        $defaults = array (
+            'posts_per_page' => -1,
+            'meta_query'=>array(
+                array(
+                    'key'=>'start_date',
+                    'value'=> date('Y/m/d'),
+                    'compare'=>'>',
+                    'type'=>'DATE'
+                )
+            ),
+            'orderby' => 'meta_value',
+            'meta_key' => 'start_date',
+            'order' => 'asc'
+        );
+
+        $queryArgs = wp_parse_args($queryArgs, $defaults);
+        $futureEvents = self::fetchAll($queryArgs);
+
+        return $futureEvents;
+    }
+
+    public static function sortByMonth($events) {
+
+        $eventsByMonth = array();
+        foreach($events as $event){
+            $monthYear = $event->startMonthYearString();
+            $position = '';
+            foreach($eventsByMonth as $key => $value)
+            {
+                if($monthYear == $value['month']) {
+                    $position = $key;
+                    break;
+                }
+            }
+            if (!is_int($position)) {
+                $eventsByMonth[] = array (
+                    'month' =>  $monthYear,
+                    'posts' => array($event)
+                );
+            } else {
+                $eventsByMonth[$position]['posts'][] = $event;
+            }
+        }
+        return $eventsByMonth;
+    }
+
+    /**
+     * return the month and year as string
+     * @param string $format
+     * @return bool|string
+     */
+    public function startMonthYearString($format = "F Y"){
+        return date($format, $this->startDate());
+    }
+
     /**
      * return start date for event as string
      * @param string $format | put in date format here

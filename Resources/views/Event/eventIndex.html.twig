@@ -1,17 +1,24 @@
 {% extends 'OutlandishAcadOowpBundle:Default:defaultIndex.html.twig' %}
 
- {#{% block itemInclude %}#}
-     {#{% include 'OutlandishAcadOowpBundle:Event:eventItem.html.twig' with {#}
-     {#'item': item,#}
-     {#'excerpt_length': 300,#}
-     {#'image': 'medium'} %}#}
- {#{% endblock %}#}
+{% block searchResults %}
 
- {#{% block itemIncludeSide %}#}
-     {#{% include 'OutlandishAcadOowpBundle:Event:eventItem.html.twig' with {#}
-     {#'item': item,#}
-     {#'excerpt_length': 150,#}
-     {#'image': 'none'} %}#}
- {#{% endblock %}#}
+    {% for month in items %}
 
+        {% if not loop.first %} <hr> {% endif %}
 
+        <h3 class="block-heading">{{ month.month | raw }}</h3>
+
+        {% for item in month['posts'] %}
+            <li>
+                {% block itemInclude %}
+                    {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                    'item': item,
+                    'excerpt_length': 300,
+                    'image': 'medium',
+                    'classes': 'image-overlay'} %}
+                {% endblock %}
+            </li>
+        {% endfor %}
+    {% endfor %}
+
+{% endblock %}

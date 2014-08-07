@@ -570,6 +570,10 @@ ul.search-results {
     padding: 0;
 }
 
+ul.search-results h3.block-heading {
+    margin-bottom: 0;
+}
+
 ul.search-results>li {
     list-style: none;
     padding: 2rem 0;
