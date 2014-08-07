@@ -31,11 +31,10 @@ app.init = {
 			$accordian.on('click', 'a.accordion-toggle', function (e) {
 				e.preventDefault();
 				var $item = $(this).closest('.accordion-item');
-				if ( ! $item.hasClass('open') ) {
-					$('.accordion-item').removeClass('open');
+				var open = $item.hasClass('open');
+				$('.accordion-item').removeClass('open');
+				if ( ! open ) {
 					$item.addClass('open');
-				} else {
-					$('.accordion-item').removeClass('open');
 				}
 				scrollIntoView($item, 30);
 			});
