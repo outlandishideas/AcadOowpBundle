@@ -648,6 +648,22 @@ ul.search-results.no-roles li {
 	border-radius: 50%;
 }
 
+.vcard .avatar {
+	width:200px;
+}
+.vcard.section {
+	border: none;
+	border-bottom: 1px solid #000;
+}
+.vcard .n {
+	display: none;
+}
+
+.vcard h1 .fn {
+	font-weight: normal;
+	font-size: 2.25rem;
+}
+
 /* Social Sharing */
 
 ul.social {

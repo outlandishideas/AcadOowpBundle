@@ -3,11 +3,10 @@
 {% block title %}{{ post.title() }}{% endblock %}
 
 {% block content %}
-    <article class="section">
+    <article class="section vcard">
         <div class="row">
             <div class="medium-8 medium-push-16 columns">
                 {% block sideBar %}
-                    {#{% include "OutlandishAcadOowpBundle:Partial:author.html.twig" %}#}
                     {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
                     'post': post } %}
                 {% endblock %}
@@ -15,22 +14,31 @@
             <div class="medium-16 medium-pull-8 columns">
                 <div class="content main">
                     {% block postAvatar %}
-                    <div class="medium-4 columns">
-                        {% include "OutlandishAcadOowpBundle:Partial:avatar.html.twig" with {
-                        'post': post } %}
-                    </div>
+                        <div class="medium-6 columns">
+                            {% include "OutlandishAcadOowpBundle:Partial:avatar.html.twig" with {
+                            'post': post,
+                            'size': 'avatar-square',
+                            'classes': 'photo' } %}
+                        </div>
                     {% endblock %}
 
                     {% block postTitle %}
-                        <div class="medium-20 columns">
-                            <h1>{{ post.title() }}</h1>
-                            {{ post.role() }}
+                        <div class="medium-18 columns">
+                            <h1>
+                                <span class="fn">{{ post.title() }}</span>
+                            </h1>
+                            <span class="n">
+                                <span class="honorific-prefix">{{ post.metadata('honorific_prefix') }}</span>
+                                <span class="given-name">{{ post.metadata('given_name') }}</span>
+                                <span class="family-name">{{ post.metadata('family_name') }}</span>
+                            </span>
+                            <span class="role">{{ post.role() }}</span>
                         </div>
                     {% endblock %}
 
                     <div class="row">
                         <div class="large-24 columns">
-                            <div class="content post">
+                            <div class="content post note">
                                 {{ post.content() | raw }}
                             </div>
                         </div>
