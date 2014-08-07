@@ -44,7 +44,30 @@ app.init = {
 			$accordian.each(function () {
 				$accordian.find(".accordion-item:first").addClass('open');
 			});
-		}
+		},
+
+        // Apply Carousel
+        '.carousel': function($carousel) {
+
+            $carousel.carouFredSel({
+                circular: true,
+                infinite: true,
+                responsive: true,
+                width: '100%',
+                height: 'auto',
+                items:{
+                    visible:{
+                        min:4,
+                        max:5
+                    }
+                },
+                auto:{
+                    play:true,
+                    items:1
+                }
+            });
+
+        },
 	}
 };
 

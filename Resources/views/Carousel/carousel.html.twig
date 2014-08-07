@@ -1,0 +1,23 @@
+{% if carousel_organisations | length > 0 %}
+    {% block carousel_organisations %}
+        <div class="associated-organisations">
+            <div class="row">
+                <div class="large-8 medium-10 small-12 large-centered small-centered columns partnership-heading">
+                    <h2>In partnership with</h2>
+                </div>
+            </div>
+            <div class="carousel-row row full-width">
+                <ul id="carousel-organisations" class="carousel section">
+                    {% for org in carousel_organisations %}
+                        <li class="carousel-organisation">
+                            <a href="{{ org.url }}" target="_blank">
+                                <img src="{{ org.logo }}">
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endblock %}
+{% endif %}
+

@@ -151,7 +151,7 @@ abstract class Event extends Post {
      * @return bool|string
      */
     public function endDateString($format = "j F Y"){
-        return date($format, $this->endDate());
+        return $this->endDate() ? date($format, $this->endDate()) : false;
     }
 
     /**
@@ -167,7 +167,7 @@ abstract class Event extends Post {
      * @return int
      */
     public function endDate(){
-        return strtotime($this->metadata('end_date'));
+        return $this->metadata('end_date') ? strtotime($this->metadata('end_date')) : false;
     }
 
     /**

@@ -1,17 +1,4 @@
 
-
-        {% if organisations | length > 0 %}
-            {% block associated_organisations %}
-                <div id="associated-organisations" class="section">
-                    <ul class="large-block-grid-5">
-                        {% for org in organisations %}
-                            <li>{{ org.title }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endblock %}
-        {% endif %}
-
         {% block footer_main %}
 
             <div class="section">

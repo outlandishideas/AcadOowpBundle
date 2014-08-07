@@ -10,6 +10,8 @@ namespace Outlandish\AcadOowpBundle\FacetedSearch;
 
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostToPost;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostType;
+use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetOrder;
+use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetOrderBy;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\Facet;
 use Outlandish\OowpBundle\Manager\QueryManager;
 use Outlandish\OowpBundle\Manager\PostManager;
@@ -37,7 +39,7 @@ class Search {
     public $defaults = array(
         'post_type' => 'any',
         'post_count' => 10,
-        'page' => 1,
+        'page' => 1
     );
 
     function __construct(QueryManager $queryManager, PostManager $postManager, array $params = array())
@@ -81,6 +83,32 @@ class Search {
     public function addFacetPostToPost($name, $section, $postType)
     {
         $facet = new FacetPostToPost($name, $section, $postType);
+        return $this->addFacet($facet);
+    }
+
+    /**
+     * Shortcut function for adding a FacetOrder object
+     * @param $name
+     * @param $section
+     * @param array $options
+     * @return FacetOrder
+     */
+    public function addFacetOrder($name, $section, $options = array())
+    {
+        $facet = new FacetOrder($name, $section, $options);
+        return $this->addFacet($facet);
+    }
+
+    /**
+     * Shortcut function for adding a FacetOrderBy object
+     * @param $name
+     * @param $section
+     * @param array $options
+     * @return FacetOrderBy
+     */
+    public function addFacetOrderBy($name, $section, $options = array())
+    {
+        $facet = new FacetOrderBy($name, $section, $options);
         return $this->addFacet($facet);
     }
 

@@ -1,3 +1,3 @@
-{% block item_subtitle %}<p class="date">{{ item.dateString() }}</p>{% endblock %}
+{% block item_subtitle %}<p class="date">{{ item.dateString("j M Y", true) }}</p>{% endblock %}
 {% block item_title %}<h3 class="font-theme-colour">{{ item.title() }}</h3>{% endblock %}
 {% block item_content %}<p>{{ item.excerpt(excerpt_length) }}</p>{% endblock %}

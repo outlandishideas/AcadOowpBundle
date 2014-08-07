@@ -432,6 +432,7 @@ a.search-toggle {
     display: flex;
     justify-content: center;
     align-items: center;
+    /*white-space: nowrap;*/
 }
 
 .post-item.image-overlay .columns:first-of-type:hover:after {
@@ -488,6 +489,24 @@ a.search-toggle {
     margin-bottom: 1rem;
     text-decoration: underline;
     font-weight: bold;
+}
+
+/* Carousel */
+
+.caroufredsel_wrapper {
+    margin-top: 30px!important;
+    margin-bottom: 30px!important;
+    min-height: 200px;
+}
+
+.carousel-row {
+    overflow: hidden;
+}
+
+.carousel-organisation {
+    display: inline-block;
+    zoom: 1;
+    margin: 0 10px;
 }
 
 /* article default */
