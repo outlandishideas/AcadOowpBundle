@@ -31,17 +31,23 @@
                 </div>
 
                 <ul class="search-results">
-                    {% for item in items %}
-                        <li>
-                            {% block itemInclude %}
-                                {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
-                                    'item': item,
-                                    'excerpt_length': 300,
-                                    'image': 'medium',
-                                    'classes': 'image-overlay'} %}
-                            {% endblock %}
-                        </li>
-                    {% endfor %}
+
+                    {% block searchResults %}
+
+                        {% for item in items %}
+                            <li>
+                                {% block itemInclude %}
+                                    {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                                        'item': item,
+                                        'excerpt_length': 300,
+                                        'image': 'medium',
+                                        'classes': 'image-overlay'} %}
+                                {% endblock %}
+                            </li>
+                        {% endfor %}
+
+                    {% endblock %}
+
                 </ul>
 
             </div>

@@ -27,28 +27,14 @@ class EventController extends BaseController {
 
         /** @var AcaSearch $search */
 
-        //only future events fetched here
-        $items = Event::fetchAll(
-            array (
-                'posts_per_page' => 10,
-                'meta_query'=>array(
-                    array(
-                        'key'=>'start_date',
-                        'value'=> date('Y/m/d'),
-                        'compare'=>'>',
-                        'type'=>'DATE'
-                    )
-                ),
-                'orderby' => 'meta_value',
-                'meta_key' => 'start_date',
-                'order' => 'asc'
-            )
-        );
+        //fetch future events and sort by month
+        $items = Event::fetchFutureEvents();
+        $itemsByMonth = Event::sortByMonth($items);
 
         //only past events fetched here
         $sideItems = array(
             array(
-                'title' => 'Past events',
+                'title' => 'Previous events',
                 'items' => Event::fetchAll(
                     array (
                         'posts_per_page' => 3,
@@ -69,7 +55,7 @@ class EventController extends BaseController {
         );
 
         $response['post'] = $post;
-        $response['items'] = $items;
+        $response['items'] = $itemsByMonth;
         $response['sections'] = $post->sections();
         $response['sideItems'] = $sideItems;
         return $response;
