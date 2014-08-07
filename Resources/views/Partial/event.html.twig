@@ -1,16 +1,23 @@
-<hr>
-<h1>Event details</h1>
-<p>Start date:{{ post.startDateString("j F Y") }}</p>
-<p>End date:{{ post.endDateString() }}</p>
-<p>Time:{{ post.startTime() }}</p>
-<p>Location:</p>
+<div class="event-details">
+    <div class="row">
+        <div class="large-24 columns">
 
-{% if latitude | length > 0 and longitude | length > 0  %}
-    <div class="google-map">
-        <div class="map" data-marker="true" data-lat="{{ latitude | raw  }}" data-lng="{{ longitude | raw  }}" data-zoom="12"></div>
+            <hr>
+            <h1>Event details</h1>
+            <p>Start date: {{ post.startDateString("j F Y") }}</p>
+            <p>End date: {{ post.endDateString() }}</p>
+            <p>Time: {{ post.startTime() }}</p>
+            <p>Location: {{ post.address() }}</p>
+
+            {% if latitude | length > 0 and longitude | length > 0  %}
+                <div class="google-map">
+                    <div class="map" data-marker="true" data-lat="{{ latitude | raw  }}" data-lng="{{ longitude | raw  }}" data-zoom="12"></div>
+                </div>
+            {% endif %}
+
+        </div>
     </div>
-{% endif %}
-
+</div>
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
