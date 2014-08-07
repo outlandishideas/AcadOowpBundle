@@ -17,19 +17,23 @@
     <div class="row">
         <div class="columns large-24">
             {% if roles | length > 0 %}
-                <ul class="search-results people">
+                <ul class="search-results people accordion first-open">
                     {% for role in roles %}
-                        <li>
+                        <li class="accordion-item">
                             {% block roleInclude %}
-                                <h3>{{ role.title() }}</h3>
-                                {{ role.content() | raw }}
-                                <div class="people-items">
-                                    {% for person in role.people %}
-                                        {% block personInclude %}
-                                            {% include 'OutlandishAcadOowpBundle:Person:personItem.html.twig' with {
-                                            'person': person } %}
-                                        {% endblock %}
-                                    {% endfor %}
+                                <h3>{{ role.title() }}
+                                    <a href="#" class="accordion-toggle"></a>
+                                </h3>
+                                <div class="accordion-content">
+                                    {{ role.content() | raw }}
+                                    <div class="people-items">
+                                        {% for person in role.people %}
+                                            {% block personInclude %}
+                                                {% include 'OutlandishAcadOowpBundle:Person:personItem.html.twig' with {
+                                                'person': person } %}
+                                            {% endblock %}
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             {% endblock %}
                         </li>
