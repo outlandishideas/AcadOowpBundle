@@ -105,4 +105,26 @@ abstract class Post extends BasePost {
 
         return $date;
     }
-} 
+
+	public static function childTypes( $isChild = true ) {
+		$types = array();
+		foreach (self::$postManager->postTypeMapping() as $postType => $class) {
+			if ( $class instanceof self && $isChild ) {
+				// if the class is a child of self and we are looking for children
+				$types[] = $postType;
+			} else if (	! $class instanceof self && ! $isChild) {
+				// if class not child of self and we are not looking for children
+				$types[] = $postType;
+			}
+		}
+
+		return $types;
+	}
+
+	public function connectedTypes( $types = array() ) {
+		$post_types = self::connectedPostTypes();
+
+		return array_intersect( $post_types, $types);
+	}
+
+}
