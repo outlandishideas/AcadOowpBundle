@@ -17,6 +17,13 @@
     {% endfor %}
 
 
+        {% block related %}
+            {{ render(controller('OutlandishAcadOowpBundle:Related:renderResources', {
+            'post': post
+            })) }}
+        {% endblock %}
+
+
 {% endblock %}
 
 {% block postDate %}<p class="date font-large">{{ post.dateString() }}</p>{% endblock %}

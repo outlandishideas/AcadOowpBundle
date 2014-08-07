@@ -57,17 +57,11 @@
         </div>
     </article>
 
-    <div class="related-items">
-        <div class="large-20 columns">
-            <h3 class="block-heading">Related Content</h3>
-        </div>
-        {% block related %}
-            {{ render(controller('OutlandishAcadOowpBundle:Related:renderResources', {
-            'post': post
-            })) }}
-        {% endblock %}
-    </div>
-
+    {% block related %}
+        {{ render(controller('OutlandishAcadOowpBundle:Related:renderResources', {
+        'post': post
+        })) }}
+    {% endblock %}
 
 {% endblock %}
 

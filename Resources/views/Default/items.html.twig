@@ -1,4 +1,11 @@
-{% for item in items %}
-    {% set twig_template = "OutlandishAcadOowpBundle:" ~ item.post_type|capitalize ~ ":" ~ item.post_type ~ "Item.html.twig"  %}
-    {% include twig_template  with { post: item } %}
-{% endfor %}
+{%  if items |length > 0 %}
+<div class="related-items">
+    <div class="large-24 columns">
+        <hr>
+        <h3 class="block-heading">Related Content</h3>
+        {% for item in items %}
+            {% set twig_template = "OutlandishAcadOowpBundle:" ~ item.post_type|capitalize ~ ":" ~ item.post_type ~ "Item.html.twig"  %}
+            {% include twig_template  with { post: item } %}
+        {% endfor %}
+    </div>
+{% endif %}

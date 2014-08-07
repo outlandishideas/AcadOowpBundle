@@ -1,7 +1,7 @@
 {% extends 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' %}
 
 {% block item_subtitle %}<h2>
-    <p class="subtitle">
-        {{ item.dateString() }}
+    <p class="date">
+        {{ item.dateString("j M Y", true) }}
     </p></h2>
 {% endblock %}
