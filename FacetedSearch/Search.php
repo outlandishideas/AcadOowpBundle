@@ -63,6 +63,14 @@ class Search {
     }
 
     /**
+     * @return Facet[]
+     */
+    public function getFacets()
+    {
+        return $this->facets;
+    }
+
+    /**
      * Shortcut function for adding a FacetPostType object
      * @param $name
      * @param $section

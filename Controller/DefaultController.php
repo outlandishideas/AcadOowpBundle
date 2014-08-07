@@ -4,6 +4,7 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 
+use Outlandish\AcadOowpBundle\FacetedSearch\SearchFormHelper;
 use Outlandish\OowpBundle\PostType\MiscPost;
 use Outlandish\RoutemasterBundle\Controller\BaseController;
 use Outlandish\SiteBundle\PostType\News;
@@ -79,15 +80,25 @@ class DefaultController extends BaseController {
     {
         $response = array();
         $response['post'] = $post;
-        $items = $this->items($request, array(News::postType()));
-        if($items){
-            $response['items'] = $items;
+        $search = $this->items($request, $postType);
+        if($search) {
+            $query = $search->search();
+        }
+        if($search && $query->post_count > 0){
+            $response['items'] = $query->posts;
+            $response['search_form'] = new SearchFormHelper($search);
         } else {
             $response['sections'] = $this->sections($post->sections());
         }
+
         return $response;
     }
 
+    /**
+     * @param Request $request
+     * @param array $postTypes
+     * @return Search
+     */
     public function items(Request $request, $postTypes = array()){
         if(!$request->query->has('q')) return false;
         $params = $request->query->all();
@@ -102,12 +113,7 @@ class DefaultController extends BaseController {
             }
         }
         $search->setParams($params);
-        $query = $search->search();
-        if($query->post_count > 0){
-            return $query->posts;
-        } else {
-            return array();
-        }
+        return $search;
     }
 
     public function sections($sections)
