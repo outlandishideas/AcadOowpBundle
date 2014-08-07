@@ -4,13 +4,19 @@
 
     {{ parent() }}
 
-    {% if event_latitude | length > 0 and event_longitude | length > 0  %}
-        <div class="google-map">
-            <div class="map" data-marker="true" data-lat="{{ event_latitude | raw  }}" data-lng="{{ event_longitude | raw  }}" data-zoom="16"></div>
-        </div>
-    {% endif %}
+    {% for item in selected_items %}
+        <li>
+            {% block itemInclude %}
+                {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                'item': item,
+                'excerpt_length': 300,
+                'image': 'medium',
+                'classes': 'image-overlay'} %}
+            {% endblock %}
+        </li>
+    {% endfor %}
 
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
 {% endblock %}
 
 {% block postDate %}<p class="date font-large">{{ post.dateString() }}</p>{% endblock %}
@@ -19,6 +25,13 @@
     {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
     'post': post,
     'title': 'event'} %}
+
+    {% include "OutlandishAcadOowpBundle:Partial:event.html.twig" with {
+    'post': post,
+    'title': 'event',
+    'latitude' : event_latitude,
+    'longitude' : event_longitude
+    } %}
 
 {% endblock %}
 

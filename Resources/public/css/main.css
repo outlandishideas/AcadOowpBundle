@@ -14,6 +14,7 @@ h1 {
     letter-spacing : 1.2px;
     color: #565859;
     color : rgb(86, 88, 89);
+    margin-top: 0.3em;
 }
 
 h1 a {
@@ -164,7 +165,8 @@ hr {
 /* styles for fonts*/
 
 .font-large {
-    font-size: 2.25rem;
+    font-size: 2.25rem!important;
+    letter-spacing: 0.5px!important;
 }
 
 .font-theme-colour {
@@ -415,18 +417,21 @@ a.search-toggle {
 }
 
 .post-item.image-overlay .columns:first-of-type p {
-    position: absolute;
-    left: 0.5em;
-    right: 0.5em;
     color: #fff;
-    text-align: center;
-    font-size: 37px;
+    font-size: 35px;
+    line-height: 35px;
     font-weight: 300;
     letter-spacing: 0.1px;
-    line-height: 35px;
     z-index: 100;
-    /*fix this*/
-    margin-top: 80px;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .post-item.image-overlay .columns:first-of-type:hover:after {
@@ -490,6 +495,7 @@ a.search-toggle {
 article img {
     width: 100%;
     display: block;
+    margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
@@ -600,7 +606,8 @@ ul.search-results.sidebar .main p.date {
 /*contact page*/
 
 .google-map .map {
-    height: 350px;
+    height: 250px;
+    margin-top: 20px;
 }
 
 img.contact-image {
@@ -650,6 +657,7 @@ ul.social {
 
 ul.social li {
 	float: left;
+    margin-right: 0.5em;
 }
 
 ul.social li a  {
@@ -658,4 +666,18 @@ ul.social li a  {
 
 ul.social li a:hover  {
 	color: #268b85
+}
+
+/*Event details in sidebar*/
+
+.event-details h1 {
+    margin: 20px 0;
+}
+
+.event-details p {
+    margin-bottom: 5px;
+}
+
+.event-details p:first-of-type {
+    margin-top: 20px;
 }

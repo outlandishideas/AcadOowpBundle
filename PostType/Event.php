@@ -115,10 +115,21 @@ abstract class Event extends Post {
     }
 
     /**
+     * return the start time as a DateTime object
+     * @return int
+     */
+    public function startTime(){
+        return $this->metadata('start_time_');
+
+    }
+
+    /**return address
      * @return array|string
      */
     public function address()  {
-        return $this->metadata('event_address', true);
+        $address = $this->metadata('event_address', true);
+        if (!$address) $address = $this->postcode();
+        return $address;
     }
 
     /**
