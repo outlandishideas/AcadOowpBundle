@@ -142,7 +142,6 @@ hr {
 
 .section {
     padding-bottom: 1rem;
-    border-bottom: 1px solid #000;
     margin-bottom: 1rem;
 }
 
@@ -532,7 +531,7 @@ a.search-toggle {
 .caroufredsel_wrapper {
     margin-top: 30px!important;
     /*margin-bottom: 30px!important;*/
-    min-height: 200px;
+    min-height: 180px;
     margin-left: 0!important;
 }
 
