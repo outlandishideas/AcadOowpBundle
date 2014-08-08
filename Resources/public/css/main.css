@@ -65,16 +65,16 @@ h4 {
     margin-bottom: 0.25rem;
 }
 
-h3.block-heading, p.date {
+h3.block-heading, p.date, .side-menu li a {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: 1.2px;
     margin-bottom: 0;
     font-size: 16px;
 }
 
 h3.block-heading {
-    margin: 0 0 2em 0;
+    margin: 0 0 1em 0;
 }
 
 h3.block-heading:before {
@@ -651,6 +651,38 @@ ul.search-results.sidebar>li>ul {
 
 ul.search-results.sidebar .main p.date {
     margin-top: 20px;
+}
+
+/*sidemenu*/
+
+ul.side-menu {
+    margin-left: 0;
+}
+
+.side-menu li{
+    list-style: none;
+}
+
+.side-menu li>a {
+    background: #f5f5f5;
+    padding: 15px 0;
+    border-bottom: 2px solid #fff;
+}
+
+.side-menu li.current_page_item>a {
+    border-left: 12px solid #00AA9D;
+    background: #E6EFEA;
+    border-bottom-left-radius: 3px;
+}
+
+.side-menu li>a {
+    color: #565859;
+    padding-left: 25px;
+    display: block;
+}
+
+:not(.current_page_ancestor)> .children {
+    display: none;
 }
 
 /*contact page*/
