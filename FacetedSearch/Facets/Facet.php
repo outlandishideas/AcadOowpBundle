@@ -9,6 +9,9 @@
 namespace Outlandish\AcadOowpBundle\FacetedSearch\Facets;
 
 
+use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
+use Outlandish\OowpBundle\PostType\Post;
+
 abstract class Facet {
 
     /**
@@ -45,6 +48,15 @@ abstract class Facet {
     public $exclusive = false;
 
     /**
+     * general parameter
+     * This will determine whether this facet is shown on the search page
+     * hidden facets are hidden by css and cannot be changed by the user
+     * they still affect the results that are returned
+     * @var bool
+     */
+    public $hidden = false;
+
+    /**
      * @param $name
      * @param $section
      * @param array $options
@@ -56,6 +68,14 @@ abstract class Facet {
         $this->options = $options;
     }
 
+    public function addOptions($array = array()){
+        foreach($array as $item){
+            if($item instanceof Post){
+
+            }
+        }
+    }
+
     /**
      * add an option to the facet
      * eg. add a post type to the FacetPostType or FacetPostToPost
@@ -63,13 +83,9 @@ abstract class Facet {
      * @param $label
      * @return $this
      */
-    public function addOption($name, $label)
+    public function addOption($name, $label, $selected = false)
     {
-        $this->options[$name] = array(
-            'name' => $name,
-            'label' => $label,
-            'selected' => false
-        );
+        $this->options[] = new FacetOption($name, $label, $selected);
         return $this;
     }
 
@@ -124,4 +140,22 @@ abstract class Facet {
         $args = wp_parse_args(array(), $args);
         return $args;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isHidden()
+    {
+        return $this->hidden;
+    }
+
+    /**
+     * @param boolean $hidden
+     */
+    public function setHidden($hidden)
+    {
+        $this->hidden = $hidden;
+    }
+
+
 }

@@ -88,9 +88,9 @@ class Search {
      * @param $section
      * @return FacetPostType
      */
-    public function addFacetPostToPost($name, $section, $postType)
+    public function addFacetPostToPost($name, $section, $postType, $options = array())
     {
-        $facet = new FacetPostToPost($name, $section, $postType);
+        $facet = new FacetPostToPost($name, $section, $postType, $options);
         return $this->addFacet($facet);
     }
 
