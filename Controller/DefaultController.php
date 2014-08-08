@@ -5,6 +5,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 
 use Outlandish\AcadOowpBundle\FacetedSearch\SearchFormHelper;
+use Outlandish\AcadOowpBundle\PostType\Theme;
 use Outlandish\OowpBundle\PostType\MiscPost;
 use Outlandish\RoutemasterBundle\Controller\BaseController;
 use Outlandish\SiteBundle\PostType\News;
@@ -86,7 +87,8 @@ class DefaultController extends BaseController {
         }
         if($search && $query->post_count > 0){
             $response['items'] = $query->posts;
-            $response['search_form'] = new SearchFormHelper($search);
+            $helper = new SearchFormHelper($search);
+            $response['search_form'] = $helper->getSearchFormElements();
         } else {
             $response['sections'] = $this->sections($post->sections());
         }
@@ -95,6 +97,7 @@ class DefaultController extends BaseController {
     }
 
     /**
+     * takes Request object and array postTypes and returns search object
      * @param Request $request
      * @param array $postTypes
      * @return Search
@@ -111,7 +114,18 @@ class DefaultController extends BaseController {
             foreach($postTypes as $postType){
                 $facet->addOption($postType, "");
             }
+            $facet->setHidden(true);
         }
+
+        foreach(Theme::childTypes(true) as $postType => $class) {
+            $search->addFacetPostToPost(
+                $class::postType(),
+                $class::friendlyName(),
+                $class::postType(),
+                $class::fetchAll()->posts
+            );
+        }
+
         $search->setParams($params);
         return $search;
     }

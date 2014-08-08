@@ -34,6 +34,11 @@
 
                     {% block searchResults %}
 
+
+                        {% for element in search_form %}
+                                {{ element | raw }}
+                        {% endfor %}
+
                         {% for item in items %}
                             <li>
                                 {% block itemInclude %}
