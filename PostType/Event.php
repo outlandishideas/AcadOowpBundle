@@ -2,7 +2,7 @@
 
 namespace Outlandish\AcadOowpBundle\PostType;
 
-abstract class Event extends Post {
+abstract class Event extends Resource {
 
     const NOT_FOUND_MESSAGE = 'NOT_FOUND_ENTER_POSTCODE_OR_ENTER_ADDRESS_OR_AMEND_TITLE';
 

@@ -113,10 +113,10 @@ abstract class Post extends BasePost {
 
 			if ( in_array( $self, class_parents( $class) ) && $isChild ) {
 				// if the class is a child of self and we are looking for children
-				$types[] = $postType;
+				$types[$postType] = $class;
 			} else if (	! in_array( $self, class_parents( $class) ) && ! $isChild) {
 				// if class not child of self and we are not looking for children
-				$types[] = $postType;
+				$types[$postType] = $class;
 			}
 		}
 

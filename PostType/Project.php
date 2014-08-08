@@ -3,7 +3,7 @@
 namespace Outlandish\AcadOowpBundle\PostType;
 
 
-abstract class Project extends Post {
+abstract class Project extends Theme {
 
 	public static $menu_icon = 'dashicons-media-text';
 

@@ -3,7 +3,7 @@
 namespace Outlandish\AcadOowpBundle\PostType;
 
 
-abstract class Document extends Post {
+abstract class Document extends Resource {
 
 	public static $menu_icon = 'dashicons-format-aside';
 
