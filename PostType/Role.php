@@ -3,7 +3,7 @@
 namespace Outlandish\AcadOowpBundle\PostType;
 
 
-abstract class Role extends Post {
+abstract class Role extends Theme {
 
 	public static $menu_icon = 'dashicons-groups';
 

@@ -3,7 +3,7 @@
 namespace Outlandish\AcadOowpBundle\PostType;
 
 
-abstract class News extends Post {
+abstract class News extends Resource {
 
 	public static $menu_icon = 'dashicons-megaphone';
 
