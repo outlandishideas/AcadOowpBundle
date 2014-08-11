@@ -3,6 +3,7 @@
 {% block title %}{{ post.title() | raw }}{% endblock %}
 
 {% block content %}
+
     <article class="section">
         <div class="row">
             <div class="medium-8 medium-push-16 columns">
@@ -33,14 +34,23 @@
                 <div class="content main">
                     {% block postDate %}{% endblock %}
                     {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
-                    {% if post.subtitle() %}
-                        <p class="subtitle">{{ post.subtitle() }}</p>
-                    {% endif %}
+                    {% block subTitle %}
+                        {% if post.subtitle() %}
+                            <p class="subtitle">{{ post.subtitle() }}</p>
+                        {% endif %}
+                    {% endblock %}
                     {{ post.featuredImage('large') | raw }}
+
                     <div class="row">
                         <div class="large-24 columns">
                             <div class="content post">
-                                {{ post.content() | raw }}
+
+                                {% block postContent %}
+
+                                    {{ post.content() | raw }}
+
+                                {% endblock %}
+
                             </div>
                         </div>
                     </div>
@@ -48,4 +58,5 @@
             </div>
         </div>
     </article>
+
 {% endblock %}

@@ -111,6 +111,13 @@ hr {
     border-color: #A0A1A3;
 }
 
+.additional-information p {
+    font-weight: 400;
+    font-size : 18px;
+    letter-spacing : 0.9px;
+    color: #565859;
+}
+
 .header {
 	background: #33bab1;
 	position: relative;
@@ -408,6 +415,18 @@ a.search-toggle {
     margin-bottom: 0;
     font-size: 1rem;
     font-weight: bold;
+}
+
+ul.subtitle-list {
+    list-style: none;
+    margin-left: 0;
+}
+
+ul.subtitle-list li {
+    display: inline;
+    font-style: italic;
+    font-size: 0.9em;
+    padding-right: 15px;
 }
 
 /*these classes make elements in post items be container-wide so that image sits over text*/
@@ -874,4 +893,42 @@ ul.social li a:hover  {
 
 .accordion-item.open > .accordion-content {
 	display: block;
+}
+
+/*Document*/
+
+.attachment {
+    background: #f5f5f5;
+    padding: 20px;
+}
+
+.attachment p, .attachment a {
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.attachment a {
+    word-break: break-all;
+}
+
+.attachment a:hover {
+    text-decoration: underline;
+}
+
+.attachment img {
+    margin: 0 20px 0 10px;
+    width: 90%;
+}
+
+.attachment a.download {
+    color: #fff;
+    background: #00AA9D;
+    padding: 0.8rem 1.375rem;
+    position: absolute;
+    right: 20px;
+    top: 80px;
+}
+
+.attachment a.download:hover {
+    color: #134643;
 }

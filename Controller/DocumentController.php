@@ -18,7 +18,7 @@ class DocumentController extends BaseController {
     {
         $response = array();
 
-        $post = $this->querySingle(array('page_id' => Document::postTypeParentId()));
+        $post = $this->querySingle(array('page_id' => '160'));
 
         $items = Document::fetchAll();
 
@@ -37,7 +37,11 @@ class DocumentController extends BaseController {
     {
         $response = array();
 
-        $response['post'] = $this->querySingle(array('name' => $name, 'post_type' => Document::postType()));
+        $post = $this->querySingle(array('name' => $name, 'post_type' => Document::postType()));
+
+        $response['post'] = $post;
+
+        $response['attachment'] = $post->attachment();
 
         return $response;
     }

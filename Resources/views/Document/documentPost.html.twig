@@ -1,1 +1,86 @@
 {% extends 'OutlandishAcadOowpBundle:Default:defaultPost.html.twig' %}
+
+{% block postTitle %}<h1>'{{ post.title() | raw }}'</h1>{% endblock %}
+
+{% block subTitle %}
+    <ul class="subtitle-list">
+        <li class="font-theme-colour">Title: {{ post.title() }}</li>
+        <li class="font-theme-colour">Author(s): </li>
+        <li class="font-theme-colour">Published: {{ post.date }}</li>
+        <li class="font-theme-colour">Size: {{ post.attachmentSize() }} </li>
+    </ul>
+
+    {% if post.additionalInformation() %}
+
+        <div class="additional-information">
+             {{ post.additionalInformation() | raw }}
+        </div>
+
+    {% endif %}
+
+    {% if attachment %}
+
+        <div class="attachment">
+            <div class="row">
+                <div class="large-4 columns">
+                    {% if post.tempAttachmentThumb() %}
+                        <img src="{{ post.tempAttachmentThumb() }}">
+                    {% endif %}
+                </div>
+                <div class="large-14 columns">
+                    <p class="font-theme-colour">Link to full paper:</p>
+                    <a href="{{  attachment['url'] | raw }}" class="font-theme-colour">{{  attachment['url'] | raw }}</a>
+                </div>
+                <div class="large-6 columns">
+                     <a href="{{ attachment['url'] | raw }}" class="download">
+                         <span class="fa fa-chevron-right"></span>
+                     </a>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}
+
+{% block postContent %}
+
+    <hr>
+    <h3 class="block-heading">Extract</h3>
+
+    <h2>'{{ post.title() | raw }}'</h2>
+
+    <p>
+        {{ post.excerpt(1000) | raw }}
+    </p>
+
+    {% if post.additionalInformation() %}
+
+        <hr>
+        <h3 class="block-heading">Bibliographic reference</h3>
+
+        {{ post.bibliographicReference() | raw }}
+
+    {% endif %}
+
+{% endblock %}
+
+
+{% block sideBar %}
+
+  {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
+  'post': post,
+  'title': 'page'} %}
+
+  <hr>
+
+  <h3 class="block-heading">Authors</h3>
+
+  <hr>
+
+  <h3 class="block-heading">Categories</h3>
+
+{% endblock %}
+
+
+
