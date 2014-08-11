@@ -22,8 +22,8 @@ class FacetPostType extends Facet {
 
         //foreach option that is selected insert option as post_type
         foreach($this->options as $option){
-            if($option['selected']){
-                $args['post_type'][] = $option['name'];
+            if($option->selected){
+                $args['post_type'][] = $option->name;
             }
         }
 
