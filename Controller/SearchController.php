@@ -50,9 +50,11 @@ class SearchController extends BaseController {
         if($query->post_count > 0){
             $response['items'] = $query->posts;
             $response['moreResultsUrl'] = $this->generateUrl('searchAjax') . "?" . $search->queryString(1);
+            $response['paged'] = $query->query_vars['paged'];
         } else {
             $response['items'] = null;
             $response['moreResultsUrl'] = null;
+            $response['paged'] = 0;
         }
         return $response;
     }
