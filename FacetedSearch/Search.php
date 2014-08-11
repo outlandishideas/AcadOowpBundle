@@ -194,7 +194,7 @@ class Search {
         }
 
         //change page by value of $page
-        if(array_key_exists('page', $query)){
+        if(array_key_exists('paged', $query)){
             $query['paged'] += $page;
         } else {
             $query['paged'] = $page;
