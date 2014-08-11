@@ -9,11 +9,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Outlandish\RoutemasterBundle\Annotation\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-class DocumentController extends BaseController {
+class SearchController extends BaseController {
 
     /**
-     * @Route("/search/", name="searchIndex")
-     * @Template("OutlandishAcadOowpBundle:Search:searchIndex.html.twig")
+     * @Route("/search/", name="search")
+     * @Template("OutlandishAcadOowpBundle:Search:search.html.twig")
      */
     public function indexAction(Request $request)
     {
