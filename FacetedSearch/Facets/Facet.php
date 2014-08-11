@@ -79,13 +79,12 @@ abstract class Facet {
     /**
      * add an option to the facet
      * eg. add a post type to the FacetPostType or FacetPostToPost
-     * @param $name
-     * @param $label
+     * @param FacetOption $option
      * @return $this
      */
-    public function addOption($name, $label, $selected = false)
+    public function addOption(FacetOption $option)
     {
-        $this->options[] = new FacetOption($name, $label, $selected);
+        $this->options[] = $option;
         return $this;
     }
 
@@ -97,7 +96,7 @@ abstract class Facet {
     public function getSelectedOptions()
     {
         $options = array_filter($this->options, function($a){
-            return $a['selected'];
+            return $a->selected;
         });
         //if no options have been selected and defaultAll is true
         if(count($options) == 0 && $this->defaultAll){
@@ -114,19 +113,39 @@ abstract class Facet {
     public function setSelected(array $params)
     {
         $optionsSet = 0;
-        if(array_key_exists($this->name, $params)){
-            $selectedValues = $params[$this->name];
-            if(!is_array($selectedValues)) $selectedValues = explode(',', $selectedValues);
+        if(count($this->options) > 0){
+            if(array_key_exists($this->name, $params)){
+                $selectedValues = $params[$this->name];
+                if(!is_array($selectedValues)) $selectedValues = explode(',', $selectedValues);
 
-            foreach($selectedValues as $value){
-                if(array_key_exists($value, $this->options)){
-                    $this->options[$value]['selected'] = true;
-                    $optionsSet++;
-                    if($this->exclusive) break;
+                foreach($selectedValues as $value){
+                    foreach($this->options as $option){
+                        if($option->name == $value){
+                            $option->selected = true;
+                            $optionsSet++;
+                        }
+                    }
+                    if($this->exclusive && $optionsSet > 0) break;
                 }
+            }
+            if($optionsSet == 0 && $this->defaultAll){
+                $optionsSet = $this->setAll();
             }
         }
         return $optionsSet;
+    }
+
+    public function setAll()
+    {
+        $fakeParams = array($this->name => $this->getOptionNames());
+        return $this->setSelected($fakeParams);
+    }
+
+    public function getOptionNames()
+    {
+        return array_map(function($a){
+            return $a->name;
+        }, $this->options);
     }
 
     /**
