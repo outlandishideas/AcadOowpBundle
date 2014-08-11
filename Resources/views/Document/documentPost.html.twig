@@ -22,12 +22,7 @@
 
         <div class="attachment">
             <div class="row">
-                <div class="large-4 columns">
-                    {% if post.tempAttachmentThumb() %}
-                        <img src="{{ post.tempAttachmentThumb() }}">
-                    {% endif %}
-                </div>
-                <div class="large-14 columns">
+                <div class="large-18 columns">
                     <p class="font-theme-colour">Link to full paper:</p>
                     <a href="{{  attachment['url'] | raw }}" class="font-theme-colour">{{  attachment['url'] | raw }}</a>
                 </div>
@@ -54,12 +49,32 @@
         {{ post.excerpt(1000) | raw }}
     </p>
 
-    {% if post.additionalInformation() %}
+    <hr>
+    <h3 class="block-heading">Bibliographic reference</h3>
 
-        <hr>
-        <h3 class="block-heading">Bibliographic reference</h3>
+    {% if post.author() %}
 
-        {{ post.bibliographicReference() | raw }}
+        <span class="bio">{{ post.author() | raw }}</span>
+
+    {% endif %}
+
+    <span class="bio">{{ post.title() | raw }}</span>
+
+    {% if post.journal() %}
+
+        <span class="bio">{{ post.journal() | raw }}</span>
+
+    {% endif %}
+
+    {% if post.publication() %}
+
+        <span class="bio">{{ post.publication() | raw }}</span>
+
+    {% endif %}
+
+    {% if post.pageNumbers() %}
+
+        <span class="bio">{{ post.pageNumbers() | raw }}</span>
 
     {% endif %}
 

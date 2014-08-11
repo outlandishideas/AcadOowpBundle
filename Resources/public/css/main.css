@@ -932,3 +932,8 @@ ul.social li a:hover  {
 .attachment a.download:hover {
     color: #134643;
 }
+
+.bio:not(:last-of-type):after {
+    content: ",";
+    padding-right: 4px;
+}

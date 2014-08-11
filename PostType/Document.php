@@ -21,16 +21,24 @@ abstract class Document extends Post {
         return $this->metadata('additional_information');
     }
 
-    public function bibliographicReference() {
-        return $this->metadata('bibliographic_reference');
+    public function author() {
+        return '';
+    }
+
+    public function journal() {
+        return $this->metadata('journal');
+    }
+
+    public function publication() {
+        return $this->metadata('publication');
+    }
+
+    public function pageNumbers() {
+        return $this->metadata('page_numbers');
     }
 
     public function attachment() {
         return $this->metadata('attachment');
-    }
-
-    public function tempAttachmentThumb() {
-       return 'http://culturehive.co.uk/wp-content/uploads/2013/04/digital_strategy_framework.png';
     }
 
     public function attachmentSize() {
@@ -41,7 +49,6 @@ abstract class Document extends Post {
         } else {
             return null;
         }
-
     }
 
     // Adapted from: http://www.php.net/manual/en/function.filesize.php
