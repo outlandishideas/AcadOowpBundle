@@ -1,3 +1,8 @@
+{% if parent_post is defined %}
+    {% set tempMenuArgs = {'max_depth': 1, 'current_depth': 1} %}
+    {% include "OutlandishOowpBundle:Helper:menuItem.html.twig" with { post: parent_post, queryArgs: queryArgs, menuArgs: tempMenuArgs } %}
+{% endif %}
+
 {% for post in posts %}
     {% include "OutlandishOowpBundle:Helper:menuItem.html.twig" with { post: post, queryArgs: queryArgs, menuArgs: menuArgs } %}
 {% endfor %}

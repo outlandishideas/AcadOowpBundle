@@ -5,6 +5,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 
 use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
+use Outlandish\AcadOowpBundle\PostType\Post;
 use Symfony\Component\HttpFoundation\Response;
 use Outlandish\SiteBundle\PostType\News;
 use Outlandish\SiteBundle\PostType\Person;
@@ -34,11 +35,29 @@ class NavigationController extends BaseController {
 		);
 	}
 
-    public function generateMenuArguments($maxDepth = 1)
+
+    /**
+     * @param Post $rootPost
+     * @param int $maxDepth
+     * @return Response
+     */
+    public function renderSideMenuAction( Post $rootPost, $maxDepth = 1 ){
+
+        $args = $this->generateMenuArguments($maxDepth, $rootPost);
+
+        /*overrides homepage as parent post*/
+        $args['parent_post'] = $rootPost;
+
+        return $this->render(
+            'OutlandishAcadOowpBundle:Menu:menuItems.html.twig',
+            $args
+        );
+    }
+
+    public function generateMenuArguments($maxDepth = 1, $rootPost = null)
     {
         $this->queryManager = $this->get('outlandish_oowp.query_manager');
         $this->postManager = $this->get('outlandish_oowp.post_manager');
-        $rootPost = null;
         $postType = 'page';
 
         $queryArgs = array(
@@ -52,6 +71,7 @@ class NavigationController extends BaseController {
             $class = $this->postManager->postTypeClass($postType);
             $queryArgs['post_parent'] = $class::postTypeParentId();
             $posts = $this->queryManager->query($queryArgs);
+            unset($queryArgs['post_parent']);
         }
 
         $menuArgs = array(

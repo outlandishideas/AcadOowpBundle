@@ -65,16 +65,16 @@ h4 {
     margin-bottom: 0.25rem;
 }
 
-h3.block-heading, p.date {
+h3.block-heading, p.date, .side-menu li a {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: 1.2px;
     margin-bottom: 0;
     font-size: 16px;
 }
 
 h3.block-heading {
-    margin: 0 0 2em 0;
+    margin: 0 0 1em 0;
 }
 
 h3.block-heading:before {
@@ -126,6 +126,45 @@ hr {
 
 .header .bottom-header .columns {
 	padding: 0;
+}
+
+.header .bottom-header li {
+    padding: 0.8rem 1.375rem;
+}
+
+.header .bottom-header li a {
+    text-align: center;
+}
+
+.header .bottom-header ul.children {
+    margin: 7px -22px -10px -22px;
+    list-style: none;
+    position: absolute;
+    z-index: 1000;
+    top: 43px;
+    display: none;
+}
+
+.header .bottom-header nav .inline-list li:hover ul.children {
+    display: block;
+}
+
+.header .bottom-header ul.children li {
+    border-left: none;
+    padding: 10px 20px;
+    text-align: left;
+    background: #268b85;
+    margin-top: 1px;
+}
+
+.header .bottom-header ul.children li:hover {
+    background: #126D66;
+}
+
+.header .bottom-header ul.children li a {
+    text-align: left;
+    display: block;
+    min-width: 120px;
 }
 
 .main-title a {
@@ -237,7 +276,7 @@ nav .inline-list li.search {
 }
 
 a.search-toggle {
-	padding: 0.5rem 1.375rem;
+	padding: 0.8rem 1.375rem;
 }
 
 /* main search */
@@ -651,6 +690,63 @@ ul.search-results.sidebar>li>ul {
 
 ul.search-results.sidebar .main p.date {
     margin-top: 20px;
+}
+
+/*sidemenu*/
+
+ul.side-menu {
+    margin-left: 0;
+}
+
+.side-menu li{
+    list-style: none;
+}
+
+.side-menu li {
+    border-bottom: 2px solid #fff;
+}
+
+.side-menu li>a {
+    background: #f5f5f5;
+    padding: 15px 0;
+}
+
+.side-menu li.current_page_item>a, .side-menu li>a:hover {
+    border-left: 12px solid #00AA9D;
+}
+
+.side-menu li:not(.current_page_item)>a:hover {
+    padding-left: 13px;
+}
+
+.side-menu li.current_page_item>a {
+    background: #E6EFEA;
+}
+
+.side-menu li>a {
+    color: #565859;
+    padding-left: 25px;
+    display: block;
+}
+
+.side-menu :not(.current_page_ancestor)> .children {
+    display: none;
+}
+
+ul.side-menu>:not(li) {
+    display: none;
+}
+
+ul.side-menu>:not(li) {
+    display: none;
+}
+
+.side-menu .children li a {
+    background: #fff;
+}
+
+.side-menu .children li:not(:last-of-type) {
+    border-bottom: 1px solid #A0A1A3;
 }
 
 /*contact page*/
