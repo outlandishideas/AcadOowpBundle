@@ -34,13 +34,13 @@ abstract class Document extends Post {
     }
 
     public function attachmentSize() {
-        $attachmentId = $this->attachment()['id'];
-        $filename = get_attached_file($attachmentId);
-        if (file_exists($filename)) {
-            return $this->humanReadableFilesize(filesize($filename));
-        } else {
+//        $attachmentId = $this->attachment()['id'];
+//        $filename = get_attached_file($attachmentId);
+//        if (file_exists($filename)) {
+//            return $this->humanReadableFilesize(filesize($filename));
+//        } else {
             return null;
-        }
+//        }
 
     }
 
