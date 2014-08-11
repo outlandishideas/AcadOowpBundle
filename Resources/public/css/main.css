@@ -724,7 +724,7 @@ ul.side-menu {
     display: block;
 }
 
-:not(.current_page_ancestor)> .children {
+.side-menu :not(.current_page_ancestor)> .children {
     display: none;
 }
 
