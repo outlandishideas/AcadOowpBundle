@@ -145,7 +145,7 @@ hr {
     display: none;
 }
 
-.header .bottom-header nav .inline-list li.current_page_ancestor:hover ul.children {
+.header .bottom-header nav .inline-list li:hover ul.children {
     display: block;
 }
 
@@ -153,12 +153,8 @@ hr {
     border-left: none;
     padding: 10px 20px;
     text-align: left;
-    border-bottom: 1px solid #fff;
     background: #268b85;
-}
-
-.header .bottom-header ul.children li:first-of-type {
-    border-top: 1px solid #fff;
+    margin-top: 1px;
 }
 
 .header .bottom-header ul.children li:hover {
