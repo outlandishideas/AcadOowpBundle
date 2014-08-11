@@ -71,6 +71,7 @@ class NavigationController extends BaseController {
             $class = $this->postManager->postTypeClass($postType);
             $queryArgs['post_parent'] = $class::postTypeParentId();
             $posts = $this->queryManager->query($queryArgs);
+            unset($queryArgs['post_parent']);
         }
 
         $menuArgs = array(

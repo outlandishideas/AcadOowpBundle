@@ -128,6 +128,49 @@ hr {
 	padding: 0;
 }
 
+.header .bottom-header li {
+    padding: 0.8rem 1.375rem;
+}
+
+.header .bottom-header li a {
+    text-align: center;
+}
+
+.header .bottom-header ul.children {
+    margin: 7px -22px -10px -22px;
+    list-style: none;
+    position: absolute;
+    z-index: 1000;
+    top: 43px;
+    display: none;
+}
+
+.header .bottom-header nav .inline-list li.current_page_ancestor:hover ul.children {
+    display: block;
+}
+
+.header .bottom-header ul.children li {
+    border-left: none;
+    padding: 10px 20px;
+    text-align: left;
+    border-bottom: 1px solid #fff;
+    background: #268b85;
+}
+
+.header .bottom-header ul.children li:first-of-type {
+    border-top: 1px solid #fff;
+}
+
+.header .bottom-header ul.children li:hover {
+    background: #126D66;
+}
+
+.header .bottom-header ul.children li a {
+    text-align: left;
+    display: block;
+    min-width: 120px;
+}
+
 .main-title a {
 	color: #FFFFFF;
 	font-size: 1.5rem;
@@ -683,6 +726,18 @@ ul.side-menu {
 
 :not(.current_page_ancestor)> .children {
     display: none;
+}
+
+ul.side-menu>:not(li) {
+    display: none;
+}
+
+ul.side-menu>:not(li) {
+    display: none;
+}
+
+ul.side-menu .children li {
+    background: #fff;
 }
 
 /*contact page*/
