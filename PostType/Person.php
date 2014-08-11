@@ -5,6 +5,8 @@ namespace Outlandish\AcadOowpBundle\PostType;
 
 abstract class Person extends Post {
 
+    public static $resource = true;
+
 	public static $menu_icon = 'dashicons-businessman';
 
     //connected to document, event, news, place, project, role, theme
