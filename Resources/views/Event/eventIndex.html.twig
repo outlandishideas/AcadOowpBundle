@@ -22,3 +22,10 @@
     {% endfor %}
 
 {% endblock %}
+
+{% block itemIncludeSide %}
+    {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+    'item': item,
+    'excerpt_length': 150,
+    'classes' : 'main image-overlay dark'} %}
+{% endblock %}
