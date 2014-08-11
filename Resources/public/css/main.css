@@ -276,7 +276,7 @@ nav .inline-list li.search {
 }
 
 a.search-toggle {
-	padding: 0.5rem 1.375rem;
+	padding: 0.8rem 1.375rem;
 }
 
 /* main search */
@@ -732,8 +732,9 @@ ul.side-menu>:not(li) {
     display: none;
 }
 
-ul.side-menu .children li {
+.side-menu .children li>a {
     background: #fff;
+    border-bottom: 2px solid grey;
 }
 
 /*contact page*/
