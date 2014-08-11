@@ -24,14 +24,16 @@ class SearchController extends BaseController {
      */
     public function indexAction(Request $request)
     {
+        $post = $this->querySingle(array('name' => 'search', 'post_type' => 'page'), true);
         $search = $this->search($request);
         $search->setParams($request->query->all());
         $query = $search->search();
         if($query->post_count > 0){
             $response['items'] = $query->posts;
+            $response['moreResultsUrl'] = $this->generateUrl('search') . "?" . $search->queryString(1);
         } else {
             $response['items'] = null;
-            $response['message'] = "No posts found with your search criteria";
+            $response['moreResultsUrl'] = null;
         }
         return $response;
     }
@@ -42,7 +44,16 @@ class SearchController extends BaseController {
      */
     public function ajaxAction(Request $request)
     {
-        $response = $this->items($request);
+        $search = $this->search($request);
+        $search->setParams($request->query->all());
+        $query = $search->search();
+        if($query->post_count > 0){
+            $response['items'] = $query->posts;
+            $response['moreResultsUrl'] = $this->generateUrl('searchAjax') . "?" . $search->queryString(1);
+        } else {
+            $response['items'] = null;
+            $response['moreResultsUrl'] = null;
+        }
         return $response;
     }
 
