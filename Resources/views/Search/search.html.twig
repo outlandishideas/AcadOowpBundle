@@ -1,1 +1,6 @@
 {% extends 'OutlandishAcadOowpBundle:Default:defaultIndex.html.twig' %}
+
+{% block content %}
+    {{ parent() }}
+    <a href="{{ moreResultsUrl }}">More Results</a>
+{% endblock %}
