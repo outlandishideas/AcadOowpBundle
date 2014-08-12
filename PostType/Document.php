@@ -21,6 +21,25 @@ abstract class Document extends Post {
         return $this->metadata('additional_information');
     }
 
+	public function taxonomies() {
+		$taxonomies = array(
+			array(
+				'type' => Theme::postType(),
+				'name' => Theme::friendlyNamePlural()
+			),
+			array(
+				'type' => Place::postType(),
+				'name' => Place::friendlyNamePlural()
+			),
+		);
+
+		foreach ( $taxonomies as &$taxonomy ) {
+			$taxonomy['terms'] = $this->connected( $taxonomy['type'] );
+		}
+
+		return $taxonomies;
+	}
+
     public function authors() {
         return $this->connected( Person::postType() );
     }
