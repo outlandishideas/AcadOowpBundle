@@ -97,6 +97,7 @@ class NavigationController extends BaseController {
 
         $pages = $this->queryManager->query(array(
             'post_type' => 'page',
+            'post_parent' => 0,
             'orderby' => 'menu_order',
             'order' => 'asc'
         ));
