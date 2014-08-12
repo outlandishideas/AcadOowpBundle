@@ -136,11 +136,12 @@ hr {
 }
 
 .header .bottom-header li {
-    padding: 0.8rem 1.375rem;
+	padding: 0;
 }
 
 .header .bottom-header li a {
     text-align: center;
+	padding: 0.5rem 1.375rem;
 }
 
 .header .bottom-header ul.children {
