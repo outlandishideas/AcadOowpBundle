@@ -770,8 +770,8 @@ ul.side-menu>:not(li) {
 /*contact page*/
 
 .google-map .map {
-    height: 250px;
-    margin-top: 20px;
+    height: 420px;
+    margin: -10px 0 20px 0;
 }
 
 img.contact-image {
@@ -935,4 +935,16 @@ ul.social li a:hover  {
 .bio:not(:last-of-type):after {
     content: ",";
     padding-right: 4px;
+}
+
+@media only screen and (max-width: 1024px)  {
+
+    .contact-person {
+        text-align: center;
+    }
+
+    .contact-person img {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
