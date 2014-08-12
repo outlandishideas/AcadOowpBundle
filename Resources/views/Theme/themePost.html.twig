@@ -1,0 +1,47 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}{{ post.title() | raw }}{% endblock %}
+
+{% block content %}
+
+    <article class="section">
+        <div class="row">
+            <div class="medium-8 medium-push-16 columns">
+                {% block sideBar %}
+
+                    {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
+                    'post': post,
+                    'title': 'page'} %}
+
+                {% endblock %}
+            </div>
+            <div class="medium-15 end medium-pull-8 columns">
+                <div class="content main">
+
+                    {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
+
+                    <div class="row">
+                        <div class="large-24 columns">
+                            <div class="content post">
+
+                                {% block postContent %}
+
+                                    {{ post.content() | raw }}
+
+                                {% endblock %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    {% block related %}
+        {{ render(controller('OutlandishAcadOowpBundle:Related:renderResources', {
+        'post': post
+        })) }}
+    {% endblock %}
+
+{% endblock %}

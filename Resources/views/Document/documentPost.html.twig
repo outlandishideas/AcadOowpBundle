@@ -2,10 +2,13 @@
 
 {% block postTitle %}<h1>'{{ post.title() | raw }}'</h1>{% endblock %}
 
+{% set author_names = post.author_names() %}
+{% set authors = post.authors() %}
+
 {% block subTitle %}
     <ul class="subtitle-list">
         <li class="font-theme-colour">Title: {{ post.title() }}</li>
-        <li class="font-theme-colour">Author(s): </li>
+        <li class="font-theme-colour">Author{% if authors | length > 1 %}s{% endif %}: {{ author_names }}</li>
         <li class="font-theme-colour">Published: {{ post.date }}</li>
         <li class="font-theme-colour">Size: {{ post.attachmentSize() }} </li>
     </ul>
@@ -52,9 +55,9 @@
     <hr>
     <h3 class="block-heading">Bibliographic reference</h3>
 
-    {% if post.author() %}
+    {% if author_names %}
 
-        <span class="bio">{{ post.author() | raw }}</span>
+        <span class="bio">{{ author_names }}</span>
 
     {% endif %}
 
@@ -85,15 +88,37 @@
 
   {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
   'post': post,
-  'title': 'page'} %}
+  'title': 'page'}
+  %}
 
-  <hr>
+  {% if authors | length > 0 %}
+    <hr>
+    <h3 class="block-heading">Author{% if authors | length > 1 %}s{% endif %}</h3>
+        <div class="authors">
+            {% for person in authors %}
+                {% include 'OutlandishAcadOowpBundle:Person:personItem.html.twig' with {
+                'person': person } %}
+            {% endfor %}
+        </div>
+  {% endif %}
 
-  <h3 class="block-heading">Authors</h3>
+      {% for taxonomy in post.taxonomies() %}
+        {% if taxonomy.terms | length > 0 %}
+            <div class="taxonomy {{ taxonomy.type }}">
+                <hr>
+                <h3 class="block-heading">{{ taxonomy.name }}</h3>
+                <ul class="terms {{ taxonomy.type }}">
+                {% for term in taxonomy.terms %}
+                    <li><a href="{{ term.permalink() }}">{{ term.title() | raw }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+      {% endfor %}
 
-  <hr>
 
-  <h3 class="block-heading">Categories</h3>
+
+
 
 {% endblock %}
 

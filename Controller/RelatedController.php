@@ -11,15 +11,19 @@ use Outlandish\AcadOowpBundle\PostType\Person;
 
 class RelatedController extends BaseController{
 
-	private function unsetByValue( &$array, $value) {
-		if ( ( $key = array_search( $value, $array ) ) !== false ) {
-			unset( $array[$key] );
+	private function unsetByValue( &$array, $values) {
+		if ( ! is_array( $values ) ) {
+			$values = array( $values );
+		}
+		foreach( $values as $value ) {
+			if ( ( $key = array_search( $value, $array ) ) !== false ) {
+				unset( $array[$key] );
+			}
 		}
 	}
 	public function renderResourcesAction( $post ) {
 		$types = Theme::childTypes( false );
-		$this->unsetByValue( $types, 'person' );
-		$this->unsetByValue( $types, 'role' );
+		$this->unsetByValue( $types, array( 'person', 'role', 'theme', 'place' ) );
 
 		$connected_types = $post->connectedTypes( $types );
 

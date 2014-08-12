@@ -25,9 +25,9 @@ class NavigationController extends BaseController {
         );
     }
 
-	public function renderMenuAction( $maxDepth = 1 ){
+	public function renderMenuAction( $maxDepth = 1, $menu = 'header' ){
 
-        $args = $this->generateMenuArguments($maxDepth);
+        $args = $this->generateMenuArguments($maxDepth, null, $menu);
 
 		return $this->render(
 			'OutlandishAcadOowpBundle:Menu:menuItems.html.twig',
@@ -56,7 +56,7 @@ class NavigationController extends BaseController {
         );
     }
 
-    public function generateMenuArguments($maxDepth = 1, $rootPost = null)
+    public function generateMenuArguments($maxDepth = 1, $rootPost = null, $menu = null)
     {
         $this->queryManager = $this->get('outlandish_oowp.query_manager');
         $this->postManager = $this->get('outlandish_oowp.post_manager');
@@ -81,6 +81,10 @@ class NavigationController extends BaseController {
             'current_depth' => 1
         );
 
+
+		$posts = $this->wp_menu( $posts, $menu );
+
+
         return array(
             'posts' => $posts,
             'queryArgs' => $queryArgs,
@@ -88,7 +92,7 @@ class NavigationController extends BaseController {
         );
     }
 
-    public function generateFooterArguments()
+    public function generateFooterArguments( $menu = 'footer' )
     {
         $this->queryManager = $this->get('outlandish_oowp.query_manager');
         $this->postManager = $this->get('outlandish_oowp.post_manager');
@@ -103,6 +107,8 @@ class NavigationController extends BaseController {
             'orderby' => 'menu_order',
             'order' => 'asc'
         ));
+
+		$pages = $this->wp_menu( $pages, $menu );
 
         $sections = $homePage->sections();
         $organisations = get_field('associated_organisations', 'options');
@@ -165,6 +171,29 @@ class NavigationController extends BaseController {
 		$title = get_the_title( $id );
 
 		return '<li><a href="' . esc_url( get_permalink( $id ) ) . '" title="Back to ' . $title . '">' . $title . '</a> </li>';
+	}
+
+	private function wp_menu( $posts, $menu = null ) {
+		if ( $menu ) {
+			$menu_locations = get_nav_menu_locations();
+			$menu_obj       = get_term( $menu_locations[$menu], 'nav_menu' );
+			if ( !is_wp_error( $menu_obj ) ) {
+				$items = wp_get_nav_menu_items( $menu_obj->term_id );
+				if ( is_array( $items ) && count( $items ) > 0 ) {
+					$items      = wp_list_pluck( $items, 'object_id' );
+					$post_items = $posts->posts;
+					$new_items  = array();
+					foreach ( $post_items as $item ) {
+						if ( in_array( $item->ID, $items ) ) {
+							$new_items[] = $item;
+						}
+					}
+					$posts->posts = $new_items;
+				}
+			}
+		}
+
+		return $posts;
 	}
 
 

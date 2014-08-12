@@ -6,6 +6,14 @@ body {
     color: #565859;
 }
 
+a {
+	color: #268b85;
+}
+
+a:hover, a:focus {
+	color: #126D66;
+}
+
 h1 {
     font-family: 'Roboto', sans-serif;
     font-weight: 200;
@@ -194,7 +202,6 @@ hr {
 
 .section {
     padding-bottom: 1rem;
-    border-bottom: 1px solid #000;
     margin-bottom: 1rem;
 }
 
@@ -854,6 +861,29 @@ ul.search-results.people li.accordion-item.open .accordion-toggle:after {
 	font-size: 2.25rem;
 }
 
+.authors {
+	margin-bottom: 1rem;
+	float: left;
+}
+
+.authors .people-item {
+	width: 100%;
+	clear: both;
+	text-align: left;
+}
+
+.authors .people-item h4 {
+	display: inline-block;
+	margin-left: 0.4rem;
+}
+
+.authors .people-item .avatar {
+	margin-top: 0;
+	margin-bottom: 0;
+	display: inline;
+	vertical-align: middle;
+}
+
 /* Social Sharing */
 
 .share {
@@ -943,6 +973,11 @@ ul.social li a:hover  {
 .bio:not(:last-of-type):after {
     content: ",";
     padding-right: 4px;
+}
+
+/* Taxonomies */
+ul.terms {
+	list-style: none;
 }
 
 @media only screen and (max-width: 1024px)  {
