@@ -6,6 +6,14 @@ body {
     color: #565859;
 }
 
+a {
+	color: #268b85;
+}
+
+a:hover, a:focus {
+	color: #126D66;
+}
+
 h1 {
     font-family: 'Roboto', sans-serif;
     font-weight: 200;
