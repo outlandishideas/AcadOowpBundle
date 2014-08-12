@@ -1,52 +1,26 @@
 {% extends 'OutlandishAcadOowpBundle:Default:defaultPost.html.twig' %}
 
-{% block content %}
-
+{% block topElement %}
     {% if map | length > 0 %}
         <div class="google-map">
             <div class="map" data-marker="true" data-lat="{{ map.lat | raw  }}" data-lng="{{ map.lng | raw  }}" data-zoom="16"></div>
         </div>
     {% endif %}
-    <article class="section">
-        <div class="row">
-            <div class="large-20 columns large-centered small-centered">
-                {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
-                {% if post.subtitle() %}
-                    <p class="subtitle">{{ post.subtitle() }}</p>
-                {% endif %}
-            </div>
-        </div>
-        <div class="row">
-            <div class="medium-16 columns large-centered small-centered">
-                <div class="row">
-                    <div class="large-20 columns large-centered small-centered">
-                        {{ post.content() | raw }}
-                    </div>
-                </div>
-            </div>
-        </div>
+{% endblock %}
 
-        {% if map | length > 0 %}
+{% block bottomElement %}
+    {% if contact_people | length > 0 %}
         <div class="row">
-            <div class="large-10 columns large-centered small-centered">
-                <div class="address large">
-                    {{ address | raw }}
-                </div>
-            </div>
-        </div>
-        {% endif %}
-
-        {% if contact_people | length > 0 %}
             {% for person in contact_people %}
-                <div class="row">
-                    <div class="large-10 columns small-centered large-centered">
+                <div class="large-8 medium-24 columns">
+                    <div class="contact-person">
                         <div class="row">
-                            {% if person.image.url | length > 0 %}
-                                <div class="large-10 columns">
+                            <div class="large-24 medium-12 small-24 columns">
+                                {% if person.image.url | length > 0 %}
                                     <img class="contact-image" src="{{ person.image.url }}">
-                                </div>
-                            {% endif %}
-                            <div class="large-14 columns">
+                                {% endif %}
+                            </div>
+                            <div class="large-24 medium-12 small-24 columns">
                                 {% if person.name.content | length > 0 %}
                                     <p class="contact-name">
                                         {{ person.name.prefix }}
@@ -73,10 +47,10 @@
                     </div>
                 </div>
             {% endfor %}
-        {% endif %}
-    </article>
+    {% endif %}
 {% endblock %}
 
 {% block footer %}
+    {{ parent() }}
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 {% endblock %}

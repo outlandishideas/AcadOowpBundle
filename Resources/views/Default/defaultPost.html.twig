@@ -32,6 +32,7 @@
             </div>
             <div class="medium-15 end medium-pull-8 columns">
                 <div class="content main">
+                    {% block topElement %}{% endblock %}
                     {% block postDate %}{% endblock %}
                     {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
                     {% block subTitle %}
@@ -54,6 +55,7 @@
                             </div>
                         </div>
                     </div>
+                    {% block bottomElement %}{% endblock %}
                 </div>
             </div>
         </div>
