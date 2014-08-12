@@ -198,7 +198,6 @@ hr {
 
 .section {
     padding-bottom: 1rem;
-    border-bottom: 1px solid #000;
     margin-bottom: 1rem;
 }
 
@@ -966,4 +965,9 @@ ul.social li a:hover  {
 .bio:not(:last-of-type):after {
     content: ",";
     padding-right: 4px;
+}
+
+/* Taxonomies */
+ul.terms {
+	list-style: none;
 }
