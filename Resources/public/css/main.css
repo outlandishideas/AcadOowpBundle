@@ -159,7 +159,7 @@ hr {
 
 .header .bottom-header ul.children li {
     border-left: none;
-    padding: 10px 20px;
+    padding: 0;
     text-align: left;
     background: #268b85;
     margin-top: 1px;
@@ -173,6 +173,7 @@ hr {
     text-align: left;
     display: block;
     min-width: 120px;
+    padding: 10px 20px;
 }
 
 .main-title a {
