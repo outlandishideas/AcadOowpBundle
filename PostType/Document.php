@@ -21,9 +21,19 @@ abstract class Document extends Post {
         return $this->metadata('additional_information');
     }
 
-    public function author() {
-        return '';
+    public function authors() {
+        return $this->connected( Person::postType() );
     }
+
+	public function author_names() {
+		$authors = $this->authors();
+		$names = array();
+		foreach( $authors as $author ) {
+			$names[] = $author->title();
+		}
+
+		return ( count( $names ) > 0 ) ? implode( ', ', $names ) : false;
+	}
 
     public function journal() {
         return $this->metadata('journal');
