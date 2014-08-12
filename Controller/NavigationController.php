@@ -136,20 +136,33 @@ class NavigationController extends BaseController {
 			$html .= "<li>  Search Results</li>";
 		} elseif ( is_404() ) {
 			$html .= "<li>  404 Not Found</li>";
-		} elseif ( is_single() ) {
+		} elseif ( is_single() && $postType != 'page' ) {
 			$class = $this->postManager->postTypeClass($postType);
 			$parent_id  = $class::postTypeParentId();
-			$parent_title = get_the_title( $parent_id );
-			$html .= '<li><a href="' . esc_url( get_permalink( $parent_id ) ) . '" title="Back to '. $parent_title .'">'. $parent_title.'</a> </li>';
+			$html .= $this->breadcrumbItem( $parent_id );
+
 			$html .= '<li>' .the_title( '', '', false ) . "</li>";
-		} elseif ( is_page() ) {
-				// todo look for parents of page
-				$html .= "<li>  " . the_title( '', '', false ) . "</li>";
+		} elseif ( $postType == 'page' ) {
+
+			$parents = get_post_ancestors( $post->ID );
+			if ( $parents ) {
+				$parents = array_reverse( $parents );
+				foreach ( $parents as $parent_id ) {
+					$html .= $this->breadcrumbItem( $parent_id );
+				}
+			}
+			$html .= "<li>  " . the_title( '', '', false ) . "</li>";
 		}
 		$html .= "</ul>";
 		echo $html;
 
 		return new Response();
+	}
+
+	private function breadcrumbItem( $id ) {
+		$title = get_the_title( $id );
+
+		return '<li><a href="' . esc_url( get_permalink( $id ) ) . '" title="Back to ' . $title . '">' . $title . '</a> </li>';
 	}
 
 
