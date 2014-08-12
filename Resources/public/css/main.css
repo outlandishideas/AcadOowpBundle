@@ -144,16 +144,16 @@ hr {
 }
 
 .header .bottom-header li {
-	padding: 0;
+    padding: 0;
 }
 
 .header .bottom-header li a {
     text-align: center;
-	padding: 0.5rem 1.375rem;
+    padding: 0.8rem 1.5rem;
 }
 
 .header .bottom-header ul.children {
-    margin: 7px -22px -10px -22px;
+    margin: 7px -22px -10px 0;
     list-style: none;
     position: absolute;
     z-index: 1000;
@@ -777,8 +777,8 @@ ul.side-menu>:not(li) {
 /*contact page*/
 
 .google-map .map {
-    height: 250px;
-    margin-top: 20px;
+    height: 420px;
+    margin: -10px 0 20px 0;
 }
 
 img.contact-image {
@@ -970,4 +970,16 @@ ul.social li a:hover  {
 /* Taxonomies */
 ul.terms {
 	list-style: none;
+}
+
+@media only screen and (max-width: 1024px)  {
+
+    .contact-person {
+        text-align: center;
+    }
+
+    .contact-person img {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

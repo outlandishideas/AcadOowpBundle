@@ -45,7 +45,9 @@ class NavigationController extends BaseController {
 
         $args = $this->generateMenuArguments($maxDepth, $rootPost);
 
-        /*overrides homepage as parent post*/
+        /*add dash to root post title*/
+        $rootPost->post_title = '/ '.$rootPost->post_title;
+        /*override homepage as parent post*/
         $args['parent_post'] = $rootPost;
 
         return $this->render(
