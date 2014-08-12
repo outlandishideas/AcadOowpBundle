@@ -13,16 +13,13 @@ class OutlandishAcadOowpBundle extends Bundle {
 
 		add_theme_support( 'menus' );
 
-		add_action(
-			'init', function () {
-				register_nav_menus(
-					array(
-						'header' => __( 'Header Navigation' ),
-						'footer' => __( 'Footer Navigation' )
-					)
-				);
-			}
+		register_nav_menus(
+			array(
+				'header' => __( 'Header Navigation' ),
+				'footer' => __( 'Footer Navigation' )
+			)
 		);
+
 		add_action(
 			'admin_menu', function () {
 				remove_menu_page( 'themes.php' );
