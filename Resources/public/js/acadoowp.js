@@ -23,7 +23,7 @@ app.init = {
 		'.search-toggle': function( $toggle ) {
 			$toggle.on('click', function (e) {
 				e.preventDefault();
-				$('.main-search').toggle();
+				$('.main-search').slideToggle(300);
 			});
 		},
 

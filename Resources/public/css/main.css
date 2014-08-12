@@ -294,10 +294,6 @@ a.search-toggle {
 }
 .main-search {
 	display: none;
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	z-index: 1;
 }
 
 .main-search form {
@@ -309,12 +305,13 @@ a.search-toggle {
 }
 
 .main-search input[type="text"] {
-    margin: 0.25rem 0;
-	width: 35%;
-	float: right;
-	height: 1.7rem;
-	color: #ffffff;
-	border-bottom: 1px solid #ffffff;
+    margin: 0 0 0.5rem 0;
+    width: 35%;
+    float: right;
+    height: 2.6rem;
+    line-height: 2.7rem;
+    color: #ffffff;
+    border-bottom: 1px solid #ffffff;
 }
 
 .main-search input[type="text"]:focus {
