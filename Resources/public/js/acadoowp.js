@@ -12,15 +12,35 @@ app.init = {
 			if ($item.length) app.init.selectors[selector]($item);
 		}
 
+        $(document).click(function(event) {
+            if( isMobile() && $('.bottom-header').hasClass('open-nav') && !$(event.target).closest('.bottom-header').length && !$(event.target).closest('#hamburger').length ) {
+                toggleSideMenu();
+            }
+        });
+
+        $(document).scroll(function() {
+
+            if (isMobile() && $('.bottom-header').hasClass('open-nav') && $(window).height() > 430) {
+                toggleSideMenu();
+            }
+        });
+
     },
 	selectors: {
+
+        '#hamburger': function($mobnav){
+            $mobnav.on('click', function(event){
+                event.preventDefault();
+                toggleSideMenu();
+            });
+        },
 
 		'.google-map': function( $map_wrap ) {
 			$map = $map_wrap.find('.map');
 			app.mapping.init( $map );
 		},
 
-		'.search-toggle': function( $toggle ) {
+		'.search-icon.toggle': function( $toggle ) {
 			$toggle.on('click', function (e) {
 				e.preventDefault();
 				$('.main-search').slideToggle(300);
@@ -104,6 +124,9 @@ app.mapping = {
 
 app.init.bootstrap();
 
+function isMobile() {
+    return ($('.mobile-hide').is(":hidden"));
+}
 
 function scrollIntoView($item, offset, speed) {
 	if (typeof offset == 'undefined') {
@@ -115,5 +138,10 @@ function scrollIntoView($item, offset, speed) {
 	$('html, body').animate({
 		scrollTop: $item.offset().top - offset
 	}, speed);
+}
+
+function toggleSideMenu() {
+    $('.bottom-header').toggleClass('open-nav');
+    $('body').toggleClass('push');
 }
 
