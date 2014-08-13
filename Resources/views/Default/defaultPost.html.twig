@@ -6,31 +6,7 @@
 
     <article class="section">
         <div class="row">
-            <div class="medium-8 medium-push-16 columns">
-                {% block sideBar %}
-
-                    {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
-                    'post': post,
-                    'title': 'page'} %}
-
-                    <hr>
-
-                    <ul class="side-menu">
-
-                        <h3 class="block-heading">Find out more</h3>
-
-                        {% block side_menu %}
-                            {{ render(controller('OutlandishAcadOowpBundle:Navigation:renderSideMenu', {
-                            'maxDepth' : 3,
-                            'rootPost': post.getRoot()
-                            })) }}
-                        {% endblock %}
-
-                    </ul>
-
-                {% endblock %}
-            </div>
-            <div class="medium-15 end medium-pull-8 columns">
+            <div class="medium-15  columns ">
                 <div class="content main">
                     {% block topElement %}{% endblock %}
                     {% block postDate %}{% endblock %}
@@ -58,6 +34,31 @@
                     {% block bottomElement %}{% endblock %}
                 </div>
             </div>
+            <div class="medium-8 columns">
+                {% block sideBar %}
+
+                    {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
+                    'post': post,
+                    'title': 'page'} %}
+
+                    <hr>
+
+                    <ul class="side-menu">
+
+                        <h3 class="block-heading">Find out more</h3>
+
+                        {% block side_menu %}
+                            {{ render(controller('OutlandishAcadOowpBundle:Navigation:renderSideMenu', {
+                            'maxDepth' : 3,
+                            'rootPost': post.getRoot()
+                            })) }}
+                        {% endblock %}
+
+                    </ul>
+
+                {% endblock %}
+            </div>
+
         </div>
     </article>
 
