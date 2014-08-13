@@ -13,14 +13,14 @@ app.init = {
 		}
 
         $(document).click(function(event) {
-            if( isMobile() && $('.bottom-header').hasClass('open-nav') && !$(event.target).closest('.bottom-header').length && !$(event.target).closest('#hamburger').length ) {
+            if( $('.bottom-header').hasClass('open-nav') && !$(event.target).closest('.bottom-header').length && !$(event.target).closest('#hamburger').length ) {
                 toggleSideMenu();
             }
         });
 
         $(document).scroll(function() {
 
-            if (isMobile() && $('.bottom-header').hasClass('open-nav') && $(window).height() > 430) {
+            if ($('.bottom-header').hasClass('open-nav') && $(window).height() > 430) {
                 toggleSideMenu();
             }
         });
