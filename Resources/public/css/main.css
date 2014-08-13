@@ -120,6 +120,10 @@ hr {
     border-color: #A0A1A3;
 }
 
+img {
+    margin-bottom: 10px;
+}
+
 .additional-information p {
     font-weight: 400;
     font-size : 18px;

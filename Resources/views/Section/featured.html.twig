@@ -5,7 +5,7 @@
             {% set item = section.items | first  %}
             <a href="{{ item.permalink() }}" class="post-item">
                 <p class="subtitle">{{ item.date() }}</p>
-                <h3>{{ item.title() }}</h3>
+                <h3 class="font-theme-colour">{{ item.title() }}</h3>
                 <p>{{ item.excerpt(800) }}</p>
             </a>
         </div>
