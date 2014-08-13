@@ -1101,16 +1101,17 @@ ul.terms {
     }
 
     .breadcrumbs {
-        margin: 2px 0 0 -15px;
+        display: none;
+        /*margin: 2px 0 0 -15px;*/
     }
 
-    .breadcrumbs .inline-list>li {
-        margin-left: 0.4rem;
-    }
+    /*.breadcrumbs .inline-list>li {*/
+        /*margin-left: 0.4rem;*/
+    /*}*/
 
-    .breadcrumbs .inline-list>li:first-of-type {
-        margin-left: 0;
-    }
+    /*.breadcrumbs .inline-list>li:first-of-type {*/
+        /*margin-left: 0;*/
+    /*}*/
 
     body, .bottom-header {
         -webkit-transition: all 0.3s;
