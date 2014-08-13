@@ -1130,4 +1130,9 @@ ul.terms {
     .caroufredsel_wrapper {
         min-height: 40px;
     }
+
+    .google-map .map {
+        height: 200px;
+        margin-top: 10px;
+    }
 }
