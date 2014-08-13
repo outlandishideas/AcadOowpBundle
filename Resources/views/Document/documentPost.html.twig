@@ -7,10 +7,45 @@
 
 {% block subTitle %}
     <ul class="subtitle-list">
-        <li class="font-theme-colour">Title: {{ post.title() }}</li>
-        <li class="font-theme-colour">Author{% if authors | length > 1 %}s{% endif %}: {{ author_names }}</li>
-        <li class="font-theme-colour">Published: {{ post.date }}</li>
-        <li class="font-theme-colour">Size: {{ post.attachmentSize() }} </li>
+        <li class="font-theme-colour">
+
+            {% if author_names %}
+
+                {{ author_names }}
+
+            {% endif %}
+
+        </li>
+        <li class="font-theme-colour">
+
+            {{ post.title() }}
+
+        </li>
+        <li class="font-theme-colour">
+
+            {% if post.journal() %}
+
+                {{ post.journal() | raw }}
+
+            {% endif %}
+        </li>
+        <li class="font-theme-colour">
+
+            {% if post.publication() %}
+
+                {{ post.publication() | raw }}
+
+            {% endif %}
+
+        </li>
+        <li class="font-theme-colour">
+
+            {% if post.pageNumbers() %}
+
+                {{ post.pageNumbers() | raw }}
+
+            {% endif %}
+        </li>
     </ul>
 
     {% if post.additionalInformation() %}
@@ -52,35 +87,6 @@
         {{ post.excerpt(1000) | raw }}
     </p>
 
-    <hr>
-    <h3 class="block-heading">Bibliographic reference</h3>
-
-    {% if author_names %}
-
-        <span class="bio">{{ author_names }}</span>
-
-    {% endif %}
-
-    <span class="bio">{{ post.title() | raw }}</span>
-
-    {% if post.journal() %}
-
-        <span class="bio">{{ post.journal() | raw }}</span>
-
-    {% endif %}
-
-    {% if post.publication() %}
-
-        <span class="bio">{{ post.publication() | raw }}</span>
-
-    {% endif %}
-
-    {% if post.pageNumbers() %}
-
-        <span class="bio">{{ post.pageNumbers() | raw }}</span>
-
-    {% endif %}
-
 {% endblock %}
 
 
@@ -115,10 +121,6 @@
             </div>
         {% endif %}
       {% endfor %}
-
-
-
-
 
 {% endblock %}
 
