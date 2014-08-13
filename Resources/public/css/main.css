@@ -723,7 +723,7 @@ ul.search-results.sidebar>li>ul {
 }
 
 ul.search-results.sidebar .main p.date {
-    margin-top: 20px;
+    padding-top: 20px;
 }
 
 /*sidemenu*/
@@ -1155,11 +1155,21 @@ ul.terms {
     }
 
     .post-item.image-overlay .columns:first-of-type p {
-        margin-top: 10%;
+        margin-top: 20%;
     }
 
     .post-item.image-overlay .columns:first-of-type img, .post-item.image-overlay .columns:first-of-type:after {
         max-width: 95%;
     }
+}
 
+/*IE8 hacks*/
+.post-item.image-overlay .columns:first-of-type p {
+    margin-top: 25%\9;
+}
+ul.search-results.sidebar .main.image-overlay .columns:first-of-type p.date {
+    margin-top: 20%\9;
+}
+.post-item.image-overlay .columns:first-of-type:after, .post-item.image-overlay.dark .columns:first-of-type:after {
+    background: transparent\9;
 }
