@@ -1014,8 +1014,7 @@ ul.terms {
 
     .main-search {
         display: block!important;
-        width: 95%;
-        margin-left: 50px;
+        margin-left: 51px;
         z-index: 1;
     }
 
