@@ -83,7 +83,7 @@ h3.block-heading, p.date, .side-menu li a {
 }
 
 h3.block-heading {
-    margin: 0 0 1em 0;
+    margin: 0 0 0.5em 0;
 }
 
 h3.block-heading:before {
@@ -118,10 +118,6 @@ p {
 
 hr {
     border-color: #A0A1A3;
-}
-
-img {
-    margin-bottom: 10px;
 }
 
 .additional-information p {
@@ -697,10 +693,6 @@ ul.search-results {
     padding: 0;
 }
 
-ul.search-results h3.block-heading {
-    margin-bottom: 0;
-}
-
 ul.search-results>li {
     list-style: none;
     padding: 2rem 0;
@@ -1165,4 +1157,9 @@ ul.terms {
     .post-item.image-overlay .columns:first-of-type p {
         margin-top: 10%;
     }
+
+    .post-item.image-overlay .columns:first-of-type img, .post-item.image-overlay .columns:first-of-type:after {
+        max-width: 95%;
+    }
+
 }
