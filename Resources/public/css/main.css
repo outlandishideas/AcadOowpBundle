@@ -787,7 +787,7 @@ ul.side-menu>:not(li) {
 
 .google-map .map {
     height: 420px;
-    margin: -10px 0 20px 0;
+    margin: 10px 0 20px 0;
 }
 
 img.contact-image {
