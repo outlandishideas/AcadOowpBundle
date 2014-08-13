@@ -13,8 +13,7 @@ app.init = {
 		}
 
         $(document).click(function(event) {
-            if( $('.bottom-header').hasClass('open-nav') && !$(event.target).closest('.bottom-header').length ) {
-//                console.log(event.target);
+            if( $('.bottom-header').hasClass('open-nav') && !$(event.target).closest('.bottom-header').length && !$(event.target).closest('#hamburger').length ) {
                 toggleSideMenu();
             }
         });
