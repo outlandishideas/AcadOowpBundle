@@ -1116,5 +1116,7 @@ ul.terms {
 
     body.push {
         left: 250px;
+        position: fixed;
+        top: 0;
     }
 }
