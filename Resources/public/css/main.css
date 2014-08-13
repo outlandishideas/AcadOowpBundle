@@ -1135,4 +1135,19 @@ ul.terms {
         height: 200px;
         margin-top: 10px;
     }
+
+    .sort-by {
+        display: none;
+    }
+
+    .sort-filter {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .sort-filter a {
+        font-size: 14px;
+        margin: 0;
+        padding: 8px 10px;
+    }
 }
