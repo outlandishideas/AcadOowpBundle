@@ -3,6 +3,7 @@
 
 namespace Outlandish\AcadOowpBundle\Controller;
 
+use Outlandish\OowpBundle\Manager\QueryManager;
 use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
 use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOptionPost;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetOrder;
@@ -85,6 +86,23 @@ class SearchController extends BaseController {
         $search->addFacet(new FacetOrder('order', 'Order'));
         $search->addFacet(new FacetOrderBy('orderby', 'Order By'));
         return $search;
+    }
+
+    public function searchSingle(Request $request)
+    {
+        if(!$request->query->has('q')) return null;
+
+        /** @var QueryManager $queryManager */
+        $queryManager = $this->get('outlandish_oowp.query_manager');
+
+        $args = array('post' => $request->query->get('q'));
+
+        $results = $queryManager->query($args);
+        if($results->post_count == 1){
+            return $results->post;
+        } else {
+            return null;
+        }
     }
 
     /**
