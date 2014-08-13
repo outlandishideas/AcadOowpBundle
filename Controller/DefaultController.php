@@ -7,7 +7,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 use Outlandish\AcadOowpBundle\FacetedSearch\SearchFormHelper;
 use Outlandish\AcadOowpBundle\PostType\Theme;
 use Outlandish\OowpBundle\PostType\MiscPost;
-use Outlandish\RoutemasterBundle\Controller\BaseController;
+use Outlandish\AcadOowpBundle\Controller\SearchController as BaseController;
 use Outlandish\SiteBundle\PostType\News;
 use Symfony\Component\HttpFoundation\Request;
 use Outlandish\SiteBundle\PostType\Page;
@@ -81,7 +81,7 @@ class DefaultController extends BaseController {
     {
         $response = array();
         $response['post'] = $post;
-        $search = $this->items($request, $postType);
+        $search = $this->search($request);
         if($search) {
             $query = $search->search();
         }
