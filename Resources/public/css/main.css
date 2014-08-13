@@ -1101,7 +1101,15 @@ ul.terms {
     }
 
     .breadcrumbs {
-        margin-top: 2px;
+        margin: 2px 0 0 -15px;
+    }
+
+    .breadcrumbs .inline-list>li {
+        margin-left: 0.8rem;
+    }
+
+    .breadcrumbs .inline-list>li:first-of-type {
+        margin-left: 0;
     }
 
     body, .bottom-header {
