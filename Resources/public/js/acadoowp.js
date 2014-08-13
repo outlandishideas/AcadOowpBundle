@@ -13,7 +13,7 @@ app.init = {
 		}
 
         $(document).click(function(event) {
-            if( $('.bottom-header').hasClass('open-nav') ) {
+            if( $('.bottom-header').hasClass('open-nav') && !$(event.target).closest('#hamburger').length ) {
                 toggleSideMenu();
             }
         });
