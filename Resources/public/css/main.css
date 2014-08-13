@@ -1052,8 +1052,8 @@ ul.terms {
 
     .header .bottom-header {
         height: 100%;
-        width: 300px;
-         left: -300px;
+        width: 250px;
+        left: -250px;
         z-index: 500;
         position: fixed;
         overflow: hidden;
@@ -1115,6 +1115,6 @@ ul.terms {
     }
 
     body.push {
-        left: 300px;
+        left: 250px;
     }
 }
