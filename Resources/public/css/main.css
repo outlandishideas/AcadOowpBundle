@@ -993,6 +993,13 @@ ul.terms {
     }
 }
 
+@media screen and (max-width: 980px) {
+    .people-items a {
+        max-width: 130px;
+        max-height: 140px;
+    }
+}
+
 @media screen and (max-width: 782px) {
 
     .mobile-hide {
