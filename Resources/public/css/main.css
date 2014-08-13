@@ -1161,6 +1161,10 @@ ul.terms {
     .post-item.image-overlay .columns:first-of-type img, .post-item.image-overlay .columns:first-of-type:after {
         max-width: 95%;
     }
+
+    .people-intro p {
+        font-size: 1rem;
+    }
 }
 
 /*IE8 hacks*/
