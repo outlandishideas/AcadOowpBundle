@@ -1141,8 +1141,7 @@ ul.terms {
     }
 
     .sort-filter {
-        padding-left: 0;
-        padding-right: 0;
+        padding: 9px 0 8px 0;
     }
 
     .sort-filter a {
