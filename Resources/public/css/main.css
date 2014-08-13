@@ -79,6 +79,7 @@ h3.block-heading, p.date, .side-menu li a {
     letter-spacing: 1.2px;
     margin-bottom: 0;
     font-size: 16px;
+    line-height: 1em;
 }
 
 h3.block-heading {
