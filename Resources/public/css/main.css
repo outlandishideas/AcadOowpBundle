@@ -1118,4 +1118,8 @@ ul.terms {
         position: fixed;
         top: 0;
     }
+
+    .caroufredsel_wrapper {
+        min-height: 100px;
+    }
 }
