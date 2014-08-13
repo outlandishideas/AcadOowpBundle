@@ -3,13 +3,13 @@
 
 namespace Outlandish\AcadOowpBundle\Controller;
 
-use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 use Outlandish\AcadOowpBundle\PostType\Theme;
 use Outlandish\AcadOowpBundle\PostType\Post;
 use Outlandish\AcadOowpBundle\PostType\Person;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
-class RelatedController extends BaseController{
+class RelatedController extends Controller{
 
 	private function unsetByValue( &$array, $value) {
 		if ( ( $key = array_search( $value, $array ) ) !== false ) {
