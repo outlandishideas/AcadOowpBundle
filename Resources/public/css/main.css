@@ -1157,4 +1157,8 @@ ul.terms {
         margin: 0;
         padding: 8px 10px;
     }
+
+    .post-item.image-overlay .columns:first-of-type p {
+        margin-top: 10%;
+    }
 }
