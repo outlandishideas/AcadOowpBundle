@@ -1086,8 +1086,11 @@ ul.terms {
         color: #808080;
         font-weight: 400;
         text-align: left;
-        border-bottom: 1px solid #808080;
         padding: 12px 30px 12px 32px;
+    }
+
+    .header .bottom-header li:not(:nth-last-of-type(2)) a {
+        border-bottom: 1px solid #808080;
     }
 
     .header .bottom-header nav .inline-list li:hover, .header .bottom-header nav .inline-list li.current_page_item, .header .bottom-header nav .inline-list li.current_page_ancestor {
