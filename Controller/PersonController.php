@@ -5,7 +5,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 
 use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
-use Outlandish\AcadOowpBundle\AcaSearch\AcaSearch;
+use Symfony\Component\HttpFoundation\Request;
 use Outlandish\AcadOowpBundle\PostType\Post;
 use Outlandish\SiteBundle\PostType\Person;
 use Outlandish\SiteBundle\PostType\Role;
@@ -18,7 +18,7 @@ class PersonController extends BaseController {
      * @Route("/people/")
      * @Template("OutlandishAcadOowpBundle:Person:personIndex.html.twig")
      */
-    public function indexAction() {
+    public function indexAction(Request $request) {
         $response = array();
 
         $post = $this->querySingle(array('page_id' => Person::postTypeParentId()));

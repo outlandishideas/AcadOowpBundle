@@ -5,7 +5,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 
 use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
-use Outlandish\AcadOowpBundle\AcaSearch\AcaSearch;
+use Symfony\Component\HttpFoundation\Request;
 use Outlandish\AcadOowpBundle\PostType\Post;
 use Outlandish\SiteBundle\PostType\News;
 use Outlandish\SiteBundle\PostType\Person;
@@ -20,7 +20,7 @@ class EventController extends BaseController {
      * @Route("/events/", name="eventsIndex")
      * @Template("OutlandishAcadOowpBundle:Event:eventIndex.html.twig")
      */
-    public function indexAction() {
+    public function indexAction(Request $request) {
         $response = array();
 
         $post = $this->querySingle(array('page_id' => Event::postTypeParentId()));

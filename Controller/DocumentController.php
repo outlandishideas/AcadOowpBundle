@@ -14,7 +14,7 @@ class DocumentController extends BaseController {
      * @Route("/documents/", name="documentsIndex")
      * @Template("OutlandishAcadOowpBundle:Document:documentIndex.html.twig")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $response = array();
 

@@ -42,11 +42,7 @@ class SearchFormHelper {
     {
         $options = array();
         if($facet->defaultAll){
-            $options[''] = array(
-                'name' => '',
-                'label' => 'All',
-                'selected' => false
-            );
+            $option[] = new FacetOption\FacetOption('', 'All', false);
         }
         $options = array_merge($options, $facet->options);
 
@@ -57,13 +53,13 @@ class SearchFormHelper {
 
         $html = "<ul id='{$facet->name}-group' class='{$classes}'>";
         foreach($options as $option) {
-            $selected = $option['selected'] ? 'selected' : '';
+            $selected = $option->selected ? 'selected' : '';
             $html .= "<li>";
-            $html .= "<label for='{$facet->name}-{$option['name']}'>{$option['label']}</label>";
+            $html .= "<label for='{$facet->name}-{$option->name}'>{$option->label}</label>";
             $html .= "<input type='checkbox'
-                id='{$facet->name}-{$option['name']}'
+                id='{$facet->name}-{$option->name}'
                 name='{$facet->name}'
-                value='{$option['name']}'
+                value='{$option->name}'
                 {$selected} />";
             $html .= "</li>";
         }

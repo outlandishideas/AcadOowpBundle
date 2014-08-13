@@ -3,7 +3,6 @@
 
 namespace Outlandish\AcadOowpBundle\Controller;
 
-use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
 use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOptionPost;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetOrder;
@@ -15,6 +14,7 @@ use Outlandish\AcadOowpBundle\FacetedSearch\Search;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Outlandish\RoutemasterBundle\Annotation\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Outlandish\RoutemasterBundle\Controller\BaseController;
 
 class SearchController extends BaseController {
 
