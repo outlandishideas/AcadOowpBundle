@@ -4,7 +4,7 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 use Outlandish\AcadOowpBundle\PostType\Document;
-use Outlandish\RoutemasterBundle\Controller\BaseController;
+use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 use Outlandish\AcadOowpBundle\PostType\Theme;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Outlandish\RoutemasterBundle\Annotation\Template;

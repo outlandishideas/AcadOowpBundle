@@ -4,13 +4,11 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 
-use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
+use Outlandish\AcadOowpBundle\Controller\ResourceController as BaseController;
+
+use Outlandish\AcadOowpBundle\PostType\Event;
+
 use Symfony\Component\HttpFoundation\Request;
-use Outlandish\AcadOowpBundle\PostType\Post;
-use Outlandish\SiteBundle\PostType\News;
-use Outlandish\SiteBundle\PostType\Person;
-use Outlandish\SiteBundle\PostType\Role;
-use Outlandish\SiteBundle\PostType\Event;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -25,11 +23,9 @@ class EventController extends BaseController {
 
         $post = $this->querySingle(array('page_id' => Event::postTypeParentId()));
 
-        /** @var AcaSearch $search */
-
         //fetch future events and sort by month
         $items = Event::fetchFutureEvents();
-        $itemsByMonth = Event::sortByMonth($items);
+//        $itemsByMonth = Event::sortByMonth($items);
 
         //only past events fetched here
         $sideItems = array(
@@ -55,7 +51,7 @@ class EventController extends BaseController {
         );
 
         $response['post'] = $post;
-        $response['items'] = $itemsByMonth;
+        $response['items'] = $items;
         $response['sections'] = $post->sections();
         $response['sideItems'] = $sideItems;
         return $response;
