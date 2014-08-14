@@ -10,6 +10,7 @@ use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetOrder;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetOrderBy;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostToPost;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostType;
+use Outlandish\AcadOowpBundle\PostType\Post;
 use Outlandish\OowpBundle\Manager\PostManager;
 use Outlandish\AcadOowpBundle\FacetedSearch\Search;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,17 +26,11 @@ class SearchController extends BaseController {
      */
     public function indexAction(Request $request)
     {
-        $post = $this->querySingle(array('name' => 'search', 'post_type' => 'page'), true);
-        $search = $this->search($request);
-        $search->setParams($request->query->all());
-        $query = $search->search();
-        if($query->post_count > 0){
-            $response['items'] = $query->posts;
-            $response['moreResultsUrl'] = $this->generateUrl('search') . "?" . $search->queryString(1);
-        } else {
-            $response['items'] = null;
-            $response['moreResultsUrl'] = null;
-        }
+        $single = $this->searchSingle($request);
+        //see if query term matches post title redirect to post page
+        if($single) return $this->redirect($single->permalink());
+        $response = $this->searchResponse($request);
+        $response['post'] = $this->querySingle(array('name' => 'search', 'post_type' => 'page'), true);
         return $response;
     }
 
@@ -45,22 +40,19 @@ class SearchController extends BaseController {
      */
     public function ajaxAction(Request $request)
     {
-        $search = $this->search($request);
-        $search->setParams($request->query->all());
-        $query = $search->search();
-        if($query->post_count > 0){
-            $response['items'] = $query->posts;
-            $response['moreResultsUrl'] = $this->generateUrl('searchAjax') . "?" . $search->queryString(1);
-            $response['paged'] = $query->query_vars['paged'];
-        } else {
-            $response['items'] = null;
-            $response['moreResultsUrl'] = null;
-            $response['paged'] = 0;
-        }
+        $response = $this->searchResponse($request);
         return $response;
     }
 
-    public function search(Request $request)
+    public function slugify($string)
+    {
+        $string = strtolower($string);
+        $string = str_replace(' ', '-', $string);
+        return $string;
+
+    }
+
+    public function search()
     {
         /** @var PostManager $postManager */
         $postManager = $this->get('outlandish_oowp.post_manager');
@@ -88,6 +80,10 @@ class SearchController extends BaseController {
         return $search;
     }
 
+    /**
+     * @param Request $request
+     * @return null|Post
+     */
     public function searchSingle(Request $request)
     {
         if(!$request->query->has('q')) return null;
@@ -95,7 +91,7 @@ class SearchController extends BaseController {
         /** @var QueryManager $queryManager */
         $queryManager = $this->get('outlandish_oowp.query_manager');
 
-        $args = array('post' => $request->query->get('q'));
+        $args = array('post_title' => $request->query->get('q'));
 
         $results = $queryManager->query($args);
         if($results->post_count == 1){
@@ -173,6 +169,27 @@ class SearchController extends BaseController {
             if($class::isTheme()) $postTypes[] = $postType;
         }
         return $postTypes;
+    }
+
+    /**
+     * @param Request $request
+     * @param $response
+     * @return mixed
+     */
+    public function searchResponse(Request $request)
+    {
+        $response = array(
+            'items' => null,
+            'moreResultsUrl' => null
+        );
+        $search = $this->search($request);
+        $search->setParams($request->query->all());
+        $query = $search->search();
+        if ($query->post_count > 0) {
+            $response['items'] = $query->posts;
+            $response['moreResultsUrl'] = $request->getUri() . "?" . $search->queryString(1);
+        }
+        return $response;
     }
 
 }
