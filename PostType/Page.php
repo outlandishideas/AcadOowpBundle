@@ -5,7 +5,7 @@ namespace Outlandish\AcadOowpBundle\PostType;
 
 abstract class Page extends Post {
 
-    const CONTACT_PAGE_ID = 105;
+    const CONTACT_PAGE_ID = 102;
 
     /**
      * return data for map on contact page
