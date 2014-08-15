@@ -66,7 +66,7 @@ app.init = {
             });
             $button.appear();
             $button.on('appear', function(e){
-//                $(this).trigger('click');
+                $(this).trigger('click');
             });
         },
 
