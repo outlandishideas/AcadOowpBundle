@@ -52,7 +52,7 @@ class DefaultController extends BaseController {
     }
 
     /**
-     * @Route("about/contact/", name="contact")
+     * @Route("about-isci/contact-us/", name="contact-us")
      * @Template("OutlandishAcadOowpBundle:Default:contactPost.html.twig")
      */
     public function contactPostAction() {
