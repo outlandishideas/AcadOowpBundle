@@ -18,6 +18,15 @@ class SearchFormHelper {
         $this->search = $search;
     }
 
+    public function getSearchFormElements()
+    {
+        $elements = array();
+        foreach($this->search->getFacets() as $facet){
+            $elements[$facet->name] = $this->generateHTML($facet);
+        }
+        return $elements;
+    }
+
 
     public function getFacet($name)
     {
@@ -33,31 +42,28 @@ class SearchFormHelper {
     {
         $options = array();
         if($facet->defaultAll){
-            $options[''] = array(
-                'name' => '',
-                'label' => 'All',
-                'selected' => false
-            );
+//            $options[] = new FacetOption\FacetOption('', 'All', false);
         }
         $options = array_merge($options, $facet->options);
 
         $classes = array();
-        if($facet->exclusive) $options[] = 'facet-exclusive';
+        if($facet->exclusive) $classes[] = 'facet-exclusive';
 
         $classes = implode(' ', $classes);
 
-        $html = "<ul id='{$facet->name}-group' class='{$classes}'>";
+        $html = "<ul id='{$facet->name}-group' class='search-facet {$classes}'>";
         foreach($options as $option) {
-            $selected = $option['selected'] ? 'selected' : '';
-            $html += "<li>";
-            $html += "<label for='{$facet->name}-{$option['name']}'>{$option['label']}</label>";
-            $html += "<input type='checkbox'
-                id='{$facet->name}-{$option['name']}'
+            $selected = $option->selected ? 'checked' : '';
+            $html .= "<li>";
+            $html .= "<label for='{$facet->name}-{$option->name}'>{$option->label}</label>";
+            $html .= "<input type='checkbox'
+                id='{$facet->name}-{$option->name}'
                 name='{$facet->name}'
-                value='{$option['name']}'
+                value='{$option->name}'
                 {$selected} />";
-            $html += "</li>";
+            $html .= "</li>";
         }
+        $html .= "</ul>";
         return $html;
     }
 

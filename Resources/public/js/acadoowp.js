@@ -47,6 +47,81 @@ app.init = {
 			});
 		},
 
+        '#more-results': function( $button ) {
+            $button.on('click', function(e) {
+                e.preventDefault();
+                $(this).addClass('loading');
+                var href = $button.attr('href').split('?');
+                var query = href[1];
+
+                var $list = $("<ul class='search-results'>");
+
+                $("#results").append($list.load( location.origin + searchAjaxUrl + "?" + query + ".search-results li", function() {
+                    var $urlHolder = $(this).find('#more-results-url');
+                    var $moreResults = $('#more-results');
+                    var newUrl = $urlHolder.data('url');
+                    $moreResults.attr('href', newUrl).removeClass('loading');
+                    $urlHolder.remove();
+                }));
+            });
+            $button.appear();
+            $button.on('appear', function(e){
+                $(this).trigger('click');
+            });
+        },
+
+        '.search-facet': function ($facet) {
+            $facet.on('change', 'input[type="checkbox"]', function(e) {
+                var $selectedOption = $(this);
+                var $facet = $selectedOption.parents('.search-facet');
+                if($facet.hasClass('facet-exclusive')){
+                    $facet.find('input[type="checkbox"]')
+                        .not('[value="' + $selectedOption.attr('value') +'"]')
+                        .prop("checked", false);
+
+                }
+                var $options = $('.search-facet li input[type="checkbox"]');
+                var $queryArr = [];
+                $options.each(function(){
+                    var $option = $(this);
+                    if($option.prop('checked')) {
+                        var name = $option.attr('name');
+                        var value = $option.attr('value');
+                        var found = false;
+                        for(var i in $queryArr){
+                            var object = $queryArr[i];
+                            if(object.name == name){
+                                object.values.push(value);
+                                found = true;
+                                break;
+                            }
+                        }
+                        if(!found) {
+                            $queryArr.push({name: name, values: [value]});
+                        }
+                    }
+                });
+                var queryStrings = [];
+                if($queryArr.length > 0){
+                    $queryArr.push({name: "paged", values: [1]});
+                    for(var i in $queryArr){
+                        var queryObject = $queryArr[i];
+                        var valueString = queryObject.values.join(",");
+                        var queryString = queryObject.name + "=" + valueString;
+                        queryStrings.push(queryString);
+                    }
+                }
+                var url = location.origin + searchAjaxUrl + "?" + queryStrings.join('&');
+                $('#results').load( url + " .search-results li", function() {
+                    var $urlHolder = $(this).find('#more-results-url');
+                    var $moreResults = $('#more-results');
+                    var newUrl = $urlHolder.data('url');
+                    $moreResults.attr('href', newUrl);
+                    $urlHolder.remove();
+                });
+            })
+        },
+
 		'.accordion-item': function( $accordian ) {
 			$accordian.on('click', 'a.accordion-toggle', function (e) {
 				e.preventDefault();
@@ -87,7 +162,7 @@ app.init = {
                 }
             });
 
-        },
+        }
 	}
 };
 

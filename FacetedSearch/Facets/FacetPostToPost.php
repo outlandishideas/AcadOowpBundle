@@ -31,10 +31,10 @@ class FacetPostToPost extends Facet{
     {
         $args = parent::generateArguments($args);
 
-        $connectedItems = $this->getSelectedOptions();
+        $options = $this->getSelectedOptions();
 
         //if no connected items do not add any new content to the arguments
-        if($connectedItems){
+        if($options){
             $connectionNames = array();
 
             if(isset($args['post_type']) && is_array($args['post_type'])) {
@@ -46,8 +46,8 @@ class FacetPostToPost extends Facet{
             }
 
             $connectedIds = array();
-            foreach($connectedItems as $connectedItem){
-                $connectedIds[]  = $connectedItem['name'];
+            foreach($options as $option){
+                $connectedIds[]  = $option->name;
             }
 
             if(!isset($args['connected_type'])) {
@@ -74,17 +74,4 @@ class FacetPostToPost extends Facet{
         sort($connection);
         return implode('_', $connection);
     }
-
-    /**
-     * @param OowpQuery $posts
-     */
-    public function addOptions(OowpQuery $posts)
-    {
-        foreach($posts as $post)
-        {
-            $this->addOption($post->ID, $post->title());
-        }
-    }
-
-
 } 

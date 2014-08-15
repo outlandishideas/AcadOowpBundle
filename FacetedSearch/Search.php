@@ -38,8 +38,8 @@ class Search {
      */
     public $defaults = array(
         'post_type' => 'any',
-        'post_count' => 10,
-        'page' => 1
+        'posts_per_page' => 10,
+        'paged' => 1
     );
 
     function __construct(QueryManager $queryManager, PostManager $postManager, array $params = array())
@@ -88,9 +88,9 @@ class Search {
      * @param $section
      * @return FacetPostType
      */
-    public function addFacetPostToPost($name, $section, $postType)
+    public function addFacetPostToPost($name, $section, $postType, $options = array())
     {
-        $facet = new FacetPostToPost($name, $section, $postType);
+        $facet = new FacetPostToPost($name, $section, $postType, $options);
         return $this->addFacet($facet);
     }
 
@@ -151,7 +151,7 @@ class Search {
      */
     public function generateArguments()
     {
-        $args = $this->defaults;
+        $args = $this->getDefaults();
 
         if(array_key_exists('q', $this->params)){
             $args['s'] = $this->params['q'];
@@ -171,6 +171,44 @@ class Search {
     public function setParams(array $params)
     {
         $this->params = $params;
+    }
+
+    public function getDefaults()
+    {
+        $defaultParams = array_intersect_key($this->params, $this->defaults);
+        return array_merge($this->defaults, $defaultParams);
+    }
+
+    public function queryString($page = 0)
+    {
+        $query = $this->getDefaults();
+        /** @var Facet $facet */
+        foreach($this->facets as $facet) {
+            $options = $facet->getSelectedOptions();
+            if(!empty($options)){
+                $value = array_map(function($a){
+                    return $a->name;
+                }, $options);
+                $query[$facet->name] = $value;
+            }
+        }
+
+        //change page by value of $page
+        if(array_key_exists('paged', $query)){
+            $query['paged'] += $page;
+        } else {
+            $query['paged'] = $page;
+        }
+
+        $queryStrings = array();
+        foreach($query as $key => $value){
+            if(is_array($value)){
+                $value = implode(',', $value);
+            }
+            $queryStrings[$key] = $key . "=" . $value;
+        }
+
+        return implode("&", $queryStrings);
     }
 
 } 

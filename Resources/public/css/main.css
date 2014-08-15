@@ -1185,6 +1185,61 @@ ul.terms {
         font-size: 1.5rem;
     }
 }
+/* Button */
+
+.button {
+    display: block;
+    border: 2px solid #000;
+    text-align: center;
+    background-color: transparent;
+    color: #000;
+}
+
+.button:hover,
+.button.loading {
+    background-color: #000;
+    color: #fff;
+}
+
+.button .text-loading {
+    display: none;
+}
+
+.button.loading .text {
+    display: none;
+}
+
+.button.loading .text-loading {
+    display: inline;
+}
+
+/* Button */
+
+.button {
+    display: block;
+    border: 2px solid #000;
+    text-align: center;
+    background-color: transparent;
+    color: #000;
+}
+
+.button:hover,
+.button.loading {
+    background-color: #000;
+    color: #fff;
+}
+
+.button .text-loading {
+    display: none;
+}
+
+.button.loading .text {
+    display: none;
+}
+
+.button.loading .text-loading {
+    display: inline;
+}
 
 /*IE8 hacks*/
 .post-item.image-overlay .columns:first-of-type p {

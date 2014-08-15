@@ -5,13 +5,8 @@ namespace Outlandish\AcadOowpBundle\PostType;
 
 abstract class Person extends Post {
 
-//    public static function postType()
-//    {
-//        return 'test';//rename post type here if necessary
-//    }
-
-
     public static $menu_icon = 'dashicons-businessman';
+    public static $resource = true;
 
     //connected to document, event, news, place, project, role, theme
     public static function onRegistrationComplete() {

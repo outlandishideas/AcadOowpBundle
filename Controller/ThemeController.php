@@ -4,10 +4,11 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 use Outlandish\AcadOowpBundle\PostType\Document;
-use Outlandish\RoutemasterBundle\Controller\BaseController;
+use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 use Outlandish\AcadOowpBundle\PostType\Theme;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Outlandish\RoutemasterBundle\Annotation\Template;
+use Symfony\Component\HttpFoundation\Request;
 
 class ThemeController extends BaseController {
 
@@ -15,7 +16,7 @@ class ThemeController extends BaseController {
 	 * @Route("/themes/")
 	 * @Template("OutlandishAcadOowpBundle:Theme:themeIndex.html.twig")
 	 */
-	public function indexAction() {
+	public function indexAction(Request $request) {
 		$response = array();
 		$post = $this->querySingle( array( 'page_id' => Theme::postTypeParentId() ) );
 

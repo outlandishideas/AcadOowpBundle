@@ -9,6 +9,9 @@
 namespace Outlandish\AcadOowpBundle\FacetedSearch\Facets;
 
 
+use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
+use Outlandish\OowpBundle\PostType\Post;
+
 abstract class Facet {
 
     /**
@@ -45,6 +48,15 @@ abstract class Facet {
     public $exclusive = false;
 
     /**
+     * general parameter
+     * This will determine whether this facet is shown on the search page
+     * hidden facets are hidden by css and cannot be changed by the user
+     * they still affect the results that are returned
+     * @var bool
+     */
+    public $hidden = false;
+
+    /**
      * @param $name
      * @param $section
      * @param array $options
@@ -56,20 +68,23 @@ abstract class Facet {
         $this->options = $options;
     }
 
+    public function addOptions($array = array()){
+        foreach($array as $item){
+            if($item instanceof Post){
+
+            }
+        }
+    }
+
     /**
      * add an option to the facet
      * eg. add a post type to the FacetPostType or FacetPostToPost
-     * @param $name
-     * @param $label
+     * @param FacetOption $option
      * @return $this
      */
-    public function addOption($name, $label)
+    public function addOption(FacetOption $option)
     {
-        $this->options[$name] = array(
-            'name' => $name,
-            'label' => $label,
-            'selected' => false
-        );
+        $this->options[] = $option;
         return $this;
     }
 
@@ -81,7 +96,7 @@ abstract class Facet {
     public function getSelectedOptions()
     {
         $options = array_filter($this->options, function($a){
-            return $a['selected'];
+            return $a->selected;
         });
         //if no options have been selected and defaultAll is true
         if(count($options) == 0 && $this->defaultAll){
@@ -98,19 +113,39 @@ abstract class Facet {
     public function setSelected(array $params)
     {
         $optionsSet = 0;
-        if(array_key_exists($this->name, $params)){
-            $selectedValues = $params[$this->name];
-            if(!is_array($selectedValues)) $selectedValues = explode(',', $selectedValues);
+        if(count($this->options) > 0){
+            if(array_key_exists($this->name, $params)){
+                $selectedValues = $params[$this->name];
+                if(!is_array($selectedValues)) $selectedValues = explode(',', $selectedValues);
 
-            foreach($selectedValues as $value){
-                if(array_key_exists($value, $this->options)){
-                    $this->options[$value]['selected'] = true;
-                    $optionsSet++;
-                    if($this->exclusive) break;
+                foreach($selectedValues as $value){
+                    foreach($this->options as $option){
+                        if($option->name == $value){
+                            $option->selected = true;
+                            $optionsSet++;
+                        }
+                    }
+                    if($this->exclusive && $optionsSet > 0) break;
                 }
+            }
+            if($optionsSet == 0 && $this->defaultAll){
+                $optionsSet = $this->setAll();
             }
         }
         return $optionsSet;
+    }
+
+    public function setAll()
+    {
+        $fakeParams = array($this->name => $this->getOptionNames());
+        return $this->setSelected($fakeParams);
+    }
+
+    public function getOptionNames()
+    {
+        return array_map(function($a){
+            return $a->name;
+        }, $this->options);
     }
 
     /**
@@ -124,4 +159,22 @@ abstract class Facet {
         $args = wp_parse_args(array(), $args);
         return $args;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isHidden()
+    {
+        return $this->hidden;
+    }
+
+    /**
+     * @param boolean $hidden
+     */
+    public function setHidden($hidden)
+    {
+        $this->hidden = $hidden;
+    }
+
+
 }

@@ -9,6 +9,8 @@
 namespace Outlandish\AcadOowpBundle\FacetedSearch\Facets;
 
 
+use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
+
 class FacetOrder extends Facet {
 
     const SORT_DESC = 'DESC';
@@ -29,7 +31,8 @@ class FacetOrder extends Facet {
         parent::__construct($name, $section, $options);
         if(empty($this->options)){
             foreach($this->defaultOptions as $name => $label){
-                $this->addOption($name, $label);
+                $option = new FacetOption($name, $label);
+                $this->addOption($option);
             }
         }
     }
@@ -44,7 +47,7 @@ class FacetOrder extends Facet {
 
         //foreach option that is selected insert option as post_type
         $option = array_values($this->getSelectedOptions());
-        $args['order'] = $option[0]['name'];
+        $args['order'] = $option[0]->name;
 
         return $args;
     }
@@ -54,7 +57,7 @@ class FacetOrder extends Facet {
         $affected = parent::setSelected($params);
         if ($affected == 0) {
             $optionKeys = array_keys($this->options);
-            $this->options[$optionKeys[0]]['selected'] = true;
+            $this->options[$optionKeys[0]]->selected = true;
             $affected++;
         }
         return $affected;
