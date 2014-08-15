@@ -51,7 +51,7 @@ class SearchFormHelper {
 
         $classes = implode(' ', $classes);
 
-        $html = "<ul id='{$facet->name}-group' class='{$classes}'>";
+        $html = "<ul id='{$facet->name}-group' class='search-facet {$classes}'>";
         foreach($options as $option) {
             $selected = $option->selected ? 'checked' : '';
             $html .= "<li>";

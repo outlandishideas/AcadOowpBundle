@@ -29,30 +29,29 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="search-form">
-                    {% for element in search_form %}
+                    {% for element in formElements %}
                         {{ element | raw }}
                     {% endfor %}
                 </div>
                 <div id="results">
-                    <ul class="search-results">
-    
+                    <ul id="page-1" class="search-results">
                         {% block searchResults %}
-    
+
                             {% for item in items %}
                                 <li>
                                     {% block itemInclude %}
                                         {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
-                                            'item': item,
-                                            'excerpt_length': 300,
-                                            'image': 'medium',
-                                            'classes': 'image-overlay'} %}
+                                        'item': item,
+                                        'excerpt_length': 300,
+                                        'image': 'medium',
+                                        'classes': 'image-overlay'} %}
                                     {% endblock %}
                                 </li>
                             {% endfor %}
-    
+
                         {% endblock %}
-    
                     </ul>
                 </div>
 
