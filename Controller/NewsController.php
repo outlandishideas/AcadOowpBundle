@@ -24,6 +24,7 @@ class NewsController extends BaseController {
         $response = array();
 
         $post = $this->querySingle(array('page_id' => News::postTypeParentId()));
+        $items = News::fetchAll();
 
         $sideItems = array(
             array(
@@ -37,6 +38,7 @@ class NewsController extends BaseController {
         );
 
         $response = $this->indexResponse($post, $request, array(News::postType()));
+        $response['items'] = $items;
         $response['sideItems'] = $sideItems;
         return $response;
     }
