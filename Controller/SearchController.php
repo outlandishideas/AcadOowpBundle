@@ -187,7 +187,8 @@ class SearchController extends BaseController {
         $query = $search->search();
         if ($query->post_count > 0) {
             $response['items'] = $query->posts;
-            $response['moreResultsUrl'] = $request->getUri() . "?" . $search->queryString(1);
+            $uriParts = explode("?", $request->getUri());
+            $response['moreResultsUrl'] = $uriParts[0] . "?" . $search->queryString(1);
         }
         $response['helper'] = new SearchFormHelper($search);
         $response['formElements'] = $response['helper']->getSearchFormElements();

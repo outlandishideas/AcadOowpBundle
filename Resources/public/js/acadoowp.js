@@ -87,7 +87,7 @@ app.init = {
                     }
                 }
                 var url = location.origin + searchAjaxUrl + "?" + queryStrings.join('&');
-                $('#results').load( url + ".search-results li", function() {
+                $('#results').load( url + " .search-results li", function() {
                     var $urlHolder = $(this).find('#more-results-url');
                     var $moreResults = $('#more-results');
                     var newUrl = $urlHolder.data('url');
