@@ -31,8 +31,8 @@ class PageController extends BaseController {
     }
 
     /**
-     * @Route("/contact/", name="contact")
-     * @Template("OutlandishAcadOowpBundle:Page:pageContact.html.twig")
+     * @Route("about/contact/", name="contact")
+     * @Template("OutlandishAcadOowpBundle:Default:contactPost.html.twig")
      */
     public function contactPostAction() {
         /** @var Page $post */
