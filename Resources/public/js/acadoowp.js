@@ -30,6 +30,7 @@ app.init = {
         '#more-results': function( $button ) {
             $button.on('click', function(e) {
                 e.preventDefault();
+                $(this).addClass('loading');
                 var href = $button.attr('href').split('?');
                 var query = href[1];
 
@@ -39,13 +40,13 @@ app.init = {
                     var $urlHolder = $(this).find('#more-results-url');
                     var $moreResults = $('#more-results');
                     var newUrl = $urlHolder.data('url');
-                    $moreResults.attr('href', newUrl);
+                    $moreResults.attr('href', newUrl).removeClass('loading');
                     $urlHolder.remove();
                 }));
             });
             $button.appear();
             $button.on('appear', function(e){
-                $(this).trigger('click');
+//                $(this).trigger('click');
             });
         },
 
