@@ -30,10 +30,12 @@
                     </div>
                 </div>
 
-                <div id="results">
-                    {% for element in search_form %}
+                <div class="search-form">
+                    {% for element in formElements %}
                         {{ element | raw }}
                     {% endfor %}
+                </div>
+                <div id="results">
                     <ul id="page-1" class="search-results">
                         {% include 'OutlandishAcadOowpBundle:Default:items.html.twig' %}
                     </ul>

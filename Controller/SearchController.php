@@ -3,6 +3,7 @@
 
 namespace Outlandish\AcadOowpBundle\Controller;
 
+use Outlandish\AcadOowpBundle\FacetedSearch\SearchFormHelper;
 use Outlandish\OowpBundle\Manager\QueryManager;
 use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
 use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOptionPost;
@@ -173,7 +174,6 @@ class SearchController extends BaseController {
 
     /**
      * @param Request $request
-     * @param $response
      * @return mixed
      */
     public function searchResponse(Request $request)
@@ -189,6 +189,8 @@ class SearchController extends BaseController {
             $response['items'] = $query->posts;
             $response['moreResultsUrl'] = $request->getUri() . "?" . $search->queryString(1);
         }
+        $response['helper'] = new SearchFormHelper($search);
+        $response['formElements'] = $response['helper']->getSearchFormElements();
         return $response;
     }
 
