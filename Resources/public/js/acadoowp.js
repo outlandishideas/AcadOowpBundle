@@ -47,6 +47,14 @@ app.init = {
 
         '.search-facet': function ($facet) {
             $facet.on('change', 'input[type="checkbox"]', function(e) {
+                var $selectedOption = $(this);
+                var $facet = $selectedOption.parents('.search-facet');
+                if($facet.hasClass('facet-exclusive')){
+                    $facet.find('input[type="checkbox"]')
+                        .not('[value="' + $selectedOption.attr('value') +'"]')
+                        .prop("checked", false);
+
+                }
                 var $options = $('.search-facet li input[type="checkbox"]');
                 var $queryArr = [];
                 $options.each(function(){
@@ -70,7 +78,7 @@ app.init = {
                 });
                 var queryStrings = [];
                 if($queryArr.length > 0){
-                    $queryArr.push({name: "paged", values: [1]})
+                    $queryArr.push({name: "paged", values: [1]});
                     for(var i in $queryArr){
                         var queryObject = $queryArr[i];
                         var valueString = queryObject.values.join(",");
