@@ -13,13 +13,15 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Class ConvertPostTypeCommand
  * @package Outlandish\AcadOowpBundle\Command
  *
- * Renames a post type
+ * 1. Renames all posts of a class
+ * 2. Renames all ACF connections that the posts have to use new post type name
+ * 3. Renames any P2P connections that the posts have to use new post type name
+ *
  */
 class ConvertPostTypeCommand extends ContainerAwareCommand {
 
     /** @var  OutputInterface */
     protected $output;
-
 
     /**
      * Configures the current command
