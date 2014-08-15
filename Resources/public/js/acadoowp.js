@@ -43,6 +43,10 @@ app.init = {
                     $urlHolder.remove();
                 }));
             });
+            $button.appear();
+            $button.on('appear', function(e){
+                $(this).trigger('click');
+            });
         },
 
         '.search-facet': function ($facet) {
