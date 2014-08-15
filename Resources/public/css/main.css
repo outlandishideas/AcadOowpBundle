@@ -616,7 +616,8 @@ ul.subtitle-list li:not(:last-of-type):after {
 /* article default */
 
 article img {
-    width: 100%;
+    width: auto;
+    max-height: 500px;
     display: block;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -726,6 +727,12 @@ ul.search-results.sidebar .main p.date {
     padding-top: 20px;
 }
 
+p.no-search-results {
+    font-weight: 500;
+    font-size: 20px;
+    padding-left: 40px;
+}
+
 /*sidemenu*/
 
 ul.side-menu {
@@ -830,10 +837,15 @@ ul.search-results.people li.accordion-item.open .accordion-toggle:after {
 	font-size: 0.9rem;
 }
 
-.people-intro p {
-   font-size: 2rem;
+.people-intro p:not(.wp-caption-text) {
+   font-size: 1.5rem;
    font-weight: lighter;
    line-height: 1.4;
+}
+
+.people-intro p.wp-caption-text {
+    font-size: 0.9rem;
+    font-weight: normal;
 }
 
 .avatar {
