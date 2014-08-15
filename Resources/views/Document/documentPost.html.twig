@@ -103,7 +103,8 @@
         <div class="authors">
             {% for person in authors %}
                 {% include 'OutlandishAcadOowpBundle:Person:personItem.html.twig' with {
-                'person': person } %}
+                'person': person,
+                'size': 'small'} %}
             {% endfor %}
         </div>
   {% endif %}
