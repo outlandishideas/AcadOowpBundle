@@ -292,43 +292,34 @@ nav .inline-list li.current_page_ancestor{
 }
 
 nav .inline-list li.search {
+    /** by putting the element last in list and giving it this CSS it will fill the space between the other elements **/
 	background: #134643;
 	padding: 0;
+    overflow: hidden;
+    float: none;
+    position: relative; /** needed for absolute positioning of submit icon **/
+    height: 3.11rem; /** force to full height again, because position: relative; breaks this **/
 }
 
 a.search-icon {
-	padding: 0.8rem 1.375rem;
-}
-
-a.search-icon.submit {
-    display: none;
+	padding: 0.8rem 1.375rem !important;
 }
 
 /* main search */
 .main-search,
-.main-search input[type="text"]{
+.main-search input[type="text"],
+.main-search .submit {
 	background: #134643;
 }
 .main-search {
-	display: none;
-}
-
-.main-search form {
     margin: 0;
 }
 
-.main-search label {
-	display: none;
-}
-
 .main-search input[type="text"] {
-    margin: 0 0 0.5rem 0;
-    width: 35%;
-    float: right;
+    margin: 0;
     height: 2.6rem;
     line-height: 2.7rem;
     color: #ffffff;
-    border-bottom: 1px solid #ffffff;
 }
 
 .main-search input[type="text"]:focus {
@@ -351,24 +342,142 @@ a.search-icon.submit {
 	color: #ffffff;
 }
 
-.main-search button {
-    position: absolute;
-    width: 2rem;
-    height: 2rem;
-    top: 0.25rem;
-    right: 1rem;
-    margin: 0;
-    padding: 0;
-    background: #134643;
-    color: #ffffff;
+.main-search .submit {
+    border-left: 1px solid #FFF;
+    position: absolute; /** position this over the right edge of the input **/
+    top: 0;
+    right: 0;
 }
 
-.main-search .filter {
-    display: block;
-    height: 2.5rem;
-    padding: 0.75rem 0;
-    color: #fff;
+nav .inline-list li.filter-toggle {
+    background: #4C4C4C;
 }
+
+nav .inline-list .filter-icon span {
+    -moz-transition: all .6s;
+    -webkit-transition: all .6s;
+    transition: all .6s;
+}
+
+nav .inline-list .search-icon span {
+    -moz-transition: all 1.6s;
+    -webkit-transition: all 1.6s;
+    transition: all 1.6s;
+}
+
+/* filter panel */
+#filter-panel {
+    background: #4c4c4c;
+    display: none;
+}
+
+#filter-panel .inline-list {
+    margin-left: -.2rem !important;
+}
+
+#filter-panel .filter-clear {
+    color: #FFF;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+    #filter-panel #filter-selected {
+        background: #134643;
+    }
+
+    #filter-panel #filter-tabs ul {
+        border-bottom: 1px solid #5c5c5c;
+        padding: .7rem 0;
+    }
+
+    #filter-panel #filter-tabs li {
+        padding-right: 2rem;
+    }
+
+    #filter-panel #filter-tabs li a {
+        color: #9a9a9a;
+        text-transform: uppercase;
+        font-weight: bold;
+        -webkit-transition: all .2s;
+        -moz-transition: all .2s;
+        transition: all .2s;
+    }
+
+    #filter-panel #filter-tabs li.active a {
+        color: #FFF;
+    }
+
+    #filter-panel #filter-content .filter-section {
+        display: none;
+    }
+
+    #filter-panel #filter-content .filter-section.active {
+        display: block;
+    }
+
+    #filter-panel #filter-content li.filter-option {
+        margin-right: .2rem;
+        margin-bottom: .5rem;
+    }
+
+    #filter-panel #filter-content li.filter-option a {
+        border: 2px solid #FFF;
+        color: #FFF;
+        padding: .2rem .5rem;
+        background-color: #4c4c4c;
+        -webkit-transition: all .2s;
+        -moz-transition: all .2s;
+        transition: all .2s;
+    }
+
+    #filter-panel #filter-content li.filter-option.selected a {
+        border-color: #303030;
+        background-color: #303030;
+    }
+    #filter-panel #filter-content li.filter-option.selected a:after {
+        content: "\f00d";
+        display: inline-block;
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding-left: .5rem;
+    }
+
+    #filter-panel #filter-content li.filter-option:hover a {
+        border-color: #666;
+        background-color: #666;
+    }
+
+    #filter-panel #filter-selected ul {
+        padding-top: .7rem;
+    }
+
+    #filter-panel #filter-selected li#selection-header {
+        color: #FFF;
+        text-transform: uppercase;
+        line-height: 2.2;
+    }
+
+    #filter-panel #filter-selected li.filter-option a {
+        border: 2px solid #008076;
+        color: #FFF;
+        padding: .2rem .5rem;
+        background-color: #008076;
+    }
+    #filter-panel #filter-selected li.filter-option a:after {
+        content: "\f00d";
+        display: inline-block;
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding-left: .5rem;
+    }
 
 /* breadcrumbs */
 

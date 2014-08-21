@@ -15,7 +15,7 @@ use Outlandish\SiteBundle\PostType\Document;
 use Outlandish\SiteBundle\PostType\Place;
 use Outlandish\SiteBundle\PostType\Theme;
 
-class NavigationController extends BaseController {
+class NavigationController extends SearchController {
 
     public function renderFooterAction(){
         $args = $this->generateFooterArguments();
@@ -34,6 +34,16 @@ class NavigationController extends BaseController {
             $args
 		);
 	}
+
+    public function renderFilterPanelAction() {
+        $args = array();
+        $search = $this->search();
+        $args['facets'] = $search->getFacets();
+        return $this->render(
+            'OutlandishAcadOowpBundle:Search:filterPanel.html.twig',
+            $args
+        );
+    }
 
 
     /**
