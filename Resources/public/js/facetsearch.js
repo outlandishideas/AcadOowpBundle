@@ -46,6 +46,13 @@
 			fs.search();
 		});
 
+		$(fs.options.selectors.queryBox).keypress(function(e) {
+			if (e.which == 13) {
+				e.preventDefault();
+				$(fs.options.selectors.querySubmit).click();
+			}
+		});
+
 		if (fs.options.selectors.filterPanelToggle != '') {
 			$(fs.options.selectors.filterPanelToggle).click(function(e) {
 				e.preventDefault();
