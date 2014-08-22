@@ -1,4 +1,8 @@
-<ul id="page-{{ paged }}" class="search-results">
-    {% include 'OutlandishAcadOowpBundle:Default:items.html.twig' %}
-    <li id="more-results-url" data-url="{{ moreResultsUrl }}"></li>
-</ul>
+{%  if items |length > 0 %}
+	<ul id="page-{{ paged }}" class="search-results">
+	    {% include 'OutlandishAcadOowpBundle:Default:items.html.twig' %}
+	    <li id="more-results-url" data-url="{{ moreResultsUrl }}"></li>
+	</ul>
+{% else %}
+	<h3>Sorry, nothing matches your search :(</h3>
+{% endif %}
