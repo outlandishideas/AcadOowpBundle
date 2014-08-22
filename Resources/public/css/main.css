@@ -6,6 +6,12 @@ body {
     color: #565859;
 }
 
+.columns {
+    /* Override the default padding because Abi thinks it's better looking ;) */
+    padding-left: 1.618rem;
+    padding-right: 1.618rem;
+}
+
 a {
 	color: #268b85;
 }
