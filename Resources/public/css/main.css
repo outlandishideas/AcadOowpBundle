@@ -923,8 +923,7 @@ p.contact-name {
 /* People Pages */
 
 ul.search-results.people li {
-	border: none;
-	clear: both;
+    padding: 30px;
 }
 
 ul.search-results.no-roles {
@@ -943,9 +942,17 @@ ul.search-results.people li.accordion-item.open .accordion-toggle:after {
 }
 
 .people-item {
-	float: left;
-	margin: 0 20px 10px 0;
 	text-align: center;
+}
+
+.people-item .columns {
+    padding-left: 1.3rem;
+    padding-right: 1.3rem;
+    padding-top: 50px;
+}
+
+.people-items a {
+    padding-right: 30px;
 }
 
 .people-item h4 {
@@ -954,7 +961,6 @@ ul.search-results.people li.accordion-item.open .accordion-toggle:after {
 
 .people-intro p:not(.wp-caption-text) {
    font-size: 1.5rem;
-   font-weight: lighter;
    line-height: 1.4;
 }
 
@@ -964,7 +970,7 @@ ul.search-results.people li.accordion-item.open .accordion-toggle:after {
 }
 
 .avatar {
-	width: 100px;
+	/*width: 100px;*/
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
 }
@@ -1121,10 +1127,7 @@ ul.terms {
 }
 
 @media screen and (max-width: 980px) {
-    .people-items a {
-        max-width: 130px;
-        max-height: 140px;
-    }
+
 }
 
 @media screen and (max-width: 782px) {
@@ -1298,6 +1301,10 @@ ul.terms {
 
     .people-intro p {
         font-size: 1.5rem;
+    }
+
+    ul.search-results.people li {
+        padding: 20px;
     }
 }
 /* Button */

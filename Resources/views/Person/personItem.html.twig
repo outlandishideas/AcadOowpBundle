@@ -2,27 +2,30 @@
     {% set size = 'normal' %}
 {% endif %}
 
-{% if size == 'small' %}
+<li>
+    {% if size == 'small' %}
 
-    <a href="{{ person.permalink() }}" class="people-item">
-        {% include "OutlandishAcadOowpBundle:Partial:avatar.html.twig" with {
-        'post': person,
-        'size': 'avatar-square' } %}
-        <h4>{{ person.title() }}</h4>
-    </a>
-{% else %}
-    <a href="{{ person.permalink() }}" class="post-item {{ classes }}">
-        <div class="row">
-            <div class="columns large-11">
-                {% block item_image %}{{ person.featuredImage('large') | raw }}{% endblock %}
-                {% if 'image-overlay' in classes %}
-                    <p class="date">{{ person.dateString("j M Y", true) }}</p>
-                {% endif %}
+        <a href="{{ person.permalink() }}" class="people-item">
+            {% include "OutlandishAcadOowpBundle:Partial:avatar.html.twig" with {
+            'post': person,
+            'size': 'avatar-square' } %}
+            <h4>{{ person.title() }}</h4>
+        </a>
+    {% else %}
+        <a href="{{ person.permalink() }}" class="post-item {{ classes }}">
+            <div class="row">
+                <div class="columns large-11">
+                    {% block item_image %}{{ person.featuredImage('large') | raw }}{% endblock %}
+                    {% if 'image-overlay' in classes %}
+                        <p class="date">{{ person.dateString("j M Y", true) }}</p>
+                    {% endif %}
+                </div>
+                <div class="columns large-13">
+                    {% block item_title %}<h3 class="font-theme-colour">{{ person.title() | raw | raw }}</h3>{% endblock %}
+                    {% block item_content %}<p>{{ person.excerpt(200) | raw }}</p>{% endblock %}
+                </div>
             </div>
-            <div class="columns large-13">
-                {% block item_title %}<h3 class="font-theme-colour">{{ person.title() | raw | raw }}</h3>{% endblock %}
-                {% block item_content %}<p>{{ person.excerpt(200) | raw }}</p>{% endblock %}
-            </div>
-        </div>
-    </a>
-{% endif %}
+        </a>
+    {% endif %}
+</li>
+

@@ -23,19 +23,21 @@
                     {% for role in roles %}
                         <li class="accordion-item">
                             {% block roleInclude %}
-                                <h3>{{ role.title() }}
+                                <h3 class="block-heading">{{ role.title() }}
                                     <a href="#" class="accordion-toggle"></a>
                                 </h3>
                                 <div class="accordion-content">
                                     {{ role.content() | raw }}
                                     <div class="people-items">
-                                        {% for person in role.people %}
-                                            {% block personInclude %}
-                                                {% include 'OutlandishAcadOowpBundle:Person:personItem.html.twig' with {
-                                                'person': person,
-                                                'size': 'small' } %}
-                                            {% endblock %}
-                                        {% endfor %}
+                                        <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+                                            {% for person in role.people %}
+                                                {% block personInclude %}
+                                                    {% include 'OutlandishAcadOowpBundle:Person:personItem.html.twig' with {
+                                                    'person': person,
+                                                    'size': 'small' } %}
+                                                {% endblock %}
+                                            {% endfor %}
+                                        </ul>
                                     </div>
                                 </div>
                             {% endblock %}
