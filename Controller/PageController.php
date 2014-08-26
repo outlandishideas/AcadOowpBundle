@@ -32,7 +32,7 @@ class PageController extends BaseController {
 
     /**
      * @Route("about-isci/contact-us/", name="contact-us")
-     * @Template("OutlandishAcadOowpBundle:Default:contactPost.html.twig")
+     * @Template("OutlandishAcadOowpBundle:Page:pageContact.html.twig")
      */
     public function contactPostAction() {
         /** @var Page $post */
