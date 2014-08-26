@@ -12,15 +12,13 @@
         </div>
     </div>
 
-    {% if items | length > 0 %}
+    <div class="row">
 
-        {% if featuredItem %}
+        <div class="columns large-16">
 
-        {% endif %}
+            {% if items | length > 0 %}
 
-        <div class="row">
-
-            <div class="columns large-16">
+                {% if featuredItem %}{% endif %}
 
                 <div class="row">
                     <div class="columns large-24">
@@ -55,42 +53,50 @@
                     </ul>
                 </div>
 
-            </div>
+            {% elseif sections | length > 0 %}
+                {% for section in sections %}
+                    {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' %}
+                {% endfor %}
 
-            <div class="columns large-7">
-                {% if sideItems | length > 0 %}
-                <h2>Other Content</h2>
-                <ul class="search-results sidebar">
-                    {% for type in sideItems %}
-                        {% if type.items | length > 0 %}
-                            <li>
-                                <hr>
-                                <h3 class="block-heading">{{ type.title }}</h3>
-                                <ul>
-                                    {% for item in type.items %}
-                                        {% block itemIncludeSide %}
-                                            {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
-                                            'item': item,
-                                            'excerpt_length': 150,
-                                            'classes' : 'main'} %}
-                                        {% endblock %}
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </div>
+            {% else %}
+                {% block noSearchResults %}{% endblock %}
+            {% endif %}
 
         </div>
 
-    {% elseif sections | length > 0 %}
-        {% for section in sections %}
-            {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' %}
-        {% endfor %}
-    {% endif %}
+        <div class="columns large-7">
 
+            {% block includeSide %}
 
+                {% if sideItems | length > 0 %}
+
+                    <ul class="search-results sidebar">
+                        {% for type in sideItems %}
+                            {% if type.items | length > 0 %}
+                                <li>
+                                    <hr>
+                                    <h3 class="block-heading">{{ type.title }}</h3>
+                                    <ul>
+                                        {% for item in type.items %}
+                                            {% block itemIncludeSide %}
+                                                {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                                                'item': item,
+                                                'excerpt_length': 150,
+                                                'classes' : 'main'} %}
+                                            {% endblock %}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+
+                {% endif %}
+
+            {% endblock %}
+
+        </div>
+
+    </div>
 
 {% endblock %}

@@ -23,9 +23,12 @@
 
 {% endblock %}
 
-{% block itemIncludeSide %}
-    {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
-    'item': item,
-    'excerpt_length': 150,
-    'classes' : 'main image-overlay dark'} %}
+{% block noSearchResults %}
+
+    <div class="row">
+        <div class="columns-18 large">
+            <p class="no-search-results">No future events found.</p>
+        </div>
+    </div>
+
 {% endblock %}
