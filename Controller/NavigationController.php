@@ -124,6 +124,7 @@ class NavigationController extends SearchController {
         $organisations = get_field('associated_organisations', 'options');
         $socialMedia = get_field('social_media', 'options');
         $address = get_field('address', 'options');
+        $email = get_field('email', 'options');
         $phoneNumber = get_field('phone_number', 'options');
 
         return array(
@@ -132,6 +133,7 @@ class NavigationController extends SearchController {
             'pages' => $pages->posts,
             'organisations' => $organisations,
             'address' => $address,
+            'email' => $email,
             'phonenumber' => $phoneNumber
         );
     }
