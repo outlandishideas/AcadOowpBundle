@@ -99,9 +99,7 @@ abstract class Post extends BasePost {
             } else {
                 $date = $this->startDateString($format);
             }
-        }
-
-        if (!$date) {
+        } else {
             $date = date($format, strtotime($this->post_date));
         }
 

@@ -142,7 +142,7 @@ abstract class Event extends Resource {
      * @return bool|string
      */
     public function startDateString($format = "j F Y"){
-        return date($format, $this->startDate());
+        return $this->startDate() ? date($format, $this->startDate()) : false;
     }
 
     /**
