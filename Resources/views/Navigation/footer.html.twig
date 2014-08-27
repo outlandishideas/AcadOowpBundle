@@ -18,23 +18,39 @@
         </div>
         <div class="large-6 columns">
             <hr>
-            <h3 class="block-heading">News</h3>
-            <p class="date">7 Jul 2014</p>
-            <h4 class="font-theme-colour">Nam sim amet nunc dui</h4>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
+            {% if newsItems %}
+                <h3 class="block-heading">News</h3>
+                {% set item = newsItems | first  %}
+                {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                'item': item,
+                'classes': 'main',
+                'image': 'none'} %}
+            {% elseif eventItems %}
+                <h3 class="block-heading">Events</h3>
+                {% set item = eventItems | last  %}
+                {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                'item': item,
+                'classes': 'main',
+                'image': 'none'} %}
+            {% endif %}
         </div>
         <div class="large-6 columns">
             <hr>
-            <h3 class="block-heading">Events</h3>
-            <p class="date">13 Sep - 20 Sep 2014</p>
-            <h4 class="font-theme-colour">Sed ultrices</h4>
-            <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                eu fugiat nulla pariatur.
-            </p>
+            {% if eventItems %}
+                <h3 class="block-heading">Events</h3>
+                {% set item = eventItems | first  %}
+                {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                'item': item,
+                'classes': 'main',
+                'image': 'none'} %}
+            {% elseif newsItems %}
+                <br>
+                {% set item = newsItems | last %}
+                {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                'item': item,
+                'classes': 'main',
+                'image': 'none'} %}
+            {% endif %}
         </div>
         <div class="large-6 columns">
             <div class="get-in-touch">

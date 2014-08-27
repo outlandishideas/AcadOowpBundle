@@ -126,6 +126,8 @@ class NavigationController extends SearchController {
         $address = get_field('address', 'options');
         $email = get_field('email', 'options');
         $phoneNumber = get_field('phone_number', 'options');
+        $newsItems = News::fetchAll(array('posts_per_page' => 2));
+        $eventItems = Event::fetchFutureEvents(array('posts_per_page' => 2));
 
         return array(
             'sections' => $sections,
@@ -134,7 +136,9 @@ class NavigationController extends SearchController {
             'organisations' => $organisations,
             'address' => $address,
             'email' => $email,
-            'phonenumber' => $phoneNumber
+            'phonenumber' => $phoneNumber,
+            'newsItems' => $newsItems,
+            'eventItems' => $eventItems
         );
     }
 

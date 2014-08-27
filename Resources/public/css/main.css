@@ -658,6 +658,10 @@ ul.subtitle-list li:not(:last-of-type):after {
     color: #000;
 }
 
+#footer .post-item h3.font-theme-colour {
+    font-weight: bold;
+}
+
 #footer p {
     line-height: 1rem;
 }
