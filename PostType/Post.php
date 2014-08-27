@@ -19,6 +19,22 @@ abstract class Post extends BasePost {
         return static::$theme;
     }
 
+    /**
+     * return custom page title if set, or else post title
+     * @return string
+     */
+    public function pageTitle() {
+        return $this->customPageTitle() ? $this->customPageTitle() : $this->title();
+    }
+
+    /**
+     * return custom page title
+     * @return string|null
+     */
+    public function customPageTitle() {
+        return $this->metadata('page_title');
+    }
+
     public function sections()
     {
         return $this->metadata('sections');
