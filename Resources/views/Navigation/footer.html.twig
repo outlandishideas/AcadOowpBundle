@@ -18,14 +18,14 @@
         </div>
         <div class="large-6 columns">
             <hr>
-            {% if newsItems %}
+            {% if newsItems.posts %}
                 <h3 class="block-heading">News</h3>
                 {% set item = newsItems | first  %}
                 {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                 'item': item,
                 'classes': 'main',
                 'image': 'none'} %}
-            {% elseif eventItems %}
+            {% elseif eventItems.posts %}
                 <h3 class="block-heading">Events</h3>
                 {% set item = eventItems | last  %}
                 {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
@@ -36,14 +36,14 @@
         </div>
         <div class="large-6 columns">
             <hr>
-            {% if eventItems %}
+            {% if eventItems.posts %}
                 <h3 class="block-heading">Events</h3>
                 {% set item = eventItems | first  %}
                 {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                 'item': item,
                 'classes': 'main',
                 'image': 'none'} %}
-            {% elseif newsItems %}
+            {% elseif newsItems.posts %}
                 <br>
                 {% set item = newsItems | last %}
                 {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
