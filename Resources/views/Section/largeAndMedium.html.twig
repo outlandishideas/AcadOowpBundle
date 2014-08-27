@@ -13,9 +13,14 @@
             'image': 'large'} %}
         </div>
         <div class="large-12 columns">
+            {# if excerpt_length 0, it gets overriden in defaultItem.html.twig#}
+            {% if not excerpt_length %}{% set excerpt_length = 0 %}{% endif %}
             {% for item in section.items %}
                 {% if not loop.first and loop.index <= 4 %}
-                    {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {'item': item, 'classes': ''} %}
+                    {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                        'item': item,
+                        'classes': '',
+                        'excerpt_length': excerpt_length } %}
                 {% endif %}
             {% endfor %}
         </div>

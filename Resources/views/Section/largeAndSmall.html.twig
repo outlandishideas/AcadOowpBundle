@@ -14,13 +14,15 @@
         </div>
         <div class="large-12 columns">
             <ul class="large-block-grid-2">
+                {# if excerpt_length 0, it gets overriden in defaultItem.html.twig#}
+                {% if not excerpt_length %}{% set excerpt_length = 0 %}{% endif %}
                 {% for item in section.items %}
                     {% if not loop.first and loop.index <= 3 %}
                         <li>{% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                             'item': item,
                             'classes': 'main',
                             'image':'large',
-                            'excerpt_length': 150} %}</li>
+                            'excerpt_length': excerpt_length} %}</li>
                     {% endif %}
                 {% endfor %}
             </ul>

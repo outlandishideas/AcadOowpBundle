@@ -5,7 +5,10 @@
     <a href="{{ item.permalink() }}" class="post-item main {{ classes }}">
 
         {% block itemNoImageInclude %}
-            {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {'item': item} %}
+            {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {
+            'item': item,
+            'excerpt_length': excerpt_length
+            } %}
         {% endblock %}
 
     </a>
@@ -20,9 +23,11 @@
             </div>
             <div class="columns large-13">
                 {% block itemInclude %}
-                    {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {'item': item} %}
+                    {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {
+                    'item': item,
+                    'excerpt_length': excerpt_length
+                    } %}
                 {% endblock %}
-
             </div>
         </div>
     </a>

@@ -12,10 +12,11 @@
         <div class="large-16 columns">
             {{ item.featuredImage('large') | raw }}
             <div class="row">
+                {% if not excerpt_length %}{% set excerpt_length = 150 %}{% endif %}
                 {% for item in section.items %}
                     {% if not loop.first and loop.index <= 3 %}
                         <div class="large-12 columns">
-                            {% include "OutlandishAcadOowpBundle:Default:defaultItem.html.twig" with {'item': item, 'image': 'none', 'excerpt_length': 150} %}
+                            {% include "OutlandishAcadOowpBundle:Default:defaultItem.html.twig" with {'item': item, 'image': 'none', 'excerpt_length': excerpt_length} %}
                         </div>
                     {% endif %}
                 {% endfor %}

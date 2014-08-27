@@ -1,3 +1,5 @@
+{% if excerpt_length == 'none' %}{% set excerpt_length = 0 %}{% endif %}
+
 {% block item_subtitle %}<p class="date">{{ item.dateString("j M Y", true) }}</p>{% endblock %}
 {% block item_title %}<h3 class="font-theme-colour">{{ item.title() | raw | raw }}</h3>{% endblock %}
 {% block item_content %}<p>{{ item.excerpt(excerpt_length) }}</p>{% endblock %}
