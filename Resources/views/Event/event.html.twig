@@ -2,30 +2,34 @@
     <div class="row">
         <div class="large-24 columns">
 
-            <hr>
-            <h1>Event details</h1>
+            {% if post.dateString or post.address or latitude %}
 
-            {%  if post.endDateString() %}
-                <p>Start date: {{ post.startDateString("j F Y") }}</p>
-                <p>End date: {{ post.endDateString() }}</p>
-            {% else %}
-                <p>Date: {{ post.startDateString("j F Y") }}</p>
-            {% endif %}
-
-            {%  if post.startTime() %}
-                <p>Time: {{ post.startTime() }}</p>
-            {% endif %}
-
-            {%  if post.address() %}
-                <p>Location: {{ post.address() }}</p>
-            {% endif %}
-
-            {% if latitude | length > 0 and longitude | length > 0  %}
-                <div class="google-map">
-                    <div class="map" data-marker="true" data-lat="{{ latitude | raw  }}" data-lng="{{ longitude | raw  }}" data-zoom="12"></div>
-                </div>
-            {% else %}
                 <hr>
+                <h1>Event details</h1>
+
+                {%  if post.endDateString() %}
+                    <p>Start date: {{ post.startDateString("j F Y") }}</p>
+                    <p>End date: {{ post.endDateString() }}</p>
+                {% elseif post.dateString() %}
+                    <p>Date: {{ post.startDateString("j F Y") }}</p>
+                {% endif %}
+
+                {%  if post.startTime() %}
+                    <p>Time: {{ post.startTime() }}</p>
+                {% endif %}
+
+                {%  if post.address() %}
+                    <p>Location: {{ post.address() }}</p>
+                {% endif %}
+
+                {% if latitude | length > 0 and longitude | length > 0  %}
+                    <div class="google-map">
+                        <div class="map" data-marker="true" data-lat="{{ latitude | raw  }}" data-lng="{{ longitude | raw  }}" data-zoom="12"></div>
+                    </div>
+                {% else %}
+                    <hr>
+                {% endif %}
+
             {% endif %}
 
         </div>
