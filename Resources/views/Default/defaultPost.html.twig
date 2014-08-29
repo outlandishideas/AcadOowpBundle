@@ -53,6 +53,25 @@
                             })) }}
                         {% endblock %}
 
+                        {% for type in sideItems %}
+                            {% if type.items | length > 0 %}
+                                <li>
+                                    <hr>
+                                    <h3 class="block-heading">{{ type.title }}</h3>
+                                    <ul>
+                                        {% for item in type.items %}
+                                            {% block itemIncludeSide %}
+                                                {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                                                'item': item,
+                                                'excerpt_length': 150,
+                                                'classes' : 'main'} %}
+                                            {% endblock %}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
                     </ul>
 
                 {% endblock %}
