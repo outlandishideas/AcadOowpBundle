@@ -52,7 +52,10 @@ class PersonController extends BaseController {
 
 		$post = $this->querySingle(array('name' => $name, 'post_type' => Person::postType()));
 
+        $sideItems = $post->allConnectedPosts();
+
         $response['post'] = $post;
+        $response['sideItems'] = $sideItems;
 
         return $response;
     }

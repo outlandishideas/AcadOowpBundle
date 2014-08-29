@@ -52,6 +52,14 @@
 
                     <p>Telephone: <span class="tel">{{ post.metadata('tel') }}</span></p>
                 </div>
+
+                {% block connected_side_posts %}
+
+                    {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
+                    'sideItems': sideItems} %}
+
+                {% endblock %}
+
             </div>
         </div>
     </article>
