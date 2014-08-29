@@ -737,7 +737,7 @@ ul.subtitle-list li:not(:last-of-type):after {
     /*margin-bottom: 30px!important;*/
     min-height: 130px;
     margin-left: 0!important;
-    max-width: 90em;
+    max-width: 85em;
 
 }
 
