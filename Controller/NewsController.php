@@ -26,20 +26,20 @@ class NewsController extends BaseController {
         $post = $this->querySingle(array('page_id' => News::postTypeParentId()));
         $items = News::fetchAll();
 
-        $sideItems = array(
-            array(
-                'title' => 'People',
-                'items' => Person::fetchAll(array('posts_per_page' => 3))
-            ),
-            array(
-                'title' => 'Roles',
-                'items' => Role::fetchAll(array('posts_per_page' => 3))
-            )
-        );
+//        $sideItems = array(
+//            array(
+//                'title' => 'People',
+//                'items' => Person::fetchAll(array('posts_per_page' => 3))
+//            ),
+//            array(
+//                'title' => 'Roles',
+//                'items' => Role::fetchAll(array('posts_per_page' => 3))
+//            )
+//        );
 
         $response = $this->indexResponse($post, $request, array(News::postType()));
         $response['items'] = $items;
-        $response['sideItems'] = $sideItems;
+//        $response['sideItems'] = $sideItems;
         return $response;
     }
 
