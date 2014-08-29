@@ -20,13 +20,13 @@
 
                 {% if featuredItem %}{% endif %}
 
-                <div class="row">
-                    <div class="columns large-24">
-                        <div class="sort-filter">
-                            <span class="sort-by">Sort by</span> <a href="#" class="selected">Date</a><a href="#">Relevance</a><a href="#">Popularity</a>
-                        </div>
-                    </div>
-                </div>
+                {#<div class="row">#}
+                    {#<div class="columns large-24">#}
+                        {#<div class="sort-filter">#}
+                            {#<span class="sort-by">Sort by</span> <a href="#" class="selected">Date</a><a href="#">Relevance</a><a href="#">Popularity</a>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
 
                 <div class="search-form">
                     {% for element in formElements %}
@@ -67,6 +67,10 @@
         <div class="columns large-7">
 
             {% block includeSide %}
+
+                {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
+                'post': post,
+                'title': 'page'} %}
 
                 {% if sideItems | length > 0 %}
 
