@@ -6,6 +6,10 @@ body {
     color: #565859;
 }
 
+.row {
+    max-width: 90em;
+}
+
 .columns {
     /* Override the default padding because Abi thinks it's better looking ;) */
     padding-left: 1.618rem;
@@ -733,6 +737,8 @@ ul.subtitle-list li:not(:last-of-type):after {
     /*margin-bottom: 30px!important;*/
     min-height: 130px;
     margin-left: 0!important;
+    max-width: 90em;
+
 }
 
 /* article default */
