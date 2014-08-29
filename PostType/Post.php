@@ -141,27 +141,31 @@ abstract class Post extends BasePost {
     public function allConnectedPosts() {
         $allConnectedPosts = array(
             array(
-                'title' => 'Themes',
+                'title' => 'Related themes',
                 'items' => $this->connectedThemes()
             ),
             array(
-                'title' => 'Documents',
+                'title' => 'Related documents',
                 'items' => $this->connectedDocuments()
             ),
             array(
-                'title' => 'Events',
+                'title' => 'Related events',
                 'items' => $this->connectedEvents()
             ),
             array(
-                'title' => 'People',
+                'title' => 'Related news',
+                'items' => $this->connectedNews()
+            ),
+            array(
+                'title' => 'Related people',
                 'items' => $this->connectedPeople()
             ),
             array(
-                'title' => 'Places',
+                'title' => 'Related places',
                 'items' => $this->connectedPlaces()
             ),
             array(
-                'title' => 'Projects',
+                'title' => 'Related projects',
                 'items' => $this->connectedProjects()
             )
         );
@@ -182,6 +186,14 @@ abstract class Post extends BasePost {
      */
     public function connectedEvents() {
         return $this->connected(Event::postType());
+    }
+
+    /**
+     * Returns all News posts connected to current post
+     * @return null|\Outlandish\OowpBundle\PostType\Post|\Outlandish\OowpBundle\Query\OowpQuery
+     */
+    public function connectedNews() {
+        return $this->connected(News::postType());
     }
 
     /**
