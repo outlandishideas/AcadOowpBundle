@@ -8,16 +8,19 @@
         <div class="row">
             <div class="medium-15  columns ">
                 <div class="content main">
-                    {% block topElement %}{% endblock %}
-                    {% block postDate %}{% endblock %}
-                    {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
-                    {% block subTitle %}
-                        {% if post.subtitle() %}
-                            <p class="subtitle">{{ post.subtitle() }}</p>
-                        {% endif %}
-                    {% endblock %}
-                    {{ post.featuredImage('large') | raw }}
-
+                    <div class="row">
+                        <div class="large-24 columns">
+                            {% block topElement %}{% endblock %}
+                            {% block postDate %}{% endblock %}
+                            {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
+                            {% block subTitle %}
+                                {% if post.subtitle() %}
+                                    <p class="subtitle">{{ post.subtitle() }}</p>
+                                {% endif %}
+                            {% endblock %}
+                            {{ post.featuredImage('large') | raw }}
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="large-24 columns">
                             <div class="content post">
