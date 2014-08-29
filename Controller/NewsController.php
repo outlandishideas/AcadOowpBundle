@@ -52,7 +52,10 @@ class NewsController extends BaseController {
 
         $post = $this->querySingle(array('name' => $name, 'post_type' => News::postType()));
 
+        $sideItems = $post->allConnectedPosts();
+
         $response['post'] = $post;
+        $response['sideItems'] = $sideItems;
         return $response;
     }
 

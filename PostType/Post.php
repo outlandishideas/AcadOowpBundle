@@ -123,10 +123,97 @@ abstract class Post extends BasePost {
 		return $types;
 	}
 
-	public function connectedTypes( $types = array() ) {
+    /**
+     * @param array $types
+     * @return array
+     */
+    public function connectedTypes( $types = array() ) {
 		$post_types = self::connectedPostTypes();
 
 		return array_intersect( $post_types, $types);
 	}
+
+
+    /**
+     * Returns custom posts, grouped and titled by post type, connected to current post
+     * @return array
+     */
+    public function allConnectedPosts() {
+        $allConnectedPosts = array(
+            array(
+                'title' => 'Themes',
+                'items' => $this->connectedThemes()
+            ),
+            array(
+                'title' => 'Documents',
+                'items' => $this->connectedDocuments()
+            ),
+            array(
+                'title' => 'Events',
+                'items' => $this->connectedEvents()
+            ),
+            array(
+                'title' => 'People',
+                'items' => $this->connectedPeople()
+            ),
+            array(
+                'title' => 'Places',
+                'items' => $this->connectedPlaces()
+            ),
+            array(
+                'title' => 'Projects',
+                'items' => $this->connectedProjects()
+            )
+        );
+        return $allConnectedPosts;
+    }
+
+    /**
+     * Returns all Document posts connected to current post
+     * @return null|\Outlandish\OowpBundle\PostType\Post|\Outlandish\OowpBundle\Query\OowpQuery
+     */
+    public function connectedDocuments() {
+        return $this->connected(Document::postType());
+    }
+
+    /**
+     * Returns all Event posts connected to current post
+     * @return null|\Outlandish\OowpBundle\PostType\Post|\Outlandish\OowpBundle\Query\OowpQuery
+     */
+    public function connectedEvents() {
+        return $this->connected(Event::postType());
+    }
+
+    /**
+     * Returns all Person posts connected to current post
+     * @return null|\Outlandish\OowpBundle\PostType\Post|\Outlandish\OowpBundle\Query\OowpQuery
+     */
+    public function connectedPeople() {
+        return $this->connected(Person::postType());
+    }
+
+    /**
+     * Returns all Place posts connected to current post
+     * @return null|\Outlandish\OowpBundle\PostType\Post|\Outlandish\OowpBundle\Query\OowpQuery
+     */
+    public function connectedPlaces() {
+        return $this->connected(Place::postType());
+    }
+
+    /**
+     * Returns all Project posts connected to current post
+     * @return null|\Outlandish\OowpBundle\PostType\Post|\Outlandish\OowpBundle\Query\OowpQuery
+     */
+    public function connectedProjects()  {
+        return $this->connected(Project::postType());
+    }
+
+    /**
+     * Returns all Theme posts connected to current post
+     * @return null|\Outlandish\OowpBundle\PostType\Post|\Outlandish\OowpBundle\Query\OowpQuery
+     */
+    public function connectedThemes() {
+        return $this->connected(Theme::postType());
+    }
 
 }
