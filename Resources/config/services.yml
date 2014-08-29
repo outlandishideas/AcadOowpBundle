@@ -2,3 +2,9 @@ services:
     outlandish_acadoowp.faceted_search.search:
         class: Outlandish\AcadOowpBundle\FacetedSearch\Search
         arguments: [@outlandish_routemaster.query_manager, @outlandish_oowp.post_manager]
+
+    kernel.listener.outlandish.notfound:
+        class: Outlandish\AcadOowpBundle\EventListener\NotFoundListener
+        arguments: [@templating.engine.php]
+        tags:
+            - {name: kernel.event_listener, event: kernel.exception, method: onKernelException}
