@@ -4,6 +4,10 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     color: #565859;
+    /*Uncomment below to restrict the width of whole body content*/
+    /*max-width: 85em;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
 }
 
 .row {
