@@ -643,7 +643,6 @@ ul.subtitle-list li:not(:last-of-type):after {
     font-weight: 300;
     letter-spacing: 0.1px;
     z-index: 100;
-    /*text-align: center;*/
     top: 0;
     bottom: 0;
     left: 10px;
@@ -652,6 +651,7 @@ ul.subtitle-list li:not(:last-of-type):after {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: inherit;
     /*white-space: nowrap;*/
 }
 
