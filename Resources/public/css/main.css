@@ -1032,7 +1032,7 @@ ul.search-results.people li.accordion-item.open .accordion-toggle h3:after {
 	/*width: 100px;*/
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
-    max-height: 170px;
+    max-height: 140px;
 }
 
 .person-heading {

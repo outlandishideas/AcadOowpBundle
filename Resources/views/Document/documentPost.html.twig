@@ -65,6 +65,7 @@
     <hr>
 
     <h3 class="block-heading">Summary</h3>
+    <br>
 
     <h2>'{{ post.title() | raw }}'</h2>
 
@@ -89,19 +90,18 @@
         </div>
     </div>
 
-  {% if authors | length > 0 %}
-    <hr>
-    <h3 class="block-heading">Author{% if authors | length > 1 %}s{% endif %}</h3>
-        <div class="authors-side">
-            {% for person in authors %}
-                {% include 'OutlandishAcadOowpBundle:Person:personItem.html.twig' with {
-                'person': person,
-                'size': 'small'} %}
-            {% endfor %}
-        </div>
-  {% endif %}
+    <div class="row">
+        <div class="large-24 columns">
 
-      {% for taxonomy in post.taxonomies() %}
+        {% include "OutlandishAcadOowpBundle:Partial:author.html.twig" with {
+        'authors': authors}
+        %}
+
+        </div>
+    </div>
+
+
+    {% for taxonomy in post.taxonomies() %}
         {% if taxonomy.terms | length > 0 %}
             <div class="taxonomy {{ taxonomy.type }}">
                 <hr>

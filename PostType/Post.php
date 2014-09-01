@@ -201,7 +201,6 @@ abstract class Post extends BasePost {
         );
     }
 
-
     /**
      * Returns a title and all place posts connected to current post
      * @param string $title
@@ -213,7 +212,6 @@ abstract class Post extends BasePost {
             'items' => $this->connected(Place::postType())
         );
     }
-
 
     /**
      * Returns a title and all project posts connected to current post
@@ -227,7 +225,6 @@ abstract class Post extends BasePost {
         );
     }
 
-
     /**
      * Returns a title and all theme posts connected to current post
      * @param string $title
@@ -238,6 +235,20 @@ abstract class Post extends BasePost {
             'title' => $title,
             'items' => $this->connected(Theme::postType())
         );
+    }
+
+    public function authors() {
+        return $this->connected( Person::postType() );
+    }
+
+    public function author_names() {
+        $authors = $this->authors();
+        $names = array();
+        foreach( $authors as $author ) {
+            $names[] = $author->title();
+        }
+
+        return ( count( $names ) > 0 ) ? implode( ', ', $names ) : false;
     }
 
 }

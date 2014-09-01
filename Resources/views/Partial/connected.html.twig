@@ -1,7 +1,7 @@
 {% if not classes %}{% set classes = 'main' %}{% endif %}
 
 {% for type in connectedItems %}
-    {% if type.items.posts | length > 0 %}
+    {% if type.items | length > 0 %}
         <li>
             <hr>
             <h3 class="block-heading">{{ type.title }}</h3>

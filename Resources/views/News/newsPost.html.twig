@@ -1,1 +1,61 @@
 {% extends 'OutlandishAcadOowpBundle:Default:defaultPost.html.twig' %}
+
+{% set author_names = post.author_names() %}
+{% set authors = post.authors() %}
+
+{% block sideBar %}
+
+    <div class="row">
+        <div class="large-24 columns">
+
+            {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
+            'post': post,
+            'title': 'page'} %}
+
+        </div>
+    </div>
+
+    {% block authors %}
+
+        <div class="row">
+            <div class="large-24 columns">
+
+                {% include "OutlandishAcadOowpBundle:Partial:author.html.twig" with {
+                'authors': authors}
+                %}
+
+                <hr>
+
+            </div>
+        </div>
+
+    {% endblock %}
+
+    <div class="row">
+        <div class="large-24 columns">
+
+            <h3 class="block-heading">Find out more</h3>
+
+            <ul class="side-menu">
+
+                {% block side_menu %}
+                    {{ render(controller('OutlandishAcadOowpBundle:Navigation:renderSideMenu', {
+                    'maxDepth' : 3,
+                    'rootPost': post.getRoot()
+                    })) }}
+
+                    {% block connected_side_posts %}
+
+                        {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
+                        'connectedItems': sideItems} %}
+
+                    {% endblock %}
+
+                {% endblock %}
+
+            </ul>
+
+        </div>
+    </div>
+
+{% endblock %}
