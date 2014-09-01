@@ -16,10 +16,12 @@
     <a href="{{ item.permalink() }}" class="post-item {{ classes }}">
         <div class="row">
             <div class="columns large-11">
-                {% block item_image %}{{ item.featuredImage('large') | raw }}{% endblock %}
-                {% if 'image-overlay' in classes %}
-                    <p class="date">{{ item.dateString("j M Y", true) }}</p>
-                {% endif %}
+                <div class="post-item-image">
+                    {% block item_image %}{{ item.featuredImage('large') | raw }}{% endblock %}
+                    {% if 'image-overlay' in classes %}
+                        <p class="date">{{ item.dateString("j M Y", true) }}</p>
+                    {% endif %}
+                </div>
             </div>
             <div class="columns large-13">
                 {% block itemInclude %}
