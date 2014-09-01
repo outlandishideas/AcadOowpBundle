@@ -7,6 +7,12 @@ abstract class Page extends Post {
 
     const CONTACT_PAGE_ID = 102;
 
+    //connected to document, news
+    public static function onRegistrationComplete() {
+        self::registerConnection(Document::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
+        self::registerConnection(News::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
+    }
+
     /**
      * return data for map on contact page
      * @return array|string

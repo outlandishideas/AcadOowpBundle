@@ -30,9 +30,15 @@ class DefaultController extends BaseController {
 		$post = $this->querySingle(array('name' => $slugBits[count($slugBits) - 1], 'post_type' => 'any'), true);
         $author = $post->author();
 
+        $bottomItems = array(
+            $post->connectedDocuments(false),
+            $post->connectedNews(false)
+        );
+
 		return array(
             'post' => $post,
-            'author' => $author
+            'author' => $author,
+            'bottomItems' => $bottomItems
         );
 	}
 
