@@ -928,8 +928,8 @@ ul.side-menu>:not(li) {
     display: none;
 }
 
-ul.side-menu>:not(li) {
-    display: none;
+ul.side-menu>h3 {
+    display: block;
 }
 
 .side-menu .children li a {
