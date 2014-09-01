@@ -62,6 +62,14 @@ abstract class Document extends Resource {
         return $this->metadata('publication');
     }
 
+    public function publisher() {
+        return $this->metadata('publisher');
+    }
+
+    public function yearPublished() {
+        return $this->metadata('year_published');
+    }
+
     public function pageNumbers() {
         return $this->metadata('page_numbers');
     }
