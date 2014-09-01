@@ -2,19 +2,19 @@
 
 {% for type in connectedItems %}
     {% if type.items | length > 0 %}
-        <li>
-            <hr>
+        {% if type.title  %}
             <h3 class="block-heading">{{ type.title | raw }}</h3>
-            <ul>
-                {% for item in type.items.posts %}
-                    {% block itemIncludeSide %}
-                        {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
-                        'item': item,
-                        'excerpt_length': 150,
-                        'classes' : classes} %}
-                    {% endblock %}
-                {% endfor %}
-            </ul>
-        </li>
+            <hr>
+        {% endif %}
+        <ul>
+            {% for item in type.items.posts %}
+                {% block itemIncludeSide %}
+                    {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                    'item': item,
+                    'excerpt_length': 150,
+                    'classes' : classes} %}
+                {% endblock %}
+            {% endfor %}
+        </ul>
     {% endif %}
 {% endfor %}
