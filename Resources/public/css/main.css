@@ -28,7 +28,7 @@ a:hover, a:focus {
 	color: #126D66;
 }
 
-h1 {
+h1, .vcard h1 .fn {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size : 2.25rem;
@@ -127,7 +127,7 @@ p {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size : 18px;
-    line-height : 24px;
+    line-height : 30px;
     letter-spacing : 0.9px;
     color: #565859;
     color : rgb(86, 88, 89);
@@ -143,6 +143,8 @@ hr {
     letter-spacing : 0.9px;
     color: #565859;
 }
+
+/* Header */
 
 .header {
 	background: #33bab1;
@@ -239,6 +241,21 @@ hr {
     text-align: center;
 }
 
+.alignright {
+    float:right;
+    margin: 5px 0 20px 20px;
+}
+
+.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+
+.aligncenter {
+    display: block;
+    margin: 5px auto 5px auto;
+}
+
 /* styles for fonts*/
 
 .font-large {
@@ -257,7 +274,7 @@ hr {
 }
 
 .content p.date {
-    font-weight: 200;
+    font-weight: 400;
 }
 
 /* content types*/
@@ -596,7 +613,7 @@ ul.subtitle-list li:not(:last-of-type):after {
     padding-right: 0;
 }
 
-.post-item.image-overlay .columns:first-of-type:after {
+.post-item.image-overlay .columns:first-of-type .post-item-image:after {
     content: '';
     top: 0;
     left: 15px;
@@ -619,14 +636,14 @@ ul.subtitle-list li:not(:last-of-type):after {
     background: transparent;
 }
 
-.post-item.image-overlay .columns:first-of-type p {
+.post-item.image-overlay .columns:first-of-type .post-item-image p {
     color: #fff;
     font-size: 35px;
     line-height: 35px;
     font-weight: 300;
     letter-spacing: 0.1px;
     z-index: 100;
-    text-align: center;
+    /*text-align: center;*/
     top: 0;
     bottom: 0;
     left: 10px;
@@ -638,7 +655,7 @@ ul.subtitle-list li:not(:last-of-type):after {
     /*white-space: nowrap;*/
 }
 
-.post-item.image-overlay .columns:first-of-type:hover:after {
+.post-item.image-overlay .columns:first-of-type:hover .post-item-image:after {
     opacity: 1;
     background: transparent;
 }
@@ -929,6 +946,10 @@ ul.side-menu>:not(li) {
     margin: 10px 0 20px 0;
 }
 
+.contact-people {
+    margin-top: 40px;
+}
+
 img.contact-image {
     max-width: 200px;
 }
@@ -939,8 +960,9 @@ p.contact-name {
 
 /* People Pages */
 
-ul.search-results.people li {
+ul.search-results.people li.person-item {
     padding: 30px;
+    text-align: center;
 }
 
 ul.search-results.no-roles {
@@ -950,11 +972,27 @@ ul.search-results.no-roles li {
 	padding: 1rem 0;
 }
 
-ul.search-results.people li.accordion-item .accordion-toggle:after {
+ul.search-results.people.accordion {
+    margin-top: 40px;
+}
+
+ul.search-results.people li.accordion-item {
+    padding-top: 0;
+    border-top: 1px solid #A0A1A3;
+}
+
+ul.search-results.people li.accordion-item h3.block-heading {
+    margin: 20px 0 30px 0;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+ul.search-results.people li.accordion-item .accordion-toggle h3:after {
 	content: "(+)";
 }
 
-ul.search-results.people li.accordion-item.open .accordion-toggle:after {
+ul.search-results.people li.accordion-item.open .accordion-toggle h3:after {
 	content: "(-)";
 }
 
@@ -973,12 +1011,15 @@ ul.search-results.people li.accordion-item.open .accordion-toggle:after {
 }
 
 .people-item h4 {
-	font-size: 0.9rem;
+    font-size: 1rem;
+    font-weight: bold;
+    padding-top: 10px;
 }
 
 .people-intro p:not(.wp-caption-text) {
-   font-size: 1.5rem;
-   line-height: 1.4;
+    font-size: 2.1rem;
+    line-height: 1.4;
+    font-weight: 200;
 }
 
 .people-intro p.wp-caption-text {
@@ -990,16 +1031,42 @@ ul.search-results.people li.accordion-item.open .accordion-toggle:after {
 	/*width: 100px;*/
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
+    max-height: 170px;
+}
+
+.person-heading {
+    margin-top: 20px;
 }
 
 .person-details {
-	border: 20px solid #f2f2f2;
-	padding: 20px;
+    margin-bottom: 50px;
+}
+
+.person-details p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.person-details p:first-of-type {
+    padding-top: 15px;
+}
+
+.person-details p:last-of-type {
+    margin-bottom: 0;
+}
+
+.person-details p span {
+    font-weight: bold;
 }
 
 .vcard .avatar {
-	width:200px;
+	max-width: 120px;
 }
+
+img.avatar.photo {
+    margin: 0;
+}
+
 .vcard.section {
 	border: none;
 }
@@ -1007,9 +1074,10 @@ ul.search-results.people li.accordion-item.open .accordion-toggle:after {
 	display: none;
 }
 
-.vcard h1 .fn {
-	font-weight: normal;
-	font-size: 2.25rem;
+.vcard .role {
+    margin-top: 10px;
+    display: block;
+    text-transform: uppercase;
 }
 
 .authors {
@@ -1124,6 +1192,28 @@ ul.social li a:hover  {
 .bio:not(:last-of-type):after {
     content: ",";
     padding-right: 4px;
+}
+
+.authors-side li {
+    list-style: none;
+    clear: both;
+    margin-top: 20px;
+}
+
+.authors-side {
+    margin: 20px 0 30px 0;
+}
+
+.authors-side img {
+    max-width: 60px;
+    float: left;
+    margin: 5px 30px 0 0;
+}
+
+.authors-side h4 {
+    line-height: 60px;
+    text-align: left;
+    padding: 0;
 }
 
 /* Taxonomies */
