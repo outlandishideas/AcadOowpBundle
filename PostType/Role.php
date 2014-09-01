@@ -7,6 +7,18 @@ abstract class Role extends Theme {
 
 	public static $menu_icon = 'dashicons-groups';
 
+    static function getRegistrationArgs($defaults) {
+
+        $defaults['hierarchical'] = true;
+
+        // Adds menu icon using the $menu_icon property if set
+        if ( static::$menu_icon ) {
+            $defaults['menu_icon'] = static::$menu_icon;
+        }
+
+        return $defaults;
+    }
+
     //connected to person, project
     public static function onRegistrationComplete() {
         self::registerConnection(Person::postType(),  array('sortable' => 'any','cardinality' => 'many-to-one'));
