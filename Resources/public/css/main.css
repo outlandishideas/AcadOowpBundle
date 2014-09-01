@@ -964,6 +964,10 @@ ul.side-menu>h3 {
     margin: 10px 0 20px 0;
 }
 
+.contact h3.block-heading {
+    padding: 30px 0;
+}
+
 .contact-people {
     margin-top: 40px;
 }
