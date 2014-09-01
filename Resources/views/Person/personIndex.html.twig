@@ -4,13 +4,12 @@
     {% block peopleContent %}
     <div class="row">
         <div class="columns medium-{% if post.featuredImage('large') %}12{% else %}24{% endif %}">
-            <h1>{{ post.title() }}</h1>
             <div class="people-intro">
                 {{ post.content() | raw }}
             </div>
         </div>
         {% if post.featuredImage('large') %}
-            <div class="columns medium-12">
+            <div class="columns medium-12 medium-centered large-centered">
                 {% block item_image %}{{ post.featuredImage('large') | raw }}{% endblock %}
             </div>
         {% endif %}
@@ -23,13 +22,16 @@
                     {% for role in roles %}
                         <li class="accordion-item">
                             {% block roleInclude %}
-                                <h3 class="block-heading">{{ role.title() }}
-                                    <a href="#" class="accordion-toggle"></a>
-                                </h3>
+                                <a href="#" class="accordion-toggle">
+                                    <h3 class="block-heading">{{ role.title() }}
+
+                                    </h3>
+                                </a>
+
                                 <div class="accordion-content">
                                     {{ role.content() | raw }}
                                     <div class="people-items">
-                                        <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+                                        <ul class="small-block-grid-2 medium-block-grid-4 large-block-grid-6">
                                             {% for person in role.people %}
                                                 {% block personInclude %}
                                                     {% include 'OutlandishAcadOowpBundle:Person:personItem.html.twig' with {
