@@ -130,8 +130,8 @@ app.init = {
 				$('.accordion-item').removeClass('open');
 				if ( ! open ) {
 					$item.addClass('open');
-				}
-				scrollIntoView($item, 30);
+                    scrollIntoView($item, 30);
+                }
 			});
 		},
 
@@ -220,7 +220,7 @@ function scrollIntoView($item, offset, speed) {
 		offset = 0;
 	}
 	if (typeof speed == 'undefined') {
-		speed = 500;
+		speed = 700;
 	}
 	$('html, body').animate({
 		scrollTop: $item.offset().top - offset
