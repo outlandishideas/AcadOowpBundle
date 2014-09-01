@@ -21,7 +21,7 @@
                                         <p class="subtitle">{{ post.subtitle() }}</p>
                                     {% endif %}
                                 {% endblock %}
-                                {{ post.featuredImage('large') | raw }}
+                                {% include 'OutlandishAcadOowpBundle:Partial:featuredImg.html.twig' with {'post': post } %}
                             </div>
                         </div>
                         <div class="row">

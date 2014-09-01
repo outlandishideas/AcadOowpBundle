@@ -19,6 +19,14 @@ abstract class Post extends BasePost {
         return static::$theme;
     }
 
+    public function featuredImageTitle() {
+        return $this->metadata('featured_image', true) ?: $this->metadata('title', true);
+    }
+
+    public function featuredImageDescription() {
+        return $this->metadata('featured_image', true) ?: $this->metadata('description', true);
+    }
+
     /**
      * return custom page title if set, or else post title
      * @return string

@@ -241,6 +241,23 @@ hr {
     text-align: center;
 }
 
+.featured-image {
+    display: table;
+}
+
+p.caption-title, p.caption-description {
+    display: table-caption;
+    caption-side: bottom;
+}
+
+p.caption-title {
+    font-size: 0.9rem;
+}
+
+p.caption-description {
+    font-size: 0.7rem;
+}
+
 .alignright {
     float:right;
     margin: 5px 0 20px 20px;

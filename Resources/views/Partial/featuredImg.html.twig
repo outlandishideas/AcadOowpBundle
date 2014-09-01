@@ -1,0 +1,9 @@
+<div class="featured-image">
+    {{ post.featuredImage('large') | raw }}
+    {% if post.featuredImageTitle() %}
+        <p class="caption-title">{{ post.featuredImageTitle() | raw }}</p>
+    {%  endif %}
+    {% if post.featuredImageDescription() %}
+        <p class="caption-description">{{ post.featuredImageDescription() | raw }}</p>
+    {%  endif %}
+</div>

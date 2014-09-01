@@ -10,7 +10,9 @@
         </div>
         {% if post.featuredImage('large') %}
             <div class="columns medium-12 medium-centered large-centered">
-                {% block item_image %}{{ post.featuredImage('large') | raw }}{% endblock %}
+                {% block item_image %}
+                   {% include 'OutlandishAcadOowpBundle:Partial:featuredImg.html.twig' with {'post': post } %}
+                {% endblock %}
             </div>
         {% endif %}
     </div>
