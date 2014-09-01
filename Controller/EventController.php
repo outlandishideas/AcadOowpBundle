@@ -34,22 +34,7 @@ class EventController extends BaseController {
         $sideItems = array(
             array(
                 'title' => 'Previous events',
-                'items' => Event::fetchAll(
-                    array (
-                        'posts_per_page' => 3,
-                        'meta_query'=>array(
-                            array(
-                                'key'=>'end_date',
-                                'value'=> date('Y/m/d'),
-                                'compare'=>'<=',
-                                'type'=>'DATE'
-                            )
-                        ),
-                        'orderby' => 'meta_value',
-                        'meta_key' => 'start_date',
-                        'order' => 'desc'
-                    )
-                 )
+                'items' => Event::fetchPastEvents()
             )
         );
 
@@ -57,6 +42,24 @@ class EventController extends BaseController {
         $response['items'] = $itemsByMonth;
         $response['sections'] = $post->sections();
         $response['sideItems'] = $sideItems;
+        return $response;
+    }
+
+    /**
+     * @Route("events/previous-events/", name="previousEvents")
+     * @Template("OutlandishAcadOowpBundle:Event:eventIndex.html.twig")
+     * @param Request $request
+     * @return array
+     */
+    public function previousEventsAction(Request $request) {
+        $response = array();
+
+        $post = $this->querySingle(array('page_id' => Event::PREVIOUS_EVENTS_PAGE_ID));
+
+        $items = Event::fetchPastEvents();
+
+        $response['post'] = $post;
+        $response['items'] = $items;
         return $response;
     }
 

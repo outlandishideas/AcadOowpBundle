@@ -2,24 +2,39 @@
 
 {% block searchResults %}
 
-    {% for month in items %}
+    {% if items | first ['month'] is defined %}
 
-        {% if not loop.first %} <hr> {% endif %}
+        {% for month in items %}
 
-        <h3 class="block-heading">{{ month.month | raw }}</h3>
+            {% if not loop.first %} <hr> {% endif %}
 
-        {% for item in month['posts'] %}
+            <h3 class="block-heading">{{ month.month | raw }}</h3>
+
+            {% for item in month['posts'] %}
+                <li>
+                    {% block itemInclude %}
+                        {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                        'item': item,
+                        'excerpt_length': 300,
+                        'image': 'medium',
+                        'classes': 'image-overlay'} %}
+                    {% endblock %}
+                </li>
+            {% endfor %}
+        {% endfor %}
+
+    {% else %}
+
+        {% for item in items %}
             <li>
-                {% block itemInclude %}
-                    {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
-                    'item': item,
-                    'excerpt_length': 300,
-                    'image': 'medium',
-                    'classes': 'image-overlay'} %}
-                {% endblock %}
+                {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                'item': item,
+                'excerpt_length': 300,
+                'image': 'medium'} %}
             </li>
         {% endfor %}
-    {% endfor %}
+
+    {% endif %}
 
 {% endblock %}
 

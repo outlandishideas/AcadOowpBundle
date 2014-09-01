@@ -4,6 +4,8 @@ namespace Outlandish\AcadOowpBundle\PostType;
 
 abstract class Event extends Resource {
 
+    const PREVIOUS_EVENTS_PAGE_ID = 1720;
+
     const NOT_FOUND_MESSAGE = 'NOT_FOUND_ENTER_POSTCODE_OR_ENTER_ADDRESS_OR_AMEND_TITLE';
 
 	public static $menu_icon = 'dashicons-location-alt';
@@ -100,6 +102,29 @@ abstract class Event extends Resource {
         $futureEvents = self::fetchAll($queryArgs);
 
         return $futureEvents;
+    }
+
+    public static function fetchPastEvents($queryArgs = array()) {
+        $defaults = array (
+            'posts_per_page' => 3,
+            'meta_query'=>array(
+                array(
+                    'key'=>'end_date',
+                    'value'=> date('Y/m/d'),
+                    'compare'=>'<=',
+                    'type'=>'DATE'
+                )
+            ),
+            'orderby' => 'meta_value',
+            'meta_key' => 'start_date',
+            'order' => 'desc'
+
+        );
+
+        $queryArgs = wp_parse_args($queryArgs, $defaults);
+        $pastEvents = self::fetchAll($queryArgs);
+
+        return $pastEvents;
     }
 
     public static function sortByMonth($events) {
