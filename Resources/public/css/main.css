@@ -645,13 +645,14 @@ ul.subtitle-list li:not(:last-of-type):after {
     z-index: 100;
     top: 0;
     bottom: 0;
-    left: 10px;
-    right: 10px;
+    left: 0;
+    right: 0;
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     width: inherit;
+    text-align: center;
     /*white-space: nowrap;*/
 }
 
