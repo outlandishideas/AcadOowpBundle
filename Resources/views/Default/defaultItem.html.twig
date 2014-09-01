@@ -19,7 +19,7 @@
                 <div class="post-item-image">
                     {% block item_image %}{{ item.featuredImage('large') | raw }}{% endblock %}
                     {% if 'image-overlay' in classes %}
-                        <p class="date">{{ item.dateString("j M Y", true) }}</p>
+                        <p class="date">{{ item.dateString("j M Y", true) | raw }}</p>
                     {% endif %}
                 </div>
             </div>

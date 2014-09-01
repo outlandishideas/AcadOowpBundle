@@ -1,5 +1,5 @@
 {% if section.link %}
-    <h2><a href="{{ section.link }}">{{ section.title }}</a></h2>
+    <h2><a href="{{ section.link }}">{{ section.title | raw }}</a></h2>
 {% else %}
-    <h2>{{ section.title }}</h2>
+    <h2>{{ section.title | raw }}</h2>
 {% endif %}

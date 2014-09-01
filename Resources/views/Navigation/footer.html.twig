@@ -9,7 +9,7 @@
                     <nav>
                         <ul>
                             {% for page in pages %}
-                                <li><a class="font-theme-colour" href="{{ page.permalink() }}">{{ page.title() | raw }}</a></li>
+                                <li><a class="font-theme-colour" href="{{ page.permalink() | raw }}">{{ page.title() | raw }}</a></li>
                             {% endfor %}
                         </ul>
                     </nav>
@@ -59,8 +59,8 @@
                 {% block footer_address %}
 
                     <p>
-                        <span><a href="mailto:{{ email }}">{{ email }}</a></span><br/>
-                        <span>{{ phonenumber }}</span>
+                        <span><a href="mailto:{{ email | raw }}">{{ email | raw }}</a></span><br/>
+                        <span>{{ phonenumber | raw }}</span>
                     </p>
 
                     <p>{{ address | raw }}</p>

@@ -1,6 +1,6 @@
 {% extends '::layout.html.twig' %}
 
-{% block title %}{{ post.title() }}{% endblock %}
+{% block title %}{{ post.title() | raw }}{% endblock %}
 
 {% block content %}
     <article class="section vcard">
@@ -20,14 +20,14 @@
                         {% block postTitle %}
                             <div class="medium-19 columns">
                                 <div class="person-heading">
-                                    <span class="role">{{ post.role() }}</span>
+                                    <span class="role">{{ post.role() | raw }}</span>
                                     <h1>
-                                        <span class="fn">{{ post.title() }}</span>
+                                        <span class="fn">{{ post.title() | raw }}</span>
                                     </h1>
                                     <span class="n">
-                                        <span class="honorific-prefix">{{ post.metadata('honorific_prefix') }}</span>
-                                        <span class="given-name">{{ post.metadata('given_name') }}</span>
-                                        <span class="family-name">{{ post.metadata('family_name') }}</span>
+                                        <span class="honorific-prefix">{{ post.metadata('honorific_prefix') | raw }}</span>
+                                        <span class="given-name">{{ post.metadata('given_name') | raw }}</span>
+                                        <span class="family-name">{{ post.metadata('family_name') | raw }}</span>
                                     </span>
                                 </div>
 
@@ -63,15 +63,15 @@
                                 <h3 class="block-heading">Contact Details</h3>
 
                                 {%  if post.metadata('role') %}
-                                    <p>Role: <span>{{ post.metadata('role') }}</span></p>
+                                    <p>Role: <span>{{ post.metadata('role') | raw }}</span></p>
                                 {% endif %}
 
                                 {%  if post.metadata('email') %}
-                                    <p>Email: <span class="email">{{ post.metadata('email') }}</span></p>
+                                    <p>Email: <span class="email">{{ post.metadata('email') | raw }}</span></p>
                                 {% endif %}
 
                                 {%  if post.metadata('tel') %}
-                                    <p>Telephone: <span class="tel">{{ post.metadata('tel') }}</span></p>
+                                    <p>Telephone: <span class="tel">{{ post.metadata('tel') | raw }}</span></p>
                                 {% endif %}
                             </div>
                         </div>

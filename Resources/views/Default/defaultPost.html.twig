@@ -18,7 +18,7 @@
                                 {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
                                 {% block subTitle %}
                                     {% if post.subtitle() %}
-                                        <p class="subtitle">{{ post.subtitle() }}</p>
+                                        <p class="subtitle">{{ post.subtitle() | raw }}</p>
                                     {% endif %}
                                 {% endblock %}
                                 {% include 'OutlandishAcadOowpBundle:Partial:featuredImg.html.twig' with {'post': post } %}

@@ -9,10 +9,10 @@
     <ul class="subtitle-list">
 
         {% if author_names %}
-            <li class="font-theme-colour">{{ author_names }}</li>
+            <li class="font-theme-colour">{{ author_names | raw }}</li>
         {% endif %}
 
-        <li class="font-theme-colour"> {{ post.title() }}</li>
+        <li class="font-theme-colour"> {{ post.title() | raw }}</li>
 
         {% if post.journal() %}
             <li class="font-theme-colour">{{ post.journal() | raw }}</li>
@@ -105,8 +105,8 @@
         {% if taxonomy.terms | length > 0 %}
             <div class="taxonomy {{ taxonomy.type }}">
                 <hr>
-                <h3 class="block-heading">{{ taxonomy.name }}</h3>
-                <ul class="terms {{ taxonomy.type }}">
+                <h3 class="block-heading">{{ taxonomy.name | raw }}</h3>
+                <ul class="terms {{ taxonomy.type | raw }}">
                 {% for term in taxonomy.terms %}
                     <li><a href="{{ term.permalink() }}">{{ term.title() | raw }}</a></li>
                 {% endfor %}

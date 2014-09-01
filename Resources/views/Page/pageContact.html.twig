@@ -36,28 +36,28 @@
                                             <li>
                                                 <div class="contact-person">
                                                     {% if person.image.url | length > 0 %}
-                                                        <img class="contact-image" src="{{ person.image.url }}">
+                                                        <img class="contact-image" src="{{ person.image.url | raw }}">
                                                     {% endif %}
 
                                                     {% if person.name.content | length > 0 %}
                                                         <p class="contact-name">
-                                                            {{ person.name.prefix }}
-                                                            {{ person.name.content }}
-                                                            {{ person.name.suffix }}
+                                                            {{ person.name.prefix | raw }}
+                                                            {{ person.name.content | raw }}
+                                                            {{ person.name.suffix | raw }}
                                                         </p>
                                                     {% endif %}
                                                     {% if person.phone.content | length > 0 %}
                                                         <p>
-                                                            {{ person.phone.prefix }}
-                                                            {{ person.phone.content }}
-                                                            {{ person.phone.suffix }}
+                                                            {{ person.phone.prefix | raw }}
+                                                            {{ person.phone.content | raw }}
+                                                            {{ person.phone.suffix | raw }}
                                                         </p>
                                                     {% endif %}
                                                     {% if person.email.content | length > 0 %}
                                                         <p>
-                                                            {{ person.email.prefix }}
-                                                            {{ person.email.content }}
-                                                            {{ person.email.suffix }}
+                                                            {{ person.email.prefix | raw }}
+                                                            {{ person.email.content | raw }}
+                                                            {{ person.email.suffix | raw }}
                                                         </p>
                                                     {% endif %}
                                                 </div>

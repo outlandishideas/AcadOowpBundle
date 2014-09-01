@@ -9,15 +9,15 @@
             {% include "OutlandishAcadOowpBundle:Partial:avatar.html.twig" with {
             'post': person,
             'size': 'avatar-square' } %}
-            <h4>{{ person.title() }}</h4>
+            <h4>{{ person.title() | raw }}</h4>
         </a>
     {% else %}
-        <a href="{{ person.permalink() }}" class="post-item {{ classes }}">
+        <a href="{{ person.permalink() | raw }}" class="post-item {{ classes }}">
             <div class="row">
                 <div class="columns large-11">
                     {% block item_image %}{{ person.featuredImage('large') | raw }}{% endblock %}
                     {% if 'image-overlay' in classes %}
-                        <p class="date">{{ person.dateString("j M Y", true) }}</p>
+                        <p class="date">{{ person.dateString("j M Y", true) | raw }}</p>
                     {% endif %}
                 </div>
                 <div class="columns large-13">

@@ -25,9 +25,7 @@
                         <li class="accordion-item">
                             {% block roleInclude %}
                                 <a href="#" class="accordion-toggle">
-                                    <h3 class="block-heading">{{ role.title() }}
-
-                                    </h3>
+                                    <h3 class="block-heading">{{ role.title() | raw }}</h3>
                                 </a>
 
                                 <div class="accordion-content">

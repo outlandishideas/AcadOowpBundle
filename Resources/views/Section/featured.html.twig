@@ -4,9 +4,9 @@
             {% include "OutlandishAcadOowpBundle:Section:title.html.twig" %}
             {% set item = section.items | first  %}
             <a href="{{ item.permalink() }}" class="post-item">
-                <p class="subtitle">{{ item.date() }}</p>
-                <h3 class="font-theme-colour">{{ item.title() }}</h3>
-                <p>{{ item.excerpt(800) }}</p>
+                <p class="subtitle">{{ item.date() | raw }}</p>
+                <h3 class="font-theme-colour">{{ item.title() | raw }}</h3>
+                <p>{{ item.excerpt(800) | raw }}</p>
             </a>
         </div>
         <div class="large-16 columns">
