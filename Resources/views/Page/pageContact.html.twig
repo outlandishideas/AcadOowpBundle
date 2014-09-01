@@ -1,54 +1,92 @@
 {% extends 'OutlandishAcadOowpBundle:Default:defaultPost.html.twig' %}
 
-{% block topElement %}
-    {% if map | length > 0 %}
-        <div class="google-map">
-            <div class="map" data-marker="true" data-lat="{{ map.lat | raw  }}" data-lng="{{ map.lng | raw  }}" data-zoom="16"></div>
-        </div>
-    {% endif %}
-{% endblock %}
+{% block content %}
 
-{% block bottomElement %}
-    {% if contact_people | length > 0 %}
+    <article class="section">
         <div class="row">
-            {% for person in contact_people %}
-                <div class="large-7 medium-24 columns">
-                    <div class="contact-person">
+            <div class="medium-15 columns">
+                <div class="content main">
+
+                    {% if map | length > 0 %}
+
                         <div class="row">
-                            <div class="large-24 medium-12 small-24 columns">
-                                {% if person.image.url | length > 0 %}
-                                    <img class="contact-image" src="{{ person.image.url }}">
-                                {% endif %}
-                            </div>
-                            <div class="large-24 medium-12 small-24 columns">
-                                {% if person.name.content | length > 0 %}
-                                    <p class="contact-name">
-                                        {{ person.name.prefix }}
-                                        {{ person.name.content }}
-                                        {{ person.name.suffix }}
-                                    </p>
-                                {% endif %}
-                                {% if person.phone.content | length > 0 %}
-                                    <p>
-                                        {{ person.phone.prefix }}
-                                        {{ person.phone.content }}
-                                        {{ person.phone.suffix }}
-                                    </p>
-                                {% endif %}
-                                {% if person.email.content | length > 0 %}
-                                    <p>
-                                        {{ person.email.prefix }}
-                                        {{ person.email.content }}
-                                        {{ person.email.suffix }}
-                                    </p>
-                                {% endif %}
+                            <div class="large-24 columns">
+                                <div class="google-map">
+                                    <div class="map" data-marker="true" data-lat="{{ map.lat | raw  }}" data-lng="{{ map.lng | raw  }}" data-zoom="16"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+                    {% endif %}
+
+                    {% block mainContent %}
+
+                        {{ parent() }}
+
+                    {% endblock %}
+
+                    {% if contact_people | length > 0 %}
+
+                        <div class="row">
+                            <div class="large-24 columns">
+                                <div class="contact-people">
+                                    <ul class="small-block-grid-2 medium-block-grid-3">
+
+                                        {% for person in contact_people %}
+                                            <li>
+                                                <div class="contact-person">
+                                                    {% if person.image.url | length > 0 %}
+                                                        <img class="contact-image" src="{{ person.image.url }}">
+                                                    {% endif %}
+
+                                                    {% if person.name.content | length > 0 %}
+                                                        <p class="contact-name">
+                                                            {{ person.name.prefix }}
+                                                            {{ person.name.content }}
+                                                            {{ person.name.suffix }}
+                                                        </p>
+                                                    {% endif %}
+                                                    {% if person.phone.content | length > 0 %}
+                                                        <p>
+                                                            {{ person.phone.prefix }}
+                                                            {{ person.phone.content }}
+                                                            {{ person.phone.suffix }}
+                                                        </p>
+                                                    {% endif %}
+                                                    {% if person.email.content | length > 0 %}
+                                                        <p>
+                                                            {{ person.email.prefix }}
+                                                            {{ person.email.content }}
+                                                            {{ person.email.suffix }}
+                                                        </p>
+                                                    {% endif %}
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
                 </div>
-            {% endfor %}
-    {% endif %}
+            </div>
+            <div class="medium-8 columns">
+
+                {% block sideBar %}
+
+                    {{ parent() }}
+
+                {% endblock %}
+
+            </div>
+        </div>
+    </article>
+
 {% endblock %}
+
+
 
 {% block footer %}
     {{ parent() }}
