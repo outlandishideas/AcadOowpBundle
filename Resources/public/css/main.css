@@ -618,7 +618,7 @@ ul.subtitle-list li:not(:last-of-type):after {
     top: 0;
     left: 15px;
     z-index: 10;
-    width: 100%;
+    width: inherit;
     height: 100%;
     display: block;
     position: absolute;

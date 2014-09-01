@@ -141,6 +141,18 @@ app.init = {
 			});
 		},
 
+        '.image-overlay' : function ($overlay) {
+
+            $overlay.find(".accordion-item:first").addClass('open');
+
+            var $images = $overlay.find('.post-item-image img');
+            $images.each(function() {
+                var $image = $(this);
+                var $width = $image.css('width');
+                $image.closest('.image-overlay .post-item-image').css('width', $width);
+            });
+        },
+
         // Apply Carousel
         '.carousel': function($carousel) {
 
@@ -152,8 +164,8 @@ app.init = {
                 height: 'auto',
                 items:{
                     visible:{
-                        min:4,
-                        max:5
+                        min:5,
+                        max:6
                     }
                 },
                 auto:{
@@ -219,4 +231,6 @@ function toggleSideMenu() {
     $('.bottom-header').toggleClass('open-nav');
     $('body').toggleClass('push');
 }
+
+
 
