@@ -38,6 +38,10 @@
                             </div>
                         </div>
 
+                        {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
+                        'connectedItems': bottomItems,
+                        'classes': 'none'} %}
+
                     {% endblock %}
 
                 </div>
@@ -61,8 +65,12 @@
 
                             {% block connected_side_posts %}
 
-                                {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
-                                'connectedItems': sideItems} %}
+                                <li>
+
+                                    {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
+                                    'connectedItems': sideItems} %}
+
+                                </li>
 
                             {% endblock %}
 
