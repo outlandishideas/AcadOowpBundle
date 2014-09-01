@@ -1,15 +1,17 @@
-{% for type in sideItems %}
-    {% if type.items | length > 0 %}
+{% if not classes %}{% set classes = 'main' %}{% endif %}
+
+{% for type in connectedItems %}
+    {% if type.items.posts | length > 0 %}
         <li>
             <hr>
             <h3 class="block-heading">{{ type.title }}</h3>
             <ul>
-                {% for item in type.items %}
+                {% for item in type.items.posts %}
                     {% block itemIncludeSide %}
                         {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                         'item': item,
                         'excerpt_length': 150,
-                        'classes' : 'main'} %}
+                        'classes' : classes} %}
                     {% endblock %}
                 {% endfor %}
             </ul>
