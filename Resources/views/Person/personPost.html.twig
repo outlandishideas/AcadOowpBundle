@@ -7,29 +7,33 @@
         <div class="row">
             <div class="medium-16 columns">
                 <div class="content main">
-                    {% block postAvatar %}
-                        <div class="medium-6 columns">
-                            {% include "OutlandishAcadOowpBundle:Partial:avatar.html.twig" with {
-                            'post': post,
-                            'size': 'avatar-square',
-                            'classes': 'photo' } %}
-                        </div>
-                    {% endblock %}
+                    <div class="row">
+                        {% block postAvatar %}
+                            <div class="medium-5 columns">
+                                {% include "OutlandishAcadOowpBundle:Partial:avatar.html.twig" with {
+                                'post': post,
+                                'size': 'avatar-square',
+                                'classes': 'photo' } %}
+                            </div>
+                        {% endblock %}
 
-                    {% block postTitle %}
-                        <div class="medium-18 columns">
-                            <h1>
-                                <span class="fn">{{ post.title() }}</span>
-                            </h1>
-                            <span class="n">
-                                <span class="honorific-prefix">{{ post.metadata('honorific_prefix') }}</span>
-                                <span class="given-name">{{ post.metadata('given_name') }}</span>
-                                <span class="family-name">{{ post.metadata('family_name') }}</span>
-                            </span>
-                            <span class="role">{{ post.role() }}</span>
-                        </div>
-                    {% endblock %}
+                        {% block postTitle %}
+                            <div class="medium-19 columns">
+                                <div class="person-heading">
+                                    <span class="role">{{ post.role() }}</span>
+                                    <h1>
+                                        <span class="fn">{{ post.title() }}</span>
+                                    </h1>
+                                    <span class="n">
+                                        <span class="honorific-prefix">{{ post.metadata('honorific_prefix') }}</span>
+                                        <span class="given-name">{{ post.metadata('given_name') }}</span>
+                                        <span class="family-name">{{ post.metadata('family_name') }}</span>
+                                    </span>
+                                </div>
 
+                            </div>
+                        {% endblock %}
+                    </div>
                     <div class="row">
                         <div class="large-20 columns">
                             <div class="content post note">
@@ -37,6 +41,11 @@
                             </div>
                         </div>
                     </div>
+
+                    {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
+                    'connectedItems': bottomItems,
+                    'classes': 'none'} %}
+
                 </div>
             </div>
             <div class="medium-8 columns">
@@ -45,18 +54,41 @@
                     'post': post } %}
                 {% endblock %}
 
-                <div class="person-details">
-                    <h3 class="block-heading">Contact Details</h3>
+                {%  if post.metadata('role') or post.metadata('email') or post.metadata('tel') %}
 
-                    <p>Email: <span class="email">{{ post.metadata('email') }}</span></p>
+                    <div class="row">
+                        <div class="large-24 columns">
+                            <div class="person-details">
+                                <hr>
+                                <h3 class="block-heading">Contact Details</h3>
 
-                    <p>Telephone: <span class="tel">{{ post.metadata('tel') }}</span></p>
-                </div>
+                                {%  if post.metadata('role') %}
+                                    <p>Role: <span>{{ post.metadata('role') }}</span></p>
+                                {% endif %}
+
+                                {%  if post.metadata('email') %}
+                                    <p>Email: <span class="email">{{ post.metadata('email') }}</span></p>
+                                {% endif %}
+
+                                {%  if post.metadata('tel') %}
+                                    <p>Telephone: <span class="tel">{{ post.metadata('tel') }}</span></p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
 
                 {% block connected_side_posts %}
 
-                    {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
-                    'sideItems': sideItems} %}
+                    <div class="row">
+                        <div class="large-24 columns">
+
+                            {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
+                            'connectedItems': sideItems} %}
+
+                        </div>
+                    </div>
 
                 {% endblock %}
 
