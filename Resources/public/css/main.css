@@ -88,7 +88,7 @@ h4 {
 }
 
 h3.block-heading, p.date, .side-menu li a {
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 1.2px;
     margin-bottom: 0;
     font-size: 16px;
@@ -100,7 +100,7 @@ h3.block-heading, p.date {
 }
 
 h3.block-heading {
-    margin: 0 0 0.5em 0;
+    margin: 0 0 1em 0;
 }
 
 h3.block-heading:before {
@@ -250,7 +250,7 @@ p.caption-title, p.caption-description {
     caption-side: bottom;
 }
 
-p.caption-title {
+p.caption-title, .wp-caption-text {
     font-size: 0.9rem;
 }
 
@@ -935,6 +935,7 @@ ul.side-menu {
     color: #565859;
     padding-left: 25px;
     display: block;
+    font-weight: 600;
 }
 
 .side-menu :not(.current_page_ancestor)> .children {
@@ -955,6 +956,14 @@ ul.side-menu>h3 {
 
 .side-menu .children li:not(:last-of-type) {
     border-bottom: 1px solid #A0A1A3;
+}
+
+.side-menu h3.block-heading {
+    margin-top: 50px;
+}
+
+.side-menu h3:not(.block-heading) {
+    font-size: 20px;
 }
 
 /*contact page*/
@@ -978,6 +987,7 @@ img.contact-image {
 
 p.contact-name {
     font-weight: bold;
+    font-size: 16px;
 }
 
 /* People Pages */
@@ -1035,7 +1045,7 @@ ul.search-results.people li.accordion-item.open .accordion-toggle h3:after {
 .people-item h4 {
     font-size: 1rem;
     font-weight: bold;
-    padding-top: 10px;
+    /*padding-top: 10px;*/
 }
 
 .people-intro p:not(.wp-caption-text) {
@@ -1226,6 +1236,10 @@ ul.social li a:hover  {
     margin: 20px 0 30px 0;
 }
 
+.authors-side .columns {
+    padding-top: 0;
+}
+
 .authors-side img {
     max-width: 60px;
     float: left;
@@ -1313,6 +1327,7 @@ ul.terms {
         cursor: pointer;
         position: absolute;
         background: #01A8A0;
+        top: 0;
     }
 
     .header .bottom-header {
