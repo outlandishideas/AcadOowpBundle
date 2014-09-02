@@ -1276,6 +1276,10 @@ ul.terms {
         margin-left: auto;
         margin-right: auto;
     }
+
+    .associated-organisations img {
+        max-width: 110px!important;
+    }
 }
 
 @media screen and (max-width: 980px) {
@@ -1444,6 +1448,10 @@ ul.terms {
 
     .caroufredsel_wrapper {
         min-height: 40px;
+    }
+
+    .associated-organisations img {
+        max-width: 90px!important;
     }
 
     .google-map .map {
