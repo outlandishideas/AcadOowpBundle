@@ -108,7 +108,9 @@
                 <h3 class="block-heading">{{ taxonomy.name | raw }}</h3>
                 <ul class="terms {{ taxonomy.type | raw }}">
                 {% for term in taxonomy.terms %}
-                    <li><a href="{{ term.permalink() }}">{{ term.title() | raw }}</a></li>
+                    <li>
+                        <h3 class="font-theme-colour"><a href="{{ term.permalink() }}">{{ term.title() | raw }}</a></h3>
+                    </li>
                 {% endfor %}
                 </ul>
             </div>

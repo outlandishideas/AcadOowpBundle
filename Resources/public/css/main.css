@@ -575,7 +575,7 @@ nav .inline-list .search-icon span {
     display: block;
 }
 
-.post-item h3 {
+.post-item h3, .terms h3 {
     font-size: 25px;
     text-decoration: none;
     font-weight: 400;
@@ -962,7 +962,7 @@ ul.side-menu>h3 {
     margin-top: 50px;
 }
 
-.side-menu h3:not(.block-heading) {
+.side-menu h3:not(.block-heading), .terms h3 {
     font-size: 20px;
 }
 
