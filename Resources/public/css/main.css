@@ -1286,7 +1286,7 @@ ul.terms {
 
 }
 
-@media screen and (max-width: 86px) {
+@media screen and (max-width: 860px) {
 
     .header .bottom-header li.page_item a {
         padding: 0.8rem 0.5rem;
@@ -1473,8 +1473,8 @@ ul.terms {
         max-width: 95%;
     }
 
-    .people-intro p {
-        font-size: 1.5rem;
+    .people-intro p:not(.wp-caption-text) {
+        font-size: 1.4rem;
     }
 
     ul.search-results.people li {
