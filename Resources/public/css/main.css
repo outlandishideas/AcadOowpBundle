@@ -1293,7 +1293,11 @@ ul.terms {
 @media screen and (max-width: 860px) {
 
     .header .bottom-header li.page_item a {
-        padding: 0.8rem 0.5rem;
+        padding: 0.8rem 0 0.8rem 32px;
+    }
+
+    ul.social li {
+        margin-right: 0;
     }
 
 }
@@ -1483,6 +1487,7 @@ ul.terms {
 
     .people-intro p:not(.wp-caption-text) {
         font-size: 1.4rem;
+        font-weight: 300;
     }
 
     ul.search-results.people li {
