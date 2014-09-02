@@ -127,7 +127,7 @@ app.init = {
 				e.preventDefault();
 				var $item = $(this).closest('.accordion-item');
 				var open = $item.hasClass('open');
-				$('.accordion-item').removeClass('open');
+				$item.removeClass('open');
 				if ( ! open ) {
 					$item.addClass('open');
                     scrollIntoView($item, 30);
@@ -135,11 +135,11 @@ app.init = {
 			});
 		},
 
-		'.accordion.first-open': function( $accordian ) {
-			$accordian.each(function () {
-				$accordian.find(".accordion-item:first").addClass('open');
-			});
-		},
+//		'.accordion.first-open': function( $accordian ) {
+//			$accordian.each(function () {
+//				$accordian.find(".accordion-item:first").addClass('open');
+//			});
+//		},
 
         '.image-overlay' : function ($overlay) {
 

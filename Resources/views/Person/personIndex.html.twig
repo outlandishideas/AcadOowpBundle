@@ -20,9 +20,9 @@
     <div class="row">
         <div class="columns large-24">
             {% if roles | length > 0 %}
-                <ul class="search-results people accordion first-open">
+                <ul class="search-results people accordion">
                     {% for role in roles %}
-                        <li class="accordion-item">
+                        <li class="accordion-item open">
                             {% block roleInclude %}
                                 <a href="#" class="accordion-toggle">
                                     <h3 class="block-heading">{{ role.title() | raw }}</h3>
