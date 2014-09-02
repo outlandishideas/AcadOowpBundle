@@ -1292,10 +1292,6 @@ ul.terms {
 
 @media screen and (max-width: 860px) {
 
-    .header .bottom-header li.page_item a {
-        padding: 0.8rem 0 0.8rem 32px;
-    }
-
     ul.social li {
         margin-right: 0;
     }
@@ -1306,6 +1302,10 @@ ul.terms {
 
     .header .bottom-header .filter-text {
         display: none;
+    }
+
+    .header .bottom-header li.page_item a {
+        padding: 0.8rem 0 0.8rem 32px;
     }
 
     .mobile-hide {
