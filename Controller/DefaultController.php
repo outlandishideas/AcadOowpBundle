@@ -31,8 +31,8 @@ class DefaultController extends BaseController {
         $author = $post->author();
 
         $bottomItems = array(
-            $post->connectedDocuments(false),
-            $post->connectedNews(false)
+            $post->connectedDocuments(),
+            $post->connectedNews()
         );
 
 		return array(
