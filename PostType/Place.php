@@ -3,7 +3,7 @@
 namespace Outlandish\AcadOowpBundle\PostType;
 
 
-abstract class Place extends Post {
+abstract class Place extends Theme {
 
 	public static $menu_icon = 'dashicons-location';
 
