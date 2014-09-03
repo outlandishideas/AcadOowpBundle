@@ -2,4 +2,5 @@
 
 {% block item_subtitle %}<p class="date">{{ item.dateString("j M Y", true) | raw }}</p>{% endblock %}
 {% block item_title %}<h3 class="font-theme-colour">{{ item.title() | raw  }}</h3>{% endblock %}
+{% block item_type %}<p class="item-type">{{ item.friendlyName() }}</p>{% endblock %}
 {% block item_content %}<p>{{ item.excerpt(excerpt_length) | raw }}</p>{% endblock %}
