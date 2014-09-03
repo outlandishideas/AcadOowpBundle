@@ -7,6 +7,7 @@ abstract class Theme extends Post {
 
 	public static $menu_icon = 'dashicons-category';
     public static $theme = true;
+    public static $searchFilter = true;
 
     //connected to document, event, news, person, project
 
