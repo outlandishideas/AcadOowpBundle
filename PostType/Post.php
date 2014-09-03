@@ -245,8 +245,32 @@ abstract class Post extends BasePost {
         );
     }
 
+    /**
+     * returns the authors connected with a post
+     * @return null|\Outlandish\OowpBundle\PostType\Post|\Outlandish\OowpBundle\Query\OowpQuery
+     */
     public function authors() {
         return $this->connected( Person::postType() );
+    }
+
+    public function hasAuthors()
+    {
+        $authors = $this->authors();
+        return $authors->post_count != 0;
+    }
+
+    /**
+     * returns the titles of the authors as an array
+     * @return array
+     */
+    public function authorTitles()
+    {
+        $authors = $this->authors();
+        if($authors->post_count < 1) return array();
+        return array_map(function($a){
+            return $a->title();
+        }, $authors->posts);
+
     }
 
     public function author_names() {
