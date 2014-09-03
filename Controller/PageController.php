@@ -8,6 +8,7 @@ use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 
 use Outlandish\AcadOowpBundle\PostType\Page;
 use Outlandish\AcadOowpBundle\PostType\Post;
+use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -71,7 +72,7 @@ class PageController extends BaseController {
                         $params['post_types'] = $section['post_types'];
                         $facet = $search->addFacetPostType('post_types', "");
                         foreach($section['post_types'] as $postType){
-                            $facet->addOption($postType, "");
+                            $facet->addOption(new FacetOption($postType, ""));
                         }
                     }
                     unset($section['post_types']);
