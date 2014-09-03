@@ -592,6 +592,12 @@ nav .inline-list .search-icon span {
     font-weight: bold;
 }
 
+.post-item .item-type {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 16px;
+}
+
 ul.subtitle-list {
     list-style: none;
     margin-left: 0;
@@ -614,6 +620,14 @@ ul.subtitle-list li {
 
 .post-item.main .subtitle {
     margin-top: 1rem;
+}
+
+.post-item .item-authors,
+.post-item .item-themes {
+    padding-left: 1.25rem;
+    font-size: 16px;
+    color: #6f6f6f;
+    margin-bottom: 0;
 }
 
 .columns:first-of-type .post-item.image-overlay .row:first-of-type {

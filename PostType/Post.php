@@ -9,7 +9,16 @@ use Outlandish\SiteBundle\PostType\Person;
 abstract class Post extends BasePost {
 
     public static $resource = false;
+    /**
+     * states whether this post type is a theme. Themes are categories that are used to populate search filter
+     * @var bool
+     */
     public static $theme = false;
+    /**
+     * this overrides theme on whether post type should be added as a search filter
+     * @var bool
+     */
+    public static $searchFilter = false;
 
     public static function isResource(){
         return static::$resource;
@@ -17,6 +26,10 @@ abstract class Post extends BasePost {
 
     public static function isTheme(){
         return static::$theme;
+    }
+
+    public static function isFilter(){
+        return static::$searchFilter;
     }
 
     public function featuredImageTitle() {
@@ -245,8 +258,32 @@ abstract class Post extends BasePost {
         );
     }
 
+    /**
+     * returns the authors connected with a post
+     * @return null|\Outlandish\OowpBundle\PostType\Post|\Outlandish\OowpBundle\Query\OowpQuery
+     */
     public function authors() {
         return $this->connected( Person::postType() );
+    }
+
+    public function hasAuthors()
+    {
+        $authors = $this->authors();
+        return $authors->post_count != 0;
+    }
+
+    /**
+     * returns the titles of the authors as an array
+     * @return array
+     */
+    public function authorTitles()
+    {
+        $authors = $this->authors();
+        if($authors->post_count < 1) return array();
+        return array_map(function($a){
+            return $a->title();
+        }, $authors->posts);
+
     }
 
     public function author_names() {
