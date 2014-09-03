@@ -2,9 +2,6 @@
 
 {% block postTitle %}<h1>'{{ post.title() | raw }}'</h1>{% endblock %}
 
-{% set author_names = post.author_names() %}
-{% set authors = post.authors() %}
-
 {% block subTitle %}
     <ul class="subtitle-list">
 
@@ -92,30 +89,33 @@
 
     <div class="row">
         <div class="large-24 columns">
+            <div class="side-menu">
 
-        {% include "OutlandishAcadOowpBundle:Partial:connectedSide.html.twig" with {
-        'authors': authors}
-        %}
+                {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
+                'connectedItems': sideItems,
+                'classes' : 'side-items'
+                } %}
 
+            </div>
         </div>
     </div>
 
 
-    {% for taxonomy in post.taxonomies() %}
-        {% if taxonomy.terms | length > 0 %}
-            <div class="taxonomy {{ taxonomy.type }}">
-                <hr>
-                <h3 class="block-heading">{{ taxonomy.name | raw }}</h3>
-                <ul class="terms {{ taxonomy.type | raw }}">
-                {% for term in taxonomy.terms %}
-                    <li>
-                        <h3 class="font-theme-colour"><a href="{{ term.permalink() }}">{{ term.title() | raw }}</a></h3>
-                    </li>
-                {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-      {% endfor %}
+    {#{% for taxonomy in post.taxonomies() %}#}
+        {#{% if taxonomy.terms | length > 0 %}#}
+            {#<div class="taxonomy {{ taxonomy.type }}">#}
+                {#<hr>#}
+                {#<h3 class="block-heading">{{ taxonomy.name | raw }}</h3>#}
+                {#<ul class="terms {{ taxonomy.type | raw }}">#}
+                {#{% for term in taxonomy.terms %}#}
+                    {#<li>#}
+                        {#<h3 class="font-theme-colour"><a href="{{ term.permalink() }}">{{ term.title() | raw }}</a></h3>#}
+                    {#</li>#}
+                {#{% endfor %}#}
+                {#</ul>#}
+            {#</div>#}
+        {#{% endif %}#}
+      {#{% endfor %}#}
 
 {% endblock %}
 

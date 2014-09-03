@@ -40,8 +40,16 @@ class DocumentController extends BaseController {
 
         $post = $this->querySingle(array('name' => $name, 'post_type' => Document::postType()));
 
-        $response['post'] = $post;
+        $sideItems = array(
+            $post->connectedPeople('Authors'),
+            $post->connectedThemes(),
+            $post->connectedDocuments(),
+            $post->connectedEvents(),
+            $post->connectedPlaces()
+        );
 
+        $response['post'] = $post;
+        $response['sideItems'] = $sideItems;
         $response['attachment'] = $post->attachment();
 
         return $response;
