@@ -10,7 +10,7 @@
     <h3 class="font-theme-colour">{{ item.title() | raw  }}</h3>
 {% endblock %}
 
-{% if not 'side-items' in classes %}
+{% if 'side-items' not in classes %}
 
     {% block item_type %}
         <p class="item-type">{{ item.friendlyName() }}</p>
@@ -24,7 +24,7 @@
     {% endif %}    
 {% endblock %}
 
-{% if not 'side-items' in classes %}
+{% if 'side-items' not in classes %}
 
     {% block item_authors %}
         {% if item.hasAuthors() %}
