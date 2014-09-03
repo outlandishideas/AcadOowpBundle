@@ -109,7 +109,7 @@ class SearchController extends BaseController {
      */
     public function generatePostToPostFacet($postType, $class){
         $posts = $class::fetchAll();
-        if(!$posts) return false;
+        if($posts->post_count < 1) return false;
 
         $facet = new FacetPostToPost($postType, $class::friendlyNamePlural(), $postType);
         foreach($posts as $post){

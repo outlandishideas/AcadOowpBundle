@@ -38,7 +38,7 @@ class NavigationController extends SearchController {
     public function renderFilterPanelAction() {
         $args = array();
         $search = $this->search();
-        $args['facets'] = $search->getFacets();
+        $args['facets'] = $search->getPostToPostFacets();
         return $this->render(
             'OutlandishAcadOowpBundle:Search:filterPanel.html.twig',
             $args

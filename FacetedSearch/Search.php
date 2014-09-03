@@ -70,6 +70,15 @@ class Search {
         return $this->facets;
     }
 
+    public function getPostToPostFacets()
+    {
+        $facets = $this->getFacets();
+        return array_filter($facets, function($a){
+            return is_a($a, 'Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostToPost');
+        });
+
+    }
+
     /**
      * Shortcut function for adding a FacetPostType object
      * @param $name

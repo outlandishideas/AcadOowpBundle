@@ -1,47 +1,21 @@
 <div id="filter-panel">
     <div class="row">
-        <div class="large-24">
-            <div id="filter-tabs" class="clearfix large-24 columns">
-                <ul class="inline-list large-24 left">
-                    {% for facet in facets %}
-                        <li {% if loop.index == 1 %}class="active"{% endif %} rel="{{ facet.name }}">
-                            <a href="#">/ {{ facet.section }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div id="filter-content" class="clearfix large-24 columns">
-                {% for facet in facets %}
-                    <div id="{{ facet.name }}" class="filter-section {% if loop.index == 1 %}active{% endif %}">
-                        <ul class="inline-list large-24 left">
-                            {% for option in facet.options %}
-                                <li
-                                    class="filter-option {% if option.selected %}selected{% endif %}"
-                                    id="{{ option.name }}_{{ option.label|replace({' ': '-', '(': '--', ')': '---'}) }}"
-                                >
-                                    <a href="#">{{ option.label }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endfor %}
-            </div>
-            <div id="filter-selected" class="clearfix large-24 columns">
-                <ul class="inline-list large-24 left">
-                    <li id="selection-header">/ selected filters</li>
-                    {% for facet in facets %}
-                        {% for option in facet.options if option.selected %}
-                            <li
-                                class="filter-option selected"
-                                rel="{{ option.name }}_{{ option.label|replace({' ': '-', '(': '--', ')': '---'}) }}"
-                            >
-                                <a href="#">{{ option.label }}</a>
+        <div class="large-22 columns large-centered">
+            {% for facet in facets %}
+                <div>
+                    <h3>{{ facet.section }}</h3>
+                    <ul class="small-block-grid-3 large-block-grid-8 block-grid-new-padding block-grid-link">
+                        {% for option in facet.options %}
+                            <li>
+                                <a href="{{ option.post.permalink() }}">
+                                    <img src="{{ option.post.featuredImage() }}"/>
+                                    <h4>{{ option.post.title() }}</h4>
+                                </a>
                             </li>
                         {% endfor %}
-                    {% endfor %}
-                    <li class="right filter-clear">/ clear all</li>
-                </ul>
-            </div>
+                    </ul>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>
