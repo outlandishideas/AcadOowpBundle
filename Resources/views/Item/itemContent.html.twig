@@ -10,9 +10,13 @@
     <h3 class="font-theme-colour">{{ item.title() | raw  }}</h3>
 {% endblock %}
 
-{% block item_type %}
-    <p class="item-type">{{ item.friendlyName() }}</p>
-{% endblock %}
+{% if not 'side-items' in classes %}
+
+    {% block item_type %}
+        <p class="item-type">{{ item.friendlyName() }}</p>
+    {% endblock %}
+
+{% endif %}
 
 {% block item_content %}
     {% if excerpt_length != 0 %}
@@ -20,14 +24,18 @@
     {% endif %}    
 {% endblock %}
 
-{% block item_authors %}
-    {% if item.hasAuthors() %}
-        <p class="item-authors"><span class="fa fa-user"></span> {{ item.authorTitles() | join(', ')  }}</p>
-    {% endif %}
-{% endblock %}
+{% if not 'side-items' in classes %}
 
-{% block item_themes %}
-    {% if item.hasThemes() %}
-        <p class="item-themes"><span class="fa fa-link"></span> {{ item.themeTitles() | join(', ')  }}</p>
-    {% endif %}
-{% endblock %}
+    {% block item_authors %}
+        {% if item.hasAuthors() %}
+            <p class="item-authors"><span class="fa fa-user"></span> {{ item.authorTitles() | join(', ')  }}</p>
+        {% endif %}
+    {% endblock %}
+
+    {% block item_themes %}
+        {% if item.hasThemes() %}
+            <p class="item-themes"><span class="fa fa-link"></span> {{ item.themeTitles() | join(', ')  }}</p>
+        {% endif %}
+    {% endblock %}
+
+{% endif %}
