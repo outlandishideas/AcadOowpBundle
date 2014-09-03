@@ -6,6 +6,7 @@ namespace Outlandish\AcadOowpBundle\PostType;
 abstract class Role extends Theme {
 
 	public static $menu_icon = 'dashicons-groups';
+    public static $searchFilter = false;
 
     static function getRegistrationArgs($defaults) {
 
