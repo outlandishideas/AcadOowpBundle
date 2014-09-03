@@ -40,24 +40,12 @@ abstract class Document extends Resource {
 		return $taxonomies;
 	}
 
-    public function journal() {
-        return $this->metadata('journal');
+    public function documentText() {
+        return $this->metadata('document_text');
     }
 
-    public function publication() {
-        return $this->metadata('publication');
-    }
-
-    public function publisher() {
-        return $this->metadata('publisher');
-    }
-
-    public function yearPublished() {
-        return $this->metadata('year_published');
-    }
-
-    public function pageNumbers() {
-        return $this->metadata('page_numbers');
+    public function bibliographicReference() {
+        return $this->metadata('bibliographic_reference');
     }
 
     public function attachment() {

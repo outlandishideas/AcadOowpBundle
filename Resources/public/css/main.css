@@ -603,11 +603,6 @@ ul.subtitle-list li {
     font-size: 0.9em;
 }
 
-ul.subtitle-list li:not(:last-of-type):after {
-    content: ",";
-    padding-right: 4px;
-}
-
 /*these classes make elements in post items be container-wide so that image sits over text*/
 .post-item.main>.row,
 .post-item.main>.row>.columns {

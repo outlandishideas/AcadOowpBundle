@@ -8,26 +8,8 @@
 {% block subTitle %}
     <ul class="subtitle-list">
 
-        {% if author_names %}
-            <li class="font-theme-colour">{{ author_names | raw }}</li>
-        {% endif %}
-
-        <li class="font-theme-colour"> {{ post.title() | raw }}</li>
-
-        {% if post.journal() %}
-            <li class="font-theme-colour">{{ post.journal() | raw }}</li>
-        {% endif %}
-
-        {% if post.publication() %}
-            <li class="font-theme-colour">{{ post.publication() | raw }}</li>
-        {% endif %}
-
-        {% if post.yearPublished() %}
-            <li class="font-theme-colour">{{ post.publication() | raw }}</li>
-        {% endif %}
-
-        {% if post.pageNumbers() %}
-            <li class="font-theme-colour">{{ post.pageNumbers() | raw }}</li>
+        {% if post.bibliographicReference() %}
+            <li class="font-theme-colour">{{ post.bibliographicReference() | raw }}</li>
         {% endif %}
 
     </ul>
@@ -62,17 +44,35 @@
 
 {% block postContent %}
 
-    <hr>
+    {%  if post.content() %}
 
-    <h3 class="block-heading">Summary</h3>
-    <br>
+        <hr>
 
-    <h2>'{{ post.title() | raw }}'</h2>
+        <h3 class="block-heading">Summary</h3>
+        <br>
 
-    <p>
-        {{ post.content()  |  raw  }}
-        {#{{ post.excerpt(1000) | raw }}#}
-    </p>
+        <h2>'{{ post.title() | raw }}'</h2>
+
+        <p>
+            {{ post.content()  |  raw  }}
+            {#{{ post.excerpt(1000) | raw }}#}
+        </p>
+
+    {%  endif %}
+
+
+    {%  if post.documentText() %}
+
+        <hr>
+
+        <h3 class="block-heading">Document text</h3>
+
+        <p>
+            {{ post.documentText()  |  raw  }}
+            {#{{ post.excerpt(1000) | raw }}#}
+        </p>
+
+    {%  endif %}
 
 {% endblock %}
 
