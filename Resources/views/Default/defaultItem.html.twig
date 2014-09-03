@@ -2,7 +2,7 @@
 {% if not excerpt_length %}{% set excerpt_length = 400 %}{% endif %}
 
 {% if image == 'none' or not item.featuredImage() %}
-    <a href="{{ item.permalink() }}" class="post-item main {{ classes }}">
+    <a href="{{ item.permalink() }}" class="post-item post-{{ item.post_type }} main {{ classes }}">
 
         {% block itemNoImageInclude %}
             {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {
@@ -14,7 +14,7 @@
 
     </a>
 {% else %}
-    <a href="{{ item.permalink() }}" class="post-item {{ classes }}">
+    <a href="{{ item.permalink() }}" class="post-item post-{{ item.post_type }} {{ classes }}">
         <div class="row">
             <div class="columns large-11 ">
                 <div class="post-item-image">
