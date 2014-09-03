@@ -39,26 +39,16 @@
                     <ul id="page-1" class="search-results">
                         {% block searchResults %}
 
-                            {% for item in items %}
-                                <li>
-                                    {% block itemInclude %}
-                                        {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
-                                        'item': item,
-                                        'excerpt_length': 300,
-                                        'image': 'medium',
-                                        'classes': 'image-overlay'} %}
-                                    {% endblock %}
-                                </li>
-                            {% endfor %}
-
-                        {% endblock %}
+                <div class="search-form">
+                    {% for element in formElements %}
+                        {{ element | raw }}
+                    {% endfor %}
+                </div>
+                <div id="results">
+                    <ul id="page-1" class="search-results">
+                        {% include 'OutlandishAcadOowpBundle:Default:items.html.twig' %}
                     </ul>
                 </div>
-
-            {% elseif sections | length > 0 %}
-                {% for section in sections %}
-                    {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' %}
-                {% endfor %}
 
             {% else %}
                 {% block noSearchResults %}{% endblock %}

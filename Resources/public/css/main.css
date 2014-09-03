@@ -1129,6 +1129,33 @@ ul.social li a:hover  {
 	display: block;
 }
 
+/* Button */
+
+.button {
+    display: block;
+    border: 2px solid #000;
+    text-align: center;
+    background-color: transparent;
+    color: #000;
+}
+
+.button:hover,
+.button.loading {
+    background-color: #000;
+    color: #fff;
+}
+
+.button .text-loading {
+    display: none;
+}
+
+.button.loading .text {
+    display: none;
+}
+
+.button.loading .text-loading {
+    display: inline;
+}
 /*Document*/
 
 .attachment {

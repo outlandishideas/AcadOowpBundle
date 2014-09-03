@@ -28,7 +28,7 @@ class EventController extends BaseController {
 
         //fetch future events and sort by month
         $items = Event::fetchFutureEvents();
-        $itemsByMonth = Event::sortByMonth($items);
+//        $itemsByMonth = Event::sortByMonth($items);
 
         //only past events fetched here
         $sideItems = array(
@@ -39,7 +39,7 @@ class EventController extends BaseController {
         );
 
         $response['post'] = $post;
-        $response['items'] = $itemsByMonth;
+        $response['items'] = $items;
         $response['sections'] = $post->sections();
         $response['sideItems'] = $sideItems;
         return $response;
