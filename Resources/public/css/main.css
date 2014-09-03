@@ -1137,8 +1137,10 @@ ul.social li a:hover  {
 }
 
 .attachment p, .attachment a {
-    font-size: 1.5em;
-    font-weight: 500;
+    font-size: 1em;
+    font-weight: 600;
+    word-break: normal;
+    margin-bottom: 0;
 }
 
 .attachment a {
@@ -1152,6 +1154,11 @@ ul.social li a:hover  {
 .attachment img {
     margin: 0 20px 0 10px;
     width: 90%;
+}
+
+.attachment .fa-file-text {
+    font-size: 4.5rem;
+    top: 5px;
 }
 
 .attachment a.download {
