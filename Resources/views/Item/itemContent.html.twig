@@ -1,6 +1,29 @@
 {% if excerpt_length == 'none' %}{% set excerpt_length = 0 %}{% endif %}
 
-{% block item_subtitle %}<p class="date">{{ item.dateString("j M Y", true) | raw }}</p>{% endblock %}
-{% block item_title %}<h3 class="font-theme-colour">{{ item.title() | raw  }}</h3>{% endblock %}
-{% block item_type %}<p class="item-type">{{ item.friendlyName() }}</p>{% endblock %}
-{% block item_content %}<p>{{ item.excerpt(excerpt_length) | raw }}</p>{% endblock %}
+{% block item_subtitle %}
+    <p class="date">{{ item.dateString("j M Y", true) | raw }}</p>
+{% endblock %}
+
+{% block item_title %}
+    <h3 class="font-theme-colour">{{ item.title() | raw  }}</h3>
+{% endblock %}
+
+{% block item_type %}
+    <p class="item-type">{{ item.friendlyName() }}</p>
+{% endblock %}
+
+{% block item_content %}
+    <p>{{ item.excerpt(excerpt_length) | raw }}</p>
+{% endblock %}
+
+{% block item_authors %}
+    {% if item.hasAuthors() %}
+        <p class="item-authors"><span class="fa fa-user"></span> {{ item.authorTitles() | join(', ')  }}</p>
+    {% endif %}
+{% endblock %}
+
+{% block item_themes %}
+    {% if item.hasThemes() %}
+        <p class="item-themes"><span class="fa fa-link"></span> {{ item.themeTitles() | join(', ')  }}</p>
+    {% endif %}
+{% endblock %}
