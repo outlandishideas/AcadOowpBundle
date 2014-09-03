@@ -627,6 +627,7 @@ ul.subtitle-list li {
     padding-left: 1.25rem;
     font-size: 16px;
     color: #6f6f6f;
+    margin-bottom: 0;
 }
 
 .columns:first-of-type .post-item.image-overlay .row:first-of-type {
