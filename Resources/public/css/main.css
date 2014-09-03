@@ -622,6 +622,13 @@ ul.subtitle-list li {
     margin-top: 1rem;
 }
 
+.post-item .item-authors,
+.post-item .item-themes {
+    padding-left: 1.25rem;
+    font-size: 16px;
+    color: #6f6f6f;
+}
+
 .columns:first-of-type .post-item.image-overlay .row:first-of-type {
     padding-left: 0.9375em;
 }
