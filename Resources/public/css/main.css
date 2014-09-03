@@ -592,6 +592,12 @@ nav .inline-list .search-icon span {
     font-weight: bold;
 }
 
+.post-item .item-type {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 16px;
+}
+
 ul.subtitle-list {
     list-style: none;
     margin-left: 0;
