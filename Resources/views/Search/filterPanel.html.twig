@@ -8,7 +8,7 @@
                         {% for option in facet.options %}
                             <li>
                                 <a href="{{ option.post.permalink() }}">
-                                    <img src="{{ option.post.featuredImage() }}"/>
+                                    {{ option.post.featuredImage() | raw }}
                                     <h4>{{ option.post.title() }}</h4>
                                 </a>
                             </li>
