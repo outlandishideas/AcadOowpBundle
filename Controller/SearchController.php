@@ -21,6 +21,8 @@ use Outlandish\RoutemasterBundle\Controller\BaseController;
 
 class SearchController extends BaseController {
 
+    public $search = null;
+
     /**
      * @Route("/search/", name="search")
      * @Template("OutlandishAcadOowpBundle:Search:search.html.twig")
@@ -199,7 +201,7 @@ class SearchController extends BaseController {
             'items' => null,
             'moreResultsUrl' => null
         );
-        $search = $this->search($request);
+        $search = $this->search();
         $search->setParams($request->query->all());
         $query = $search->search();
         if ($query->post_count > 0) {

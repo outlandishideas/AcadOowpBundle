@@ -37,7 +37,6 @@ class Search {
      * @var array
      */
     public $defaults = array(
-        'post_type' => 'any',
         'posts_per_page' => 10,
         'paged' => 1
     );

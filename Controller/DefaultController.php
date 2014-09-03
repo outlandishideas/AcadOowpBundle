@@ -55,7 +55,8 @@ class DefaultController extends BaseController {
     {
         $response = array();
         $response['post'] = $post;
-        $search = $this->search($request);
+        $search = $this->search();
+        $search->setParams($request->query->all());
         if($search) {
             $query = $search->search();
         }
