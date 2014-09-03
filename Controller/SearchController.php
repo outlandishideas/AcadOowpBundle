@@ -63,7 +63,7 @@ class SearchController extends BaseController {
         /** @var Search $search */
         $search = $this->get('outlandish_acadoowp.faceted_search.search');
         $resources = $this->getResourcePostTypes();
-        $themes = $this->getThemePostTypes();
+        $themes = $this->getFilterPostTypes();
 
         // adding FacetPostType to search
         $search->addFacet($this->generatePostTypeFacet($resources));
@@ -168,6 +168,23 @@ class SearchController extends BaseController {
         $postTypes = array();
         foreach($postManager->postTypeMapping() as $postType => $class) {
             if($class::isTheme()) $postTypes[] = $postType;
+        }
+        return $postTypes;
+    }
+
+    /**
+     * returns only the post types that we consider to be themes
+     * These will be used as categories
+     * @return array
+     */
+    public function getFilterPostTypes()
+    {
+        /** @var PostManager $postManager */
+        $postManager = $this->get('outlandish_oowp.post_manager');
+
+        $postTypes = array();
+        foreach($postManager->postTypeMapping() as $postType => $class) {
+            if($class::isTheme() && $class::isFilter()) $postTypes[] = $postType;
         }
         return $postTypes;
     }
