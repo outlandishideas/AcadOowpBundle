@@ -12,9 +12,13 @@ namespace Outlandish\AcadOowpBundle\FacetedSearch\FacetOption;
 use Outlandish\OowpBundle\PostType\Post;
 
 class FacetOptionPost extends FacetOption {
+
+    public $post;
+
     function __construct(Post $post, $selected = false)
     {
         parent::__construct($post->postType(), $post->title(), $selected);
+        $this->post = $post;
     }
 
 } 
