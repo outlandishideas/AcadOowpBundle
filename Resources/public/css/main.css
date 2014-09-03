@@ -237,9 +237,10 @@ hr {
     background-color: #000;
 }
 
-.small-centered, .large-centered {
-    text-align: center;
-}
+/* We should not be applying styles like this to foundation styles. Use a new style if you want to center text in a centered column. */
+/*.small-centered, .large-centered {*/
+    /*text-align: center;*/
+/*}*/
 
 .featured-image {
     display: table;
@@ -422,113 +423,44 @@ nav .inline-list .search-icon span {
     display: none;
 }
 
-#filter-panel .inline-list {
-    margin-left: -.2rem !important;
+#filter-panel h3,
+#filter-panel h4 {
+    color: #f2f2f2;
 }
 
-#filter-panel .filter-clear {
-    color: #FFF;
-    text-transform: uppercase;
-    cursor: pointer;
+#filter-panel h4 {
+    font-weight: normal;
 }
 
-    #filter-panel #filter-selected {
-        background: #134643;
-    }
+#filter-panel ul li a {
+    display: block;
+}
 
-    #filter-panel #filter-tabs ul {
-        border-bottom: 1px solid #5c5c5c;
-        padding: .7rem 0;
-    }
+#filter-panel ul li:hover {
+    background-color: #268b85;
+}
 
-    #filter-panel #filter-tabs li {
-        padding-right: 2rem;
-    }
+.block-grid-link li {
+    padding: 0;
+}
 
-    #filter-panel #filter-tabs li a {
-        color: #9a9a9a;
-        text-transform: uppercase;
-        font-weight: bold;
-        -webkit-transition: all .2s;
-        -moz-transition: all .2s;
-        transition: all .2s;
-    }
+.block-grid-link li a {
+    padding: 0 0.625rem 1.25rem;
+}
 
-    #filter-panel #filter-tabs li.active a {
-        color: #FFF;
-    }
+.block-grid-new-padding li {
+    padding: 0.625rem;
+}
 
-    #filter-panel #filter-content .filter-section {
-        display: none;
-    }
+.block-grid-new-padding.block-grid-link li {
+    padding: 0;
+}
 
-    #filter-panel #filter-content .filter-section.active {
-        display: block;
-    }
+.block-grid-new-padding.block-grid-link li a {
+    padding: 0.625rem;
+}
 
-    #filter-panel #filter-content li.filter-option {
-        margin-right: .2rem;
-        margin-bottom: .5rem;
-    }
-
-    #filter-panel #filter-content li.filter-option a {
-        border: 2px solid #FFF;
-        color: #FFF;
-        padding: .2rem .5rem;
-        background-color: #4c4c4c;
-        -webkit-transition: all .2s;
-        -moz-transition: all .2s;
-        transition: all .2s;
-    }
-
-    #filter-panel #filter-content li.filter-option.selected a {
-        border-color: #303030;
-        background-color: #303030;
-    }
-    #filter-panel #filter-content li.filter-option.selected a:after {
-        content: "\f00d";
-        display: inline-block;
-        font-family: FontAwesome;
-        font-style: normal;
-        font-weight: normal;
-        line-height: 1;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        padding-left: .5rem;
-    }
-
-    #filter-panel #filter-content li.filter-option:hover a {
-        border-color: #666;
-        background-color: #666;
-    }
-
-    #filter-panel #filter-selected ul {
-        padding-top: .7rem;
-    }
-
-    #filter-panel #filter-selected li#selection-header {
-        color: #FFF;
-        text-transform: uppercase;
-        line-height: 2.2;
-    }
-
-    #filter-panel #filter-selected li.filter-option a {
-        border: 2px solid #008076;
-        color: #FFF;
-        padding: .2rem .5rem;
-        background-color: #008076;
-    }
-    #filter-panel #filter-selected li.filter-option a:after {
-        content: "\f00d";
-        display: inline-block;
-        font-family: FontAwesome;
-        font-style: normal;
-        font-weight: normal;
-        line-height: 1;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        padding-left: .5rem;
-    }
+.block-grid
 
 /* breadcrumbs */
 
