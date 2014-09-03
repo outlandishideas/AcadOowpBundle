@@ -6,15 +6,13 @@
             <h3 class="block-heading">{{ type.title | raw }}</h3>
             <hr>
         {% endif %}
-        <ul>
             {% for item in type.items.posts %}
                 {% block itemIncludeSide %}
                     {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                     'item': item,
-                    'excerpt_length': 150,
+                    'excerpt_length': 'none',
                     'classes' : classes} %}
                 {% endblock %}
             {% endfor %}
-        </ul>
     {% endif %}
 {% endfor %}

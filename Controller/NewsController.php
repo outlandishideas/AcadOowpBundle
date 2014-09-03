@@ -42,6 +42,7 @@ class NewsController extends BaseController {
         $post = $this->querySingle(array('name' => $name, 'post_type' => News::postType()));
 
         $sideItems = array(
+            $post->connectedPeople('Authors'),
             $post->connectedThemes(),
             $post->connectedDocuments(),
             $post->connectedEvents(),

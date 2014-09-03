@@ -153,6 +153,16 @@ app.init = {
             });
         },
 
+        '.equalise' : function ($containers) {
+
+            $containers.each(function() {
+                var $container = $(this);
+                var $match = $container.prev('.columns');
+                var $height =  $match.css('height');
+                $container.css({'height' : $height, 'line-height' : $height});
+            });
+        },
+
         // Apply Carousel
         '.carousel': function($carousel) {
 

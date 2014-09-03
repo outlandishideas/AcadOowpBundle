@@ -7,7 +7,8 @@
         {% block itemNoImageInclude %}
             {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {
             'item': item,
-            'excerpt_length': excerpt_length
+            'excerpt_length': excerpt_length,
+            'date' : 'no_date'
             } %}
         {% endblock %}
 
@@ -15,7 +16,7 @@
 {% else %}
     <a href="{{ item.permalink() }}" class="post-item {{ classes }}">
         <div class="row">
-            <div class="columns large-11">
+            <div class="columns large-11 ">
                 <div class="post-item-image">
                     {% block item_image %}{{ item.featuredImage('large') | raw }}{% endblock %}
                     {% if 'image-overlay' in classes %}
@@ -23,13 +24,16 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="columns large-13">
+            <div class="columns large-13 {% if 'side-items' in classes %} equalise {% endif %} ">
+
                 {% block itemInclude %}
                     {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {
                     'item': item,
-                    'excerpt_length': excerpt_length
+                    'excerpt_length': excerpt_length,
+                    'date' : 'no_date'
                     } %}
                 {% endblock %}
+
             </div>
         </div>
     </a>

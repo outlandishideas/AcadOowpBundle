@@ -1,8 +1,5 @@
 {% extends 'OutlandishAcadOowpBundle:Default:defaultPost.html.twig' %}
 
-{% set author_names = post.author_names() %}
-{% set authors = post.authors() %}
-
 {% block sideBar %}
 
     <div class="row">
@@ -14,20 +11,6 @@
 
         </div>
     </div>
-
-    {% block authors %}
-
-        <div class="row">
-            <div class="large-24 columns">
-
-                {% include "OutlandishAcadOowpBundle:Partial:author.html.twig" with {
-                'authors': authors}
-                %}
-
-            </div>
-        </div>
-
-    {% endblock %}
 
     <div class="row">
         <div class="large-24 columns">
@@ -42,12 +25,9 @@
 
                     {% block connected_side_posts %}
 
-                        <li>
-
                             {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
-                            'connectedItems': sideItems} %}
-
-                        </li>
+                            'connectedItems': sideItems,
+                            'classes' : 'side-items'} %}
 
                     {% endblock %}
 

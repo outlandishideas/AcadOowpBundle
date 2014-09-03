@@ -912,6 +912,10 @@ ul.side-menu {
 .side-menu li>a {
     background: #f5f5f5;
     padding: 15px 0;
+    color: #565859;
+    padding-left: 25px;
+    display: block;
+    font-weight: 600;
 }
 
 .side-menu li.current_page_item>a, .side-menu li>a:hover {
@@ -926,20 +930,13 @@ ul.side-menu {
     background: #E6EFEA;
 }
 
-.side-menu li>a {
-    color: #565859;
-    padding-left: 25px;
-    display: block;
-    font-weight: 600;
-}
-
 .side-menu :not(.current_page_ancestor)> .children {
     display: none;
 }
 
-ul.side-menu>:not(li) {
-    display: none;
-}
+/*ul.side-menu>:not(li) {*/
+    /*display: none;*/
+/*}*/
 
 ul.side-menu>h3 {
     display: block;
@@ -959,6 +956,9 @@ ul.side-menu>h3 {
 
 .side-menu h3:not(.block-heading), .terms h3 {
     font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 20px;
 }
 
 /*contact page*/
@@ -1221,30 +1221,29 @@ ul.social li a:hover  {
     padding-right: 4px;
 }
 
-.authors-side li {
-    list-style: none;
-    clear: both;
-    margin-top: 20px;
-}
-
-.authors-side {
+.side-items {
     margin: 20px 0 30px 0;
 }
 
-.authors-side .columns {
+.side-items .columns {
     padding-top: 0;
 }
 
-.authors-side img {
-    max-width: 60px;
+.side-items img {
+    max-width: 100%;
     float: left;
     margin: 5px 30px 0 0;
+    border-radius: 50%;
+    max-height: 140px;
 }
 
-.authors-side h4 {
-    line-height: 60px;
+.side-items h3 {
     text-align: left;
     padding: 0;
+    color: #33BBB1!important;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 20px;
 }
 
 /* Taxonomies */

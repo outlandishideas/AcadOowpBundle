@@ -65,12 +65,10 @@
 
                             {% block connected_side_posts %}
 
-                                <li>
-
-                                    {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
-                                    'connectedItems': sideItems} %}
-
-                                </li>
+                                {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
+                                'connectedItems': sideItems,
+                                'classes' : 'side-items'
+                                } %}
 
                             {% endblock %}
 
