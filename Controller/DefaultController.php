@@ -30,6 +30,8 @@ class DefaultController extends BaseController {
 		$post = $this->querySingle(array('name' => $slugBits[count($slugBits) - 1], 'post_type' => 'any'), true);
         $author = $post->author();
 
+        $sections = $this->sections($post->sections());
+
         $bottomItems = array(
             $post->connectedDocuments(),
             $post->connectedNews()
@@ -38,6 +40,7 @@ class DefaultController extends BaseController {
 		return array(
             'post' => $post,
             'author' => $author,
+            'sections' => $sections,
             'bottomItems' => $bottomItems
         );
 	}
