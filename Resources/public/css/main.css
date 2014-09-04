@@ -1133,11 +1133,11 @@ ul.social li a:hover  {
 
 .attachment {
     background: #f5f5f5;
-    padding: 20px;
+    padding: 30px;
 }
 
 .attachment p, .attachment a {
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: 600;
     word-break: normal;
     margin-bottom: 0;
