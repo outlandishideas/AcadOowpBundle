@@ -26,8 +26,6 @@ abstract class Person extends Post {
         self::registerConnection(Project::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
         self::registerConnection(Theme::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
         self::registerConnection('user',  array('sortable' => 'any','cardinality' => 'one-to-one'));
-
-		add_image_size( 'avatar-square', '300', '300', array('center', 'center'));
 	}
 
     public static function friendlyNamePlural(){
