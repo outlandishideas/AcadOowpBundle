@@ -97,8 +97,6 @@ class NavigationController extends SearchController {
             'current_depth' => 1
         );
 
-		$posts = $this->wpMenu($menu );
-
         return array(
             'posts' => $posts,
             'queryArgs' => $queryArgs,
