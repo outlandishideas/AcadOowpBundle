@@ -16,7 +16,8 @@ class OutlandishAcadOowpBundle extends Bundle {
 		register_nav_menus(
 			array(
 				'header' => __( 'Header Navigation' ),
-				'footer' => __( 'Footer Navigation' )
+				'footer' => __( 'Footer Navigation' ),
+                'footer_about'=> __( 'Footer About' )
 			)
 		);
 
