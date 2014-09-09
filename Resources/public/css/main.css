@@ -242,15 +242,6 @@ hr {
     /*text-align: center;*/
 /*}*/
 
-.featured-image {
-    display: table;
-}
-
-p.caption-title, p.caption-description {
-    display: table-caption;
-    caption-side: bottom;
-}
-
 p.caption-title, .wp-caption-text {
     font-size: 0.9rem;
 }
