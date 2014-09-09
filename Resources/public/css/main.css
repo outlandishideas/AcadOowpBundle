@@ -149,6 +149,7 @@ hr {
 .header {
 	background: #33bab1;
 	position: relative;
+    max-height: 50px;
 }
 
 .header .top-header {
