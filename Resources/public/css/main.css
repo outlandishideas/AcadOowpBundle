@@ -149,7 +149,6 @@ hr {
 .header {
 	background: #33bab1;
 	position: relative;
-    max-height: 50px;
 }
 
 .header .top-header {
@@ -1252,6 +1251,10 @@ ul.terms {
 }
 
 @media screen and (max-width: 782px) {
+
+    .header {
+        height: 50px;
+    }
 
     .header .bottom-header .filter-text {
         display: none;
