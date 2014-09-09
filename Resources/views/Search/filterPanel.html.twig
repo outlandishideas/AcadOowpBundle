@@ -11,29 +11,31 @@
             </div>
          </div>
     </div>
-    <div class="row">
-        <div class="large-22 columns large-centered">
-            {% for facet in facets %}
-                <div>
-                    <hr>
-                    <h3>{{ facet.section }}</h3>
-                    <ul class="small-block-grid-4 large-block-grid-6 block-grid-new-padding block-grid-link">
-                        {% for option in facet.options %}
-                            <li>
-                                <a href="{{ option.post.permalink() }}">
+    <div class="mobile-hide">
+        <div class="row">
+            <div class="large-22 columns large-centered">
+                {% for facet in facets %}
+                    <div>
+                        <hr>
+                        <h3>{{ facet.section }}</h3>
+                        <ul class="small-block-grid-4 large-block-grid-6 block-grid-new-padding block-grid-link">
+                            {% for option in facet.options %}
+                                <li>
+                                    <a href="{{ option.post.permalink() }}">
 
-                                    {% if option.post.featuredImageUrl()  %}
-                                        <img src="{{ option.post.featuredImageUrl() }}">
-                                    {% else %}
-                                        <img src="{{ asset('bundles/outlandishacadoowp/images/placeholder.png') }}">
-                                    {% endif %}
-                                    <h4>{{ option.post.title() }}</h4>
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endfor %}
+                                        {% if option.post.featuredImageUrl()  %}
+                                            <img src="{{ option.post.featuredImageUrl() }}">
+                                        {% else %}
+                                            <img src="{{ asset('bundles/outlandishacadoowp/images/placeholder.png') }}">
+                                        {% endif %}
+                                        <h4>{{ option.post.title() }}</h4>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

@@ -1284,14 +1284,23 @@ ul.terms {
 
     .header {
         height: 50px;
+        margin-bottom: 50px;
     }
 
-    #filter-panel {
-        display: none!important;
+    .main-search {
+        margin: 10px 0 0px 0;
+    }
+
+    #filter-panel .columns {
+        padding: 0;
     }
 
     .header .bottom-header li.page_item a {
         padding: 0.8rem 0 0.8rem 32px;
+    }
+
+    .header .bottom-header-row {
+        margin-bottom: -10px;
     }
 
     .mobile-hide {
@@ -1304,7 +1313,7 @@ ul.terms {
 
     .header h1 {
         text-align: center;
-        margin: 3px 0;
+        margin: 3px 0 12px 0;
         font-size: 1.3rem;
     }
 
@@ -1312,6 +1321,9 @@ ul.terms {
         display: block;
     }
 
+    .mobile-header a.search-icon.submit {
+        top: 5px;
+    }
 
     .main-search {
         display: block!important;
@@ -1319,12 +1331,18 @@ ul.terms {
         z-index: 1;
     }
 
+    .main-search .submit {
+        height: 42px;
+    }
+
     .main-search input[type="text"] {
-        margin: 0 0.2rem 0.5rem 0;
+        margin: 0 0.2rem 0.5rem 2px;
         width: 93%;
         float: left;
         height: 2.6rem;
         border-bottom: 1px solid #ffffff;
+        line-height: 2rem;
+        font-size: 1.6rem;
     }
 
     a.search-icon.submit {
@@ -1335,6 +1353,8 @@ ul.terms {
         line-height: 1rem;
         z-index: 1;
         width: 10px;
+        top: 10px;
+        right: 30px;
     }
 
     #hamburger {
@@ -1438,6 +1458,10 @@ ul.terms {
         left: 250px;
         position: fixed;
         top: 0;
+    }
+
+    #content {
+        margin-top: 20px;
     }
 
     .caroufredsel_wrapper {
