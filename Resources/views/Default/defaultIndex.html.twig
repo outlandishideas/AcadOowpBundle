@@ -20,34 +20,18 @@
 
             {% if items | length > 0 %}
 
-                {% if featuredItem %}{% endif %}
-
-                {#<div class="row">#}
-                    {#<div class="columns large-24">#}
-                        {#<div class="sort-filter">#}
-                            {#<span class="sort-by">Sort by</span> <a href="#" class="selected">Date</a><a href="#">Relevance</a><a href="#">Popularity</a>#}
-                        {#</div>#}
-                    {#</div>#}
-                {#</div>#}
-
-                <div class="search-form">
-                    {% for element in formElements %}
-                        {{ element | raw }}
-                    {% endfor %}
-                </div>
-                <div id="results">
-                    <ul id="page-1" class="search-results">
-                        {% include 'OutlandishAcadOowpBundle:Default:items.html.twig' %}
-                    </ul>
-                </div>
+                {% include 'OutlandishAcadOowpBundle:Search:searchSection.html.twig' %}
 
             {% elseif sections | length > 0 %}
+
                 {% for section in sections %}
                     {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' %}
                 {% endfor %}
 
             {% else %}
+
                 {% block noSearchResults %}{% endblock %}
+
             {% endif %}
 
         </div>
