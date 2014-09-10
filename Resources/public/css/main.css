@@ -415,16 +415,22 @@ nav .inline-list .search-icon span {
     display: none;
 }
 
-#filter-panel h3,
-#filter-panel h4 {
+#filter-panel h2, #filter-panel h3, #filter-panel h4 {
     color: #f2f2f2;
+}
+
+#filter-panel h2, #filter-panel h3 {
+    letter-spacing: 0;
+    margin-bottom: 1.5rem;
+}
+
+#filter-panel h2 {
+    font-size: 28px;
 }
 
 #filter-panel h3 {
     font-weight: 600;
     font-size: 24px;
-    letter-spacing: 0;
-    margin-bottom: 1.5rem;
 }
 
 #filter-panel h4 {
@@ -1460,9 +1466,7 @@ ul.terms {
         top: 0;
     }
 
-    #content {
-        margin-top: 20px;
-    }
+
 
     .caroufredsel_wrapper {
         min-height: 40px;
