@@ -1,19 +1,21 @@
 {% extends '::layout.html.twig' %}
 
 {% block content %}
-    <div class="section">
-        <div class="row">
-            <div class="large-10 columns">
-                <div class="main-content">
-                    {{ post.content() | raw }}
-                </div>
-            </div>
-            <div class="large-14 columns">
-                {{ post.featuredImage("large") | raw }}
-            </div>
+    <div id="front-page">
+        <div class="section">
+            {#<div class="row">#}
+            {#<div class="large-10 columns">#}
+            {#<div class="main-content">#}
+            {#{{ post.content() | raw }}#}
+            {#</div>#}
+            {#</div>#}
+            {#<div class="large-14 columns">#}
+            {#{{ post.featuredImage("large") | raw }}#}
+            {#</div>#}
+            {#</div>#}
         </div>
+        {% for section in sections %}
+            {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' with {'excerpt_length': 'none'} %}
+        {% endfor %}
     </div>
-    {% for section in sections %}
-        {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' with {'excerpt_length': 'none'} %}
-    {% endfor %}
 {% endblock %}
