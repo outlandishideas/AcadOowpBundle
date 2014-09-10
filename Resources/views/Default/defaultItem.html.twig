@@ -1,4 +1,6 @@
 {% if not image %}{% set image = "thumbnail" %}{% endif %}
+{% if not tags %}{% set tags = "tags" %}{% endif %}
+{% if not date %}{% set date = "none" %}{% endif %}
 {% if not excerpt_length %}{% set excerpt_length = 400 %}{% endif %}
 
 {% if image == 'none' or not item.featuredImage() %}
@@ -8,7 +10,8 @@
             {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {
             'item': item,
             'excerpt_length': excerpt_length,
-            'date' : 'no_date'
+            'date' : date,
+            'tags' : tags
             } %}
         {% endblock %}
 
@@ -24,13 +27,14 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="columns large-13 {% if 'side-items' in classes %} equalise {% endif %} ">
+            <div class="columns large-13 {% if 'side-items' in classes %}equalise{% endif %}">
 
                 {% block itemInclude %}
                     {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {
                     'item': item,
                     'excerpt_length': excerpt_length,
-                    'date' : 'no_date'
+                    'date' : date,
+                    'tags' : tags
                     } %}
                 {% endblock %}
 

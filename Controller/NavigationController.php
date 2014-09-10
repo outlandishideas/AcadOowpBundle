@@ -6,6 +6,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 use Outlandish\AcadOowpBundle\PostType\Post;
+use Outlandish\AcadOowpBundle\PostType\Page;
 use Symfony\Component\HttpFoundation\Response;
 use Outlandish\SiteBundle\PostType\News;
 use Outlandish\SiteBundle\PostType\Person;
@@ -19,6 +20,11 @@ class NavigationController extends SearchController {
 
     public function renderFooterAction(){
         $args = $this->generateFooterArguments();
+
+        $footerAbout = $this->wpMenu('footer_about');
+
+        $args['footer_about'] = $footerAbout->posts;
+
         return $this->render(
             'OutlandishAcadOowpBundle:Navigation:footer.html.twig',
             $args
@@ -55,7 +61,7 @@ class NavigationController extends SearchController {
 
         $args = $this->generateMenuArguments($maxDepth, $rootPost);
 
-        /*add dash to root post title*/
+        /*add slash to root post title*/
         $rootPost->post_title = '/ '.$rootPost->post_title;
         /*override homepage as parent post*/
         $args['parent_post'] = $rootPost;
@@ -91,10 +97,6 @@ class NavigationController extends SearchController {
             'current_depth' => 1
         );
 
-
-		$posts = $this->wp_menu( $posts, $menu );
-
-
         return array(
             'posts' => $posts,
             'queryArgs' => $queryArgs,
@@ -104,6 +106,7 @@ class NavigationController extends SearchController {
 
     public function generateFooterArguments( $menu = 'footer' )
     {
+
         $this->queryManager = $this->get('outlandish_oowp.query_manager');
         $this->postManager = $this->get('outlandish_oowp.post_manager');
 
@@ -111,14 +114,7 @@ class NavigationController extends SearchController {
             'page_id' => get_option('page_on_front')
         ))->post;
 
-        $pages = $this->queryManager->query(array(
-            'post_type' => 'page',
-            'post_parent' => 0,
-            'orderby' => 'menu_order',
-            'order' => 'asc'
-        ));
-
-		$pages = $this->wp_menu( $pages, $menu );
+        $pages = $this->wpMenu($menu);
 
         $sections = $homePage->sections();
         $organisations = get_field('associated_organisations', 'options');
@@ -189,22 +185,35 @@ class NavigationController extends SearchController {
 		return '<li><a href="' . esc_url( get_permalink( $id ) ) . '" title="Back to ' . $title . '">' . $title . '</a> </li>';
 	}
 
-	private function wp_menu( $posts, $menu = null ) {
-		if ( $menu ) {
+
+    /**
+     * Returns pages in a menu object as an OOWP query
+     * @param null $menu
+     * @return array
+     */
+    private function wpMenu($menu = null ) {
+
+        $posts = array();
+
+        $this->queryManager = $this->get('outlandish_oowp.query_manager');
+
+        if ( $menu ) {
 			$menu_locations = get_nav_menu_locations();
 			$menu_obj       = get_term( $menu_locations[$menu], 'nav_menu' );
 			if ( !is_wp_error( $menu_obj ) ) {
 				$items = wp_get_nav_menu_items( $menu_obj->term_id );
 				if ( is_array( $items ) && count( $items ) > 0 ) {
-					$items      = wp_list_pluck( $items, 'object_id' );
-					$post_items = $posts->posts;
-					$new_items  = array();
-					foreach ( $post_items as $item ) {
-						if ( in_array( $item->ID, $items ) ) {
-							$new_items[] = $item;
-						}
-					}
-					$posts->posts = $new_items;
+					$items = array_map(function($a){
+                        return $a->object_id;
+                    }, $items);
+
+                    $args = array(
+                        'post__in' => $items,
+                        'orderby' => 'post__in'
+                    );
+
+                    $posts = $this->queryManager->query($args);
+
 				}
 			}
 		}

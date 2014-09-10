@@ -41,8 +41,20 @@
 {% block noSearchResults %}
 
     <div class="row">
-        <div class="columns-18 large">
-            <p class="no-search-results">No future events found.</p>
+        <div class="columns 20-large">
+            <p>No future events found.</p>
+
+            {% if previousItems | length > 0 %}
+
+                <p>See below for our past events:</p>
+                <br>
+
+                {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
+                'connectedItems': previousItems,
+                'classes': 'none'} %}
+
+            {% endif %}
+
         </div>
     </div>
 
