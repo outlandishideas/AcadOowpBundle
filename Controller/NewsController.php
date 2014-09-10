@@ -16,7 +16,7 @@ class NewsController extends BaseController {
 
     /**
      * @Route("/news/", name="newsIndex")
-     * @Template("OutlandishAcadOowpBundle:Search:search.html.twig")
+     * @Template("OutlandishAcadOowpBundle:News:newsIndex.html.twig")
      * @param Request $request
      * @return array
      */
