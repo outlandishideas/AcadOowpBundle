@@ -55,8 +55,15 @@ class Search {
      */
     public function addFacet(Facet $facet)
     {
-        $this->facets[] = $facet;
-        usort($this->facets, array($this, 'sortFacets'));
+        $facetExists = False;
+        foreach($this->facets as $existingFacet){
+            if($facet->name == $existingFacet->name)
+                $facetExists = True;
+        }
+        if(!$facetExists) {
+            $this->facets[] = $facet;
+            usort($this->facets, array($this, 'sortFacets'));
+        }
 
         return $facet;
     }
