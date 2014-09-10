@@ -1,22 +1,41 @@
-<div class="section">
+<div class="section featured">
     <div class="row">
-        <div class="large-8 columns">
+        <div class="large-24 columns">
             {% include "OutlandishAcadOowpBundle:Section:title.html.twig" %}
-            {% set item = section.items | first  %}
-            <a href="{{ item.permalink() }}" class="post-item">
-                <p class="subtitle">{{ item.date() | raw }}</p>
-                <h3 class="font-theme-colour">{{ item.title() | raw }}</h3>
-                <p>{{ item.excerpt(800) | raw }}</p>
-            </a>
         </div>
-        <div class="large-16 columns">
-            {{ item.featuredImage('large') | raw }}
+    </div>
+    <div class="row">
+        <div class="large-24 columns">
+            <div class="row">
+                {% set item = section.items | first  %}
+                <div class="large-12 columns">
+                    {{ item.featuredImage('large') | raw }}
+                </div>
+                <div class="large-12 columns">
+                    <a href="{{ item.permalink() }}" class="post-item">
+                        <p class="date">{{ item.date() | raw }}</p>
+                        <h3 class="font-theme-colour featured">{{ item.title() | raw }}</h3>
+                        <p>{{ item.excerpt(600) | raw }}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-24 columns">
             <div class="row">
                 {% if not excerpt_length %}{% set excerpt_length = 150 %}{% endif %}
                 {% for item in section.items %}
                     {% if not loop.first and loop.index <= 3 %}
                         <div class="large-12 columns">
-                            {% include "OutlandishAcadOowpBundle:Default:defaultItem.html.twig" with {'item': item, 'image': 'none', 'excerpt_length': excerpt_length} %}
+                            <hr>
+                            {% include "OutlandishAcadOowpBundle:Default:defaultItem.html.twig" with {
+                            'item': item,
+                            'image': 'none',
+                            'tags' : 'none',
+                            'date' : 'date',
+                            'excerpt_length': excerpt_length
+                            } %}
                         </div>
                     {% endif %}
                 {% endfor %}
