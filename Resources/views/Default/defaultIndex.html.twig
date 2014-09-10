@@ -41,6 +41,11 @@
                     </ul>
                 </div>
 
+            {% elseif sections | length > 0 %}
+                {% for section in sections %}
+                    {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' %}
+                {% endfor %}
+
             {% else %}
                 {% block noSearchResults %}{% endblock %}
             {% endif %}

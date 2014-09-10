@@ -1,0 +1,16 @@
+<div class="section">
+    <div class="row">
+        <div class="columns large-24">
+            <ul>
+                {% for item in section.items %}
+                    {% block sectionItemResults %}
+                        {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                        'item': item,
+                        'excerpt_length': 150,
+                        'classes' : ''} %}
+                    {% endblock %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

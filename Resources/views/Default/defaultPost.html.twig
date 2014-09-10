@@ -38,6 +38,14 @@
                             </div>
                         </div>
 
+                        {% if sections %}
+
+                            {% for section in sections %}
+                                {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' with {'excerpt_length': 'none'} %}
+                            {% endfor %}
+
+                        {%  endif %}
+
                         {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
                         'connectedItems': bottomItems,
                         'classes': 'none'} %}

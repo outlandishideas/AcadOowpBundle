@@ -1,0 +1,44 @@
+<div class="section standard">
+    <div class="row">
+        <div class="large-24 columns">
+            {% include "OutlandishAcadOowpBundle:Section:title.html.twig" %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-24 columns">
+            <ul class="small-block-grid-2 large-block-grid-4">
+                {% if not classes %}{% set classes = 'main' %}{% endif %}
+                {% if not excerpt_length %}{% set excerpt_length = 150 %}{% endif %}
+
+                {% for item in section.items %}
+
+                    {#limit to 18 items#}
+                    {% if loop.index <= 18 %}
+
+                        {% if loop.index > 4 %}
+                            {% set image = "none" %}
+                        {% endif %}
+
+                        {#display 5th and 6th item at 50% width by showing image in separate li#}
+                        {% if loop.index == 5 or loop.index == 6  %}
+                            <li>
+                                {{ item.featuredImage('large') | raw }}
+                            </li>
+                            {% set classes = '' %}
+                        {% endif %}
+
+                        <li>{% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                            'item': item,
+                            'classes': classes,
+                            'image': image,
+                            'date' : 'date',
+                            'tags' : 'none',
+                            'excerpt_length': excerpt_length} %}</li>
+
+                    {% endif %}
+
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

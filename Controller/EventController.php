@@ -31,7 +31,7 @@ class EventController extends BaseController {
 //        $itemsByMonth = Event::sortByMonth($items);
 
         //only past events fetched here
-        $sideItems = array(
+        $previousItems = array(
             array(
                 'title' => 'Previous events',
                 'items' => Event::fetchPastEvents()
@@ -41,7 +41,7 @@ class EventController extends BaseController {
         $response['post'] = $post;
         $response['items'] = $items;
         $response['sections'] = $post->sections();
-        $response['sideItems'] = $sideItems;
+        $response['previousItems'] = $previousItems;
         return $response;
     }
 

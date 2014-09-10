@@ -13,10 +13,13 @@ class OutlandishAcadOowpBundle extends Bundle {
 
 		add_theme_support( 'menus' );
 
-		register_nav_menus(
+        add_image_size( 'avatar-square', '100', '100', array('center', 'center'));
+
+        register_nav_menus(
 			array(
 				'header' => __( 'Header Navigation' ),
-				'footer' => __( 'Footer Navigation' )
+				'footer' => __( 'Footer Navigation' ),
+                'footer_about'=> __( 'Footer About' )
 			)
 		);
 

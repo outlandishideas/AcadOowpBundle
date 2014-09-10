@@ -22,17 +22,16 @@
     {% if attachment %}
 
         <div class="attachment">
-            <div class="row">
-                <div class="large-18 columns">
-                    <p class="font-theme-colour">Download:</p>
-                    <a href="{{  attachment['url'] | raw }}" class="font-theme-colour">{{  attachment['url'] | raw }}</a>
+            <a href="{{  attachment['url'] | raw }}" class="font-theme-colour">
+                <div class="row">
+                    <div class="large-18 columns">
+                        <p class="font-theme-colour">Download '{{ post.title() }}'</p>
+                    </div>
+                    <div class="large-6 columns">
+                        <span class="fa-stack fa-lg"><i class="fa fa-file-text fa-stack-1x"></i></span>
+                    </div>
                 </div>
-                <div class="large-6 columns">
-                     <a href="{{ attachment['url'] | raw }}" class="download">
-                         <span class="fa fa-chevron-right"></span>
-                     </a>
-                </div>
-            </div>
+            </a>
         </div>
 
     {% endif %}
@@ -86,6 +85,7 @@
 
         </div>
     </div>
+    ggdgf
 
     <div class="row">
         <div class="large-24 columns">

@@ -105,7 +105,7 @@ abstract class Post extends BasePost {
     /**
      *  Returns date as
      *  (1) dd/mm - dd/mm/yyyy for events if end date set
-     *  (2) dd/mm/yyyy for everything else
+     *  (2) post date title as dd/mm/yyyy for news
      * @param bool $shortMonth (return 'Sep' instead of 'September')
      * @return int|string
      */
@@ -164,6 +164,7 @@ abstract class Post extends BasePost {
             $this->connectedThemes(),
             $this->connectedDocuments(),
             $this->connectedEvents(),
+            $this->connectedNews(),
             $this->connectedPeople(),
             $this->connectedPlaces(),
             $this->connectedProjects()
