@@ -1182,6 +1182,12 @@ img.avatar.photo {
     font-size: 16px;
 }
 
+.equalise {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .authors {
 	margin-bottom: 1rem;
 	float: left;

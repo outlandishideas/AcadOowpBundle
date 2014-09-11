@@ -160,7 +160,7 @@ app.init = {
                 var $image = $container.prev('.columns').find('.post-item-image img');
                 $image.on('load',function(){
                     var $height = $image.css('height');
-                    $container.css({'height' : $height, 'line-height' : $height});
+                    $container.css('height', $height);
                 });
             });
         },
