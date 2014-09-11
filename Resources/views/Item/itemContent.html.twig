@@ -16,6 +16,9 @@
 {% if 'side-items' not in classes and tags != 'none' %}
 
     {% block item_type %}
+        {%  if item.postTypeIcon() %}
+            <span class="item-type-image {{ item.postTypeIcon() }}"></span>
+        {% endif %}
         <p class="item-type">{{ item.friendlyName() }}</p>
     {% endblock %}
 
