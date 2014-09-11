@@ -570,6 +570,10 @@ nav .inline-list .search-icon span {
     font-weight: 400;
 }
 
+.post-item .item-role {
+    margin-bottom: 0;
+}
+
 ul.subtitle-list {
     list-style: none;
     margin-left: 0;
