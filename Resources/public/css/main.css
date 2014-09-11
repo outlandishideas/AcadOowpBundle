@@ -20,6 +20,12 @@ body {
     padding-right: 1.618rem;
 }
 
+.columns.align-width {
+    /*Align content inside full-width elements to rest of page*/
+    padding-left: 2.1rem;
+    padding-right: 2.1rem;
+}
+
 a {
 	color: #268b85;
 }
