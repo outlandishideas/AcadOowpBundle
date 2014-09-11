@@ -21,12 +21,13 @@
                                         <p class="subtitle">{{ post.subtitle() | raw }}</p>
                                     {% endif %}
                                 {% endblock %}
-                                {% include 'OutlandishAcadOowpBundle:Partial:featuredImg.html.twig' with {'post': post } %}
                             </div>
                         </div>
                         <div class="row">
                             <div class="large-24 columns">
                                 <div class="content post">
+
+                                    {% include 'OutlandishAcadOowpBundle:Partial:featuredImg.html.twig' with {'post': post } %}
 
                                     {% block postContent %}
 

@@ -237,6 +237,10 @@ hr {
     margin-bottom: 1.2rem;
 }
 
+.featured-image img {
+    margin-top: 0.5rem;
+}
+
 .stand-in-image {
     height: 300px;
     width: 100%;
@@ -269,7 +273,7 @@ p.caption-description {
 
 .alignleft {
     float: left;
-    margin: 5px 20px 20px 0;
+    margin: 0 30px 10px 0;
 }
 
 .aligncenter {
