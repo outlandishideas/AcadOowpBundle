@@ -20,6 +20,10 @@ abstract class Role extends Theme {
         return $defaults;
     }
 
+    public function postTypeIcon() {
+        return self::$menu_icon;
+    }
+
     //connected to person, project
     public static function onRegistrationComplete() {
         self::registerConnection(Person::postType(),  array('sortable' => 'any','cardinality' => 'many-to-one'));

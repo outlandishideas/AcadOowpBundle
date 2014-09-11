@@ -12,4 +12,8 @@ abstract class Place extends Theme {
         self::registerConnection(Project::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
     }
 
+    public function postTypeIcon() {
+        return self::$menu_icon;
+    }
+
 }

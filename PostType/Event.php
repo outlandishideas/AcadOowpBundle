@@ -82,6 +82,10 @@ abstract class Event extends Resource {
         }
     }
 
+    public function postTypeIcon() {
+        return self::$menu_icon;
+    }
+
     public static function fetchFutureEvents($queryArgs = array()) {
         $defaults = array (
             'posts_per_page' => -1,

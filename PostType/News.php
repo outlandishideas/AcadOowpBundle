@@ -19,4 +19,8 @@ abstract class News extends Resource {
         return "News";
     }
 
+    public function postTypeIcon() {
+        return self::$menu_icon;
+    }
+
 }
