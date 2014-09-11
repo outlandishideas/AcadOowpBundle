@@ -558,11 +558,31 @@ nav .inline-list .search-icon span {
     font-weight: bold;
 }
 
+.post-item .item-type, .post-item .item-type-image {
+    color: #6f6f6f;
+}
+
 .post-item .item-type {
     margin-bottom: 0;
     font-weight: bold;
     font-size: 16px;
-    color: #6f6f6f;
+}
+
+.post-item .item-type-image {
+    float: left;
+    width: 36px;
+    height: 36px;
+    margin: 0;
+    text-align: center;
+}
+
+.post-item .item-type-image:before {
+    font-family: dashicons;
+    margin: -3px 8px 0 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
 }
 
 .post-item .item-role {
