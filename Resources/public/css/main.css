@@ -673,6 +673,10 @@ ul.subtitle-list li {
     margin-bottom: 0.5em;
 }
 
+#footer h3.block-heading:before {
+    height: 0;
+}
+
 #footer h4 {
     font-weight: bold;
 }
@@ -725,6 +729,10 @@ ul.subtitle-list li {
     letter-spacing: 1px;
 }
 
+#footer .share {
+    margin-top: 0;
+}
+
 #footer #copyright {
     background: #636363;
 }
@@ -752,7 +760,7 @@ ul.subtitle-list li {
 /* Carousel */
 
 .associated-organisations h3.block-heading {
-    margin-bottom: 0;
+    margin: 40px 0 0 0;
 }
 
 .associated-organisations li {

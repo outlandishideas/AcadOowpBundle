@@ -31,9 +31,7 @@
                 </nav>
             </div>
             <div class="large-6 columns">
-                <hr>
-            </div>
-            <div class="large-6 columns">
+
                 <div class="get-in-touch">
                     <hr>
                     <h3 class="block-heading">Get in touch</h3>
@@ -47,10 +45,15 @@
                         <p>{{ address | raw }}</p>
 
                     {% endblock %}
-                    {% include "OutlandishAcadOowpBundle:Partial:social.html.twig" with {
-                    'post': post,
-                    'title': 'event'} %}
                 </div>
+
+            </div>
+            <div class="large-6 columns">
+
+                {% include "OutlandishAcadOowpBundle:Partial:social.html.twig" with {
+                'post': post,
+                'title': 'event'} %}
+
             </div>
         </div>
 
