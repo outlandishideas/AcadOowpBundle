@@ -243,6 +243,7 @@ hr {
 
 .featured-image img {
     margin-top: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .stand-in-image {
@@ -267,7 +268,7 @@ p.caption-title, p.caption-description {
 }
 
 p.caption-title, .wp-caption-text {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 p.caption-description {
