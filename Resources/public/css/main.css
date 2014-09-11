@@ -22,8 +22,8 @@ body {
 
 .columns.align-width {
     /*Align content inside full-width elements to rest of page*/
-    padding-left: 2.1rem;
-    padding-right: 2.1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 a {
