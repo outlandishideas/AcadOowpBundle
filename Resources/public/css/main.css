@@ -697,6 +697,11 @@ ul.subtitle-list li {
     line-height: 1rem;
 }
 
+#footer hr {
+    border-color: darkgrey;
+    border-width: 2px;
+}
+
 #footer nav {
     margin-top: 0;
 }
