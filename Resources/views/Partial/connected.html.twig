@@ -4,7 +4,6 @@
     {% if type.items | length > 0 %}
         {% if type.title  %}
             <h3 class="block-heading">{{ type.title | raw }}</h3>
-            <hr>
         {% endif %}
             {% for item in type.items.posts %}
                 {% block itemIncludeSide %}
