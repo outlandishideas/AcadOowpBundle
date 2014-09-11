@@ -1,40 +1,35 @@
 <div class="share">
-    <div class="row">
-        <div class="large-24 columns">
-            <hr>
-            <h3 class="block-heading">Share this {{ title | raw }}</h3>
-            <ul class="social">
-                <li class="twitter">
-                    <a title="Share on Twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" href="http://twitter.com/share?text={{ post.title() | raw }}&amp;url={{ post.permalink() }}">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a></li>
-                <li class="facebook">
-                    <a title="Share on Facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" href="https://www.facebook.com/sharer/sharer.php?u={{ post.permalink() | raw }}">
-                         <span class="fa-stack fa-lg">
-                          <i class="fa fa-circle fa-stack-2x"></i>
-                          <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a></li>
-                <li class="google">
-                    <a title="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" href="https://plus.google.com/share?url={{ post.permalink() }}">
-                         <span class="fa-stack fa-lg">
-                          <i class="fa fa-circle fa-stack-2x"></i>
-                          <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-                <li class="email">
-                    <a title="Share by email" href="mailto:?subject={{ post.title() }}&body={{ post.permalink() | raw }}">
-                         <span class="fa-stack fa-lg">
-                          <i class="fa fa-circle fa-stack-2x"></i>
-                          <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <h3 class="block-heading">Share this {{ title | raw }}</h3>
+    <ul class="social">
+        <li class="twitter">
+            <a title="Share on Twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" href="http://twitter.com/share?text={{ post.title() | raw }}&amp;url={{ post.permalink() }}">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                </span>
+            </a></li>
+        <li class="facebook">
+            <a title="Share on Facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" href="https://www.facebook.com/sharer/sharer.php?u={{ post.permalink() | raw }}">
+                 <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                </span>
+            </a></li>
+        <li class="google">
+            <a title="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" href="https://plus.google.com/share?url={{ post.permalink() }}">
+                 <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                </span>
+            </a>
+        </li>
+        <li class="email">
+            <a title="Share by email" href="mailto:?subject={{ post.title() }}&body={{ post.permalink() | raw }}">
+                 <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                </span>
+            </a>
+        </li>
+    </ul>
 </div>
