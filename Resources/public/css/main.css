@@ -237,6 +237,10 @@ hr {
     margin-bottom: 1.2rem;
 }
 
+.featured-image {
+    margin-bottom: 0.5rem;
+}
+
 .featured-image img {
     margin-top: 0.5rem;
 }
@@ -257,6 +261,10 @@ hr {
 /*.small-centered, .large-centered {*/
     /*text-align: center;*/
 /*}*/
+
+p.caption-title, p.caption-description {
+    line-height: 1.3rem;
+}
 
 p.caption-title, .wp-caption-text {
     font-size: 0.9rem;
