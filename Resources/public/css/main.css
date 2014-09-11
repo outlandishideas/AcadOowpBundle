@@ -995,9 +995,16 @@ ul.side-menu>h3 {
 
 .side-menu h3:not(.block-heading), .terms h3 {
     font-size: 20px;
-    display: inline-block;
     vertical-align: middle;
     line-height: 20px;
+}
+
+.side-menu h3:not(.block-heading) {
+    display: inline;
+}
+
+.terms h3 {
+    display: inline-block;
 }
 
 /* Front page*/
