@@ -14,11 +14,10 @@
     <div class="mobile-hide">
         <div class="row">
             <div class="large-22 columns large-centered">
-                <h2>Browse by</h2>
                 {% for facet in facets %}
                     <div>
                         <hr>
-                        <h3>{{ facet.section }}</h3>
+                        <h3>Browse by {{ facet.section | lower | raw }}</h3>
                         <ul class="small-block-grid-4 large-block-grid-6 block-grid-new-padding block-grid-link">
                             {% for option in facet.options %}
                                 <li>
