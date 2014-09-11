@@ -1,4 +1,5 @@
-<div class="featured-image">
+<div class="featured-image {% if post.featuredImageAlign()%}alignleft{% endif %}"
+">
     {{ post.featuredImage('large') | raw }}
     {% if post.featuredImageTitle() %}
         <p class="caption-title">{{ post.featuredImageTitle() | raw }}</p>

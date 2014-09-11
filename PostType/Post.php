@@ -40,6 +40,10 @@ abstract class Post extends BasePost {
         return $this->metadata('featured_image', true) ?: $this->metadata('description', true);
     }
 
+    public function featuredImageAlign() {
+        return $this->metadata('image_align_left');
+    }
+
     /**
      * return custom page title if set, or else post title
      * @return string
