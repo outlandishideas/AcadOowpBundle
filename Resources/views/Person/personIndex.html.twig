@@ -4,6 +4,9 @@
     {% block peopleContent %}
     <div class="row">
         <div class="columns medium-{% if post.featuredImage('large') %}12{% else %}24{% endif %}">
+
+            <h1>{{ post.title() | raw }}</h1>
+
             <div class="people-intro">
                 {{ post.content() | raw }}
             </div>
