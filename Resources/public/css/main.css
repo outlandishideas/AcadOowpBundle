@@ -97,11 +97,10 @@ p.date {
 }
 
 h3.block-heading {
-    margin: 0 0 1em 0;
+    margin: 3em 0 1em 0;
 }
 
 h3.block-heading:before {
-    /*padding-right: 7px;*/
     content: "";
     display: block;
     height: 3px;
@@ -358,7 +357,7 @@ nav .inline-list li.search {
     overflow: hidden;
     float: none;
     position: relative; /** needed for absolute positioning of submit icon **/
-    height: 3.11rem; /** force to full height again, because position: relative; breaks this **/
+    height: 100%;
 }
 
 a.search-icon {
@@ -1036,10 +1035,6 @@ ul.side-menu>h3 {
 
 .side-menu .children li:not(:last-of-type) {
     border-bottom: 1px solid #A0A1A3;
-}
-
-.side-menu h3.block-heading {
-    margin-top: 50px;
 }
 
 .side-menu h3:not(.block-heading), .terms h3 {
