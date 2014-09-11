@@ -20,10 +20,11 @@
                         {% block postTitle %}
                             <div class="medium-19 columns">
                                 <div class="person-heading">
-                                    <span class="role">{{ post.role() | raw }}</span>
                                     <h1>
                                         <span class="fn">{{ post.title() | raw }}</span>
                                     </h1>
+                                    <span class="role">{{ post.role() | raw }}</span>
+
                                     <span class="n">
                                         <span class="honorific-prefix">{{ post.metadata('honorific_prefix') | raw }}</span>
                                         <span class="given-name">{{ post.metadata('given_name') | raw }}</span>
