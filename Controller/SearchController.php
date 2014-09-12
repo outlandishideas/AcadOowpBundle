@@ -204,6 +204,7 @@ class SearchController extends BaseController {
         $search = $this->search();
         $search->setParams($request->query->all());
         $query = $search->search();
+        $response['search'] = $query;
         if ($query->post_count > 0) {
             $response['items'] = $query->posts;
             $uriParts = explode("?", $request->getUri());
