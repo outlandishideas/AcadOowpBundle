@@ -8,11 +8,17 @@
 
 {% block item_title %}
     <h3 class="font-theme-colour">{{ item.title() | raw  }}</h3>
+    {% if 'side-items' in classes and item.postType() == 'person' %}
+        <p class="item-role">{{ item.role() }}</p>
+    {% endif %}
 {% endblock %}
 
 {% if 'side-items' not in classes and tags != 'none' %}
 
     {% block item_type %}
+        {%  if item.postTypeIcon() %}
+            <span class="{{ item.postTypeIcon() }} item-type-image"></span>
+        {% endif %}
         <p class="item-type">{{ item.friendlyName() }}</p>
     {% endblock %}
 
@@ -24,7 +30,7 @@
     {% endif %}    
 {% endblock %}
 
-{% if 'side-items' not in classes and tags != 'none' %}
+{% if 'side-items' not in classes and tags != 'none' and tags != 'post-type' %}
 
     {% block item_authors %}
         {% if item.hasAuthors() %}

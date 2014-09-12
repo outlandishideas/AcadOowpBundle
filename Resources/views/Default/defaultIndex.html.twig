@@ -8,15 +8,9 @@
 
         <div class="columns large-16">
 
-            <div class="row">
-                <div class="columns large-24">
+            <h1>{{ post.title() | raw }}</h1>
 
-                    <h1>{{ post.title() | raw }}</h1>
-
-                    {{ post.content() | raw }}
-
-                </div>
-            </div>
+            {{ post.content() | raw }}
 
             {% if items | length > 0 %}
 
@@ -45,7 +39,9 @@
                                         {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                                         'item': item,
                                         'excerpt_length': 300,
-                                        'image': 'medium'} %}
+                                        'image': 'medium',
+                                        'date' : 'date'
+                                        } %}
                                     {% endblock %}
                                 </li>
                             {% endfor %}

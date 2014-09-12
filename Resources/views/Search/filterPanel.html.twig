@@ -1,41 +1,44 @@
 <div id="filter-panel">
     <div class="row">
-        <div class="large-22 columns large-centered">
-            <div class="search">
-                <form class="main-search">
-                    <input type="text" name="q" id="q" placeholder="Search..." />
-                    <a href="#" class="search-icon submit right" id="submit-q">
-                        <span class="fa fa-search"></span>
-                    </a>
-                </form>
-            </div>
-         </div>
-    </div>
-    <div class="mobile-hide">
-        <div class="row">
-            <div class="large-22 columns large-centered">
-                <h2>Browse by</h2>
-                {% for facet in facets %}
-                    <div>
-                        <hr>
-                        <h3>{{ facet.section }}</h3>
-                        <ul class="small-block-grid-4 large-block-grid-6 block-grid-new-padding block-grid-link">
-                            {% for option in facet.options %}
-                                <li>
-                                    <a href="{{ option.post.permalink() }}">
-
-                                        {% if option.post.featuredImageUrl()  %}
-                                            <img src="{{ option.post.featuredImageUrl() }}">
-                                        {% else %}
-                                            <img src="{{ asset('bundles/outlandishacadoowp/images/placeholder.png') }}">
-                                        {% endif %}
-                                        <h4>{{ option.post.title() }}</h4>
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
+        <div class="large-24 columns">
+            <div class="row">
+                <div class="large-24 columns large-centered">
+                    <div class="search">
+                        <form class="main-search">
+                            <input type="text" name="q" id="q" placeholder="Search..." />
+                            <a href="#" class="search-icon submit right" id="submit-q">
+                                <span class="fa fa-search"></span>
+                            </a>
+                        </form>
                     </div>
-                {% endfor %}
+                </div>
+            </div>
+            <div class="mobile-hide">
+                <div class="row">
+                    <div class="large-24 columns large-centered">
+                        {% for facet in facets %}
+                            <div>
+                                <hr>
+                                <h3>Browse by {{ facet.section | lower | raw }}</h3>
+                                <ul class="small-block-grid-4 large-block-grid-6 block-grid-new-padding block-grid-link">
+                                    {% for option in facet.options %}
+                                        <li>
+                                            <a href="{{ option.post.permalink() }}">
+
+                                                {% if option.post.featuredImageUrl()  %}
+                                                    <img src="{{ option.post.featuredImageUrl() }}">
+                                                {% else %}
+                                                    <img src="{{ asset('bundles/outlandishacadoowp/images/placeholder.png') }}">
+                                                {% endif %}
+                                                <h4>{{ option.post.title() }}</h4>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,18 +1,24 @@
 {% if not classes %}{% set classes = 'main' %}{% endif %}
 
-{% for type in connectedItems %}
-    {% if type.items | length > 0 %}
-        {% if type.title  %}
-            <h3 class="block-heading">{{ type.title | raw }}</h3>
-            <hr>
+<div id="results">
+    {% for type in connectedItems %}
+        {% if type.items | length > 0 %}
+            {% if type.title  %}
+                <h3 class="block-heading">{{ type.title | raw }}</h3>
+            {% endif %}
+            <ul class="search-results">
+                {% for item in type.items.posts %}
+                    <li>
+                        {% block itemInclude %}
+                            {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                            'item': item,
+                            'excerpt_length': 'none',
+                            'classes' : classes} %}
+                        {% endblock %}
+                    </li>
+                {% endfor %}
+            </ul>
         {% endif %}
-            {% for item in type.items.posts %}
-                {% block itemIncludeSide %}
-                    {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
-                    'item': item,
-                    'excerpt_length': 'none',
-                    'classes' : classes} %}
-                {% endblock %}
-            {% endfor %}
-    {% endif %}
-{% endfor %}
+    {% endfor %}
+</div>
+

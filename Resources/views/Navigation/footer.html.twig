@@ -1,63 +1,73 @@
 {% block footer_main %}
 
-    <div class="row">
-        <div class="large-6 columns">
-            <div id="useful-links">
-                <hr>
-                {% block footer_navigation %}
-                    <h3 class="block-heading">Navigation</h3>
-                    <nav>
-                        <ul>
-                            {% for page in pages %}
-                                <li><a href="{{ page.permalink() | raw }}">{{ page.title() | raw }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </nav>
-                {% endblock %}
+<div class="row">
+    <div class="large-24 columns">
+
+        <div class="row">
+            <div class="large-6 columns">
+                <div id="useful-links">
+                    <hr>
+                    {% block footer_navigation %}
+                        <h3 class="block-heading">Navigation</h3>
+                        <nav>
+                            <ul>
+                                {% for page in pages %}
+                                    <li><a href="{{ page.permalink() | raw }}">{{ page.title() | raw }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                    {% endblock %}
+                </div>
             </div>
-        </div>
-        <div class="large-6 columns">
-            <hr>
-            <nav>
-                <ul>
-                    {% for page in footer_about %}
-                        <li><a href="{{ page.permalink() | raw }}">{{ page.title() | raw }}</a></li>
-                    {% endfor %}
-                </ul>
-            </nav>
-        </div>
-        <div class="large-6 columns">
-            <hr>
-        </div>
-        <div class="large-6 columns">
-            <div class="get-in-touch">
+            <div class="large-6 columns">
                 <hr>
-                <h3 class="block-heading">Get in touch</h3>
-                {% block footer_address %}
+                <nav>
+                    <ul>
+                        <h3 class="block-heading">Find out more</h3>
+                        {% for page in footer_about %}
+                            <li><a href="{{ page.permalink() | raw }}">{{ page.title() | raw }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+            <div class="large-6 columns">
 
-                    <p>
-                        <span><a href="mailto:{{ email | raw }}">{{ email | raw }}</a></span><br/>
-                        <span>{{ phonenumber | raw }}</span>
-                    </p>
+                <div class="get-in-touch">
+                    <hr>
+                    <h3 class="block-heading">Get in touch</h3>
+                    {% block footer_address %}
 
-                    <p>{{ address | raw }}</p>
+                        <p>
+                            <span><a href="mailto:{{ email | raw }}">{{ email | raw }}</a></span><br/>
+                            <span>{{ phonenumber | raw }}</span>
+                        </p>
 
-                {% endblock %}
+                        <p>{{ address | raw }}</p>
+
+                    {% endblock %}
+                </div>
+
+            </div>
+            <div class="large-6 columns">
+
                 {% include "OutlandishAcadOowpBundle:Partial:social.html.twig" with {
                 'post': post,
                 'title': 'event'} %}
+
             </div>
         </div>
-    </div>
 
-{% endblock %}
+        {% endblock %}
+
+    </div>
+</div>
 
 <div id="copyright">
     <div class="row">
-        <div class="large-6 columns pull-left">
+        <div class="large-6 columns pull-left align-width">
             <p>&copy; State Crime 2014</p>
         </div>
-        <div class="large-6 columns pull-right">
+        <div class="large-6 columns pull-right align-width">
             <p>An Outlandish website</p>
         </div>
     </div>

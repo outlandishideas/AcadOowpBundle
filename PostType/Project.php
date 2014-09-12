@@ -12,4 +12,8 @@ abstract class Project extends Theme {
         self::registerConnection(Theme::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
     }
 
+    public function postTypeIcon() {
+        return self::$menu_icon;
+    }
+
 }

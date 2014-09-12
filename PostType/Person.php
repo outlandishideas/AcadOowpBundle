@@ -32,6 +32,10 @@ abstract class Person extends Post {
         return "People";
     }
 
+    public function postTypeIcon() {
+        return self::$menu_icon;
+    }
+
     /**
      * @param $userId
      * @return void|Person

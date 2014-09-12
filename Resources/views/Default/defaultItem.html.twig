@@ -19,7 +19,7 @@
 {% else %}
     <a href="{{ item.permalink() }}" class="post-item {{ classes }}">
         <div class="row">
-            <div class="columns large-11 ">
+            <div class="columns large-{% if 'side-items' in classes %}8{% else %}10{% endif %}">
                 <div class="post-item-image">
                     {% block item_image %}{{ item.featuredImage('large') | raw }}{% endblock %}
                     {% if 'image-overlay' in classes %}
@@ -27,7 +27,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="columns large-13 {% if 'side-items' in classes %}equalise{% endif %}">
+            <div class="columns large-{% if 'side-items' in classes %}16 equalise {% else %}14 {% endif %}">
 
                 {% block itemInclude %}
                     {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {

@@ -6,36 +6,30 @@
 
     <article class="section">
         <div class="row">
-            <div class="medium-15  columns ">
+            <div class="medium-15 columns ">
                 <div class="content main">
 
                     {% block mainContent %}
 
-                        <div class="row">
-                            <div class="large-24 columns">
-                                {% block topElement %}{% endblock %}
-                                {% block postDate %}{% endblock %}
-                                {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
-                                {% block subTitle %}
-                                    {% if post.subtitle() %}
-                                        <p class="subtitle">{{ post.subtitle() | raw }}</p>
-                                    {% endif %}
-                                {% endblock %}
-                                {% include 'OutlandishAcadOowpBundle:Partial:featuredImg.html.twig' with {'post': post } %}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="large-24 columns">
-                                <div class="content post">
+                        {% block topElement %}{% endblock %}
+                        {% block postDate %}{% endblock %}
+                        {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
+                        {% block subTitle %}
+                            {% if post.subtitle() %}
+                                <p class="subtitle">{{ post.subtitle() | raw }}</p>
+                            {% endif %}
+                        {% endblock %}
 
-                                    {% block postContent %}
+                        <div class="content post">
 
-                                        {{ post.content() | raw }}
+                            {% include 'OutlandishAcadOowpBundle:Partial:featuredImg.html.twig' with {'post': post } %}
 
-                                    {% endblock %}
+                            {% block postContent %}
 
-                                </div>
-                            </div>
+                                {{ post.content() | raw }}
+
+                            {% endblock %}
+
                         </div>
 
                         {% if sections %}
@@ -61,8 +55,6 @@
                     'post': post,
                     'title': 'page'} %}
 
-                    <hr>
-
                     <ul class="side-menu">
 
                         {% block side_menu %}
@@ -71,18 +63,19 @@
                             'rootPost': post.getRoot()
                             })) }}
 
-                            {% block connected_side_posts %}
-
-                                {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
-                                'connectedItems': sideItems,
-                                'classes' : 'side-items'
-                                } %}
-
-                            {% endblock %}
-
-                        {% endblock %}
-
                     </ul>
+
+                    {% block connected_side_posts %}
+
+                        {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
+                        'connectedItems': sideItems,
+                        'classes' : 'side-items'
+                        } %}
+
+                    {% endblock %}
+
+                {% endblock %}
+
 
                 {% endblock %}
             </div>

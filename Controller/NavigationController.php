@@ -62,7 +62,7 @@ class NavigationController extends SearchController {
         $args = $this->generateMenuArguments($maxDepth, $rootPost);
 
         /*add slash to root post title*/
-        $rootPost->post_title = '/ '.$rootPost->post_title;
+        $rootPost->post_title = $rootPost->post_title;
         /*override homepage as parent post*/
         $args['parent_post'] = $rootPost;
 
