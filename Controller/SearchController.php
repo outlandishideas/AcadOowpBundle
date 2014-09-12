@@ -219,4 +219,13 @@ class SearchController extends BaseController {
         return $response;
     }
 
+    /**
+     * returns specific post types for search results on index pages
+     * eg. on News Index, have this return an array(News::postType())
+     * @return array
+     */
+    public function postTypes()
+    {
+        return array();
+    }
 }
