@@ -7,6 +7,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 use Outlandish\AcadOowpBundle\FacetedSearch\SearchFormHelper;
 use Outlandish\AcadOowpBundle\PostType\Theme;
 use Outlandish\OowpBundle\PostType\MiscPost;
+use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
 use Outlandish\AcadOowpBundle\Controller\SearchController as BaseController;
 use Outlandish\SiteBundle\PostType\News;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,19 +59,21 @@ class DefaultController extends BaseController {
     {
         $response = array();
         $response['post'] = $post;
-        $search = $this->search();
-        $search->setParams($request->query->all());
-        if($search) {
-            $query = $search->search();
+        //if a search item does not appear in request
+        //look for sections on the page
+        if(!$request->query->has('q')){
+            $sections = $this->sections($post->sections());
+            if($sections) $response['sections'] = $sections;
         }
-        if($search && $query->post_count > 0){
+        //if section has not been set get items
+        if(!array_key_exists('sections', $response)){
+            $search = $this->search();
+            $search->setParams($request->query->all());
+            $query = $search->search();
             $response['items'] = $query->posts;
             $helper = new SearchFormHelper($search);
             $response['search_form'] = $helper->getSearchFormElements();
-        } else {
-            $response['sections'] = $this->sections($post->sections());
         }
-
         return $response;
     }
 

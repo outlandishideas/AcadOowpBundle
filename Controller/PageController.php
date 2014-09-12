@@ -9,6 +9,7 @@ use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 use Outlandish\AcadOowpBundle\PostType\Page;
 use Outlandish\AcadOowpBundle\PostType\Post;
 use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
+use Symfony\Component\HttpFoundation\Request;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -19,16 +20,12 @@ class PageController extends BaseController {
 	 * @Route("/", name="home")
 	 * @Template("OutlandishAcadOowpBundle:Page:pageFront.html.twig")
 	 */
-	public function frontPageAction()
+	public function frontPageAction(Request $request)
     {
         /** @var Page $post */
 		$post = $this->querySingle(array('page_id' => get_option('page_on_front')));
-        $sections = $this->sections($post->sections());
-        $returnArgs = array(
-            'post' => $post,
-            'sections' => $sections
-        );
-		return $returnArgs;
+        $response = $this->indexResponse($post, $request);
+		return $response;
     }
 
     /**
