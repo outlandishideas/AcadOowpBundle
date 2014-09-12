@@ -67,12 +67,7 @@ class DefaultController extends BaseController {
         }
         //if section has not been set get items
         if(!array_key_exists('sections', $response)){
-            $search = $this->search();
-            $search->setParams($request->query->all());
-            $query = $search->search();
-            $response['items'] = $query->posts;
-            $helper = new SearchFormHelper($search);
-            $response['search_form'] = $helper->getSearchFormElements();
+            $response = array_merge($response, $this->searchResponse($request));
         }
         return $response;
     }
