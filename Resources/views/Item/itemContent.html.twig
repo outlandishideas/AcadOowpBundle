@@ -17,7 +17,7 @@
 
     {% block item_type %}
         {%  if item.postTypeIcon() %}
-            <span class="item-type-image {{ item.postTypeIcon() }}"></span>
+            <span class="{{ item.postTypeIcon() }} item-type-image"></span>
         {% endif %}
         <p class="item-type">{{ item.friendlyName() }}</p>
     {% endblock %}
