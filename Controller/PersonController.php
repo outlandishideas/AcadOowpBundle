@@ -20,13 +20,7 @@ class PersonController extends BaseController {
      */
     public function indexAction(Request $request) {
         $response = array();
-
         $post = $this->querySingle(array('page_id' => Person::postTypeParentId()));
-
-        /** @var AcaSearch $search */
-        //todo: meed to sort our faceted search first
-//        $search = $this->container->get('aca.search');
-
 		$roles = Role::fetchAll();
 		if ( $roles && $roles->post_count > 0 ) {
 			foreach ( $roles as &$role ) {
