@@ -160,6 +160,12 @@ hr {
 
 .header .bottom-header-row {
 	background: #00a99d;
+    max-width: 100%;
+}
+
+.header .bottom-header {
+    max-width: 85em;
+    margin: 0 auto;
 }
 
 .header .bottom-header li {
