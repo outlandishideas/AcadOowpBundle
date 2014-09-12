@@ -33,13 +33,6 @@ a {
     transition: all 1.6s;
 }
 
- a h3:hover, a h3:focus {
-	color: #126D66!important;
-    -moz-transition: all 1.6s;
-    -webkit-transition: all 1.6s;
-    transition: all 1.6s;
-}
-
 h1, .vcard h1 .fn, #front-page .post-item h3.featured  {
     font-weight: bold;
     font-size : 2.25rem;
@@ -553,10 +546,17 @@ nav .inline-list .search-icon span {
 }
 
 .post-item h3, .terms h3 {
-    color: #2E2E2E!important;
+    color: #2E2E2E;
     font-size: 21px;
     text-decoration: none;
     font-weight: bold;
+}
+
+#front-page a.post-item h3:hover, #front-page a.post-item a h3:focus, #front-page a.post-item h3.featured:hover {
+    color: #126D66;
+    -moz-transition: all 1.6s;
+    -webkit-transition: all 1.6s;
+    transition: all 1.6s;
 }
 
 .post-item:last-child {
