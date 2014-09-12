@@ -30,7 +30,7 @@
     {% endif %}    
 {% endblock %}
 
-{% if 'side-items' not in classes and tags != 'none' %}
+{% if 'side-items' not in classes and tags != 'none' and tags != 'post-type' %}
 
     {% block item_authors %}
         {% if item.hasAuthors() %}

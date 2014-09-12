@@ -10,7 +10,8 @@
             {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
             'item': item,
             'classes': 'main',
-            'image': 'large'} %}
+            'image' : 'large',
+            'tags' : 'post-type'} %}
         </div>
         <div class="large-12 columns">
             <ul class="large-block-grid-2">
@@ -22,6 +23,7 @@
                             'item': item,
                             'classes': 'main',
                             'image':'large',
+                            'tags' : 'post-type',
                             'excerpt_length': excerpt_length} %}</li>
                     {% endif %}
                 {% endfor %}
