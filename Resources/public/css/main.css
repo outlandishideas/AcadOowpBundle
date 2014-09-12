@@ -589,11 +589,9 @@ nav .inline-list .search-icon span {
 
 .post-item .item-type-image:before {
     font-family: dashicons;
-    margin: -3px 8px 0 0;
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    font-size: 20px;
+    margin: 0 8px 0 0;
+    font-size: 18px;
+    vertical-align: middle;
 }
 
 .post-item .item-role {

@@ -11,4 +11,8 @@ abstract class Theme extends Resource {
 
     //connected to document, event, news, person, project
 
+    public function postTypeIcon() {
+        return self::$menu_icon;
+    }
+
 }
