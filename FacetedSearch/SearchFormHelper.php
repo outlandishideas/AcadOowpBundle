@@ -51,10 +51,11 @@ class SearchFormHelper {
 
         $classes = implode(' ', $classes);
 
-        $html = "<ul id='{$facet->name}-group' class='search-facet {$classes}'>";
+        $html = "<ul id='{$facet->name}-group' class='search-facet inline-list {$classes}'>";
         foreach($options as $option) {
             $selected = $option->selected ? 'checked' : '';
-            $html .= "<li>";
+            $liClass = $option->selected ? 'class="active"': null;
+            $html .= "<li {$liClass}>";
             $html .= "<label for='{$facet->name}-{$option->name}'>{$option->label}</label>";
             $html .= "<input type='checkbox'
                 id='{$facet->name}-{$option->name}'

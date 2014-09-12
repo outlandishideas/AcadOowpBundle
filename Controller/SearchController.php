@@ -55,7 +55,7 @@ class SearchController extends BaseController {
 
     }
 
-    public function search()
+    public function search(array $postType = array())
     {
         /** @var PostManager $postManager */
         $postManager = $this->get('outlandish_oowp.post_manager');
@@ -64,7 +64,10 @@ class SearchController extends BaseController {
 
         /** @var Search $search */
         $search = $this->get('outlandish_acadoowp.faceted_search.search');
-        $resources = $this->getResourcePostTypes();
+        //if post types have been passed through, use them
+        //otherwise use all the resources
+        $resources = array_keys(array_intersect_key($postMap, array_flip($postType)));
+        if(empty($resources)) $resources = $this->getResourcePostTypes();
         $themes = $this->getFilterPostTypes();
 
         // adding FacetPostType to search
@@ -193,15 +196,16 @@ class SearchController extends BaseController {
 
     /**
      * @param Request $request
+     * @param array $postType
      * @return mixed
      */
-    public function searchResponse(Request $request)
+    public function searchResponse(Request $request, array $postType = array())
     {
         $response = array(
             'items' => null,
             'moreResultsUrl' => null
         );
-        $search = $this->search();
+        $search = $this->search($postType);
         $search->setParams($request->query->all());
         $query = $search->search();
         $response['search'] = $query;

@@ -871,6 +871,35 @@ ul.social-media li a {
     color: #000;
 }
 
+/* search facet lists */
+
+.search-facets {
+    background-color: #00a99d;
+}
+
+.search-facet li {
+    margin-left: 0;
+}
+
+.search-facet li:first-child {
+    margin-left: 1.375rem;
+}
+
+.search-facet li label {
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    background-color: #00a99d;
+}
+
+.search-facet li label:hover,
+.search-facet li.active label{
+    background-color: #268b85;
+}
+
+.search-facet li input {
+    display: none;
+}
+
 /* search results */
 
 ul.search-results {

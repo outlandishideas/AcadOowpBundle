@@ -3,8 +3,11 @@
         {% block featuredItemContent %}
         {% endblock %}
     {% endif %}
+    <h2>{{ search.found_posts }} Results: <span class="search-query">"{{ search.query_vars.s }}"</span></h2>
+    <div class="search-facets">
+        {{ formElements.post_type  | raw}}
+    </div>
     <div id="results">
-        <h2>{{ search.found_posts }} Results: <span class="search-query">"{{ search.query_vars.s }}"</span></h2>
         <ul id="page-1" class="search-results">
             {% include 'OutlandishAcadOowpBundle:Default:items.html.twig' %}
         </ul>

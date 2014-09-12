@@ -67,7 +67,7 @@ class DefaultController extends BaseController {
         }
         //if section has not been set get items
         if(!array_key_exists('sections', $response)){
-            $response = array_merge($response, $this->searchResponse($request));
+            $response = array_merge($response, $this->searchResponse($request, $postType));
         }
         return $response;
     }
