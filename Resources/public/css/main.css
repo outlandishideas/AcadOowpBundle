@@ -28,9 +28,6 @@ body {
 
 a {
 	color: #268b85;
-    -moz-transition: all 1.6s;
-    -webkit-transition: all 1.6s;
-    transition: all 1.6s;
 }
 
 h1, .vcard h1 .fn, #front-page .post-item h3.featured  {
@@ -541,8 +538,8 @@ nav .inline-list .search-icon span {
 /* post-item */
 
 .post-item {
-    margin-bottom: 1rem;
     display: block;
+    padding: 2rem 0 1.5rem 0;
 }
 
 .post-item h3, .terms h3 {
@@ -550,6 +547,12 @@ nav .inline-list .search-icon span {
     font-size: 21px;
     text-decoration: none;
     font-weight: bold;
+}
+
+#front-page a.post-item h3, #front-page a.post-item h3.featured {
+    -moz-transition: all 1.6s;
+    -webkit-transition: all 1.6s;
+    transition: all 1.6s;
 }
 
 #front-page a.post-item h3:hover, #front-page a.post-item a h3:focus, #front-page a.post-item h3.featured:hover {
@@ -642,6 +645,10 @@ ul.subtitle-list li {
 .post-item.image-overlay .columns:first-of-type {
     padding-left: 0;
     padding-right: 0;
+}
+
+.post-item-image img {
+    margin-top: 0.5rem;
 }
 
 .post-item.image-overlay .columns:first-of-type .post-item-image:after {
@@ -962,7 +969,6 @@ ul.search-results {
 
 ul.search-results>li {
     list-style: none;
-    padding: 3rem 0 0 0;
 }
 
 ul.search-results>li:not(first-of-type):before {
@@ -973,10 +979,14 @@ ul.search-results>li:not(first-of-type):before {
     margin-bottom: 3rem;
 }
 
-ul.search-results>li:first-child, ul.search-results>li:first-child:before {
+ul.search-results>li:first-child, .search-results>li:first-child:before {
     border-top-color: transparent;
     background: transparent;
     margin-bottom: 0;
+}
+
+ul.search-results .post-item {
+    padding: 1rem 0 3.5rem 0;
 }
 
 /* side search results */
@@ -997,6 +1007,10 @@ ul.search-results.sidebar>li:first-child {
 ul.search-results.sidebar>li>ul {
     margin: 0;
     padding: 0;
+}
+
+ul.search-results .post-item.side-items {
+    padding: 0 0 1.5rem 0;
 }
 
 ul.search-results.sidebar .main p.date {
@@ -1100,6 +1114,10 @@ ul.side-menu>h3 {
 }
 
 /* Front page*/
+
+#front-page .main-content {
+    margin-top: 2rem;
+}
 
 #front-page h2, #front-page h2 a {
     color: #00a99d;
@@ -1404,7 +1422,11 @@ ul.social li a:hover  {
 }
 
 .side-items {
-    margin: 20px 0 30px 0;
+    margin: 10px 0 30px 0;
+}
+
+a.side-items {
+    padding: 0;
 }
 
 .section .side-items .row {
