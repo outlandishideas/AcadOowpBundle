@@ -39,7 +39,9 @@
                                         {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                                         'item': item,
                                         'excerpt_length': 300,
-                                        'image': 'medium'} %}
+                                        'image': 'medium',
+                                        'date' : 'date'
+                                        } %}
                                     {% endblock %}
                                 </li>
                             {% endfor %}
