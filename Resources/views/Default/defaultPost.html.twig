@@ -63,18 +63,19 @@
                             'rootPost': post.getRoot()
                             })) }}
 
-                            {% block connected_side_posts %}
-
-                                {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
-                                'connectedItems': sideItems,
-                                'classes' : 'side-items'
-                                } %}
-
-                            {% endblock %}
-
-                        {% endblock %}
-
                     </ul>
+
+                    {% block connected_side_posts %}
+
+                        {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
+                        'connectedItems': sideItems,
+                        'classes' : 'side-items'
+                        } %}
+
+                    {% endblock %}
+
+                {% endblock %}
+
 
                 {% endblock %}
             </div>
