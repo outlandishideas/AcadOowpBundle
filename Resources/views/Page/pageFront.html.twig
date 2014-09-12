@@ -1,3 +1,32 @@
 {% extends 'OutlandishAcadOowpBundle:Default:defaultIndex.html.twig' %}
 
-{% block contentPage %}{% endblock %}
+{% block content %}
+
+    <div class="row">
+        <div class="columns large-24">
+
+
+            {% if items | length > 0 %}
+
+                <div class="row">
+                    <div class="columns large-16">
+                        {% include 'OutlandishAcadOowpBundle:Search:searchSection.html.twig' %}
+                    </div>
+                </div>
+
+            {% elseif sections | length > 0 %}
+
+                {% for section in sections %}
+                    {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' %}
+                {% endfor %}
+
+            {% else %}
+
+                {% block noSearchResults %}{% endblock %}
+
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}
