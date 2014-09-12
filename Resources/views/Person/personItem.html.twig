@@ -2,30 +2,28 @@
     {% set size = 'normal' %}
 {% endif %}
 
-<li class="person-item">
     {% if size == 'small' %}
 
-        <a href="{{ person.permalink() }}" class="people-item">
+        <a href="{{ item.permalink() }}" class="people-item">
             {% include "OutlandishAcadOowpBundle:Partial:avatar.html.twig" with {
-            'post': person,
+            'post': item,
             'size': 'avatar-square' } %}
-            <h4>{{ person.title() | raw }}</h4>
+            <h4>{{ item.title() | raw }}</h4>
         </a>
     {% else %}
-        <a href="{{ person.permalink() | raw }}" class="post-item {{ classes }}">
+        <a href="{{ item.permalink() | raw }}" class="post-item {{ classes }}">
             <div class="row">
                 <div class="columns large-11">
-                    {% block item_image %}{{ person.featuredImage('large') | raw }}{% endblock %}
+                    {% block item_image %}{{ item.featuredImage('large') | raw }}{% endblock %}
                     {% if 'image-overlay' in classes %}
-                        <p class="date">{{ person.dateString("j M Y", true) | raw }}</p>
+                        <p class="date">{{ item.dateString("j M Y", true) | raw }}</p>
                     {% endif %}
                 </div>
                 <div class="columns large-13">
-                    {% block item_title %}<h3 class="font-theme-colour">{{ person.title() | raw | raw }}</h3>{% endblock %}
-                    {% block item_content %}<p>{{ person.excerpt(200) | raw }}</p>{% endblock %}
+                    {% block item_title %}<h3 class="font-theme-colour">{{ item.title() | raw }}</h3>{% endblock %}
+                    {% block item_content %}<p>{{ item.excerpt(200) | raw }}</p>{% endblock %}
                 </div>
             </div>
         </a>
     {% endif %}
-</li>
 

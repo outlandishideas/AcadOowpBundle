@@ -1,17 +1,13 @@
 <div id="filter-panel">
     <div class="row">
-        <div class="large-24 columns">
-            <div class="row">
-                <div class="large-24 columns large-centered">
-                    <div class="search">
-                        <form class="main-search">
-                            <input type="text" name="q" id="q" placeholder="Search..." />
-                            <a href="#" class="search-icon submit right" id="submit-q">
-                                <span class="fa fa-search"></span>
-                            </a>
-                        </form>
-                    </div>
-                </div>
+        <div class="large-22 columns large-centered">
+            <div class="search">
+                <form class="main-search" action="{{ formAction }}" method="get">
+                    <input type="text" name="s" id="s" placeholder="Search..." />
+                    <button href="#" class="search-icon submit right">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </form>
             </div>
             <div class="mobile-hide">
                 <div class="row">

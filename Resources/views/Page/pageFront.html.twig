@@ -1,21 +1,32 @@
-{% extends '::layout.html.twig' %}
+{% extends 'OutlandishAcadOowpBundle:Default:defaultIndex.html.twig' %}
 
 {% block content %}
-    <div id="front-page">
-        <div class="section">
-            <div class="row">
-            <div class="large-24 columns">
-                <div class="main-content">
-                    {{ post.content() | raw }}
+
+    <div class="row">
+        <div class="columns large-24">
+
+
+            {% if items | length > 0 %}
+
+                <div class="row">
+                    <div class="columns large-16">
+                        {% include 'OutlandishAcadOowpBundle:Search:searchSection.html.twig' %}
+                    </div>
                 </div>
-            </div>
-            {#<div class="large-14 columns">#}
-            {#{{ post.featuredImage("large") | raw }}#}
-            {#</div>#}
-            </div>
+
+            {% elseif sections | length > 0 %}
+
+                {% for section in sections %}
+                    {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' %}
+                {% endfor %}
+
+            {% else %}
+
+                {% block noSearchResults %}{% endblock %}
+
+            {% endif %}
+
         </div>
-        {% for section in sections %}
-            {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' with {'excerpt_length': 'none'} %}
-        {% endfor %}
     </div>
+
 {% endblock %}

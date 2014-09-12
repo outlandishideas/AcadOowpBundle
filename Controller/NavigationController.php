@@ -41,10 +41,15 @@ class NavigationController extends SearchController {
 		);
 	}
 
-    public function renderFilterPanelAction() {
+    public function renderFilterPanelAction( Post $currentPost) {
         $args = array();
         $search = $this->search();
         $args['facets'] = $search->getPostToPostFacets();
+        if($currentPost->postType() != "page"){
+            $args["formAction"] = $currentPost->parent()->permalink();
+        } else {
+            $args["formAction"] = $currentPost->permalink();
+        }
         return $this->render(
             'OutlandishAcadOowpBundle:Search:filterPanel.html.twig',
             $args

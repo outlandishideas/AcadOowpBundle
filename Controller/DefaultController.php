@@ -7,6 +7,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 use Outlandish\AcadOowpBundle\FacetedSearch\SearchFormHelper;
 use Outlandish\AcadOowpBundle\PostType\Theme;
 use Outlandish\OowpBundle\PostType\MiscPost;
+use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
 use Outlandish\AcadOowpBundle\Controller\SearchController as BaseController;
 use Outlandish\SiteBundle\PostType\News;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,18 +59,16 @@ class DefaultController extends BaseController {
     {
         $response = array();
         $response['post'] = $post;
-        $search = $this->search($request);
-        if($search) {
-            $query = $search->search();
+        //if a search item does not appear in request
+        //look for sections on the page
+        if(!$request->query->has('s')){
+            $sections = $this->sections($post->sections());
+            if($sections) $response['sections'] = $sections;
         }
-        if($search && $query->post_count > 0){
-            $response['items'] = $query->posts;
-            $helper = new SearchFormHelper($search);
-            $response['search_form'] = $helper->getSearchFormElements();
-        } else {
-            $response['sections'] = $this->sections($post->sections());
+        //if section has not been set get items
+        if(!array_key_exists('sections', $response)){
+            $response = array_merge($response, $this->searchResponse($request, $postType));
         }
-
         return $response;
     }
 
@@ -80,7 +79,7 @@ class DefaultController extends BaseController {
      * @return Search
      */
     public function items(Request $request, $postTypes = array()){
-        if(!$request->query->has('q')) return false;
+        if(!$request->query->has('s')) return false;
         $params = $request->query->all();
 
         /** @var Search $search */
@@ -105,6 +104,99 @@ class DefaultController extends BaseController {
 
         $search->setParams($params);
         return $search;
+    }
+
+    public function sections($sections)
+    {
+        if(!$sections || !is_array($sections)){
+            return array();
+        }
+        foreach($sections as $s => $section){
+            if(!isset($section['acf_fc_layout'])){
+                unset($sections[$s]);
+                break;
+            }
+            switch($section['acf_fc_layout']) {
+                //if search_posts layout create faceted search from arguments
+                //add results from faceted search to section
+                case "search_posts":
+                    $params = array();
+                    /** @var Search $search */
+                    $search = $this->get('outlandish_acadoowp.faceted_search.search');
+
+                    $params['s'] = $section['query'];
+                    unset($section['query']);
+
+                    if(!empty($section['post_types'])){
+                        $params['post_types'] = $section['post_types'];
+                        $facet = $search->addFacetPostType('post_types', "");
+                        foreach($section['post_types'] as $postType){
+                            $facet->addOption(new FacetOption($postType, ""));
+                        }
+                    }
+                    unset($section['post_types']);
+
+                    if(!empty($section['connected_to'])){
+                        //get posts from array of post ids in $section['connected_to']
+                        $query = Post::fetchAll(array('post_type' => 'any', 'post__in' => $section['connected_to']));
+                        if($query->post_count > 0){
+                            $postTypes = array();
+                            //sort posts from query by post type
+                            foreach($query->posts as $post){
+                                /** @var Post $post */
+                                if(!isset($postTypes[$post->post_type])){
+                                    $postTypes[$post->post_type] = array();
+                                }
+                                $postTypes[$post->post_type][] = $post->ID;
+                            }
+                            //create facet for each post type
+                            foreach($postTypes as $postType => $posts){
+                                $params[$postType] = $posts;
+                                $facet = $search->addFacetPostToPost($postType, "", $postType);
+                                foreach($posts as $postId){
+                                    $facet->addOption($postId, "");
+                                }
+                            }
+                        }
+                    }
+                    unset($section['connected_to']);
+
+                    if(!empty($section['order'])){
+                        $search->addFacetOrder('order', "");
+                        $params['order'] = $section['order'];
+                    }
+
+                    if(!empty($section['orderby'])){
+                        $search->addFacetOrderBy('orderby', "");
+                        $params['orderby'] = $section['orderby'];
+                    }
+
+                    $search->setParams($params);
+                    $sections[$s]['items'] = $search->search();
+                    break;
+                //if curated posts convert WP_Post items to ooPost items
+                case "curated_posts":
+                    $ids = array();
+                    foreach($section['items'] as $item){
+                        if($item instanceof \WP_Post){
+                            $ids[] = $item->ID;
+                        } else {
+                            $ids[] = $item;
+                        }
+                    }
+                    $query = Post::fetchAll(array('post_type' => 'any', 'post__in' => $ids));
+                    if($query->post_count > 0){
+                        $items = $query->posts;
+                    } else {
+                        $items = array();
+                    }
+                    $sections[$s]['items'] = $items;
+                    break;
+                default:
+                    unset($sections[$s]);
+            }
+        }
+        return $sections;
     }
 
 }

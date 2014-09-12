@@ -75,10 +75,16 @@ app.init = {
                 var $selectedOption = $(this);
                 var $facet = $selectedOption.parents('.search-facet');
                 if($facet.hasClass('facet-exclusive')){
-                    $facet.find('input[type="checkbox"]')
+                    $facet.find('li.active').removeClass('active').end()
+                        .find('input[type="checkbox"]')
                         .not('[value="' + $selectedOption.attr('value') +'"]')
                         .prop("checked", false);
 
+                }
+                if($selectedOption.prop('checked')){
+                    $selectedOption.parent('li').addClass('active');
+                } else {
+                    $selectedOption.parent('li').removeClass('active');
                 }
                 var $options = $('.search-facet li input[type="checkbox"]');
                 var $queryArr = [];
@@ -112,13 +118,12 @@ app.init = {
                     }
                 }
                 var url = location.origin + searchAjaxUrl + "?" + queryStrings.join('&');
-                $('#results').load( url + " .search-results li", function() {
-                    var $urlHolder = $(this).find('#more-results-url');
-                    var $moreResults = $('#more-results');
-                    var newUrl = $urlHolder.data('url');
-                    $moreResults.attr('href', newUrl);
-                    $urlHolder.remove();
-                });
+                var $list = $("<ul class='search-results'>");
+                $('#results').empty();
+                var $moreResults = $('#more-results');
+                $moreResults.attr('href', url);
+                $moreResults.click();
+
             })
         },
 

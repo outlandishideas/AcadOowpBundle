@@ -16,7 +16,7 @@ class FacetPostType extends Facet {
         $args = parent::generateArguments($args);
 
         //if we don't have the post_type in the $args, make it
-        if(!$args['post_type'] || !is_array($args['post_type'])) {
+        if(!isset($args['post_type']) || !is_array($args['post_type'])) {
             $args['post_type'] = array();
         }
 

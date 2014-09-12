@@ -38,7 +38,7 @@
                                             {% for person in role.people %}
                                                 {% block personInclude %}
                                                     {% include 'OutlandishAcadOowpBundle:Person:personItem.html.twig' with {
-                                                    'person': person,
+                                                    'item': person,
                                                     'size': 'small' } %}
                                                 {% endblock %}
                                             {% endfor %}
@@ -55,7 +55,7 @@
                         <li>
                             {% block itemInclude %}
                                 {% include 'OutlandishAcadOowpBundle:Person:personItem.html.twig' with {
-                                'person': person,
+                                'item': person,
                                 'size': 'small'} %}
                             {% endblock %}
                         </li>

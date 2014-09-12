@@ -7,8 +7,6 @@ namespace Outlandish\AcadOowpBundle\Controller;
 use Outlandish\AcadOowpBundle\Controller\ResourceController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Outlandish\SiteBundle\PostType\News;
-use Outlandish\SiteBundle\PostType\Person;
-use Outlandish\SiteBundle\PostType\Role;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -21,14 +19,8 @@ class NewsController extends BaseController {
      * @return array
      */
     public function indexAction(Request $request) {
-        $response = array();
-
         $post = $this->querySingle(array('page_id' => News::postTypeParentId()));
-        $items = News::fetchAll();
-
-        $response = $this->indexResponse($post, $request, array(News::postType()));
-        $response['items'] = $items;
-//        $response['sideItems'] = $sideItems;
+        $response = $this->indexResponse($post, $request, $this->postTypes());
         return $response;
     }
 
@@ -52,6 +44,11 @@ class NewsController extends BaseController {
         $response['post'] = $post;
         $response['sideItems'] = $sideItems;
         return $response;
+    }
+
+    public function postTypes()
+    {
+        return array(News::postType());
     }
 
 }
