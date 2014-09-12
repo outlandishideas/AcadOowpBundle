@@ -61,7 +61,7 @@ class DefaultController extends BaseController {
         $response['post'] = $post;
         //if a search item does not appear in request
         //look for sections on the page
-        if(!$request->query->has('q')){
+        if(!$request->query->has('s')){
             $sections = $this->sections($post->sections());
             if($sections) $response['sections'] = $sections;
         }
@@ -79,7 +79,7 @@ class DefaultController extends BaseController {
      * @return Search
      */
     public function items(Request $request, $postTypes = array()){
-        if(!$request->query->has('q')) return false;
+        if(!$request->query->has('s')) return false;
         $params = $request->query->all();
 
         /** @var Search $search */
@@ -124,7 +124,7 @@ class DefaultController extends BaseController {
                     /** @var Search $search */
                     $search = $this->get('outlandish_acadoowp.faceted_search.search');
 
-                    $params['q'] = $section['query'];
+                    $params['s'] = $section['query'];
                     unset($section['query']);
 
                     if(!empty($section['post_types'])){

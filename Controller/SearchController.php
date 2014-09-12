@@ -89,12 +89,12 @@ class SearchController extends BaseController {
      */
     public function searchSingle(Request $request)
     {
-        if(!$request->query->has('q')) return null;
+        if(!$request->query->has('s')) return null;
 
         /** @var QueryManager $queryManager */
         $queryManager = $this->get('outlandish_oowp.query_manager');
 
-        $args = array('post_title' => $request->query->get('q'));
+        $args = array('post_title' => $request->query->get('s'));
 
         $results = $queryManager->query($args);
         if($results->post_count == 1){

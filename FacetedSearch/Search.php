@@ -37,6 +37,7 @@ class Search {
      * @var array
      */
     public $defaults = array(
+        's' => null,
         'posts_per_page' => 10,
         'paged' => 1
     );
@@ -168,10 +169,6 @@ class Search {
     {
         $args = $this->getDefaults();
 
-        if(array_key_exists('q', $this->params)){
-            $args['s'] = $this->params['q'];
-        }
-
         foreach($this->facets as $facet) {
             /** @var Facet $facet */
             $facet->setSelected($this->params);
@@ -191,7 +188,9 @@ class Search {
     public function getDefaults()
     {
         $defaultParams = array_intersect_key($this->params, $this->defaults);
-        return array_merge($this->defaults, $defaultParams);
+        $defaultParams = array_merge($this->defaults, $defaultParams);
+        return $defaultParams;
+
     }
 
     public function queryString($page = 0)
@@ -215,15 +214,7 @@ class Search {
             $query['paged'] = $page;
         }
 
-        $queryStrings = array();
-        foreach($query as $key => $value){
-            if(is_array($value)){
-                $value = implode(',', $value);
-            }
-            $queryStrings[$key] = $key . "=" . $value;
-        }
-
-        return implode("&", $queryStrings);
+        return http_build_query($query);
     }
 
 } 
