@@ -97,7 +97,10 @@ class SearchController extends BaseController {
         /** @var QueryManager $queryManager */
         $queryManager = $this->get('outlandish_oowp.query_manager');
 
-        $args = array('post_title' => $request->query->get('s'));
+        $args = array(
+            'name' => sanitize_title($request->query->get('s')),
+            'posts_per_page' => 1
+        );
 
         $results = $queryManager->query($args);
         if($results->post_count == 1){
@@ -202,6 +205,7 @@ class SearchController extends BaseController {
     public function searchResponse(Request $request, array $postType = array())
     {
         $response = array(
+            'featuredItem' => $this->searchSingle($request),
             'items' => null,
             'moreResultsUrl' => null
         );

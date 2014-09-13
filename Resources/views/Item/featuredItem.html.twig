@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="large-12 columns">
+        {{ item.featuredImage('large') | raw }}
+    </div>
+    <div class="large-12 columns">
+        <a href="{{ item.permalink() }}" class="post-item">
+            <p class="date">{{ item.date() | raw }}</p>
+            <h3 class="font-theme-colour featured">{{ item.title() | raw }}</h3>
+            <p>{{ item.excerpt(600) | raw }}</p>
+        </a>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 {% block searchResultsContent %}
     {% if featuredItem %}
         {% block featuredItemContent %}
+            {% include "OutlandishAcadOowpBundle:Item:featuredItem.html.twig" with {'item': featuredItem} %}
         {% endblock %}
     {% endif %}
     <h2>{{ search.found_posts }} Results: <span class="search-query">"{{ search.query_vars.s }}"</span></h2>
