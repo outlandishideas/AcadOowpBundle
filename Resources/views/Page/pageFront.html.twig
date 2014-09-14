@@ -22,7 +22,9 @@
 
             {% else %}
 
-                {% block noSearchResults %}{% endblock %}
+                {% block noSearchResults %}
+                    {% include 'OutlandishAcadOowpBundle:Search:noResults.html.twig' %}
+                {% endblock %}
 
             {% endif %}
 
