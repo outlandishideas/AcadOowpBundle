@@ -9,6 +9,7 @@
             <ul class="small-block-grid-2 large-block-grid-4">
                 {% if not classes %}{% set classes = 'main' %}{% endif %}
                 {% if not excerpt_length %}{% set excerpt_length = 150 %}{% endif %}
+                {% if not image %}{% set image = 'item-image-6' %}{% endif %}
 
                 {% for item in section.items %}
 
@@ -16,7 +17,7 @@
                     {% if loop.index <= 18 %}
 
                         {% if loop.index > 4 %}
-                            {% set image = "none" %}
+                            {% set image = 'none' %}
                         {% endif %}
 
                         {#display 5th and 6th item at 50% width by showing image in separate li#}
