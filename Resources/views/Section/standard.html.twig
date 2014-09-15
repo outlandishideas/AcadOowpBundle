@@ -7,7 +7,7 @@
     <div class="row">
         <div class="large-24 columns">
             <ul class="large-block-grid-4">
-                {% if not excerpt_length %}{% set excerpt_length = 150 %}{% endif %}
+                {% if not excerpt_length %}{% set excerpt_length = 'none' %}{% endif %}
                 {% for item in section.items %}
                     {% if loop.index <= 8 %}
                         <li>{% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {

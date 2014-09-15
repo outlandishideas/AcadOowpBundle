@@ -8,7 +8,7 @@
         <div class="large-24 columns">
             <ul class="small-block-grid-2 large-block-grid-4">
                 {% if not classes %}{% set classes = 'main' %}{% endif %}
-                {% if not excerpt_length %}{% set excerpt_length = 150 %}{% endif %}
+                {% if not excerpt_length %}{% set excerpt_length = 'none' %}{% endif %}
                 {% if not image %}{% set image = 'item-image-6' %}{% endif %}
 
                 {% for item in section.items %}
