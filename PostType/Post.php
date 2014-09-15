@@ -48,8 +48,8 @@ abstract class Post extends BasePost {
      * return custom page title if set, or else post title
      * @return string
      */
-    public function pageTitle() {
-        return $this->customPageTitle() ? $this->customPageTitle() : $this->title();
+    public function title() {
+        return $this->customPageTitle() ? $this->customPageTitle() : parent::title();
     }
 
     /**

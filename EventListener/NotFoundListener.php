@@ -13,7 +13,7 @@ class NotFoundListener {
 	/** @var PhpEngine */
 	private $templateEngine;
 
-	function __construct(PhpEngine $templateEngine = null) {
+	function __construct($templateEngine = null) {
 		$this->templateEngine = $templateEngine;
 	}
 
@@ -24,6 +24,7 @@ class NotFoundListener {
 			global $post, $wp_query;
 			$post = new FakePost();
             $wp_query->post = $post;
+            $wp_query->is_404 = true;
 
             $content = $this->templateEngine->render('OutlandishAcadOowpBundle:Default:404.html.twig', array('post'=> $post));
 

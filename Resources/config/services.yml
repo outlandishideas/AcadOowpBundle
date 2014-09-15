@@ -5,6 +5,6 @@ services:
 
     kernel.listener.outlandish.notfound:
         class: Outlandish\AcadOowpBundle\EventListener\NotFoundListener
-        arguments: [@templating.engine.php]
+        arguments: [@templating.engine.twig]
         tags:
             - {name: kernel.event_listener, event: kernel.exception, method: onKernelException}
