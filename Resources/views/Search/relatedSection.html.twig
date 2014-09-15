@@ -1,0 +1,10 @@
+{% block searchResultsContent %}
+    {% if search.post_count > 1 %}
+        <div class="row">
+            <div class="columns large-24">
+                <h2>Related Posts</h2>
+                {% include "OutlandishAcadOowpBundle:Search:searchResults.html.twig" %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -67,7 +67,7 @@ class SearchController extends BaseController {
         }
         $response = $this->searchResponse($args);
         return $this->render(
-            'OutlandishAcadOowpBundle:Search:searchResults.html.twig',
+            'OutlandishAcadOowpBundle:Search:relatedSection.html.twig',
             $response
         );
     }
