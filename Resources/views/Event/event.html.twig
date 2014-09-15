@@ -4,8 +4,7 @@
 
             {% if post.dateString or post.address or latitude %}
 
-                <hr>
-                <h1>Event details</h1>
+                <h3 class="block-heading">Event details</h3>
 
                 {%  if post.endDateString() %}
                     <p>Start date: {{ post.startDateString("j F Y") | raw }}</p>
