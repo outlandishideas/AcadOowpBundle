@@ -860,6 +860,10 @@ article .subtitle {
     background: #00a99d;
 }
 
+.section .post-item {
+    padding-top: 0;
+}
+
 .section .post-item h3 {
     color: #000;
     font-size: 20px;
