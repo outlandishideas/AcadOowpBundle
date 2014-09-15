@@ -43,7 +43,7 @@ class SearchController extends BaseController {
      */
     public function ajaxAction(Request $request)
     {
-        $response = $this->searchResponse($request);
+        $response = $this->searchResponse($request->query->all());
         return $response;
     }
 
