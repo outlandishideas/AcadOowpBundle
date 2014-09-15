@@ -306,6 +306,14 @@ p.caption-description {
     font-weight: 400;
 }
 
+.section .content h3.block-heading {
+    font-size: 20px;
+}
+
+.section .content h2:before {
+    display: none;
+}
+
 /* content types*/
 
 .date.large {
