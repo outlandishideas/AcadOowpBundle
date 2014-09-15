@@ -130,10 +130,10 @@ abstract class Post extends BasePost {
 
         } elseif ($this->post_type == News::postType()) {
             $date = date($format, strtotime($this->post_date));
-
-        } elseif ($this->post_type == Theme::postType() || $this->post_type == Person::postType()) {
-            $date = date($format, strtotime($this->post_modified));
         }
+//        elseif ($this->post_type == Theme::postType() || $this->post_type == Person::postType()) {
+//            $date = date($format, strtotime($this->post_modified));
+//        }
 
         return $date;
     }
