@@ -1,4 +1,4 @@
-{% if not image %}{% set image = "thumbnail" %}{% endif %}
+{% if not image %}{% set image = "large" %}{% endif %}
 {% if not tags %}{% set tags = "tags" %}{% endif %}
 {% if not date %}{% set date = "none" %}{% endif %}
 {% if not excerpt_length %}{% set excerpt_length = 400 %}{% endif %}
@@ -21,7 +21,7 @@
         <div class="row">
             <div class="columns large-{% if 'side-items' in classes %}8{% else %}10{% endif %}">
                 <div class="post-item-image">
-                    {% block item_image %}{{ item.featuredImage('large') | raw }}{% endblock %}
+                    {% block item_image %}{{ item.featuredImage(image) | raw }}{% endblock %}
                     {% if 'image-overlay' in classes %}
                         <p class="date">{{ item.dateString("j M Y", true) | raw }}</p>
                     {% endif %}
