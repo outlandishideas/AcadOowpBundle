@@ -898,13 +898,14 @@ article .subtitle {
     letter-spacing: 0;
 }
 
-.section a.post-item h3, .section a.post-item h3.featured {
+.section a h2, .section a.post-item h3, .section a.post-item h3.featured {
     -moz-transition: all 1.6s;
     -webkit-transition: all 1.6s;
     transition: all 1.6s;
+    display: inline;
 }
 
-.section a.post-item h3:hover, .section a.post-item a h3:focus, .section a.post-item h3.featured:hover {
+.section a:hover h2, .section a.post-item h3:hover, .section a.post-item a h3:focus, .section a.post-item h3.featured:hover {
     color: #126D66;
     -moz-transition: all 1.6s;
     -webkit-transition: all 1.6s;
@@ -935,6 +936,10 @@ article .subtitle {
 .section.large-grid ul li:nth-child(-n+4) h3 {
     color: #2E2E2E;
     font-size: 21px;
+}
+
+.section.large-grid ul li a:hover h3 {
+    color: #126D66;
 }
 
 .section.large-grid ul li:nth-child(-n+12) h3 {
