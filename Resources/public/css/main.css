@@ -1273,6 +1273,10 @@ ul.search-results.people li.accordion-item.open .accordion-toggle h3:after {
     padding-top: 50px;
 }
 
+.people-items li {
+    text-align: center;
+}
+
 .people-items a {
     padding-right: 30px;
 }
