@@ -572,9 +572,8 @@ nav .inline-list .search-icon span {
     font-size: 21px;
     text-decoration: none;
     font-weight: bold;
+    margin-top: 0;
 }
-
-
 
 .post-item:last-child {
     margin-bottom: 0;
