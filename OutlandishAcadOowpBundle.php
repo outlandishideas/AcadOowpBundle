@@ -15,6 +15,12 @@ class OutlandishAcadOowpBundle extends Bundle {
 
         add_image_size( 'avatar-square', '100', '100', array('center', 'center'));
 
+        add_image_size( 'item-image-12', '630', '380', array('center', 'center'));
+
+        add_image_size( 'item-image-6', '307', '190', array('center', 'center'));
+
+        add_image_size( 'item-image-4', '198', '122', array('center', 'center'));
+
         register_nav_menus(
 			array(
 				'header' => __( 'Header Navigation' ),
