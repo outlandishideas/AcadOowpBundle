@@ -34,6 +34,16 @@ body {
 
 a {
 	color: #268b85;
+    -moz-transition: all 1.6s;
+    -webkit-transition: all 1.6s;
+    transition: all 1.6s;
+}
+
+a:hover, a:focus {
+    color: #126D66;
+    -moz-transition: all 1.6s;
+    -webkit-transition: all 1.6s;
+    transition: all 1.6s;
 }
 
 h1, .vcard h1 .fn, .section .post-item h3.featured  {
@@ -1109,9 +1119,6 @@ ul.side-menu {
 
 .side-menu li{
     list-style: none;
-}
-
-.side-menu li {
     border-bottom: 2px solid #fff;
 }
 
@@ -1122,6 +1129,10 @@ ul.side-menu {
     padding-left: 25px;
     display: block;
     font-weight: 600;
+    -moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: color 0 ease-in;
+    transition: none;
 }
 
 .side-menu li.current_page_item>a, .side-menu li>a:hover {
