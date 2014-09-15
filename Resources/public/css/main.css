@@ -157,6 +157,16 @@ hr {
 	padding: 1rem 0;
 }
 
+.header .top-header .columns:nth-of-type(2) {
+    padding-left: 0;
+}
+
+.header .top-header p {
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+}
+
 #hamburger, .mobile-header {
     display: none;
 }
@@ -1542,6 +1552,10 @@ ul.terms {
 
 @media only screen and (max-width: 1024px)  {
 
+    .header .top-header p {
+        font-size: 13px;
+    }
+
     .header .bottom-header li a {
         padding: 0.8rem 1.2rem;
         font-size: 15px;
@@ -1585,6 +1599,10 @@ ul.terms {
 
     ul.social li {
         margin-right: 0;
+    }
+
+    .header .top-header p {
+        font-size: 12px;
     }
 
 }
