@@ -36,7 +36,7 @@ a {
 	color: #268b85;
 }
 
-h1, .vcard h1 .fn, #front-page .post-item h3.featured  {
+h1, .vcard h1 .fn, .section .post-item h3.featured  {
     font-weight: bold;
     font-size : 2.25rem;
     line-height : 2.75rem;
@@ -555,18 +555,7 @@ nav .inline-list .search-icon span {
     font-weight: bold;
 }
 
-#front-page a.post-item h3, #front-page a.post-item h3.featured {
-    -moz-transition: all 1.6s;
-    -webkit-transition: all 1.6s;
-    transition: all 1.6s;
-}
 
-#front-page a.post-item h3:hover, #front-page a.post-item a h3:focus, #front-page a.post-item h3.featured:hover {
-    color: #126D66;
-    -moz-transition: all 1.6s;
-    -webkit-transition: all 1.6s;
-    transition: all 1.6s;
-}
 
 .post-item:last-child {
     margin-bottom: 0;
@@ -855,39 +844,76 @@ article .subtitle {
     font-size: 2rem;
 }
 
-/*Custom sections*/
+/*Generic section styles*/
+
+.section h2, .section h2 a {
+    color: #00a99d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.section h2:before {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: #00a99d;
+}
+
+.section .post-item h3 {
+    color: #000;
+    font-size: 20px;
+    letter-spacing: 0;
+}
+
+.section a.post-item h3, .section a.post-item h3.featured {
+    -moz-transition: all 1.6s;
+    -webkit-transition: all 1.6s;
+    transition: all 1.6s;
+}
+
+.section a.post-item h3:hover, .section a.post-item a h3:focus, .section a.post-item h3.featured:hover {
+    color: #126D66;
+    -moz-transition: all 1.6s;
+    -webkit-transition: all 1.6s;
+    transition: all 1.6s;
+}
+
+/*Featured section styles*/
 
 .section.featured .columns .columns  {
     padding-left: 0.9375em;
     padding-right: 0.9375em;
 }
 
-#front-page .section.featured h2:before {
+.section.featured h2:before {
     display: none;
 }
 
-#front-page .section.standard ul li:nth-child(-n+4) h3 {
+/*Large grid section styles*/
+
+.section.large-grid .post-item-image img {
+    margin-bottom: 10px;
+}
+
+.section.large-grid ul li h3 {
+    font-weight: normal;
+}
+
+.section.large-grid ul li:nth-child(-n+4) h3 {
     color: #2E2E2E;
     font-size: 21px;
 }
 
-#front-page .section.standard ul li h3 {
-    font-weight: normal;
-}
-
-#front-page .section.standard ul li:nth-child(-n+12) h3 {
+.section.large-grid ul li:nth-child(-n+12) h3 {
     font-weight: bold;
 }
 
-#front-page .section.standard ul li:nth-child(n+13) h3 {
+.section.large-grid ul li:nth-child(n+13) h3 {
     font-weight: normal;
 }
 
-.section.standard .post-item-image img {
-    margin-bottom: 10px;
-}
-
-.section.standard ul li:nth-child(n+5):before {
+.section.large-grid ul li:nth-child(n+5):before {
     content: "";
     display: block;
     height: 1px;
@@ -896,15 +922,10 @@ article .subtitle {
     margin: 10px 0 30px 0;
 }
 
-.section.standard ul li:nth-child(5):before, .section.standard ul li:nth-child(7):before {
-    /*join up top border on 5th and 6th news item*/
+.section.large-grid ul li:nth-child(5):before, .section.large-grid ul li:nth-child(7):before {
+    /*join up top border of 5th and 6th item*/
     min-width: 400px;
 }
-
-/*#front-page .section.standard ul li.half:nth-child(n+5):before {*/
-    /*width: 400px;*/
-/*}*/
-
 
 /*sorting filter*/
 
@@ -1152,26 +1173,6 @@ ul.side-menu>h3 {
 
 #front-page .main-content {
     margin-top: 2rem;
-}
-
-#front-page h2, #front-page h2 a {
-    color: #00a99d;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-#front-page h2:before {
-    content: "";
-    display: block;
-    height: 3px;
-    width: 100%;
-    background: #00a99d;
-}
-
-#front-page .post-item h3 {
-    color: #000;
-    font-size: 20px;
-    letter-spacing: 0;
 }
 
 /*contact page*/
