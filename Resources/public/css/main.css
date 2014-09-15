@@ -306,6 +306,14 @@ p.caption-description {
     font-weight: 400;
 }
 
+.section .content h3.block-heading {
+    font-size: 20px;
+}
+
+.section .content h2:before {
+    display: none;
+}
+
 /* content types*/
 
 .date.large {
@@ -858,6 +866,10 @@ article .subtitle {
     height: 3px;
     width: 100%;
     background: #00a99d;
+}
+
+.section .post-item {
+    padding-top: 0;
 }
 
 .section .post-item h3 {
@@ -1453,6 +1465,10 @@ ul.social li a:hover  {
 }
 
 .attachment a:hover {
+    color: #4c4c4c;
+}
+
+.attachment a:hover p {
     text-decoration: underline;
 }
 

@@ -84,17 +84,14 @@
 
     <div class="row">
         <div class="large-24 columns">
-            <div class="side-menu">
 
-                {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
-                'connectedItems': sideItems,
-                'classes' : 'side-items'
-                } %}
+            {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
+            'connectedItems': sideItems,
+            'classes' : 'side-items'
+            } %}
 
-            </div>
         </div>
     </div>
-
 
     {#{% for taxonomy in post.taxonomies() %}#}
         {#{% if taxonomy.terms | length > 0 %}#}
