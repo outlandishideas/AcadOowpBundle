@@ -1465,6 +1465,10 @@ ul.social li a:hover  {
 }
 
 .attachment a:hover {
+    color: #4c4c4c;
+}
+
+.attachment a:hover p {
     text-decoration: underline;
 }
 
