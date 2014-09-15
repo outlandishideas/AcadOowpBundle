@@ -39,7 +39,8 @@ class Search {
     public $defaults = array(
         's' => null,
         'posts_per_page' => 10,
-        'paged' => 1
+        'paged' => 1,
+        'post__not_in' => array()
     );
 
     function __construct(QueryManager $queryManager, PostManager $postManager, array $params = array())

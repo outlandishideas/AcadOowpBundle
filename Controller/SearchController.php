@@ -49,9 +49,22 @@ class SearchController extends BaseController {
 
     public function renderRelatedPostsAction( Post $post, $s = null) {
         $args = array(
-            $post->postType() => array($post->ID),
             's' => $s
         );
+        if($post::isResource()){
+            $themes = $post->connected($this->getThemePostTypes());
+            if($themes->post_count > 0){
+                foreach($themes->posts as $theme){
+                    if(!array_key_exists($theme->postType(), $args)){
+                        $args[$theme->postType()] = array();
+                    }
+                    $args[$theme->postType()][] = $theme->ID;
+                }
+                $args['post__not_in'] = array($post->ID);
+            }
+        } else {
+            $args[$post->postType()] = array($post->ID);
+        }
         $response = $this->searchResponse($args);
         return $this->render(
             'OutlandishAcadOowpBundle:Search:searchResults.html.twig',

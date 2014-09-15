@@ -52,11 +52,11 @@ class FacetPostToPost extends Facet{
 
             if(!isset($args['connected_type'])) {
                 $args['connected_type'] = array();
-                $args['connected_items'] = array();
+                $args['connected'] = array();
             }
 
             $args['connected_type'] = array_merge($connectionNames, $args['connected_type']);
-            $args['connected_items'] = array_merge($connectedIds, $args['connected_items']);
+            $args['connected'] = array_merge($connectedIds, $args['connected']);
         }
 
         return $args;
