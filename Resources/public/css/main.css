@@ -1399,7 +1399,12 @@ ul.social li a:hover  {
 }
 
 .event-details p {
-    margin-bottom: 5px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #565859;
+    color: rgb(86, 88, 89);
+    margin-bottom: 0.3rem;
+    font-weight: bold;
 }
 
 .event-details p:first-of-type {
