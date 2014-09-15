@@ -154,7 +154,8 @@ class DefaultController extends BaseController {
                                 $params[$postType] = $posts;
                                 $facet = $search->addFacetPostToPost($postType, "", $postType);
                                 foreach($posts as $postId){
-                                    $facet->addOption($postId, "");
+                                    $option = new FacetOption($postId, "");
+                                    $facet->addOption($option);
                                 }
                             }
                         }
