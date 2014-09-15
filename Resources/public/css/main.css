@@ -902,7 +902,6 @@ article .subtitle {
     -moz-transition: all 1.6s;
     -webkit-transition: all 1.6s;
     transition: all 1.6s;
-    display: inline;
 }
 
 .section a:hover h2, .section a.post-item h3:hover, .section a.post-item a h3:focus, .section a.post-item h3.featured:hover {
