@@ -30,18 +30,18 @@
     {% endif %}    
 {% endblock %}
 
-{#{% if 'side-items' not in classes and tags != 'none' and tags != 'post-type' %}#}
+{% if 'side-items' not in classes and tags != 'none' and tags != 'post-type' %}
 
-    {#{% block item_authors %}#}
-        {#{% if item.hasAuthors() %}#}
-            {#<p class="item-authors"><span class="fa fa-user"></span> {{ item.authorTitles() | join(', ')  }}</p>#}
-        {#{% endif %}#}
-    {#{% endblock %}#}
+    {% block item_authors %}
+        {% if item.hasAuthors() %}
+            <p class="item-authors"><span class="fa fa-user"></span> {{ item.authorTitles() | join(', ')  }}</p>
+        {% endif %}
+    {% endblock %}
 
-    {#{% block item_themes %}#}
-        {#{% if item.hasThemes() %}#}
-            {#<p class="item-themes"><span class="fa fa-link"></span> {{ item.themeTitles() | join(', ')  }}</p>#}
-        {#{% endif %}#}
-    {#{% endblock %}#}
+    {% block item_themes %}
+        {% if item.hasThemes() %}
+            <p class="item-themes"><span class="fa fa-link"></span> {{ item.themeTitles() | join(', ')  }}</p>
+        {% endif %}
+    {% endblock %}
 
-{#{% endif %}#}
+{% endif %}
