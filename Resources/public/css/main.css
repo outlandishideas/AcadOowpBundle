@@ -313,6 +313,10 @@ p.caption-description {
     padding-top: 2rem;
 }
 
+.content.post p:first-of-type {
+    padding-top: 2rem;
+}
+
 .section .content h3.block-heading {
     font-size: 20px;
 }
