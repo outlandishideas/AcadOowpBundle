@@ -47,14 +47,40 @@ class SearchFormHelper {
         $options = array_merge($options, $facet->options);
 
         $classes = array();
-        if($facet->exclusive) $classes[] = 'facet-exclusive';
+        if($facet->exclusive)
+        {
+            $classes[] = 'facet-exclusive';
+        }
 
         $classes = implode(' ', $classes);
 
         $html = "<ul id='{$facet->name}-group' class='search-facet inline-list {$classes}'>";
+
+        //create an all button
+
+        $selectedOptions = $facet->getSelectedOptions();
+        if(!$facet->exclusive)
+        {
+            $optionNames = implode(',', array_map(function($a){
+                return $a->name;
+            }, $options));
+            $liClass = (count($selectedOptions) == count($options)) ? 'class="active"': null;
+            $selected = (count($selectedOptions) == count($options)) ? 'checked' : '';
+            $li = "<li {$liClass}>";
+            $li .= "<label for='{$facet->name}-all'>All</label>";
+            $li .= "<input type='checkbox'
+                id='{$facet->name}-all'
+                name='{$facet->name}'
+                value='{$optionNames}'
+                {$selected} />";
+            $li .= "</li>";
+            $html .= $li;
+        }
+
+
         foreach($options as $option) {
-            $selected = $option->selected ? 'checked' : '';
-            $liClass = $option->selected ? 'class="active"': null;
+            $selected = $option->selected && (count($selectedOptions) != count($options)) ? 'checked' : '';
+            $liClass = $option->selected && (count($selectedOptions) != count($options)) ? 'class="active"': null;
             $html .= "<li {$liClass}>";
             $html .= "<label for='{$facet->name}-{$option->name}'>{$option->label}</label>";
             $html .= "<input type='checkbox'
