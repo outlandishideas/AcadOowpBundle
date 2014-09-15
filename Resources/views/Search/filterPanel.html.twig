@@ -21,8 +21,8 @@
                                         <li>
                                             <a href="{{ option.post.permalink() }}">
 
-                                                {% if option.post.featuredImageUrl()  %}
-                                                    <img src="{{ option.post.featuredImageUrl() }}">
+                                                {% if option.post.featuredImage()  %}
+                                                    {{ option.post.featuredImage('item-image-6') | raw }}
                                                 {% else %}
                                                     <img src="{{ asset('bundles/outlandishacadoowp/images/placeholder.png') }}">
                                                 {% endif %}
