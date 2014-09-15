@@ -124,8 +124,15 @@ abstract class Post extends BasePost {
             } else {
                 $date = $this->startDateString($format);
             }
+            if (!$date) {
+                $date = date($format, strtotime($this->post_date));
+            }
+
         } elseif ($this->post_type == News::postType()) {
             $date = date($format, strtotime($this->post_date));
+
+        } elseif ($this->post_type == Theme::postType() || $this->post_type == Person::postType()) {
+            $date = date($format, strtotime($this->post_modified));
         }
 
         return $date;
@@ -158,7 +165,6 @@ abstract class Post extends BasePost {
 		return array_intersect( $post_types, $types);
 	}
 
-
     /**
      * Returns posts, grouped and titled by post type, connected to current post
      * @return array
@@ -189,7 +195,6 @@ abstract class Post extends BasePost {
         );
     }
 
-
     /**
      * Returns a title and all event posts connected to current post
      * @param string $title
@@ -213,7 +218,6 @@ abstract class Post extends BasePost {
             'items' => $this->connected(News::postType())
         );
     }
-
 
     /**
      * Returns a title and all person posts connected to current post
