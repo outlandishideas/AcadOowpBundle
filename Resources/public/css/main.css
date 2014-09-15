@@ -96,6 +96,7 @@ p.date {
     letter-spacing: 1px;
     color: #565859;
     color: rgb(86, 88, 89);
+    margin-bottom: 0.3rem;
 }
 
 h3.block-heading {
@@ -300,10 +301,6 @@ p.caption-description {
 
 .content {
     padding-top: 2rem;
-}
-
-.content p.date {
-    font-weight: 400;
 }
 
 .section .content h3.block-heading {
