@@ -27,7 +27,7 @@ class ThemeController extends BaseController {
 
 	/**
 	 * @Route("/themes/{name}/", name="theme")
-	 * @Template("OutlandishAcadOowpBundle:theme:themePost.html.twig")
+	 * @Template("OutlandishAcadOowpBundle:Theme:themePost.html.twig")
 	 */
 	public function singleAction($name) {
 		$response = array();

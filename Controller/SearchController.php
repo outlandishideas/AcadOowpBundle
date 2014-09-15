@@ -47,6 +47,18 @@ class SearchController extends BaseController {
         return $response;
     }
 
+    public function renderRelatedPostsAction( Post $post, $s = null) {
+        $args = array(
+            $post->postType() => array($post->ID),
+            's' => $s
+        );
+        $response = $this->searchResponse($args);
+        return $this->render(
+            'OutlandishAcadOowpBundle:Search:searchResults.html.twig',
+            $response
+        );
+    }
+
     public function slugify($string)
     {
         $string = strtolower($string);
@@ -87,18 +99,18 @@ class SearchController extends BaseController {
     }
 
     /**
-     * @param Request $request
+     * @param array $params
      * @return null|Post
      */
-    public function searchSingle(Request $request)
+    public function searchSingle(array $params)
     {
-        if(!$request->query->has('s')) return null;
+        if(!array_key_exists('s', $params)) return null;
 
         /** @var QueryManager $queryManager */
         $queryManager = $this->get('outlandish_oowp.query_manager');
 
         $args = array(
-            'name' => sanitize_title($request->query->get('s')),
+            'name' => sanitize_title($params['s']),
             'posts_per_page' => 1
         );
 
@@ -198,25 +210,25 @@ class SearchController extends BaseController {
     }
 
     /**
-     * @param Request $request
+     * @param array $params
      * @param array $postType
      * @return mixed
      */
-    public function searchResponse(Request $request, array $postType = array())
+    public function searchResponse(array $params, array $postType = array())
     {
         $response = array(
-            'featuredItem' => $this->searchSingle($request),
+            'featuredItem' => $this->searchSingle($params),
             'items' => null,
             'moreResultsUrl' => null
         );
         $search = $this->search($postType);
-        $search->setParams($request->query->all());
+        $search->setParams($params);
         $query = $search->search();
         $response['search'] = $query;
         if ($query->post_count > 0) {
             $response['items'] = $query->posts;
-            $uriParts = explode("?", $request->getUri());
-            $response['moreResultsUrl'] = $uriParts[0] . "?" . $search->queryString(1);
+//            $uriParts = explode("?", $params->getUri());
+            $response['moreResultsUrl'] = "?" . $search->queryString(1);
         }
         $response['helper'] = new SearchFormHelper($search);
         $response['formElements'] = $response['helper']->getSearchFormElements();

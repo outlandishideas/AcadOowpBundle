@@ -5,20 +5,5 @@
         {% endblock %}
     {% endif %}
     <h2>{{ search.found_posts }} Results: <span class="search-query">"{{ search.query_vars.s }}"</span></h2>
-    <div class="search-facets">
-        {{ formElements.post_type  | raw}}
-    </div>
-    <div id="results">
-        <ul id="page-1" class="search-results">
-            {% include 'OutlandishAcadOowpBundle:Default:items.html.twig' %}
-        </ul>
-    </div>
-    <div class="row">
-        <div class="columns large-12 large-centered">
-            <a class="button" href="{{ moreResultsUrl }}" id="more-results">
-                <span class="text">More Results</span>
-                <span class="text-loading"><span class="fa fa-circle-o-notch fa-spin"></span> Loading</span>
-            </a>
-        </div>
-    </div>
+    {% include "OutlandishAcadOowpBundle:Search:searchResults.html.twig" %}
 {% endblock %}

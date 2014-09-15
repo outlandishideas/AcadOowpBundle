@@ -40,9 +40,12 @@
 
                         {%  endif %}
 
-                        {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
-                        'connectedItems': bottomItems,
-                        'classes': 'none'} %}
+                        {% block related %}
+                            <h2>Related Posts</h2>
+                            {{ render(controller('OutlandishAcadOowpBundle:Search:renderRelatedPosts', {
+                            'post': post
+                            })) }}
+                        {% endblock %}
 
                     {% endblock %}
 

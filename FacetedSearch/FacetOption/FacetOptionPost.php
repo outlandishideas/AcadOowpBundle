@@ -17,7 +17,7 @@ class FacetOptionPost extends FacetOption {
 
     function __construct(Post $post, $selected = false)
     {
-        parent::__construct($post->postType(), $post->title(), $selected);
+        parent::__construct($post->ID, $post->title(), $selected);
         $this->post = $post;
     }
 

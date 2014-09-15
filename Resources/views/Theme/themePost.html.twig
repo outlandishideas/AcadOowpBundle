@@ -39,7 +39,7 @@
     </article>
 
     {% block related %}
-        {{ render(controller('OutlandishAcadOowpBundle:Related:renderResources', {
+        {{ render(controller('OutlandishAcadOowpBundle:Search:renderRelatedPosts', {
         'post': post
         })) }}
     {% endblock %}

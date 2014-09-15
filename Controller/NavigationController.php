@@ -46,7 +46,11 @@ class NavigationController extends SearchController {
         $search = $this->search();
         $args['facets'] = $search->getPostToPostFacets();
         if($currentPost->postType() != "page"){
-            $args["formAction"] = $currentPost->parent()->permalink();
+            $parent = $currentPost->parent();
+            if(!$parent){
+                $parent = Page::fetchById(get_option('page_on_front'));
+            }
+            $args["formAction"] = $parent->permalink();
         } else {
             $args["formAction"] = $currentPost->permalink();
         }
