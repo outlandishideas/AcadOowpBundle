@@ -1,6 +1,6 @@
 {% extends 'OutlandishAcadOowpBundle:Default:defaultPost.html.twig' %}
 
-{% block content %}
+{% block mainContent %}
 
     {% if map | length > 0 %}
         <div class="google-map">
@@ -9,7 +9,7 @@
     {% endif %}
     <article class="section">
         <div class="row">
-            <div class="large-20 columns large-centered small-centered">
+            <div class="large-24 columns">
                 {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
                 {% if post.subtitle() %}
                     <p class="subtitle">{{ post.subtitle() }}</p>
@@ -17,9 +17,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="medium-16 columns large-centered small-centered">
+            <div class="medium-24 columns">
                 <div class="row">
-                    <div class="large-20 columns large-centered small-centered">
+                    <div class="large-20 columns">
                         {{ post.content() | raw }}
                     </div>
                 </div>
@@ -27,26 +27,27 @@
         </div>
 
         {% if map | length > 0 %}
-        <div class="row">
-            <div class="large-10 columns large-centered small-centered">
-                <div class="address large">
-                    {{ address | raw }}
+            <div class="row">
+                <div class="large-24 columns">
+                    <h3 class="block-heading">
+                        Address
+                    </h3>
+                    <div class="address large">
+                        {{ address | raw }}
+                    </div>
                 </div>
             </div>
-        </div>
         {% endif %}
 
         {% if contact_people | length > 0 %}
+            <h3 class="block-heading">
+                Contacts
+            </h3>
+            <div class="row">
+
             {% for person in contact_people %}
-                <div class="row">
-                    <div class="large-10 columns small-centered large-centered">
-                        <div class="row">
-                            {% if person.image.url | length > 0 %}
-                                <div class="large-10 columns">
-                                    <img class="contact-image" src="{{ person.image.url }}">
-                                </div>
-                            {% endif %}
-                            <div class="large-14 columns">
+
+                <div class="large-8 columns">
                                 {% if person.name.content | length > 0 %}
                                     <p class="contact-name">
                                         {{ person.name.prefix }}
@@ -68,13 +69,15 @@
                                         {{ person.email.suffix }}
                                     </p>
                                 {% endif %}
-                            </div>
-                        </div>
                     </div>
-                </div>
+
             {% endfor %}
+            </div>
+
+
         {% endif %}
     </article>
+
 {% endblock %}
 
 {% block footer %}
