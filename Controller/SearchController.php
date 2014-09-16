@@ -14,8 +14,10 @@ use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostType;
 use Outlandish\AcadOowpBundle\PostType\Post;
 use Outlandish\OowpBundle\Manager\PostManager;
 use Outlandish\AcadOowpBundle\FacetedSearch\Search;
+use Outlandish\SiteBundle\PostType\Page;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Outlandish\RoutemasterBundle\Annotation\Template;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Outlandish\RoutemasterBundle\Controller\BaseController;
 
@@ -48,6 +50,7 @@ class SearchController extends BaseController {
     }
 
     public function renderRelatedPostsAction( Post $post, $s = null) {
+        if($post->postType() == Page::postType()) return new Response();
         $args = array(
             's' => $s
         );
