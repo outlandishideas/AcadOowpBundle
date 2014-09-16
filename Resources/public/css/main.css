@@ -161,6 +161,7 @@ hr {
 .header {
 	background: #33bab1;
 	position: relative;
+    margin-bottom: 1em;
 }
 
 .header .top-header {
