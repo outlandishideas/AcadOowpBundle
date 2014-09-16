@@ -334,4 +334,16 @@ abstract class Post extends BasePost {
         }, $themes->posts);
     }
 
+    public function recentResources () {
+        $recentResources = Post::fetchAll(array(
+            'post_type' =>
+                array(
+                    'news',
+                    'event',
+                    'document'
+            ),
+            'posts_per_page' => 10));
+        return $recentResources;
+    }
+
 }

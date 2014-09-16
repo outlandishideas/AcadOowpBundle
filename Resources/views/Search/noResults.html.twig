@@ -1,2 +1,22 @@
-<h2>Unfortunately, we couldn't find anything for "{{ search.query_vars.s }}". Perhaps these articles may interest you?</h2>
-   
+<div class="row">
+    <div class="large-24 columns">
+        <h2>Unfortunately, we couldn't find anything for "{{ search.query_vars.s }}". The below recently added resources might interest you.</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-16 columns">
+        <ul class="search-results">
+            {% for item in post.recentResources() %}
+                <li>
+                    {% block itemInclude %}
+                        {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                        'item': item,
+                        'excerpt_length': '150',
+                        'classes' : classes} %}
+                    {% endblock %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
