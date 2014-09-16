@@ -324,7 +324,7 @@ p.caption-description {
     padding-top: 2rem;
 }
 
-.content.post p:first-of-type {
+.content.post p:not(.caption-title):first-of-type {
     padding-top: 2rem;
 }
 
