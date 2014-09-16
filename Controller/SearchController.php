@@ -94,8 +94,9 @@ class SearchController extends BaseController {
         $search = $this->get('outlandish_acadoowp.faceted_search.search');
         //if post types have been passed through, use them
         //otherwise use all the resources
-        $resources = array_keys(array_intersect_key($postMap, array_flip($postType)));
-        if(empty($resources)) $resources = $this->getResourcePostTypes();
+//        $resources = array_keys(array_intersect_key($postMap, array_flip($postType)));
+//        if(empty($resources)) $resources = $this->getResourcePostTypes();
+        $resources = $this->getResourcePostTypes();
         $themes = $this->getFilterPostTypes();
 
         // adding FacetPostType to search
@@ -238,6 +239,7 @@ class SearchController extends BaseController {
             'moreResultsUrl' => null
         );
         $search = $this->search($postType);
+        if(!empty($postType)) $params['post_type'] = $postType;
         $search->setParams($params);
         $query = $search->search();
         $response['search'] = $query;
