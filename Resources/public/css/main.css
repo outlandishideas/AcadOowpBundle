@@ -320,7 +320,7 @@ p.caption-description {
 
 /*page sections*/
 
-.content {
+.content.main {
     padding-top: 2rem;
 }
 
