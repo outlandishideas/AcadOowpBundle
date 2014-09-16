@@ -2,7 +2,7 @@
     {% for item in items %}
         <li>
             {% set twig_template = "OutlandishAcadOowpBundle:" ~ item.post_type|capitalize ~ ":" ~ item.post_type ~ "Item.html.twig"  %}
-            {% include twig_template  with { post: item } %}
+            {% include twig_template  with { post: item, image: 'item-image-12' } %}
         </li>
     {% endfor %}
 {% endif %}

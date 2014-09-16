@@ -74,13 +74,10 @@ app.init = {
             $facet.on('change', 'input[type="checkbox"]', function(e) {
                 var $selectedOption = $(this);
                 var $facet = $selectedOption.parents('.search-facet');
-                if($facet.hasClass('facet-exclusive')){
-                    $facet.find('li.active').removeClass('active').end()
-                        .find('input[type="checkbox"]')
-                        .not('[value="' + $selectedOption.attr('value') +'"]')
-                        .prop("checked", false);
-
-                }
+                $facet.find('li.active').removeClass('active').end()
+                    .find('input[type="checkbox"]')
+                    .not('[value="' + $selectedOption.attr('value') +'"]')
+                    .prop("checked", false);
                 if($selectedOption.prop('checked')){
                     $selectedOption.parent('li').addClass('active');
                 } else {
