@@ -6,7 +6,7 @@
             {% if type.title  %}
                 <h3 class="block-heading">{{ type.title | raw }}</h3>
             {% endif %}
-            <ul class="search-results{% if type.postType == 'person'  %} person-results{% endif %}">
+            <ul class="search-results">
                 {% for item in type.items.posts %}
                     <li>
                         {% block itemInclude %}

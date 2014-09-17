@@ -1558,7 +1558,7 @@ a.side-items {
     max-height: 140px;
 }
 
-.person-results .side-items img {
+.post-person.side-items img {
     border-radius: 50%;
 }
 
