@@ -187,6 +187,7 @@ abstract class Post extends BasePost {
     public function connectedDocuments($title = 'Related documents') {
         return array(
             'title' => $title,
+            'postType' => Document::postType(),
             'items' => $this->connected(Document::postType())
         );
     }
@@ -199,6 +200,7 @@ abstract class Post extends BasePost {
     public function connectedEvents($title = 'Related events') {
         return array(
             'title' => $title,
+            'postType' => Event::postType(),
             'items' => $this->connected(Event::postType())
         );
     }
@@ -211,6 +213,7 @@ abstract class Post extends BasePost {
     public function connectedNews($title = 'Related news') {
         return array(
             'title' => $title,
+            'postType' => News::postType(),
             'items' => $this->connected(News::postType())
         );
     }
@@ -223,6 +226,7 @@ abstract class Post extends BasePost {
     public function connectedPeople($title = 'Related people') {
         return array(
             'title' => $title,
+            'postType' => Person::postType(),
             'items' => $this->connected(Person::postType())
         );
     }
@@ -235,6 +239,7 @@ abstract class Post extends BasePost {
     public function connectedPlaces($title = 'Related places') {
         return array(
             'title' => $title,
+            'postType' => Place::postType(),
             'items' => $this->connected(Place::postType())
         );
     }
@@ -247,6 +252,7 @@ abstract class Post extends BasePost {
     public function connectedProjects($title = 'Related projects') {
         return array(
             'title' => $title,
+            'postType' => Project::postType(),
             'items' => $this->connected(Project::postType())
         );
     }
@@ -259,6 +265,7 @@ abstract class Post extends BasePost {
     public function connectedThemes($title = 'Related themes') {
         return array(
             'title' => $title,
+            'postType' => Theme::postType(),
             'items' => $this->connected(Theme::postType())
         );
     }
