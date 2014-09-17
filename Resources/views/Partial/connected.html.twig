@@ -6,13 +6,14 @@
             {% if type.title  %}
                 <h3 class="block-heading">{{ type.title | raw }}</h3>
             {% endif %}
-            <ul class="search-results">
+            <ul class="search-results{% if type.postType == 'person'  %} person-results{% endif %}">
                 {% for item in type.items.posts %}
                     <li>
                         {% block itemInclude %}
                             {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
                             'item': item,
                             'excerpt_length': 'none',
+                            'image':'avatar-square',
                             'classes' : classes} %}
                         {% endblock %}
                     </li>
