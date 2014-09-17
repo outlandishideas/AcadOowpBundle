@@ -51,4 +51,11 @@ class NewsController extends BaseController {
         return array(News::postType());
     }
 
+//    /**
+//     * @Route("/articles/")
+//     */
+//    public function articlesAction() {
+//        return $this->redirect($this->generateUrl('newsIndex'));
+//    }
+
 }
