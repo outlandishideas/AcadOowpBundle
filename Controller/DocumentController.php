@@ -21,7 +21,15 @@ class DocumentController extends BaseController {
 
         $post = $this->querySingle(array('page_id' => '3563'));
 
-        $items = Document::fetchAll();
+        //order posts by publication date
+        //NB posts with no publication date will not be shown
+        $items = Document::fetchAll(
+            array(
+                'meta_key' => 'publication_date',
+                'orderby' => 'meta_value',
+                'order' => 'DESC'
+            )
+        );
 
         $response['post'] = $post;
         $response['items'] = $items;
