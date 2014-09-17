@@ -52,6 +52,10 @@ abstract class Document extends Resource {
         return $this->metadata('bibliographic_reference');
     }
 
+    public function documentUrl() {
+        return $this->metadata('document_url');
+    }
+
     public function attachment() {
         return $this->metadata('attachment');
     }
@@ -77,6 +81,28 @@ abstract class Document extends Resource {
 
         return round($size, 2) . ' ' . $units[$i];
     }
+
+//    public static function fetchDocuments($queryArgs = array()) {
+//        $defaults = array (
+//            'posts_per_page' => -1,
+//            'meta_query'=>array(
+//                array(
+//                    'key'=>'publication_date',
+//                    'value'=> date('Y/m/d'),
+//                    'compare'=>'>',
+//                    'type'=>'DATE'
+//                )
+//            ),
+//            'orderby' => 'meta_value',
+//            'meta_key' => 'start_date',
+//            'order' => 'asc'
+//        );
+//
+//        $queryArgs = wp_parse_args($queryArgs, $defaults);
+//        $futureEvents = self::fetchAll($queryArgs);
+//
+//        return $futureEvents;
+//    }
 
 
 }

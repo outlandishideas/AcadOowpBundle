@@ -58,6 +58,7 @@ class DocumentController extends BaseController {
 
         $response['post'] = $post;
         $response['sideItems'] = $sideItems;
+        $response['documentUrl'] = $post->documentUrl();
         $response['attachment'] = $post->attachment();
 
         return $response;
