@@ -349,4 +349,8 @@ abstract class Post extends BasePost {
         return $recentResources;
     }
 
+    public function socialMedia() {
+        return get_field('social_media', 'options');
+    }
+
 }

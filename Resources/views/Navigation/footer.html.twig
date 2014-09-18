@@ -48,13 +48,25 @@
                 </div>
 
             </div>
+
             <div class="large-6 columns">
 
-                {% include "OutlandishAcadOowpBundle:Partial:social.html.twig" with {
-                'post': post,
-                'title': 'event'} %}
+                <div class="share">
+                    <div class="row">
+                        <div class="large-24 columns">
+                            <hr>
+                            <h3 class="block-heading">Follow us</h3>
+                            <ul class="social">
 
+                                {% include "OutlandishAcadOowpBundle:Partial:social.html.twig" with {
+                                'title': 'event'} %}
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
 
         {% endblock %}

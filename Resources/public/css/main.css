@@ -233,6 +233,35 @@ hr {
     padding: 10px 20px;
 }
 
+.header .bottom-header .fa-stack {
+    color: black;
+    font-size: 1em;
+    line-height: 1;
+}
+
+.header .bottom-header .fa-circle {
+     display: none;
+}
+
+.header .bottom-header .fa-stack .fa {
+    color: white;
+    font-size: 1.5em;
+    line-height: 1.4;
+}
+
+.header .bottom-header li.social-icon {
+    float: right;
+    border-right: 1px solid #fff;
+}
+
+.header .bottom-header li.social-icon:last-of-type {
+    border-left: 1px solid #fff;
+}
+
+.header .bottom-header li.social-icon a {
+    padding: 0.6rem 0.9rem;
+}
+
 .main-title a {
 	color: #FFFFFF;
 	font-size: 1.5rem;
@@ -369,11 +398,14 @@ nav .inline-list {
 
 nav .inline-list li {
 	padding: 0.5rem 1.375rem;
-	border-left: 1px solid #ffffff;
 	margin: 0;
 }
 
-nav .inline-list li:nth-last-of-type(2), nav .inline-list li:last-of-type {
+nav .inline-list li:not(.social-icon) {
+    border-left: 1px solid #ffffff;
+}
+
+nav .inline-list li:nth-of-type(6) {
     border-right: 1px solid #ffffff;
 }
 
@@ -393,9 +425,10 @@ nav .inline-list li.search {
 	background: #134643;
 	padding: 0;
     overflow: hidden;
-    float: none;
+    /*float: none;*/
     position: relative; /** needed for absolute positioning of submit icon **/
     height: 100%;
+    border-right: 1px solid #fff;
 }
 
 a.search-icon {
