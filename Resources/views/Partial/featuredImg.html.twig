@@ -1,6 +1,7 @@
-<div class="featured-image"
-">
-    {{ post.featuredImage('large') | raw }}
+{% if image == 'none' %}{% set image = 'large' %}{% endif %}
+
+<div class="featured-image {{ classes }}">
+    {{ post.featuredImage(image) | raw }}
     {% if post.featuredImageTitle() %}
         <p class="caption-title">{{ post.featuredImageTitle() | raw }}</p>
     {%  endif %}
