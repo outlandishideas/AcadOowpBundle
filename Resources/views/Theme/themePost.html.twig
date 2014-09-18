@@ -1,10 +1,14 @@
 {% extends '::layout.html.twig' %}
 
 {% block title %}{{ post.title() | raw }}{% endblock %}
-
 {% block content %}
 
     <article class="section">
+        <div class="row">
+            <div class="large-24 columns">
+                {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
+            </div>
+        </div>
         <div class="row">
             <div class="medium-8 medium-push-16 columns">
                 {% block sideBar %}
@@ -13,16 +17,15 @@
                     'post': post,
                     'title': 'page'} %}
 
-                {% endblock %}
-            </div>
-            <div class="medium-15 end medium-pull-8 columns">
-                <div class="content main">
-
-                    {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
-
                     <div class="row">
                         <div class="large-24 columns">
                             <div class="content post">
+
+                                {% include 'OutlandishAcadOowpBundle:Partial:featuredImg.html.twig' with {
+                                    'post': post,
+                                    'image' : 'item-image-12',
+                                    'classes' : 'sidebar-featured-image'
+                                } %}
 
                                 {% block postContent %}
 
@@ -33,15 +36,23 @@
                             </div>
                         </div>
                     </div>
+
+                {% endblock %}
+            </div>
+            <div class="medium-15 end medium-pull-8 columns">
+                <div class="content main">
+
+                    {% block related %}
+                        {{ render(controller('OutlandishAcadOowpBundle:Search:renderRelatedPosts', {
+                        'post': post
+                        })) }}
+                    {% endblock %}
+
                 </div>
             </div>
         </div>
     </article>
 
-    {% block related %}
-        {{ render(controller('OutlandishAcadOowpBundle:Search:renderRelatedPosts', {
-        'post': post
-        })) }}
-    {% endblock %}
+
 
 {% endblock %}
