@@ -3,7 +3,7 @@
 {% if not date %}{% set date = "none" %}{% endif %}
 {% if not excerpt_length %}{% set excerpt_length = 400 %}{% endif %}
 
-{% if image == 'none' or not item.featuredImage() %}
+{% if (image == 'none' or not item.featuredImage()) and item.postType != 'person' %}
     <a href="{{ item.permalink() }}" class="post-item post-{{ item.post_type }} main {{ classes }}">
 
         {% block itemNoImageInclude %}
@@ -21,7 +21,19 @@
         <div class="row">
             <div class="columns large-{% if 'side-items' in classes %}8{% else %}10{% endif %}">
                 <div class="post-item-image">
-                    {% block item_image %}{{ item.featuredImage(image) | raw }}{% endblock %}
+                    {% block item_image %}
+
+                        {% if item.featuredImage() %}
+
+                            {{ item.featuredImage(image) | raw }}
+
+                        {% elseif item.postType() == 'person' %}
+
+                            <img src="{{ asset('bundles/outlandishacadoowp/images/no-profile.png') }}">
+
+                        {% endif %}
+
+                    {% endblock %}
                     {% if 'image-overlay' in classes %}
                         <p class="date">{{ item.dateString("j M Y", true) | raw }}</p>
                     {% endif %}
