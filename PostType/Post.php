@@ -187,7 +187,8 @@ abstract class Post extends BasePost {
     public function connectedDocuments($title = 'Related documents') {
         return array(
             'title' => $title,
-            'items' => $this->connected(Document::postType())
+            'items' => $this->connected(Document::postType()),
+            'postType' => Document::postType()
         );
     }
 
@@ -199,7 +200,8 @@ abstract class Post extends BasePost {
     public function connectedEvents($title = 'Related events') {
         return array(
             'title' => $title,
-            'items' => $this->connected(Event::postType())
+            'items' => $this->connected(Event::postType()),
+            'postType' => Event::postType()
         );
     }
 
@@ -211,7 +213,8 @@ abstract class Post extends BasePost {
     public function connectedNews($title = 'Related news') {
         return array(
             'title' => $title,
-            'items' => $this->connected(News::postType())
+            'items' => $this->connected(News::postType()),
+            'postType' => News::postType()
         );
     }
 
@@ -223,7 +226,8 @@ abstract class Post extends BasePost {
     public function connectedPeople($title = 'Related people') {
         return array(
             'title' => $title,
-            'items' => $this->connected(Person::postType())
+            'items' => $this->connected(Person::postType()),
+            'postType' => Person::postType()
         );
     }
 
@@ -235,7 +239,8 @@ abstract class Post extends BasePost {
     public function connectedPlaces($title = 'Related places') {
         return array(
             'title' => $title,
-            'items' => $this->connected(Place::postType())
+            'items' => $this->connected(Place::postType()),
+            'postType' => Place::postType()
         );
     }
 
@@ -247,7 +252,8 @@ abstract class Post extends BasePost {
     public function connectedProjects($title = 'Related projects') {
         return array(
             'title' => $title,
-            'items' => $this->connected(Project::postType())
+            'items' => $this->connected(Project::postType()),
+            'postType' => Project::postType()
         );
     }
 
@@ -259,7 +265,8 @@ abstract class Post extends BasePost {
     public function connectedThemes($title = 'Related themes') {
         return array(
             'title' => $title,
-            'items' => $this->connected(Theme::postType())
+            'items' => $this->connected(Theme::postType()),
+            'postType' => Theme::postType()
         );
     }
 
