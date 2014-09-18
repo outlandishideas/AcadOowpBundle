@@ -21,9 +21,11 @@
                         <div class="large-24 columns">
                             <div class="content post">
 
+                                <h3 class="block-heading">About {{ post.title() }}</h3>
+
                                 {% include 'OutlandishAcadOowpBundle:Partial:featuredImg.html.twig' with {
                                     'post': post,
-                                    'image' : 'item-image-12',
+                                    'image' : 'item-image-6',
                                     'classes' : 'sidebar-featured-image'
                                 } %}
 
