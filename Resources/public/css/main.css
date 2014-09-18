@@ -899,13 +899,13 @@ article .subtitle {
     letter-spacing: 0;
 }
 
-.section a h2, .section a.post-item h3, .section a.post-item h3.featured {
+a h2, a.post-item h3, a.post-item h3.featured {
     -moz-transition: all 1.6s;
     -webkit-transition: all 1.6s;
     transition: all 1.6s;
 }
 
-.section a:hover h2, .section a.post-item h3:hover, .section a.post-item a h3:focus, .section a.post-item h3.featured:hover {
+a:hover h2, a.post-item h3:hover, a.post-item a h3:focus, a.post-item h3.featured:hover {
     color: #126D66;
     -moz-transition: all 1.6s;
     -webkit-transition: all 1.6s;
@@ -1370,6 +1370,12 @@ img.avatar.photo {
 .vcard .person-details .fn {
     font-weight: 400;
     font-size: 16px;
+}
+
+.vcard .person-details .fa-stack {
+    width: 1.8em;
+    height: 1.8em;
+    margin-left: -9px;
 }
 
 .equalise {
