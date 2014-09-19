@@ -1446,6 +1446,10 @@ img.avatar.photo {
     display: none;
 }
 
+.theme .share {
+    margin-top: 0;
+}
+
 /* Social Sharing */
 
 .share {
