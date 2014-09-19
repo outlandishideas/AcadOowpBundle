@@ -59,10 +59,8 @@
 
         <h3 class="block-heading">Summary</h3>
 
-        <p>
-            {{ post.content()  |  raw  }}
-            {#{{ post.excerpt(1000) | raw }}#}
-        </p>
+        {{ post.content()  |  raw  }}
+        {#{{ post.excerpt(1000) | raw }}#}
 
     {%  endif %}
 
