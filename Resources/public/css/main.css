@@ -1195,10 +1195,6 @@ ul.side-menu {
     display: none;
 }
 
-/*ul.side-menu>:not(li) {*/
-    /*display: none;*/
-/*}*/
-
 ul.side-menu>h3 {
     display: block;
 }
@@ -1338,7 +1334,6 @@ ul.search-results.people li.accordion-item.open .accordion-toggle h3:after {
 .people-item h4 {
     font-size: 1rem;
     font-weight: bold;
-    /*padding-top: 10px;*/
 }
 
 .people-intro p:not(.wp-caption-text) {
@@ -1354,7 +1349,6 @@ ul.search-results.people li.accordion-item.open .accordion-toggle h3:after {
 }
 
 .avatar {
-	/*width: 100px;*/
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
     max-height: 140px;
@@ -1444,6 +1438,12 @@ img.avatar.photo {
 	margin-bottom: 0;
 	display: inline;
 	vertical-align: middle;
+}
+
+/*Theme post*/
+
+.theme h2.related-heading {
+    display: none;
 }
 
 /* Social Sharing */

@@ -42,12 +42,6 @@
 
                         {% block related %}
 
-                            <div class="row">
-                                <div class="large-24 columns">
-                                    <h2>Explore related content</h2>
-                                </div>
-                            </div>
-
                             {{ render(controller('OutlandishAcadOowpBundle:Search:renderRelatedPosts', {
                             'post': post
                             })) }}
