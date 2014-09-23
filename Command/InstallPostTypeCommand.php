@@ -61,8 +61,22 @@ class InstallPostTypeCommand extends ContainerAwareCommand {
         //create PostType dir in @OutlandishSiteBundle if it doesn't exist
         //todo: mkdir PostTypes ...
 
-        //create file with $name name
-        //todo: create file @OutlandishSiteBundle/PostTypes/$name
+        //if file does not exist
+
+            //create file with $name name
+            //todo: create file @OutlandishSiteBundle/PostTypes/$name
+
+        //else if file inherits from $inherit
+            //if class is abstract
+                //make class not abstract
+                //todo: remove abstract from file
+                //todo: exit with success code and message
+            //else
+                //class already exists and is instantiated
+                //todo: exit with success code and message
+        //else
+            //class already exists but is set up differently
+            //todo: exit with error and message
 
         //open file and add contents
         //todo: open file created above
