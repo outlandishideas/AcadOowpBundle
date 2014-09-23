@@ -1,0 +1,150 @@
+<!doctype html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<head>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1"/>
+    <meta charset="utf-8" />
+    <title>{% block title %} {{ post.title() }}{% endblock %}</title>
+    {{ wp_head }}
+    {% block stylesheets %}
+        <link href="{{ asset('bundles/outlandishacadoowp/css/foundation/foundation.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('bundles/outlandishacadoowp/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('bundles/outlandishacadoowp/css/main.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/isci.css') }}" rel="stylesheet" type="text/css" />
+        <link rel='stylesheet' id='dashicons-css'  href='http://scaca.beta.gd/wp-includes/css/dashicons.min.css?ver=3.9.1' type='text/css' media='all' />
+    {% endblock %}
+    {% block scripts_header %}
+        <script src="{{ asset('bundles/outlandishacadoowp/js/vendor/modernizr.js') }}"></script>
+        <!--[if IE 8]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+        <script src="//s3.amazonaws.com/nwapi/nwmatcher/nwmatcher-1.2.5-min.js"></script>
+        <script src="//html5base.googlecode.com/svn-history/r38/trunk/js/selectivizr-1.0.3b.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
+        <script src="{{ asset('bundles/outlandishacadoowp/js/vendor/rem.min.js') }}"></script>
+        <![endif]-->
+    {% endblock %}
+</head>
+<body>
+
+{% block nav_top %}
+    <div class="sticky">
+        <header class="header">
+
+            <div class="row top-header">
+                <div class="large-6 medium-8 small-24 small-centered medium-uncentered large-uncentered columns align-width">
+                    <img class="logo" src="{{ asset('assets/images/isci-logo.jpg') }}">
+                </div>
+                <div class="large-10 medium-16 small-24 columns small-centered large-uncentered align-width">
+                    {#{%  if post.headerText() %}#}
+                    {#<img src="{{ post.headerText() }}">#}
+                    {#{% endif %}#}
+                    <p>The International State Crime Initiative is a cross-disciplinary research centre. We aim to introduce new perspectives to human rights research.</p>                </div>
+            </div>
+
+            <div class="mobile-header">
+                {#<a href="#" id="hamburger">#}
+                    {#<span class="fa fa-search"></span>#}
+                {#</a>#}
+                <a href="#" id="hamburger">&#9776;</a>
+                <a href="#" class="search filter-toggle search-icon submit right">
+                     <span class="fa fa-search"></span>
+                 </a>
+            </div>
+            <div class="row bottom-header-row">
+                <div class="bottom-header">
+                    <div class="large-24 columns large-centered text-right align-width">
+                        {% block nav_section %}
+                            <nav>
+                                <!-- Right Nav Section -->
+                                <ul class="inline-list large-24 left">
+                                    {% block nav_links %}
+                                        {{ render(controller('OutlandishAcadOowpBundle:Navigation:renderMenu', {
+                                        'maxDepth': 3
+                                        })) }}
+                                    {% endblock %}
+
+                                    {% include "OutlandishAcadOowpBundle:Partial:social.html.twig" with {
+                                        'socialmedia' : post.socialMedia()}
+                                    %}
+
+                                    <li class="search filter-toggle right">
+                                        <a href="#" class="search-icon right">
+                                            <span class="search-text">Search</span>
+                                            <span class="fa fa-search"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+            {% block filter_panel %}
+                {{ render(controller('OutlandishAcadOowpBundle:Navigation:renderFilterPanel', {'currentPost': post })) }}
+            {% endblock %}
+            {% block breadcrumbs %}
+                <section id="breadcrumbs" class="section">
+                    <div class="row">
+                        <div class="large-24 columns">
+                            <div class="breadcrumbs">
+                                {% block bead_links %}
+                                    {{ render(controller('OutlandishAcadOowpBundle:Navigation:renderBreadcrumbs' )) }}
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            {% endblock %}
+
+        </header>
+    </div>
+{% endblock %}
+
+{% block main_content %}
+    <div id="content" class="row">
+        <div class="large-24 columns">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block carousel %}
+    {{ render(controller('OutlandishAcadOowpBundle:Carousel:renderCarousel', {} )) }}
+{% endblock %}
+
+{{ wp_footer() }}
+{% block footer %}
+    <footer id="footer">
+        {{ render(controller('OutlandishAcadOowpBundle:Navigation:renderFooter')) }}
+    </footer>
+{% endblock %}
+
+{#Empty div for checking if mobile view#}
+<div class="mobile-hide">&nbsp;</div>
+
+{% block scripts_footer %}
+    <script src="{{ asset('bundles/outlandishacadoowp/js/vendor/jquery.js') }}"></script>
+    <script src="{{ asset('bundles/outlandishacadoowp/js/foundation.min.js') }}"></script>
+    <script src="{{ asset('bundles/outlandishacadoowp/js/vendor/jquery.carouFredSel.min.js') }}"></script>
+    <script src="{{ asset('bundles/outlandishacadoowp/js/vendor/jquery.appear.js') }}"></script>
+    <script src="{{ asset('bundles/outlandishacadoowp/js/acadoowp.js') }}"></script>
+    <script src="{{ asset('bundles/outlandishacadoowp/js/facetsearch.js') }}"></script>
+{% endblock %}
+
+    <script type="application/javascript">
+        window.searchAjaxUrl = "{{ path('searchAjax') }}";
+    </script>
+    <script>
+        window.fs = new window.FacetSearch();
+        $('#filter-selected li.filter-option').each(function(i, el) {
+            window.fs.addSelection($(el).attr('rel'));
+        });
+    </script>
+
+    <script type="application/javascript">
+        var searchAjaxUrl = "{{ path('searchAjax') }}";
+        console.log(searchAjaxUrl);
+    </script>
+
+</body>
+</html>
