@@ -6,8 +6,8 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 
-use Outlandish\AcadOowpBundle\PostType\Page;
-use Outlandish\AcadOowpBundle\PostType\Post;
+use Outlandish\SiteBundle\PostType\Page;
+use Outlandish\SiteBundle\PostType\Post;
 use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
 use Symfony\Component\HttpFoundation\Request;
 

@@ -3,7 +3,7 @@
 
 namespace Outlandish\AcadOowpBundle\Controller;
 
-use Outlandish\AcadOowpBundle\PostType\Document;
+use Outlandish\SiteBundle\PostType\Document;
 use Outlandish\AcadOowpBundle\Controller\ResourceController as BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Outlandish\RoutemasterBundle\Annotation\Template;

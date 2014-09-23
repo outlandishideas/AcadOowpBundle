@@ -11,7 +11,7 @@ use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetOrder;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetOrderBy;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostToPost;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostType;
-use Outlandish\AcadOowpBundle\PostType\Post;
+use Outlandish\SiteBundle\PostType\Post;
 use Outlandish\OowpBundle\Manager\PostManager;
 use Outlandish\AcadOowpBundle\FacetedSearch\Search;
 use Outlandish\SiteBundle\PostType\Page;

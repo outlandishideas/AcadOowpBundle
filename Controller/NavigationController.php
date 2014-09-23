@@ -6,8 +6,8 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 use Outlandish\OowpBundle\PostType\Post as OowpPost;
-use Outlandish\AcadOowpBundle\PostType\Post;
-use Outlandish\AcadOowpBundle\PostType\Page;
+use Outlandish\SiteBundle\PostType\Post;
+use Outlandish\SiteBundle\PostType\Page;
 use Outlandish\OowpBundle\PostType\MiscPost;
 use Symfony\Component\HttpFoundation\Response;
 use Outlandish\SiteBundle\PostType\News;

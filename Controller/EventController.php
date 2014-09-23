@@ -7,7 +7,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 use Outlandish\AcadOowpBundle\Controller\ResourceController as BaseController;
 
 use Symfony\Component\HttpFoundation\Request;
-use Outlandish\AcadOowpBundle\PostType\Event;
+use Outlandish\SiteBundle\PostType\Event;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 

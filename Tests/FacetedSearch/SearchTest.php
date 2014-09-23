@@ -14,7 +14,7 @@ require_once __DIR__ . '/../../../../../web/wp-settings.php';
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostType;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostToPost;
 use Outlandish\AcadOowpBundle\FacetedSearch\Search;
-use Outlandish\AcadOowpBundle\PostType\Document;
+use Outlandish\SiteBundle\PostType\Document;
 use Outlandish\SiteBundle\PostType\News;
 use Outlandish\SiteBundle\PostType\Person;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

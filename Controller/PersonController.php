@@ -6,7 +6,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 use Outlandish\AcadOowpBundle\Controller\ThemeController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
-use Outlandish\AcadOowpBundle\PostType\Post;
+use Outlandish\SiteBundle\PostType\Post;
 use Outlandish\SiteBundle\PostType\Person;
 use Outlandish\SiteBundle\PostType\Role;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

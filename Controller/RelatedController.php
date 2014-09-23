@@ -3,9 +3,9 @@
 
 namespace Outlandish\AcadOowpBundle\Controller;
 
-use Outlandish\AcadOowpBundle\PostType\Theme;
-use Outlandish\AcadOowpBundle\PostType\Post;
-use Outlandish\AcadOowpBundle\PostType\Person;
+use Outlandish\SiteBundle\PostType\Theme;
+use Outlandish\SiteBundle\PostType\Post;
+use Outlandish\SiteBundle\PostType\Person;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 

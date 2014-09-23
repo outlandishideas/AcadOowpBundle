@@ -5,7 +5,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 
 use Outlandish\AcadOowpBundle\FacetedSearch\SearchFormHelper;
-use Outlandish\AcadOowpBundle\PostType\Theme;
+use Outlandish\SiteBundle\PostType\Theme;
 use Outlandish\OowpBundle\PostType\MiscPost;
 use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 use Outlandish\SiteBundle\PostType\News;

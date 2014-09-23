@@ -3,9 +3,9 @@
 
 namespace Outlandish\AcadOowpBundle\Controller;
 
-use Outlandish\AcadOowpBundle\PostType\Document;
+use Outlandish\SiteBundle\PostType\Document;
 use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
-use Outlandish\AcadOowpBundle\PostType\Theme;
+use Outlandish\SiteBundle\PostType\Theme;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Outlandish\RoutemasterBundle\Annotation\Template;
 use Symfony\Component\HttpFoundation\Request;

@@ -3,9 +3,9 @@
 
 namespace Outlandish\AcadOowpBundle\Controller;
 
-use Outlandish\AcadOowpBundle\PostType\Document;
+use Outlandish\SiteBundle\PostType\Document;
 use Outlandish\RoutemasterBundle\Controller\BaseController;
-use Outlandish\AcadOowpBundle\PostType\Place;
+use Outlandish\SiteBundle\PostType\Place;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Outlandish\RoutemasterBundle\Annotation\Template;
 
