@@ -20,17 +20,19 @@ class CarouselController extends BaseController {
 
 	public function getCarousel( $args = array() )
 	{
-		$organisations = get_field('associated_organisations', 'options');
-		$carouselOrganisations = array();
-		foreach ($organisations as $org) {
-			$org['url'] = $this->cleanUrl($org['url']);
-            $org['logo'] = $this->getImageWithId($org['logo'], 'medium');
-			$carouselOrganisations[] = $org;
-		}
+        $organisations = get_field('associated_organisations', 'options');
+        $carouselOrganisations = array();
+        if(is_array($organisations)){
+            foreach ($organisations as $org) {
+                $org['url'] = $this->cleanUrl($org['url']);
+                $org['logo'] = $this->getImageWithId($org['logo'], 'medium');
+                $carouselOrganisations[] = $org;
+            }
+        }
 
-		$args['carousel_organisations'] = $carouselOrganisations;
+        $args['carousel_organisations'] = $carouselOrganisations;
 
-		return $args;
+        return $args;
 	}
 
     public function cleanUrl($url) {
