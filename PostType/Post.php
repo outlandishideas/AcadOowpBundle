@@ -8,6 +8,13 @@ use Outlandish\SiteBundle\PostType\Person;
 
 abstract class Post extends BasePost {
 
+    /**
+     * return the name of the icon for this post type
+     * todo: change this to the post icon from dashicons
+     * @var string
+     */
+    public static $menuIcon = 'dashicons-location';
+
     public static $resource = false;
     /**
      * states whether this post type is a theme. Themes are categories that are used to populate search filter
@@ -53,6 +60,14 @@ abstract class Post extends BasePost {
         foreach($connections as $postType => $args) {
             $class::registerConnection($postType, $args);
         }
+    }
+
+    /**
+     * wraps the static property $menuIcon
+     * @return bool|string
+     */
+    public function postTypeIcon() {
+        return static::$menuIcon;
     }
 
     public function featuredImageTitle() {

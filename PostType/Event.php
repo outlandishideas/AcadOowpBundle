@@ -8,7 +8,7 @@ abstract class Event extends Resource {
 
     const NOT_FOUND_MESSAGE = 'NOT_FOUND_ENTER_POSTCODE_OR_ENTER_ADDRESS_OR_AMEND_TITLE';
 
-	public static $menu_icon = 'dashicons-location-alt';
+	public static $menuIcon = 'dashicons-location-alt';
 
     public static $connections = array(
         'news' => array('sortable' => 'any','cardinality' => 'many-to-many'),
@@ -19,7 +19,7 @@ abstract class Event extends Resource {
     );
 
     public function postTypeIcon() {
-        return self::$menu_icon;
+        return self::$menuIcon;
     }
 
     public static function fetchFutureEvents($queryArgs = array()) {

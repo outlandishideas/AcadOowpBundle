@@ -5,7 +5,7 @@ namespace Outlandish\AcadOowpBundle\PostType;
 
 abstract class Role extends Theme {
 
-	public static $menu_icon = 'dashicons-groups';
+	public static $menuIcon = 'dashicons-groups';
     public static $searchFilter = false;
 
     public static $connections = array(
@@ -17,15 +17,10 @@ abstract class Role extends Theme {
         $defaults['hierarchical'] = true;
 
         // Adds menu icon using the $menu_icon property if set
-        if ( static::$menu_icon ) {
-            $defaults['menu_icon'] = static::$menu_icon;
+        if ( static::$menuIcon ) {
+            $defaults['menu_icon'] = static::$menuIcon;
         }
 
         return $defaults;
     }
-
-    public function postTypeIcon() {
-        return self::$menu_icon;
-    }
-
 }

@@ -5,7 +5,7 @@ namespace Outlandish\AcadOowpBundle\PostType;
 
 abstract class Document extends Resource {
 
-	public static $menu_icon = 'dashicons-format-aside';
+	public static $menuIcon = 'dashicons-format-aside';
 
     public static $connections = array(
         'event' => array('sortable' => 'any','cardinality' => 'many-to-many'),
@@ -15,10 +15,6 @@ abstract class Document extends Resource {
         'project' => array('sortable' => 'any','cardinality' => 'many-to-many'),
         'theme' => array('sortable' => 'any','cardinality' => 'many-to-many'),
     );
-
-    public function postTypeIcon() {
-        return self::$menu_icon;
-    }
 
     public function additionalInformation() {
         return $this->metadata('additional_information');

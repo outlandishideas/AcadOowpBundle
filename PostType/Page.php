@@ -7,6 +7,9 @@ abstract class Page extends Post {
 
     const CONTACT_PAGE_ID = 102;
 
+    //todo: change this to the dashicon for page
+    public static $menuIcon = 'dashicons-location';
+
     /**
      * return data for map on contact page
      * @return array|string

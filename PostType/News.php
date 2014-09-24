@@ -5,7 +5,7 @@ namespace Outlandish\AcadOowpBundle\PostType;
 
 abstract class News extends Resource {
 
-	public static $menu_icon = 'dashicons-megaphone';
+	public static $menuIcon = 'dashicons-megaphone';
 
     public static $connections = array(
         'person' => array('sortable' => 'any','cardinality' => 'many-to-many'),
@@ -19,7 +19,7 @@ abstract class News extends Resource {
     }
 
     public function postTypeIcon() {
-        return self::$menu_icon;
+        return self::$menuIcon;
     }
 
 }

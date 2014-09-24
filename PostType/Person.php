@@ -5,7 +5,7 @@ namespace Outlandish\AcadOowpBundle\PostType;
 
 abstract class Person extends Post {
 
-    public static $menu_icon = 'dashicons-businessman';
+    public static $menuIcon = 'dashicons-businessman';
     public static $resource = true;
 
     public static $connections = array(
@@ -19,8 +19,8 @@ abstract class Person extends Post {
         $defaults['hierarchical'] = true;
 
         // Adds menu icon using the $menu_icon property if set
-        if ( static::$menu_icon ) {
-            $defaults['menu_icon'] = static::$menu_icon;
+        if ( static::$menuIcon ) {
+            $defaults['menu_icon'] = static::$menuIcon;
         }
 
         return $defaults;
@@ -28,10 +28,6 @@ abstract class Person extends Post {
 
     public static function friendlyNamePlural(){
         return "People";
-    }
-
-    public function postTypeIcon() {
-        return self::$menu_icon;
     }
 
     /**
