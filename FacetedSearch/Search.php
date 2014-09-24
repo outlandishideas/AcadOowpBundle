@@ -71,6 +71,25 @@ class Search {
     }
 
     /**
+     * remove a specific facet
+     * @param $facetName
+     */
+    public function removeFacet($facetName)
+    {
+        if(array_key_exists($facetName, $this->facets)){
+            unset($this->facets[$facetName]);
+        }
+    }
+
+    /**
+     * remove all facets
+     */
+    public function resetFacets()
+    {
+        $this->facets = array();
+    }
+
+    /**
      * @return Facet[]
      */
     public function getFacets()
