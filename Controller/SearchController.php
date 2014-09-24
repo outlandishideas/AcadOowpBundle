@@ -12,6 +12,7 @@ use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetOrderBy;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostToPost;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostType;
 use Outlandish\SiteBundle\PostType\Post;
+use Outlandish\OowpBundle\PostType\Post as OowpPost;
 use Outlandish\OowpBundle\Manager\PostManager;
 use Outlandish\AcadOowpBundle\FacetedSearch\Search;
 use Outlandish\SiteBundle\PostType\Page;
@@ -49,7 +50,7 @@ class SearchController extends BaseController {
         return $response;
     }
 
-    public function renderRelatedPostsAction( Post $post, $s = null) {
+    public function renderRelatedPostsAction( OowpPost $post, $s = null) {
         if($post->postType() == Page::postType()) return new Response();
         $args = array(
             's' => $s
