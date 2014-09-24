@@ -208,8 +208,9 @@ class NavigationController extends SearchController {
 
         $this->queryManager = $this->get('outlandish_oowp.query_manager');
 
-        if ( $menu ) {
-			$menu_locations = get_nav_menu_locations();
+        $menu_locations = get_nav_menu_locations();
+
+        if ( $menu && array_key_exists($menu, $menu_locations) ) {
 			$menu_obj       = get_term( $menu_locations[$menu], 'nav_menu' );
 			if ( !is_wp_error( $menu_obj ) ) {
 				$items = wp_get_nav_menu_items( $menu_obj->term_id );
