@@ -7,15 +7,14 @@ abstract class Document extends Resource {
 
 	public static $menu_icon = 'dashicons-format-aside';
 
-    //connected to event, news, person, place, project, theme
-    public static function onRegistrationComplete() {
-        self::registerConnection(Event::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
-        self::registerConnection(News::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
-        self::registerConnection(Person::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
-        self::registerConnection(Place::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
-        self::registerConnection(Project::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
-        self::registerConnection(Theme::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
-    }
+    public static $connections = array(
+        'event' => array('sortable' => 'any','cardinality' => 'many-to-many'),
+        'news' => array('sortable' => 'any','cardinality' => 'many-to-many'),
+        'person' => array('sortable' => 'any','cardinality' => 'many-to-many'),
+        'place' => array('sortable' => 'any','cardinality' => 'many-to-many'),
+        'project' => array('sortable' => 'any','cardinality' => 'many-to-many'),
+        'theme' => array('sortable' => 'any','cardinality' => 'many-to-many'),
+    );
 
     public function postTypeIcon() {
         return self::$menu_icon;

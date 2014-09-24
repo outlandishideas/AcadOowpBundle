@@ -8,6 +8,10 @@ abstract class Role extends Theme {
 	public static $menu_icon = 'dashicons-groups';
     public static $searchFilter = false;
 
+    public static $connections = array(
+        'person' => array('sortable' => 'any','cardinality' => 'many-to-many'),
+    );
+
     static function getRegistrationArgs($defaults) {
 
         $defaults['hierarchical'] = true;
@@ -22,13 +26,6 @@ abstract class Role extends Theme {
 
     public function postTypeIcon() {
         return self::$menu_icon;
-    }
-
-    //connected to person, project
-    public static function onRegistrationComplete() {
-        self::registerConnection(Person::postType(),  array('sortable' => 'any','cardinality' => 'many-to-one'));
-        self::registerConnection(Project::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
-
     }
 
 }

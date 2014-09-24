@@ -8,6 +8,12 @@ abstract class Person extends Post {
     public static $menu_icon = 'dashicons-businessman';
     public static $resource = true;
 
+    public static $connections = array(
+        'place' => array('sortable' => 'any','cardinality' => 'many-to-many'),
+        'project' => array('sortable' => 'any','cardinality' => 'many-to-many'),
+        'theme' => array('sortable' => 'any','cardinality' => 'many-to-many'),
+    );
+
     static function getRegistrationArgs($defaults) {
 
         $defaults['hierarchical'] = true;
@@ -19,14 +25,6 @@ abstract class Person extends Post {
 
         return $defaults;
     }
-
-    //connected to document, event, news, place, project, role, theme
-    public static function onRegistrationComplete() {
-        self::registerConnection(Place::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
-        self::registerConnection(Project::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
-        self::registerConnection(Theme::postType(),  array('sortable' => 'any','cardinality' => 'many-to-many'));
-        self::registerConnection('user',  array('sortable' => 'any','cardinality' => 'one-to-one'));
-	}
 
     public static function friendlyNamePlural(){
         return "People";

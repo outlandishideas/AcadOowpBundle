@@ -20,6 +20,14 @@ abstract class Post extends BasePost {
      */
     public static $searchFilter = false;
 
+    /**
+     * this lists the connections for this post
+     * array key = internal name of post type (eg. post)
+     * array value = $args to be passed to registerConnection($postType, $args)
+     * @var array
+     */
+    public static $connections = array();
+
     public static function isResource(){
         return static::$resource;
     }
@@ -30,6 +38,21 @@ abstract class Post extends BasePost {
 
     public static function isFilter(){
         return static::$searchFilter;
+    }
+
+    public static function onRegistrationComplete() {
+        parent::onRegistrationComplete();
+        static::registerConnections();
+    }
+
+    public static function registerConnections()
+    {
+        $class = get_called_class();
+        $mapping = self::$postManager->postTypeMapping();
+        $connections = array_intersect_key($class::$connections, $mapping);
+        foreach($connections as $postType => $args) {
+            $class::registerConnection($postType, $args);
+        }
     }
 
     public function featuredImageTitle() {
