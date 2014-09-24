@@ -25,7 +25,7 @@ class NavigationController extends SearchController {
 
         $footerAbout = $this->wpMenu('footer_about');
 
-        $args['footer_about'] = $footerAbout->posts;
+        $args['footer_about'] = $footerAbout;
 
         return $this->render(
             'OutlandishAcadOowpBundle:Navigation:footer.html.twig',
@@ -139,7 +139,7 @@ class NavigationController extends SearchController {
         return array(
             'sections' => $sections,
             'socialmedia' => $socialMedia,
-            'pages' => $pages->posts,
+            'pages' => $pages,
             'organisations' => $organisations,
             'address' => $address,
             'email' => $email,
@@ -224,7 +224,7 @@ class NavigationController extends SearchController {
                         'orderby' => 'post__in'
                     );
 
-                    $posts = $this->queryManager->query($args);
+                    $posts = $this->queryManager->query($args)->posts;
 
 				}
 			}
