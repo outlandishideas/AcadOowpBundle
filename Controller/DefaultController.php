@@ -122,7 +122,7 @@ class DefaultController extends BaseController {
                 case "search_posts":
                     $params = array();
                     /** @var Search $search */
-                    $search = $this->get('outlandish_acadoowp.faceted_search.search');
+                    $search = clone $this->get('outlandish_acadoowp.faceted_search.search');
 
                     $params['s'] = $section['query'];
                     unset($section['query']);
