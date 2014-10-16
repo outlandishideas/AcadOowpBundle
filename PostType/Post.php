@@ -346,11 +346,6 @@ abstract class Post extends BasePost {
         return ( count( $names ) > 0 ) ? implode( ', ', $names ) : false;
     }
 
-    public function postTypeIcon() {
-        return false;
-    }
-
-
     public function themes()
     {
         $themes = array();
