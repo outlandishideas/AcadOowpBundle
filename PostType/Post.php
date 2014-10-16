@@ -391,4 +391,13 @@ abstract class Post extends BasePost {
         return get_field('social_media', 'options');
     }
 
+    public function headerImage() {
+        return get_field('header_image', 'options');
+
+    }
+
+    public function headerText() {
+        return get_field('header_text', 'options');
+    }
+
 }
