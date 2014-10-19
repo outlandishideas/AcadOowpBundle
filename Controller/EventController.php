@@ -14,17 +14,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class EventController extends BaseController {
 
     /**
-     * @Route("/events/", name="eventsIndex")
-     * @Template("OutlandishAcadOowpBundle:Event:eventIndex.html.twig")
+     *
      * @param Request $request
      * @return array
+     *
+     * @Template("OutlandishAcadOowpBundle:Event:eventIndex.html.twig")
      */
     public function indexAction(Request $request) {
         $response = array();
 
-        //todo: use postTypeParentId() instead
-        $post = $this->querySingle(array('page_id' => '834'));
-//        $post = $this->querySingle(array('page_id' => Event::postTypeParentId()));
+        $post = $this->querySingle(array('page_id' => Event::postTypeParentId()));
 
         //fetch future events and sort by month
         $items = Event::fetchFutureEvents();
@@ -46,12 +45,11 @@ class EventController extends BaseController {
     }
 
     /**
-     * @Route("events/previous-events/", name="previousEvents")
-     * @Template("OutlandishAcadOowpBundle:Event:eventIndex.html.twig")
      * @param Request $request
      * @return array
+     * @Template("OutlandishAcadOowpBundle:Event:eventIndex.html.twig")
      */
-    public function previousEventsAction(Request $request) {
+    public function previousAction(Request $request) {
         $response = array();
 
         $post = $this->querySingle(array('page_id' => Event::PREVIOUS_EVENTS_PAGE_ID));

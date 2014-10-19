@@ -4,11 +4,9 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 
-use Outlandish\AcadOowpBundle\FacetedSearch\SearchFormHelper;
 use Outlandish\SiteBundle\PostType\Theme;
 use Outlandish\OowpBundle\PostType\MiscPost;
 use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
-use Outlandish\AcadOowpBundle\Controller\SearchController as BaseController;
 use Outlandish\SiteBundle\PostType\News;
 use Symfony\Component\HttpFoundation\Request;
 use Outlandish\SiteBundle\PostType\Page;
@@ -18,10 +16,13 @@ use Outlandish\SiteBundle\PostType\Person;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class DefaultController extends BaseController {
+class DefaultController extends Outlandish\AcadOowpBundle\Controller\SearchController {
 
 	/**
 	 * Route is specified in routing.yml because it needs to come last
+     *
+     * @param mixed $slugs
+     * @return array
 	 * @Template("OutlandishAcadOowpBundle:Default:defaultPost.html.twig")
 	 */
 	public function defaultPostAction($slugs)
@@ -50,6 +51,7 @@ class DefaultController extends BaseController {
      * method to generate response for index pages
      * returns either a response with items (if a search has been placed)
      * or a response with sections if sections have been created for a page
+     *
      * @param \Outlandish\OowpBundle\PostType\Post $post
      * @param Request $request
      * @param array $postType
@@ -74,11 +76,12 @@ class DefaultController extends BaseController {
 
     /**
      * takes Request object and array postTypes and returns search object
+     *
      * @param Request $request
      * @param array $postTypes
      * @return Search
      */
-    public function items(Request $request, $postTypes = array()){
+    protected function items(Request $request, $postTypes = array()){
         if(!$request->query->has('s')) return false;
         $params = $request->query->all();
 
@@ -106,7 +109,14 @@ class DefaultController extends BaseController {
         return $search;
     }
 
-    public function sections($sections)
+    /**
+     * Generates an array of sections that can be display on a page
+     * Uses the sections metadata for a page to generate a list of sections and their content
+     *
+     * @param $sections
+     * @return array
+     */
+    protected function sections($sections)
     {
         if(!$sections || !is_array($sections)){
             return array();

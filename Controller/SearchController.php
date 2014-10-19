@@ -27,7 +27,6 @@ class SearchController extends BaseController {
     public $search = null;
 
     /**
-     * @Route("/search/", name="search")
      * @Template("OutlandishAcadOowpBundle:Search:search.html.twig")
      */
     public function indexAction(Request $request)
@@ -41,7 +40,6 @@ class SearchController extends BaseController {
     }
 
     /**
-     * @Route("/search/ajax/", name="searchAjax")
      * @Template("OutlandishAcadOowpBundle:Search:searchAjax.html.twig")
      */
     public function ajaxAction(Request $request)

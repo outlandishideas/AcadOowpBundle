@@ -15,7 +15,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class PersonController extends BaseController {
 
     /**
-     * @Route("/people/")
      * @Template("OutlandishAcadOowpBundle:Person:personIndex.html.twig")
      */
     public function indexAction(Request $request) {
@@ -38,7 +37,6 @@ class PersonController extends BaseController {
     }
 
     /**
-     * @Route("/people/{name}/", name="person")
      * @Template("OutlandishAcadOowpBundle:Person:personPost.html.twig")
      */
     public function singleAction($name) {

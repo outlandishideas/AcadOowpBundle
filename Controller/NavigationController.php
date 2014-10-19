@@ -64,11 +64,11 @@ class NavigationController extends SearchController {
 
 
     /**
-     * @param Post $rootPost
+     * @param OowpPost $rootPost
      * @param int $maxDepth
      * @return Response
      */
-    public function renderSideMenuAction( Post $rootPost, $maxDepth = 1 ){
+    public function renderSideMenuAction( OowpPost $rootPost, $maxDepth = 1 ){
 
         $args = $this->generateMenuArguments($maxDepth, $rootPost);
 

@@ -12,7 +12,6 @@ use Outlandish\RoutemasterBundle\Annotation\Template;
 class PlaceController extends BaseController {
 
 	/**
-	 * @Route("/places/")
 	 * @Template("OutlandishAcadOowpBundle:Place:placeIndex.html.twig")
 	 */
 	public function indexAction() {
@@ -25,7 +24,6 @@ class PlaceController extends BaseController {
 	}
 
 	/**
-	 * @Route("/places/{name}/", name="place")
 	 * @Template("OutlandishAcadOowpBundle:Place:placePost.html.twig")
 	 */
 	public function singleAction($name) {

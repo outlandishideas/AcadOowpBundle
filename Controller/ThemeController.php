@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 class ThemeController extends BaseController {
 
 	/**
-	 * @Route("/themes/")
 	 * @Template("OutlandishAcadOowpBundle:Theme:themeIndex.html.twig")
 	 */
 	public function indexAction(Request $request) {
@@ -26,7 +25,6 @@ class ThemeController extends BaseController {
 	}
 
 	/**
-	 * @Route("/themes/{name}/", name="theme")
 	 * @Template("OutlandishAcadOowpBundle:Theme:themePost.html.twig")
 	 */
 	public function singleAction($name) {

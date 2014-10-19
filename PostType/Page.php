@@ -5,8 +5,6 @@ namespace Outlandish\AcadOowpBundle\PostType;
 
 abstract class Page extends Post {
 
-    const CONTACT_PAGE_ID = 102;
-
     //todo: change this to the dashicon for page
     public static $menuIcon = 'dashicons-location';
 
@@ -30,47 +28,50 @@ abstract class Page extends Post {
     {
         $contactPeopleData = $this->metadata('contact_people');
         $contactPeople = array();
-        foreach ($contactPeopleData as $person) {
-            $contactPerson = array(
-                'name' => array(
-                    'prefix' => '',
-                    'content' => null,
-                    'suffix' => ""
-                ),
-                'email' => array(
-                    'prefix' => 'E: ',
-                    'content' => null,
-                    'suffix' => ""
-                ),
-                'phone' => array(
-                    'prefix' => 'T: ',
-                    'content' => null,
-                    'suffix' => ""
-                ),
-                'image' => array(
-                    'url' => null,
-                )
-            );
-            if ($person['contact_person_type'] == 'existing_contact_person') {
-                $wpPost = $person['contact_person_existing'];
-                if($wpPost instanceof \WP_Post){
-                    $id = $wpPost->ID;
-                    /** @var Person $personObject */
-                    $personObject = Person::fetchById($id);
-                    if($personObject instanceof Person){
-                        $contactPerson['name']['content'] = $personObject->title();
-                        $contactPerson['email']['content'] = $personObject->email();
-                        $contactPerson['phone']['content'] = $personObject->phone();
-                        $contactPerson['image']['url'] = $personObject->featuredImageUrl('medium');
+
+        if(is_array($contactPeopleData)) {
+            foreach ($contactPeopleData as $person) {
+                $contactPerson = array(
+                    'name' => array(
+                        'prefix' => '',
+                        'content' => null,
+                        'suffix' => ""
+                    ),
+                    'email' => array(
+                        'prefix' => 'E: ',
+                        'content' => null,
+                        'suffix' => ""
+                    ),
+                    'phone' => array(
+                        'prefix' => 'T: ',
+                        'content' => null,
+                        'suffix' => ""
+                    ),
+                    'image' => array(
+                        'url' => null,
+                    )
+                );
+                if ($person['contact_person_type'] == 'existing_contact_person') {
+                    $wpPost = $person['contact_person_existing'];
+                    if($wpPost instanceof \WP_Post){
+                        $id = $wpPost->ID;
+                        /** @var Person $personObject */
+                        $personObject = Person::fetchById($id);
+                        if($personObject instanceof Person){
+                            $contactPerson['name']['content'] = $personObject->title();
+                            $contactPerson['email']['content'] = $personObject->email();
+                            $contactPerson['phone']['content'] = $personObject->phone();
+                            $contactPerson['image']['url'] = $personObject->featuredImageUrl('medium');
+                        }
                     }
+                } else {
+                    $contactPerson['name']['content'] = $person['contact_person_name'];
+                    $contactPerson['email']['content'] = $person['contact_person_email'];
+                    $contactPerson['phone']['content'] = $person['contact_person_phone'];
+                    $contactPerson['image']['url'] = $this->imageUrlOnPage($person['contact_person_image'], 'medium');
                 }
-            } else {
-                $contactPerson['name']['content'] = $person['contact_person_name'];
-                $contactPerson['email']['content'] = $person['contact_person_email'];
-                $contactPerson['phone']['content'] = $person['contact_person_phone'];
-                $contactPerson['image']['url'] = $this->imageUrlOnPage($person['contact_person_image'], 'medium');
+                $contactPeople[] = $contactPerson;
             }
-            $contactPeople[] = $contactPerson;
         }
         return $contactPeople;
     }

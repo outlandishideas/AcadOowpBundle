@@ -13,7 +13,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class NewsController extends BaseController {
 
     /**
-     * @Route("/news/", name="newsIndex")
      * @Template("OutlandishAcadOowpBundle:News:newsIndex.html.twig")
      * @param Request $request
      * @return array
@@ -25,7 +24,6 @@ class NewsController extends BaseController {
     }
 
     /**
-     * @Route("/news/{name}/", name="newsPost")
      * @Template("OutlandishAcadOowpBundle:News:newsPost.html.twig")
      */
     public function singleAction($name) {

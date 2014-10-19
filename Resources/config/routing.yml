@@ -1,11 +1,157 @@
-site_controllers:
-    resource: "@OutlandishAcadOowpBundle/Controller"
-    prefix: /
-    type: annotation
+# page routes
+home_page:
+    path: /
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Page:frontPage
+    methods: [GET]
 
+contact_us:
+    path: /contact-us/
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Page:contactUs
+    methods: [GET]
+
+# search routes
+search_ajax:
+    path: /search/ajax/
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Search:ajax
+        _format: json
+    methods: [GET]
+    requirements:
+        _format:  json
+
+# article routes
+article_index:
+    path: /articles/
+    defaults:
+        _controller: OutlandishAcadOowpBundle:News:index
+    methods: [GET]
+
+article_post:
+    path: /articles/{slug}
+    defaults:
+        _controller: OutlandishAcadOowpBundle:News:single
+    methods: [GET]
+    requirements:
+        slug: "[\w-\/]+"
+
+# document routes
+document_index:
+    path: /documents/
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Deocument:index
+    methods: [GET]
+
+document_post:
+    path: /documents/{slug}
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Document:single
+    methods: [GET]
+    requirements:
+        slug: "[\w-\/]+"
+
+# event routes
+event_index:
+    path: /events/
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Event:index
+    methods: [GET]
+
+event_previous:
+    path: /events/previous/
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Event:previous
+    methods: [GET]
+
+event_post:
+    path: /events/{slug}
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Event:single
+    methods: [GET]
+    requirements:
+        slug: "[\w-\/]+"
+
+# news routes
+news_index:
+    path: /news/
+    defaults:
+        _controller: OutlandishAcadOowpBundle:News:index
+    methods: [GET]
+
+news_post:
+    path: /news/{slug}
+    defaults:
+        _controller: OutlandishAcadOowpBundle:News:single
+    methods: [GET]
+    requirements:
+        slug: "[\w-\/]+"
+
+# person routes
+person_index:
+    path: /people/
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Person:index
+    methods: [GET]
+
+person_post:
+    path: /people/{slug}
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Person:single
+    methods: [GET]
+    requirements:
+        slug: "[\w-\/]+"
+
+# place routes
+place_index:
+    path: /places/
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Place:index
+    methods: [GET]
+
+place_post:
+    path: /places/{slug}
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Place:single
+    methods: [GET]
+    requirements:
+        slug: "[\w-\/]+"
+
+# project routes
+project_index:
+    path: /people/
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Project:index
+    methods: [GET]
+
+project_post:
+    path: /people/{slug}
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Project:single
+    methods: [GET]
+    requirements:
+        slug: "[\w-\/]+"
+
+# theme routes
+theme_index:
+    path: /themes/
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Theme:index
+    methods: [GET]
+
+theme_post:
+    path: /themes/{slug}
+    defaults:
+        _controller: OutlandishAcadOowpBundle:Theme:single
+    methods: [GET]
+    requirements:
+        slug: "[\w-\/]+"
+
+# default post route
 default_post:
     path: /{slugs}/
-    requirements:
-        slugs: "[\w-\/]+"
     defaults:
         _controller: OutlandishAcadOowpBundle:Default:defaultPost
+    methods: [GET]
+    requirements:
+        slugs: "[\w-\/]+"

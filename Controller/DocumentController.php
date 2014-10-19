@@ -12,7 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 class DocumentController extends BaseController {
 
     /**
-     * @Route("/documents/", name="documentsIndex")
+     * action for index
+     *
+     * @param Request $request
+     * @return array
+     *
      * @Template("OutlandishAcadOowpBundle:Document:documentIndex.html.twig")
      */
     public function indexAction(Request $request)
@@ -39,14 +43,16 @@ class DocumentController extends BaseController {
     }
 
     /**
-     * @Route("/documents/{name}/", name="documentsPost")
+     * @param mixed $slug
+     * @return array
+     *
      * @Template("OutlandishAcadOowpBundle:Document:documentPost.html.twig")
      */
-    public function singleAction($name)
+    public function singleAction($slug)
     {
         $response = array();
 
-        $post = $this->querySingle(array('name' => $name, 'post_type' => Document::postType()));
+        $post = $this->querySingle(array('name' => $slug, 'post_type' => Document::postType()));
 
         $sideItems = array(
             $post->connectedPeople('Authors'),
