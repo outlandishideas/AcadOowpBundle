@@ -2,7 +2,7 @@
 home_page:
     path: /
     defaults:
-        _controller: OutlandishAcadOowpBundle:Page:frontPage
+        _controller: OutlandishAcadOowpBundle:Search:frontPage
     methods: [GET]
 
 contact_us:
@@ -26,12 +26,12 @@ article_index:
     methods: [GET]
 
 article_post:
-    path: /articles/{slug}
+    path: /articles/{name}
     defaults:
         _controller: OutlandishAcadOowpBundle:News:single
     methods: [GET]
     requirements:
-        slug: "[\w-\/]+"
+        name: "[\w-\/]+"
 
 # document routes
 document_index:
@@ -41,12 +41,12 @@ document_index:
     methods: [GET]
 
 document_post:
-    path: /documents/{slug}
+    path: /documents/{name}
     defaults:
         _controller: OutlandishAcadOowpBundle:Document:single
     methods: [GET]
     requirements:
-        slug: "[\w-\/]+"
+        name: "[\w-\/]+"
 
 # event routes
 event_index:
@@ -62,12 +62,12 @@ event_previous:
     methods: [GET]
 
 event_post:
-    path: /events/{slug}
+    path: /events/{name}
     defaults:
         _controller: OutlandishAcadOowpBundle:Event:single
     methods: [GET]
     requirements:
-        slug: "[\w-\/]+"
+        name: "[\w-\/]+"
 
 # news routes
 news_index:
@@ -77,12 +77,12 @@ news_index:
     methods: [GET]
 
 news_post:
-    path: /news/{slug}
+    path: /news/{name}
     defaults:
         _controller: OutlandishAcadOowpBundle:News:single
     methods: [GET]
     requirements:
-        slug: "[\w-\/]+"
+        name: "[\w-\/]+"
 
 # person routes
 person_index:
@@ -92,12 +92,12 @@ person_index:
     methods: [GET]
 
 person_post:
-    path: /people/{slug}
+    path: /people/{name}
     defaults:
         _controller: OutlandishAcadOowpBundle:Person:single
     methods: [GET]
     requirements:
-        slug: "[\w-\/]+"
+        name: "[\w-\/]+"
 
 # place routes
 place_index:
@@ -107,12 +107,12 @@ place_index:
     methods: [GET]
 
 place_post:
-    path: /places/{slug}
+    path: /places/{name}
     defaults:
         _controller: OutlandishAcadOowpBundle:Place:single
     methods: [GET]
     requirements:
-        slug: "[\w-\/]+"
+        name: "[\w-\/]+"
 
 # project routes
 project_index:
@@ -127,7 +127,7 @@ project_post:
         _controller: OutlandishAcadOowpBundle:Project:single
     methods: [GET]
     requirements:
-        slug: "[\w-\/]+"
+        name: "[\w-\/]+"
 
 # theme routes
 theme_index:
@@ -137,18 +137,18 @@ theme_index:
     methods: [GET]
 
 theme_post:
-    path: /themes/{slug}
+    path: /themes/{name}
     defaults:
         _controller: OutlandishAcadOowpBundle:Theme:single
     methods: [GET]
     requirements:
-        slug: "[\w-\/]+"
+        name: "[\w-\/]+"
 
 # default post route
 default_post:
-    path: /{slugs}/
+    path: /{names}/
     defaults:
         _controller: OutlandishAcadOowpBundle:Default:defaultPost
     methods: [GET]
     requirements:
-        slugs: "[\w-\/]+"
+        names: "[\w-\/]+"
