@@ -12,22 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  * Class PageController
  * @package Outlandish\AcadOowpBundle\Controller
  */
-class PageController extends Outlandish\AcadOowpBundle\Controller\DefaultController {
-
-	/**
-     * action for displaying front page
-     *
-     * @param Request $request
-     * @return array
-	 * @Template("OutlandishAcadOowpBundle:Page:pageFront.html.twig")
-	 */
-	public function frontPageAction(Request $request)
-    {
-        /** @var Page $post */
-		$post = $this->querySingle(array('page_id' => get_option('page_on_front')));
-        $response = $this->indexResponse($post, $request);
-		return $response;
-    }
+class PageController extends DefaultController {
 
     /**
      * action for display contact us page

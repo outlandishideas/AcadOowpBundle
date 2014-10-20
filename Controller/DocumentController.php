@@ -4,12 +4,11 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 use Outlandish\SiteBundle\PostType\Document;
-use Outlandish\AcadOowpBundle\Controller\ResourceController as BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Outlandish\RoutemasterBundle\Annotation\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-class DocumentController extends BaseController {
+class DocumentController extends ResourceController {
 
     /**
      * action for index

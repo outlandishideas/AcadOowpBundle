@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Outlandish\SiteBundle\PostType\Event;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class EventController extends Outlandish\AcadOowpBundle\Controller\ResourceController {
+class EventController extends ResourceController {
 
     /**
      *

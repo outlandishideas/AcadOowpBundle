@@ -7,7 +7,7 @@ use Outlandish\SiteBundle\PostType\Theme;
 use Outlandish\RoutemasterBundle\Annotation\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-class ThemeController extends Outlandish\AcadOowpBundle\Controller\DefaultController {
+class ThemeController extends DefaultController {
 
 	/**
 	 * @Template("OutlandishAcadOowpBundle:Theme:themeIndex.html.twig")

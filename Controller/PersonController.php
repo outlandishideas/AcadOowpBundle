@@ -9,7 +9,7 @@ use Outlandish\SiteBundle\PostType\Person;
 use Outlandish\SiteBundle\PostType\Role;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class PersonController extends Outlandish\AcadOowpBundle\Controller\ThemeController {
+class PersonController extends ThemeController {
 
     /**
      * @Template("OutlandishAcadOowpBundle:Person:index.html.twig")

@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Outlandish\SiteBundle\PostType\News;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class NewsController extends Outlandish\AcadOowpBundle\Controller\ResourceController {
+class NewsController extends ResourceController {
 
     /**
      * @Template("OutlandishAcadOowpBundle:News:index.html.twig")
