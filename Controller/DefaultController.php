@@ -7,7 +7,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 use Outlandish\OowpBundle\PostType\Post as BasePost;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class DefaultController extends SearchController {
+class DefaultController extends Outlandish\RoutemasterBundle\Controller\BaseController {
 
 	/**
 	 * Route is specified in routing.yml because it needs to come last

@@ -22,7 +22,7 @@ use Outlandish\RoutemasterBundle\Annotation\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-abstract class SearchController extends Outlandish\RoutemasterBundle\Controller\BaseController {
+abstract class SearchController extends DefaultController {
 
     public $search = null;
 
