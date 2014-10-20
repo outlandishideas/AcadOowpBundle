@@ -1,0 +1,9 @@
+{% if not excerpt_length %}{% set excerpt_length = 400 %}{% endif %}
+{%  if items |length > 0 %}
+    {% for item in items %}
+        <li>
+            {% set twig_template = "OutlandishAcadOowpBundle:" ~ item.post_type|capitalize ~ ":item.html.twig"  %}
+            {% include twig_template  with { post: item, image: 'item-image-12', date: 'date', excerpt_length: excerpt_length } %}
+        </li>
+    {% endfor %}
+{% endif %}

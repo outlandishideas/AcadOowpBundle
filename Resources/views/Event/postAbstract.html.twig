@@ -1,0 +1,44 @@
+{% extends 'OutlandishAcadOowpBundle:Default:postAbstract.html.twig' %}
+
+{% block content %}
+
+    {{ parent() }}
+
+    {% for item in selected_items %}
+        <li>
+            {% block itemInclude %}
+                {% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
+                'item': item,
+                'excerpt_length': 300,
+                'image': 'medium',
+                'classes': 'image-overlay'} %}
+            {% endblock %}
+        </li>
+    {% endfor %}
+
+
+        {% block related %}
+            {{ render(controller('OutlandishAcadOowpBundle:Related:renderResources', {
+            'post': post
+            })) }}
+        {% endblock %}
+
+
+{% endblock %}
+
+{% block postDate %}<p class="date">{{ post.dateString() }}</p>{% endblock %}
+
+{% block sideBar %}
+    {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
+    'post': post,
+    'title': 'event'} %}
+
+    {% include "OutlandishAcadOowpBundle:Event:event.html.twig" with {
+    'post': post,
+    'title': 'event',
+    'latitude' : event_latitude,
+    'longitude' : event_longitude
+    } %}
+
+{% endblock %}
+

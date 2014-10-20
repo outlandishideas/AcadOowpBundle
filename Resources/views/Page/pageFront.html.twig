@@ -1,4 +1,4 @@
-{% extends 'OutlandishAcadOowpBundle:Default:defaultIndex.html.twig' %}
+{% extends 'OutlandishAcadOowpBundle:Page:postAbstract.html.twig' %}
 
 {% block content %}
 
@@ -22,7 +22,7 @@
             {% else %}
 
                 {% block noSearchResults %}
-                    {% include 'OutlandishAcadOowpBundle:Search:noResults.html.twig' %}
+                    {% include 'OutlandishAcadOowpBundle:Search:noResults.html.twig' with {'post': post } %}
                 {% endblock %}
 
             {% endif %}

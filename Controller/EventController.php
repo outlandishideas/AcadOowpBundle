@@ -4,21 +4,18 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 
-use Outlandish\AcadOowpBundle\Controller\ResourceController as BaseController;
-
 use Symfony\Component\HttpFoundation\Request;
 use Outlandish\SiteBundle\PostType\Event;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class EventController extends BaseController {
+class EventController extends Outlandish\AcadOowpBundle\Controller\ResourceController {
 
     /**
      *
      * @param Request $request
      * @return array
      *
-     * @Template("OutlandishAcadOowpBundle:Event:eventIndex.html.twig")
+     * @Template("OutlandishAcadOowpBundle:Event:index.html.twig")
      */
     public function indexAction(Request $request) {
         $response = array();
@@ -47,7 +44,7 @@ class EventController extends BaseController {
     /**
      * @param Request $request
      * @return array
-     * @Template("OutlandishAcadOowpBundle:Event:eventIndex.html.twig")
+     * @Template("OutlandishAcadOowpBundle:Event:index.html.twig")
      */
     public function previousAction(Request $request) {
         $response = array();
@@ -62,8 +59,7 @@ class EventController extends BaseController {
     }
 
     /**
-     * @Route("/events/{name}/", name="eventPost")
-     * @Template("OutlandishAcadOowpBundle:Event:eventPost.html.twig")
+     * @Template("OutlandishAcadOowpBundle:Event:post.html.twig")
      */
     public function singleAction($name) {
         $response = array();
@@ -75,6 +71,11 @@ class EventController extends BaseController {
         $response['event_longitude'] = $post->longitude();
 
         return $response;
+    }
+
+    public function postTypes()
+    {
+        return array(Event::postType());
     }
 
 }

@@ -10,7 +10,7 @@
                 {% for item in type.items.posts %}
                     <li>
                         {% block itemInclude %}
-                            {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                            {% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
                             'item': item,
                             'excerpt_length': 'none',
                             'image':'avatar-square',

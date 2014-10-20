@@ -1,0 +1,13 @@
+{% extends 'OutlandishAcadOowpBundle:Default:itemAbstract.html.twig' %}
+
+ {% block itemInclude %}
+
+     {% include 'OutlandishAcadOowpBundle:Item:eventContent.html.twig' with {'item': item} %}
+
+ {% endblock %}
+
+ {% block itemNoImageInclude %}
+
+     {% include 'OutlandishAcadOowpBundle:Item:eventContent.html.twig' with {'item': item} %}
+
+ {% endblock %}

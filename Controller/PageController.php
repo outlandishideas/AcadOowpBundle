@@ -5,11 +5,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 
 use Outlandish\SiteBundle\PostType\Page;
-use Outlandish\SiteBundle\PostType\Post;
-use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
 use Symfony\Component\HttpFoundation\Request;
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
@@ -39,7 +35,7 @@ class PageController extends Outlandish\AcadOowpBundle\Controller\DefaultControl
      * @return array
      * @Template("OutlandishAcadOowpBundle:Page:pageContact.html.twig")
      */
-    public function contactPostAction() {
+    public function contactUsAction() {
         /** @var Page $post */
         $post = $this->querySingle(array('page_id' => Page::CONTACT_US_ID));
 

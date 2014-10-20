@@ -3,10 +3,10 @@
 namespace Outlandish\AcadOowpBundle\PostType;
 
 
-abstract class Person extends Post {
+abstract class Person extends Resource {
 
     public static $menuIcon = 'dashicons-businessman';
-    public static $resource = true;
+    public static $theme = true;
 
     public static $connections = array(
         'place' => array('sortable' => 'any','cardinality' => 'many-to-many'),
@@ -55,21 +55,19 @@ abstract class Person extends Post {
 		return ( $role ) ? $role->title() : '';
 	}
     /**
-     * todo: get metadata from person object
      * @return string
      */
     public function email()
     {
-        return "test@email.com";
+        return $this->metadata('email');
     }
 
     /**
-     * todo: get metadata from persnn object
      * @return string
      */
     public function phone()
     {
-        return "01234 567 890";
+        return $this->metadata('tel');
     }
 
 } 

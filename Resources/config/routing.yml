@@ -16,10 +16,7 @@ search_ajax:
     path: /search/ajax/
     defaults:
         _controller: OutlandishAcadOowpBundle:Search:ajax
-        _format: json
     methods: [GET]
-    requirements:
-        _format:  json
 
 # article routes
 article_index:
@@ -119,13 +116,13 @@ place_post:
 
 # project routes
 project_index:
-    path: /people/
+    path: /project/
     defaults:
         _controller: OutlandishAcadOowpBundle:Project:index
     methods: [GET]
 
 project_post:
-    path: /people/{slug}
+    path: /project/{name}
     defaults:
         _controller: OutlandishAcadOowpBundle:Project:single
     methods: [GET]

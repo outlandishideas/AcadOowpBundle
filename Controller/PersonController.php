@@ -4,18 +4,15 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 
-use Outlandish\AcadOowpBundle\Controller\ThemeController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
-use Outlandish\SiteBundle\PostType\Post;
 use Outlandish\SiteBundle\PostType\Person;
 use Outlandish\SiteBundle\PostType\Role;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class PersonController extends BaseController {
+class PersonController extends Outlandish\AcadOowpBundle\Controller\ThemeController {
 
     /**
-     * @Template("OutlandishAcadOowpBundle:Person:personIndex.html.twig")
+     * @Template("OutlandishAcadOowpBundle:Person:index.html.twig")
      */
     public function indexAction(Request $request) {
         $response = array();
@@ -37,7 +34,7 @@ class PersonController extends BaseController {
     }
 
     /**
-     * @Template("OutlandishAcadOowpBundle:Person:personPost.html.twig")
+     * @Template("OutlandishAcadOowpBundle:Person:post.html.twig")
      */
     public function singleAction($name) {
         $response = array();
@@ -62,6 +59,11 @@ class PersonController extends BaseController {
         return $response;
     }
 
+
+    public function postTypes()
+    {
+        return array(Person::postType());
+    }
 
 
 }

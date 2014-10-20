@@ -17,26 +17,16 @@ class DocumentController extends BaseController {
      * @param Request $request
      * @return array
      *
-     * @Template("OutlandishAcadOowpBundle:Document:documentIndex.html.twig")
+     * @Template("OutlandishAcadOowpBundle:Document:index.html.twig")
      */
     public function indexAction(Request $request)
     {
         $response = array();
 
-        $post = $this->querySingle(array('page_id' => '3563'));
-
-        //order posts by publication date
-        //NB posts with no publication date will not be shown
-        $items = Document::fetchAll(
-            array(
-                'meta_key' => 'publication_date',
-                'orderby' => 'meta_value',
-                'order' => 'DESC'
-            )
-        );
+        $post = $this->querySingle(array('page_id' => Document::postTypeParentId()));
 
         $response['post'] = $post;
-        $response['items'] = $items;
+        $response = $this->indexResponse($post, $request, $this->postTypes());
         $response['sections'] = $post->sections();
 
         return $response;
@@ -46,7 +36,7 @@ class DocumentController extends BaseController {
      * @param mixed $slug
      * @return array
      *
-     * @Template("OutlandishAcadOowpBundle:Document:documentPost.html.twig")
+     * @Template("OutlandishAcadOowpBundle:Document:post.html.twig")
      */
     public function singleAction($slug)
     {
@@ -70,4 +60,8 @@ class DocumentController extends BaseController {
         return $response;
     }
 
+    public function postTypes()
+    {
+        return array(Document::postType());
+    }
 }

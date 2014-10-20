@@ -1,0 +1,89 @@
+{% extends '::layout.html.twig' %}
+
+{% block content %}
+
+
+
+    <div class="row">
+
+        <div class="columns large-16">
+
+            {% block contentPage %}
+                <div class="row">
+                    <div class="columns large-24">
+
+                        <h1>{{ post.title() | raw }}</h1>
+
+                        {{ post.content() | raw }}
+
+                    </div>
+                </div>
+            {% endblock %}
+
+            {% if items | length > 0 %}
+
+                {% block itemsIndex %}
+
+                    {% include 'OutlandishAcadOowpBundle:Search:searchSection.html.twig' with {
+                    'facets': 'true',
+                    'excerpt_length' : 20
+                    } %}
+
+                {% endblock %}
+
+            {% elseif sections | length > 0 %}
+
+                {% for section in sections %}
+                    {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' %}
+                {% endfor %}
+
+            {% else %}
+
+                {% block noSearchResults %}
+                    {% include 'OutlandishAcadOowpBundle:Search:noResults.html.twig' %}
+                {% endblock %}
+
+            {% endif %}
+
+        </div>
+
+        <div class="columns large-7">
+
+            {% block includeSide %}
+
+                {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
+                'post': post,
+                'title': 'page'} %}
+
+                {% if sideItems | length > 0 %}
+
+                    <ul class="search-results sidebar">
+                        {% for type in sideItems %}
+                            {% if type.items | length > 0 %}
+                                <li>
+                                    <hr>
+                                    <h3 class="block-heading">{{ type.title | raw }}</h3>
+                                    <ul>
+                                        {% for item in type.items %}
+                                            {% block itemIncludeSide %}
+                                                {% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
+                                                'item': item,
+                                                'excerpt_length': 90,
+                                                'classes' : 'main'} %}
+                                            {% endblock %}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+
+                {% endif %}
+
+            {% endblock %}
+
+        </div>
+
+    </div>
+
+{% endblock %}

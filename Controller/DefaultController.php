@@ -23,7 +23,7 @@ class DefaultController extends Outlandish\AcadOowpBundle\Controller\SearchContr
      *
      * @param mixed $slugs
      * @return array
-	 * @Template("OutlandishAcadOowpBundle:Default:defaultPost.html.twig")
+	 * @Template("OutlandishAcadOowpBundle:Default:post.html.twig")
 	 */
 	public function defaultPostAction($slugs)
     {
@@ -195,7 +195,9 @@ class DefaultController extends Outlandish\AcadOowpBundle\Controller\SearchContr
                             $ids[] = $item;
                         }
                     }
-                    $query = Post::fetchAll(array('post_type' => 'any', 'post__in' => $ids));
+                    $queryArgs = array('post_type' => 'any', 'post__in' => $ids);
+                    if (!$section['order_by_date']) {$queryArgs['orderby'] = 'post__in';}
+                    $query = Post::fetchAll($queryArgs);
                     if($query->post_count > 0){
                         $items = $query->posts;
                     } else {

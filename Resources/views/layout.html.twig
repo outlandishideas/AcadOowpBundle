@@ -31,28 +31,30 @@
         <header class="header">
 
             <div class="row top-header">
-                <div class="large-6 medium-8 small-24 small-centered medium-uncentered large-uncentered columns align-width">
-                    <img class="logo" src="{{ asset('assets/images/isci-logo.jpg') }}">
+                <div class="large-6 medium-8 small-24 small-centered medium-uncentered large-uncentered columns">
+                    {%  if post.headerImage() %}
+                        <a href="{{ site_url() }}">
+                            <img class="logo" src="{{ post.headerImage() }}">
+                        </a>
+                    {% endif %}
                 </div>
-                <div class="large-10 medium-16 small-24 columns small-centered large-uncentered align-width">
-                    {#{%  if post.headerText() %}#}
-                    {#<img src="{{ post.headerText() }}">#}
-                    {#{% endif %}#}
-                    <p>The International State Crime Initiative is a cross-disciplinary research centre. We aim to introduce new perspectives to human rights research.</p>                </div>
+                <div class="large-10 medium-16 small-24 columns small-centered large-uncentered">
+                    <p>{{ post.headerText() }}</p>
+                </div>
             </div>
 
             <div class="mobile-header">
                 {#<a href="#" id="hamburger">#}
-                    {#<span class="fa fa-search"></span>#}
+                {#<span class="fa fa-search"></span>#}
                 {#</a>#}
                 <a href="#" id="hamburger">&#9776;</a>
                 <a href="#" class="search filter-toggle search-icon submit right">
-                     <span class="fa fa-search"></span>
-                 </a>
+                    <span class="fa fa-search"></span>
+                </a>
             </div>
             <div class="row bottom-header-row">
                 <div class="bottom-header">
-                    <div class="large-24 columns large-centered text-right align-width">
+                    <div class="large-24 columns large-centered text-right">
                         {% block nav_section %}
                             <nav>
                                 <!-- Right Nav Section -->
@@ -64,7 +66,7 @@
                                     {% endblock %}
 
                                     {% include "OutlandishAcadOowpBundle:Partial:social.html.twig" with {
-                                        'socialmedia' : post.socialMedia()}
+                                    'socialmedia' : post.socialMedia()}
                                     %}
 
                                     <li class="search filter-toggle right">
@@ -131,20 +133,20 @@
     <script src="{{ asset('bundles/outlandishacadoowp/js/facetsearch.js') }}"></script>
 {% endblock %}
 
-    <script type="application/javascript">
-        window.searchAjaxUrl = "{{ path('searchAjax') }}";
-    </script>
-    <script>
-        window.fs = new window.FacetSearch();
-        $('#filter-selected li.filter-option').each(function(i, el) {
-            window.fs.addSelection($(el).attr('rel'));
-        });
-    </script>
+<script type="application/javascript">
+    window.searchAjaxUrl = "{{ path('searchAjax') }}";
+</script>
+<script>
+    window.fs = new window.FacetSearch();
+    $('#filter-selected li.filter-option').each(function(i, el) {
+        window.fs.addSelection($(el).attr('rel'));
+    });
+</script>
 
-    <script type="application/javascript">
-        var searchAjaxUrl = "{{ path('searchAjax') }}";
-        console.log(searchAjaxUrl);
-    </script>
+<script type="application/javascript">
+    var searchAjaxUrl = "{{ path('searchAjax') }}";
+    console.log(searchAjaxUrl);
+</script>
 
 </body>
 </html>
