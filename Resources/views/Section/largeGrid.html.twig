@@ -7,25 +7,29 @@
     <div class="row">
         <div class="large-24 columns">
             <ul class="small-block-grid-2 large-block-grid-4">
-                {% if not classes %}{% set classes = 'main' %}{% endif %}
-                {% if not excerpt_length %}{% set excerpt_length = 'none' %}{% endif %}
-                {% if not image %}{% set image = 'item-image-6' %}{% endif %}
+                {% set classes = '' %}
+                {% set image = 'item-image-12' %}
 
                 {% for item in section.items %}
 
                     {#limit to 18 items#}
                     {% if loop.index <= 18 %}
 
-                        {% if loop.index > 4 %}
+                        {#display items 1-2 with excerpt and items 1-6 with images#}
+                        {% if loop.index > 2 and loop.index <= 6 %}
+                            {% set excerpt_length = 'none' %}
+                            {% set classes = 'main' %}
+                            {% set image = 'item-image-6' %}
+                        {% else %}
                             {% set image = 'none' %}
                         {% endif %}
 
-                        {#display 5th and 6th item at 50% width by showing image in separate li#}
-                        {% if loop.index == 5 or loop.index == 6  %}
+                        {#display items 1-2 at 50% width by showing image in separate li#}
+                        {% if loop.index <= 2  %}
                             <li>
-                                {{ item.featuredImage('large') | raw }}
+                                {{ item.featuredImage('item-image-12') | raw }}
                             </li>
-                            {% set classes = '' %}
+                            {% set excerpt_length = 80 %}
                         {% endif %}
 
                         <li>{% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
