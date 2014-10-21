@@ -1,9 +1,15 @@
-<div class="search-facets">
-    {{ formElements.post_type  | raw}}
-</div>
+{% if not facets %}{% set facets = 'true' %}{% endif %}
+{% if not excerpt_length %}{% set excerpt_length = 200 %}{% endif %}
+{% if facets != 'false' %}
+    <div class="search-facets">
+        {{ formElements.post_type  | raw }}
+    </div>
+{% endif %}
+
 <div id="results">
     <ul id="page-1" class="search-results">
-        {% include 'OutlandishAcadOowpBundle:Default:items.html.twig' %}
+        {% include 'OutlandishAcadOowpBundle:Partial:items.html.twig'
+        with { excerpt_length: excerpt_length } %}
     </ul>
 </div>
 {% if search.post_count > 9 %}

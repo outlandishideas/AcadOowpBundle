@@ -4,37 +4,25 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 
-use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
-
 use Outlandish\SiteBundle\PostType\Page;
-use Outlandish\SiteBundle\PostType\Post;
-use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
 use Symfony\Component\HttpFoundation\Request;
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class PageController extends BaseController {
-
-	/**
-	 * @Route("/", name="home")
-	 * @Template("OutlandishAcadOowpBundle:Page:pageFront.html.twig")
-	 */
-	public function frontPageAction(Request $request)
-    {
-        /** @var Page $post */
-		$post = $this->querySingle(array('page_id' => get_option('page_on_front')));
-        $response = $this->indexResponse($post, $request);
-		return $response;
-    }
+/**
+ * Class PageController
+ * @package Outlandish\AcadOowpBundle\Controller
+ */
+class PageController extends DefaultController {
 
     /**
-     * @Route("about-isci/contact-us/", name="contact-us")
+     * action for display contact us page
+     *
+     * @return array
      * @Template("OutlandishAcadOowpBundle:Page:pageContact.html.twig")
      */
-    public function contactPostAction() {
+    public function contactUsAction() {
         /** @var Page $post */
-        $post = $this->querySingle(array('page_id' => Page::CONTACT_PAGE_ID));
+        $post = $this->querySingle(array('page_id' => Page::CONTACT_US_ID));
 
         $response['post'] = $post;
         $response['map']  = $post->contactMap();

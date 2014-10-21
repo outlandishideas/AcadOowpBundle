@@ -30,7 +30,7 @@ class RelatedController extends Controller{
 		$items = $post->connected( $connected_types );
 
 		return $this->render(
-			'OutlandishAcadOowpBundle:Default:items.html.twig',
+			'OutlandishAcadOowpBundle:Partial:items.html.twig',
 			array( 'items' => $items )
 		);
 

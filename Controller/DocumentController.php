@@ -4,49 +4,44 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 use Outlandish\SiteBundle\PostType\Document;
-use Outlandish\AcadOowpBundle\Controller\ResourceController as BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Outlandish\RoutemasterBundle\Annotation\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-class DocumentController extends BaseController {
+class DocumentController extends ResourceController {
 
     /**
-     * @Route("/documents/", name="documentsIndex")
-     * @Template("OutlandishAcadOowpBundle:Document:documentIndex.html.twig")
+     * action for index
+     *
+     * @param Request $request
+     * @return array
+     *
+     * @Template("OutlandishAcadOowpBundle:Document:index.html.twig")
      */
     public function indexAction(Request $request)
     {
         $response = array();
 
-        $post = $this->querySingle(array('page_id' => '3563'));
-
-        //order posts by publication date
-        //NB posts with no publication date will not be shown
-        $items = Document::fetchAll(
-            array(
-                'meta_key' => 'publication_date',
-                'orderby' => 'meta_value',
-                'order' => 'DESC'
-            )
-        );
+        $post = $this->querySingle(array('page_id' => Document::postTypeParentId()));
 
         $response['post'] = $post;
-        $response['items'] = $items;
+        $response = $this->indexResponse($post, $request, $this->postTypes());
         $response['sections'] = $post->sections();
 
         return $response;
     }
 
     /**
-     * @Route("/documents/{name}/", name="documentsPost")
-     * @Template("OutlandishAcadOowpBundle:Document:documentPost.html.twig")
+     * @param mixed $slug
+     * @return array
+     *
+     * @Template("OutlandishAcadOowpBundle:Document:post.html.twig")
      */
-    public function singleAction($name)
+    public function singleAction($slug)
     {
         $response = array();
 
-        $post = $this->querySingle(array('name' => $name, 'post_type' => Document::postType()));
+        $post = $this->querySingle(array('name' => $slug, 'post_type' => Document::postType()));
 
         $sideItems = array(
             $post->connectedPeople('Authors'),
@@ -64,4 +59,8 @@ class DocumentController extends BaseController {
         return $response;
     }
 
+    public function postTypes()
+    {
+        return array(Document::postType());
+    }
 }

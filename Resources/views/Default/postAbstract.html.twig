@@ -1,0 +1,88 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}{{ post.title() | raw }}{% endblock %}
+
+{% block content %}
+
+    <article class="section">
+        <div class="row">
+            <div class="medium-15 columns ">
+                <div class="content main">
+
+                    {% block mainContent %}
+
+                        {% block topElement %}{% endblock %}
+                        {% block postDate %}{% endblock %}
+                        {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
+                        {% block subTitle %}
+                            {% if post.subtitle() %}
+                                <p class="subtitle">{{ post.subtitle() | raw }}</p>
+                            {% endif %}
+                        {% endblock %}
+
+                        <div class="content post">
+
+                            {% include 'OutlandishAcadOowpBundle:Partial:featuredImg.html.twig' with {'post': post } %}
+
+                            {% block postContent %}
+
+                                {{ post.content() | raw }}
+
+                            {% endblock %}
+
+                        </div>
+
+                        {% if sections %}
+
+                            {% for section in sections %}
+                                {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' with {'excerpt_length': 'none'} %}
+                            {% endfor %}
+
+                        {%  endif %}
+
+                        {% block related %}
+
+                            {{ render(controller('OutlandishAcadOowpBundle:Search:renderRelatedPosts', {
+                            'post': post
+                            })) }}
+                        {% endblock %}
+
+                    {% endblock %}
+
+                </div>
+            </div>
+            <div class="medium-8 columns sidebar-main">
+                {% block sideBar %}
+
+                    {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
+                    'post': post,
+                    'title': 'page'} %}
+
+                    <ul class="side-menu">
+
+                    {% block side_menu %}
+                        {{ render(controller('OutlandishAcadOowpBundle:Navigation:renderSideMenu', {
+                        'maxDepth' : 3,
+                        'rootPost': post.getRoot()
+                        })) }}
+
+                        </ul>
+
+                        {% block connected_side_posts %}
+
+                            {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
+                            'connectedItems': sideItems,
+                            'classes' : 'side-items'
+                            } %}
+
+                        {% endblock %}
+
+                    {% endblock %}
+
+
+                {% endblock %}
+            </div>
+        </div>
+    </article>
+
+{% endblock %}

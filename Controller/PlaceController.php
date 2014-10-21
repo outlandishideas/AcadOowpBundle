@@ -3,19 +3,16 @@
 
 namespace Outlandish\AcadOowpBundle\Controller;
 
-use Outlandish\SiteBundle\PostType\Document;
-use Outlandish\RoutemasterBundle\Controller\BaseController;
 use Outlandish\SiteBundle\PostType\Place;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Outlandish\RoutemasterBundle\Annotation\Template;
+use Symfony\Component\HttpFoundation\Request;
 
-class PlaceController extends BaseController {
+class PlaceController extends ThemeController {
 
 	/**
-	 * @Route("/places/")
-	 * @Template("OutlandishAcadOowpBundle:Place:placeIndex.html.twig")
+	 * @Template("OutlandishAcadOowpBundle:Place:index.html.twig")
 	 */
-	public function indexAction() {
+	public function indexAction(Request $request) {
 		$response = array();
 		$post = $this->querySingle( array( 'page_id' => Place::postTypeParentId() ) );
 
@@ -25,8 +22,7 @@ class PlaceController extends BaseController {
 	}
 
 	/**
-	 * @Route("/places/{name}/", name="place")
-	 * @Template("OutlandishAcadOowpBundle:Place:placePost.html.twig")
+	 * @Template("OutlandishAcadOowpBundle:Place:post.html.twig")
 	 */
 	public function singleAction($name) {
 		$response = array();
@@ -35,5 +31,11 @@ class PlaceController extends BaseController {
 		$response['post'] = $post;
 
 		return $response;
+	}
+
+
+	public function postTypes()
+	{
+		return array(Place::postType());
 	}
 }

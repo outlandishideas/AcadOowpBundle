@@ -10,7 +10,7 @@
                 {% if not excerpt_length %}{% set excerpt_length = 'none' %}{% endif %}
                 {% for item in section.items %}
                     {% if loop.index <= 8 %}
-                        <li>{% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                        <li>{% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
                             'item': item,
                             'classes': 'main',
                             'image':'item-image-4',

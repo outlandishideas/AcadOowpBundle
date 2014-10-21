@@ -3,17 +3,13 @@
 
 namespace Outlandish\AcadOowpBundle\Controller;
 
-use Outlandish\SiteBundle\PostType\Document;
-use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 use Outlandish\SiteBundle\PostType\Theme;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Outlandish\RoutemasterBundle\Annotation\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-class ThemeController extends BaseController {
+class ThemeController extends DefaultController {
 
 	/**
-	 * @Route("/themes/")
 	 * @Template("OutlandishAcadOowpBundle:Theme:themeIndex.html.twig")
 	 */
 	public function indexAction(Request $request) {
@@ -26,7 +22,6 @@ class ThemeController extends BaseController {
 	}
 
 	/**
-	 * @Route("/themes/{name}/", name="theme")
 	 * @Template("OutlandishAcadOowpBundle:Theme:themePost.html.twig")
 	 */
 	public function singleAction($name) {
@@ -36,5 +31,11 @@ class ThemeController extends BaseController {
 		$response['post'] = $post;
 
 		return $response;
+	}
+
+
+	public function postTypes()
+	{
+		return array(Theme::postType());
 	}
 }

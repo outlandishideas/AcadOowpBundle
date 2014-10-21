@@ -1,4 +1,4 @@
-{% extends 'OutlandishAcadOowpBundle:Default:defaultPost.html.twig' %}
+{% extends 'OutlandishAcadOowpBundle:Page:postAbstract.html.twig' %}
 
 {% block mainContent %}
 
@@ -81,5 +81,6 @@
 {% endblock %}
 
 {% block footer %}
+    {{ parent() }}
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 {% endblock %}

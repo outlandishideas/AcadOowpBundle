@@ -4,27 +4,23 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 
-use Outlandish\AcadOowpBundle\Controller\ResourceController as BaseController;
-
 use Symfony\Component\HttpFoundation\Request;
 use Outlandish\SiteBundle\PostType\Event;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class EventController extends BaseController {
+class EventController extends ResourceController {
 
     /**
-     * @Route("/events/", name="eventsIndex")
-     * @Template("OutlandishAcadOowpBundle:Event:eventIndex.html.twig")
+     *
      * @param Request $request
      * @return array
+     *
+     * @Template("OutlandishAcadOowpBundle:Event:index.html.twig")
      */
     public function indexAction(Request $request) {
         $response = array();
 
-        //todo: use postTypeParentId() instead
-        $post = $this->querySingle(array('page_id' => '834'));
-//        $post = $this->querySingle(array('page_id' => Event::postTypeParentId()));
+        $post = $this->querySingle(array('page_id' => Event::postTypeParentId()));
 
         //fetch future events and sort by month
         $items = Event::fetchFutureEvents();
@@ -46,12 +42,11 @@ class EventController extends BaseController {
     }
 
     /**
-     * @Route("events/previous-events/", name="previousEvents")
-     * @Template("OutlandishAcadOowpBundle:Event:eventIndex.html.twig")
      * @param Request $request
      * @return array
+     * @Template("OutlandishAcadOowpBundle:Event:index.html.twig")
      */
-    public function previousEventsAction(Request $request) {
+    public function previousAction(Request $request) {
         $response = array();
 
         $post = $this->querySingle(array('page_id' => Event::PREVIOUS_EVENTS_PAGE_ID));
@@ -64,8 +59,7 @@ class EventController extends BaseController {
     }
 
     /**
-     * @Route("/events/{name}/", name="eventPost")
-     * @Template("OutlandishAcadOowpBundle:Event:eventPost.html.twig")
+     * @Template("OutlandishAcadOowpBundle:Event:post.html.twig")
      */
     public function singleAction($name) {
         $response = array();
@@ -77,6 +71,11 @@ class EventController extends BaseController {
         $response['event_longitude'] = $post->longitude();
 
         return $response;
+    }
+
+    public function postTypes()
+    {
+        return array(Event::postType());
     }
 
 }

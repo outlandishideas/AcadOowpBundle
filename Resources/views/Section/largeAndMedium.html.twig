@@ -7,18 +7,18 @@
     <div class="row">
         <div class="large-12 columns">
             {% set item = section.items | first  %}
-            {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+            {% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
             'item': item,
             'classes': 'main',
             'image': 'item-image-12',
             'tags' : 'post-type'} %}
         </div>
         <div class="large-12 columns">
-            {# if excerpt_length 0, it gets overriden in defaultItem.html.twig#}
+            {# if excerpt_length 0, it gets overriden in item.html.twig#}
             {% if not excerpt_length %}{% set excerpt_length = 0 %}{% endif %}
             {% for item in section.items %}
                 {% if not loop.first and loop.index <= 4 %}
-                    {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                    {% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
                         'item': item,
                         'classes': '',
                         'tags' : 'none',

@@ -1,12 +1,19 @@
-<div class="row">
-    <div class="large-12 columns">
-        {{ item.featuredImage('item-image-12') | raw }}
+<div class="featured-item">
+    <div class="row">
+        <div class="large-12 columns">
+            <h2>Featured result</h2>
+        </div>
     </div>
-    <div class="large-12 columns">
-        <a href="{{ item.permalink() }}" class="post-item">
-            <p class="date">{{ item.date() | raw }}</p>
-            <h3 class="font-theme-colour featured">{{ item.title() | raw }}</h3>
-            <p>{{ item.excerpt(600) | raw }}</p>
-        </a>
+    <div class="row">
+        <div class="large-12 columns">
+            {{ item.featuredImage('item-image-12') | raw }}
+        </div>
+        <div class="large-12 columns">
+            <a href="{{ item.permalink() }}" class="post-item">
+                <p class="date">{{ item.date() | raw }}</p>
+                <h3 class="font-theme-colour featured">{{ item.title() | raw }}</h3>
+                <p>{{ item.excerpt(350) | raw }}</p>
+            </a>
+        </div>
     </div>
 </div>

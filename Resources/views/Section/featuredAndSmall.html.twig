@@ -1,0 +1,35 @@
+<div class="section featured-and-small">
+    <div class="row">
+        <div class="large-24 columns">
+            {% include "OutlandishAcadOowpBundle:Section:title.html.twig" %}
+        </div>
+    </div>
+    {% set item = section.items | first  %}
+    <div class="row">
+        <div class="large-24 columns">
+            {% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
+            'item': item,
+            'classes': '',
+            'tags' : 'none',
+            'excerpt_length': 600 } %}
+        </div>
+    </div>
+    <div class="large-24 columns">
+        <div class="row small-featured">
+            {% for item in section.items %}
+                {% if not loop.first and loop.index <= 7 %}
+                    <div class="large-4 medium-12 small-24 columns">
+                        <hr>
+                        {% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
+                        'item': item,
+                        'classes': 'main',
+                        'image' : 'item-image-12',
+                        'tags' : '',
+                        'excerpt_length': 'none' } %}
+
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
