@@ -198,6 +198,12 @@ class SearchController extends DefaultController {
                         $params['orderby'] = $section['orderby'];
                     }
 
+                    //todo: create a generic class for adding search parameters to use here instead of AddFacetOrderBy
+                    if(!empty($section['search_posts_limit'])){
+                        $search->addFacetOrderBy('posts_per_page', "");
+                        $params['posts_per_page'] = $section['search_posts_limit'];
+                    }
+
                     $search->setParams($params);
                     $sections[$s]['items'] = $search->search();
                     break;
