@@ -1,26 +1,21 @@
 {% extends 'OutlandishAcadOowpBundle:Resource:postAbstract.html.twig' %}
 
-{% block postTitle %}<h1>'{{ post.title() | raw }}'</h1>{% endblock %}
+{% block content_main %}
+    <h1>'{{ post.title() | raw }}'</h1>
 
-{% block subTitle %}
-    <ul class="subtitle-list">
-
-        {% if post.bibliographicReference() %}
+    {% if post.bibliographicReference() %}
+        <ul class="subtitle-list">
             <li class="font-theme-colour">{{ post.bibliographicReference() | raw }}</li>
-        {% endif %}
-
-    </ul>
+        </ul>
+    {% endif %}
 
     {% if post.additionalInformation() %}
-
         <div class="additional-information">
             {{ post.additionalInformation() | raw }}
         </div>
-
     {% endif %}
 
     {% if documentUrl %}
-
         <div class="document-external">
             <a href="{{  documentUrl | raw }}" class="font-theme-colour" target="_blank">
                 <div class="row">
@@ -48,78 +43,21 @@
                 </div>
             </a>
         </div>
-
     {% endif %}
 
-{% endblock %}
-
-{% block postContent %}
-
     {%  if post.content() %}
-
         <h3 class="block-heading">Summary</h3>
-
         {{ post.content()  |  raw  }}
-        {#{{ post.excerpt(1000) | raw }}#}
-
     {%  endif %}
-
 
     {%  if post.documentText() %}
-
         <h3 class="block-heading">Document text</h3>
-
-        <p>
-            {{ post.documentText()  |  raw  }}
-            {#{{ post.excerpt(1000) | raw }}#}
-        </p>
-
+        {{ post.documentText()  |  raw  }}
     {%  endif %}
 
-{% endblock %}
-
-
-{% block sideBar %}
-
-    <div class="row">
-        <div class="large-24 columns">
-
-            {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
-            'post': post,
-            'title': 'page'}
-            %}
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="large-24 columns">
-
-            {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
-            'connectedItems': sideItems,
-            'classes' : 'side-items'
-            } %}
-
-        </div>
-    </div>
-
-    {#{% for taxonomy in post.taxonomies() %}#}
-    {#{% if taxonomy.terms | length > 0 %}#}
-    {#<div class="taxonomy {{ taxonomy.type }}">#}
-    {#<hr>#}
-    {#<h3 class="block-heading">{{ taxonomy.name | raw }}</h3>#}
-    {#<ul class="terms {{ taxonomy.type | raw }}">#}
-    {#{% for term in taxonomy.terms %}#}
-    {#<li>#}
-    {#<h3 class="font-theme-colour"><a href="{{ term.permalink() }}">{{ term.title() | raw }}</a></h3>#}
-    {#</li>#}
-    {#{% endfor %}#}
-    {#</ul>#}
-    {#</div>#}
-    {#{% endif %}#}
-    {#{% endfor %}#}
+    {{ render(controller('OutlandishAcadOowpBundle:Search:renderRelatedResources', {
+    'post': post,
+    'request': request
+    } )) }}
 
 {% endblock %}
-
-
-

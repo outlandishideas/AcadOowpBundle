@@ -1,1 +1,25 @@
 {% extends 'OutlandishAcadOowpBundle:Search:indexAbstract.html.twig' %}
+
+{% block content_main %}
+
+    <h1>{{ post.title() | raw }}</h1>
+    {{ post.content() | raw }}
+
+    {% if items | length > 0 %}
+
+        <ul class="small-block-grid-1 medium-block-grid-3 block-grid-new-padding block-grid-link">
+            {% for item in items %}
+                <li>
+                    <a href="{{ item.permalink() }}">
+                        {{ item.featuredImage() | raw }}
+                        <h4>{{ item.title() | raw }}</h4>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <p>No posts could be found.</p>
+    {% endif %}
+
+{% endblock %}

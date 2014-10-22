@@ -4,38 +4,66 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 use Outlandish\SiteBundle\PostType\Theme;
+use Outlandish\SiteBundle\PostType\Page;
 use Outlandish\RoutemasterBundle\Annotation\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-class ThemeController extends DefaultController {
+class ThemeController extends SearchController {
 
-	/**
-	 * @Template("OutlandishAcadOowpBundle:Theme:themeIndex.html.twig")
-	 */
-	public function indexAction(Request $request) {
-		$response = array();
-		$post = $this->querySingle( array( 'page_id' => Theme::postTypeParentId() ) );
+    protected $class = "Outlandish\\SiteBundle\\PostType\\Theme";
 
-		$response['post'] = $post;
+    /**
+     * @param Request $request
+     * @return array
+     *
+     * @Template("OutlandishAcadOowpBundle:Theme:index.html.twig")
+     */
+    public function indexAction(Request $request) {
+        $post = $this->querySingle(array(
+            'page_id' => $this->getIndexPageId(),
+            'post_type' => Page::postType()
+        ), true);
 
-		return $response;
-	}
+        $class = $this->getClass();
+        $items = $class::fetchAll(array('orderby' => 'title', 'order' => 'ASC'))->posts;
 
-	/**
-	 * @Template("OutlandishAcadOowpBundle:Theme:themePost.html.twig")
-	 */
-	public function singleAction($name) {
-		$response = array();
-		$post = $this->querySingle(array('name' => $name, 'post_type' => Theme::postType()));
+        return array(
+            'post' => $post,
+            'items' => $items
+        );
+    }
 
-		$response['post'] = $post;
+    /**
+     * @param Request $request
+     * @param mixed $name
+     * @return array
+     *
+     * @Template("OutlandishAcadOowpBundle:Theme:post.html.twig")
+     */
+    public function singleAction(Request $request, $name) {
+        $resources = parent::singleAction($request, $name);
+        $class = $this->getClass();
+        $request->query->set($class::postType(), array($resources['post']->ID));
+        return array_merge($resources, $this->processSearch($request));
+    }
 
-		return $response;
-	}
+    protected function getIndexPageId()
+    {
+        return Theme::postTypeParentId();
+    }
 
+    protected function getSearchResultPostTypes()
+    {
+        return array(Theme::postType());
+    }
 
-	public function postTypes()
-	{
-		return array(Theme::postType());
-	}
+    public function postTypes()
+    {
+        return array(Theme::postType());
+    }
+
+    public function getClass()
+    {
+        return $this->class;
+    }
 }

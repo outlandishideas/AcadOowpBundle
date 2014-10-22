@@ -9,33 +9,41 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProjectController extends ThemeController {
 
-	/**
-	 * @Template("OutlandishAcadOowpBundle:Project:index.html.twig")
-	 */
-	public function indexAction(Request $request) {
-		$response = array();
-		$post = $this->querySingle( array( 'page_id' => Project::postTypeParentId() ) );
+    protected $class = "Outlandish\\SiteBundle\\PostType\\Project";
 
-		$response['post'] = $post;
+    /**
+     * @param Request $request
+     * @return array
+     *
+     * @Template("OutlandishAcadOowpBundle:Place:index.html.twig")
+     */
+    public function indexAction(Request $request) {
+        return parent::indexAction($request);
+    }
 
-		return $response;
-	}
+    /**
+     * @param Request $request
+     * @param mixed $name
+     * @return array
+     *
+     * @Template("OutlandishAcadOowpBundle:Place:post.html.twig")
+     */
+    public function singleAction(Request $request, $name) {
+        return parent::singleAction($request, $name);
+    }
 
-	/**
-	 * @Template("OutlandishAcadOowpBundle:Project:post.html.twig")
-	 */
-	public function singleAction($name) {
-		$response = array();
-		$post = $this->querySingle(array('name' => $name, 'post_type' => Project::postType()));
+    protected function getIndexPageId()
+    {
+        return Project::postTypeParentId();
+    }
 
-		$response['post'] = $post;
+    protected function getSearchResultPostTypes()
+    {
+        return array(Project::postType());
+    }
 
-		return $response;
-	}
-
-
-	public function postTypes()
-	{
-		return array(Project::postType());
-	}
+    public function postTypes()
+    {
+        return array(Project::postType());
+    }
 }

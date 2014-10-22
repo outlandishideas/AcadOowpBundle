@@ -1,60 +1,26 @@
-{% extends '::layout.html.twig' %}
+{% extends 'OutlandishAcadOowpBundle:Search:post.html.twig' %}
 
-{% block title %}{{ post.title() | raw }}{% endblock %}
-{% block content %}
+{% block content_main %}
+    <h1>Resources related to {{ post.title() }}</h1>
 
-    <article class="section theme">
-        <div class="row">
-            <div class="large-24 columns">
-                {% block postTitle %}<h1>{{ post.title() | raw }}</h1>{% endblock %}
-            </div>
-        </div>
-        <div class="row">
-            <div class="medium-8 medium-push-16 columns">
-                {% block sideBar %}
+    {{ search_form.orderby | raw }}
 
-                    {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
-                    'post': post,
-                    'title': 'page'} %}
+    {% include 'OutlandishAcadOowpBundle:Partial:searchResults.html.twig' %}
 
-                    <div class="row">
-                        <div class="large-24 columns">
-                            <div class="content post">
+{% endblock %}
 
-                                <h3 class="block-heading">About {{ post.title() }}</h3>
+{% block content_sidebar %}
 
-                                {% include 'OutlandishAcadOowpBundle:Partial:featuredImg.html.twig' with {
-                                'post': post,
-                                'image' : 'item-image-6',
-                                'classes' : 'sidebar-featured-image'
-                                } %}
+    {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
+    'post': post} %}
 
-                                {% block postContent %}
+    <h3 class="block-heading">{{ post.title() | raw }}</h3>
+    {{ post.featuredImage() | raw }}
+    {{ post.content() | raw }}
 
-                                    {{ post.content() | raw }}
-
-                                {% endblock %}
-
-                            </div>
-                        </div>
-                    </div>
-
-                {% endblock %}
-            </div>
-            <div class="medium-15 end medium-pull-8 columns">
-                <div class="content main">
-
-                    {% block related %}
-                        {{ render(controller('OutlandishAcadOowpBundle:Search:renderRelatedPosts', {
-                        'post': post
-                        })) }}
-                    {% endblock %}
-
-                </div>
-            </div>
-        </div>
-    </article>
-
-
+    {{ render(controller('OutlandishAcadOowpBundle:Navigation:renderSideMenu', {
+    'maxDepth' : 3,
+    'rootPost': post.getRoot()
+    })) }}
 
 {% endblock %}

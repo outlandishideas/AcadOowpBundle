@@ -23,32 +23,20 @@ class DocumentController extends ResourceController {
     }
 
     /**
-     * @param mixed $slug
+     * @param Request $request
+     * @param mixed $name
      * @return array
      *
      * @Template("OutlandishAcadOowpBundle:Document:post.html.twig")
      */
-    public function singleAction($slug)
+    public function singleAction(Request $request, $name)
     {
-        $response = array();
-
-        $post = $this->querySingle(array('name' => $slug, 'post_type' => Document::postType()));
-
-        $sideItems = array(
-            $post->connectedPeople('Authors'),
-            $post->connectedThemes(),
-            $post->connectedDocuments(),
-            $post->connectedEvents(),
-            $post->connectedPlaces()
-        );
-
-        $response['post'] = $post;
-        $response['sideItems'] = $sideItems;
-        $response['documentUrl'] = $post->documentUrl();
-        $response['attachment'] = $post->attachment();
-
+        $response =  parent::singleAction($request, $name);
+        $response['documentUrl'] = $response['post']->documentUrl();
+        $response['attachment'] = $response['post']->attachment();
         return $response;
     }
+
     protected function getIndexPageId()
     {
         return Document::postTypeParentId();
