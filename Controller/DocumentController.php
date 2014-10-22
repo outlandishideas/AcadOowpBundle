@@ -18,17 +18,8 @@ class DocumentController extends ResourceController {
      *
      * @Template("OutlandishAcadOowpBundle:Document:index.html.twig")
      */
-    public function indexAction(Request $request)
-    {
-        $response = array();
-
-        $post = $this->querySingle(array('page_id' => Document::postTypeParentId()));
-
-        $response['post'] = $post;
-        $response = $this->indexResponse($post, $request, $this->postTypes());
-        $response['sections'] = $post->sections();
-
-        return $response;
+    public function indexAction(Request $request) {
+        return parent::indexAction($request);
     }
 
     /**
@@ -57,6 +48,15 @@ class DocumentController extends ResourceController {
         $response['attachment'] = $post->attachment();
 
         return $response;
+    }
+    protected function getIndexPageId()
+    {
+        return Document::postTypeParentId();
+    }
+
+    protected function getSearchResultPostTypes()
+    {
+        return array(Document::postType());
     }
 
     public function postTypes()

@@ -45,7 +45,7 @@ class NavigationController extends SearchController {
 
     public function renderFilterPanelAction( OowpPost $currentPost) {
         $args = array();
-        $search = $this->search();
+        $search = $this->get('outlandish_acadoowp.faceted_search.search');
         $args['facets'] = $search->getPostToPostFacets();
         if($currentPost->postType() != "page"){
             $parent = $currentPost->parent();
@@ -78,7 +78,7 @@ class NavigationController extends SearchController {
         $args['parent_post'] = $rootPost;
 
         return $this->render(
-            'OutlandishAcadOowpBundle:Menu:menuItems.html.twig',
+            'OutlandishAcadOowpBundle:Navigation:sideMenu.html.twig',
             $args
         );
     }

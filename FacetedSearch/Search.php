@@ -8,6 +8,8 @@
 
 namespace Outlandish\AcadOowpBundle\FacetedSearch;
 
+use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
+use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOptionPost;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostToPost;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetPostType;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetOrder;
@@ -15,6 +17,7 @@ use Outlandish\AcadOowpBundle\FacetedSearch\Facets\FacetOrderBy;
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\Facet;
 use Outlandish\OowpBundle\Manager\QueryManager;
 use Outlandish\OowpBundle\Manager\PostManager;
+use Outlandish\OowpBundle\PostType\Post;
 
 class Search {
 
@@ -43,11 +46,74 @@ class Search {
         'post__not_in' => array()
     );
 
-    function __construct(QueryManager $queryManager, PostManager $postManager, array $params = array())
+    function __construct(QueryManager $queryManager, PostManager $postManager)
     {
         $this->queryManager = $queryManager;
         $this->postManager = $postManager;
-        $this->params = $params;
+        $this->populateFacets();
+    }
+
+    function populateFacets()
+    {
+        $postMap = $this->postManager->postTypeMapping();
+        $resources = $this->getResourcePostTypes();
+        $themes = $this->getThemePostTypes();
+
+        $facet = new FacetPostType('post_type', 'Post Type');
+        /** @var PostManager $postManager */
+        $postClasses = array_intersect_key($this->postManager->postTypeMapping(), array_flip($resources));
+        foreach($postClasses as $postType => $class){
+            $option  = new FacetOption($postType, $class::friendlyName());
+            $facet->addOption($option);
+        }
+        $this->addFacet($facet);
+
+        foreach($themes as $postType){
+            if(!array_key_exists($postType, $postMap)) continue;
+            $class = $postMap[$postType];
+
+            $posts = $class::fetchAll();
+            if($posts->post_count < 1) continue;
+            $facet = new FacetPostToPost($postType, $class::friendlyNamePlural(), $postType);
+            foreach($posts as $post){
+                $option = new FacetOptionPost($post);
+                $facet->addOption($option);
+            }
+            $this->addFacet($facet);
+        }
+
+        $this->addFacet(new FacetOrder('order', 'Order'));
+        $this->addFacet(new FacetOrderBy('orderby', 'Order By'));
+    }
+
+    /**
+     * returns only the post types that we consider to be resources
+     * These will be returned in search results, whereas others will used as categories
+     * @return array
+     */
+    public function getResourcePostTypes()
+    {
+        /** @var PostManager $this->postManager */
+        $postTypes = array();
+        foreach($this->postManager->postTypeMapping() as $postType => $class) {
+            if($class::isResource()) $postTypes[] = $postType;
+        }
+        return $postTypes;
+    }
+
+    /**
+     * returns only the post types that we consider to be themes
+     * These will be used as categories
+     * @return array
+     */
+    public function getThemePostTypes()
+    {
+        /** @var PostManager $this->postManager */
+        $postTypes = array();
+        foreach($this->postManager->postTypeMapping() as $postType => $class) {
+            if($class::isTheme()) $postTypes[] = $postType;
+        }
+        return $postTypes;
     }
 
     /**
@@ -177,7 +243,7 @@ class Search {
     public function search()
     {
         $args = $this->generateArguments();
-        return $this->queryManager->query($args);
+        return $this->queryManager->query(array_filter($args));
     }
 
     /**
@@ -202,6 +268,11 @@ class Search {
      */
     public function setParams(array $params)
     {
+        if(array_key_exists('post__not_in', $params)){
+            if(!is_array($params['post__not_in'])){
+                $params['post__not_in'] = array($params['post__not_in']);
+            }
+        }
         $this->params = $params;
     }
 
@@ -209,6 +280,7 @@ class Search {
     {
         $defaultParams = array_intersect_key($this->params, $this->defaults);
         $defaultParams = array_merge($this->defaults, $defaultParams);
+
         return $defaultParams;
 
     }
@@ -221,9 +293,9 @@ class Search {
             $options = $facet->getSelectedOptions();
             if(!empty($options)){
                 $value = array_map(function($a){
-                    return $a->name;
+                    return $a->getName();
                 }, $options);
-                $query[$facet->name] = $value;
+                $query[$facet->getName()] = $value;
             }
         }
 
@@ -232,6 +304,10 @@ class Search {
             $query['paged'] += $page;
         } else {
             $query['paged'] = $page;
+        }
+
+        foreach($query as $key => &$value){
+            if(is_array($value)) $value = implode(',', $value);
         }
 
         return http_build_query($query);

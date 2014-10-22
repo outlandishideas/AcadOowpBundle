@@ -16,30 +16,27 @@ class NewsController extends ResourceController {
      * @return array
      */
     public function indexAction(Request $request) {
-        $post = $this->querySingle(array('page_id' => News::postTypeParentId()));
-        $response = $this->indexResponse($post, $request, $this->postTypes());
-        return $response;
+        return parent::indexAction($request);
     }
 
     /**
+     * @param Request $request
+     * @param mixed $name
+     * @return array
      * @Template("OutlandishAcadOowpBundle:News:post.html.twig")
      */
-    public function singleAction($name) {
-        $response = array();
+    public function singleAction(Request $request, $name) {
+        return parent::singleAction($request, $name);
+    }
 
-        $post = $this->querySingle(array('name' => $name, 'post_type' => News::postType()));
+    protected function getIndexPageId()
+    {
+        return News::postTypeParentId();
+    }
 
-        $sideItems = array(
-            $post->connectedPeople('Authors'),
-            $post->connectedThemes(),
-            $post->connectedDocuments(),
-            $post->connectedEvents(),
-            $post->connectedPlaces(),
-        );
-
-        $response['post'] = $post;
-        $response['sideItems'] = $sideItems;
-        return $response;
+    protected function getSearchResultPostTypes()
+    {
+        return array(News::postType());
     }
 
     public function postTypes()

@@ -68,6 +68,46 @@ abstract class Facet {
         $this->options = $options;
     }
 
+    /**
+     * @return boolean
+     */
+    public function isDefaultAll()
+    {
+        return $this->defaultAll;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isExclusive()
+    {
+        return $this->exclusive;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSection()
+    {
+        return $this->section;
+    }
+
     public function addOptions($array = array()){
         foreach($array as $item){
             if($item instanceof Post){

@@ -1,7 +1,9 @@
 {%  if items |length > 0 %}
 	<ul id="page-{{ paged }}" class="search-results">
 	    {% include 'OutlandishAcadOowpBundle:Partial:items.html.twig' %}
-	    <li id="more-results-url" data-url="{{ moreResultsUrl }}"></li>
+        {% if items | length > 9 %}
+	        <li id="more-results-url" data-url="{{ moreResultsUrl }}"></li>
+        {% endif %}
 	</ul>
 {% else %}
 	<h3>Sorry, nothing matches your search :(</h3>

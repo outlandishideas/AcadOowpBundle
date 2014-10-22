@@ -1,17 +1,35 @@
-{% extends 'OutlandishAcadOowpBundle:Default:indexAbstract.html.twig' %}
+{% extends 'OutlandishAcadOowpBundle:Default:postAbstract.html.twig' %}
 
-{% block content %}
+{% block content_main %}
+
+    {# inherits from postAbstract so this just prints out the title and the content #}
     {{ parent() }}
-    <div class="row">
-        <div class="columns large-16">
-            <div class="row">
-                <div class="columns large-12 large-centered">
-                    <a class="button" href="{{ moreResultsUrl }}" id="more-results">
-                        <span class="text">More Results</span>
-                        <span class="text-loading"><span class="fa fa-circle-o-notch fa-spin"></span> Loading</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    {% if items | length > 0 %}
+
+        {% if featuredItem %}
+            {% block featuredItemContent %}
+                {% include "OutlandishAcadOowpBundle:Item:featuredItem.html.twig" with {'item': featuredItem} %}
+            {% endblock %}
+        {% endif %}
+
+        {{ search_form.orderby | raw }}
+        {{ search_form.order | raw }}
+
+        {% include 'OutlandishAcadOowpBundle:Partial:items.html.twig' %}
+
+    {% elseif sections | length > 0 %}
+
+        {% for section in sections %}
+            {% include 'OutlandishAcadOowpBundle:Section:' ~ section.layout ~ '.html.twig' %}
+        {% endfor %}
+
+    {% else %}
+
+        {% block noSearchResults %}
+            {% include 'OutlandishAcadOowpBundle:Search:noResults.html.twig' %}
+        {% endblock %}
+
+    {% endif %}
+
 {% endblock %}

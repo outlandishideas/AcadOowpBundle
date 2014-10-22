@@ -79,14 +79,6 @@ abstract class Post extends BasePost {
     }
 
     /**
-     * return custom page title if set, or else post title
-     * @return string
-     */
-    public function title() {
-        return $this->customPageTitle() ? $this->customPageTitle() : parent::title();
-    }
-
-    /**
      * return custom page title
      * @return string|null
      */

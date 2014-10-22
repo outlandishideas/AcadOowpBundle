@@ -56,12 +56,16 @@ app.init = {
 
                 var $list = $("<ul class='search-results'>");
 
-                $("#results").append($list.load( location.origin + searchAjaxUrl + "?" + query + ".search-results li", function() {
+                $("#results").append($list.load( location.origin + searchAjaxUrl + "?" + query + " .search-results li", function() {
                     var $urlHolder = $(this).find('#more-results-url');
                     var $moreResults = $('#more-results');
-                    var newUrl = $urlHolder.data('url');
+                    if($urlHolder.length < 1){
+                        $moreResults.addClass('no-results');
+                    } else {
+                        var newUrl = $urlHolder.data('url');
+                        $urlHolder.remove();
+                    }
                     $moreResults.attr('href', newUrl).removeClass('loading');
-                    $urlHolder.remove();
                 }));
             });
             $button.appear();
@@ -71,56 +75,48 @@ app.init = {
         },
 
         '.search-facet': function ($facet) {
-            $facet.on('change', 'input[type="checkbox"]', function(e) {
-                var $selectedOption = $(this);
-                var $facet = $selectedOption.parents('.search-facet');
-                $facet.find('li.active').removeClass('active').end()
-                    .find('input[type="checkbox"]')
-                    .not('[value="' + $selectedOption.attr('value') +'"]')
-                    .prop("checked", false);
-                if($selectedOption.prop('checked')){
-                    $selectedOption.parent('li').addClass('active');
-                } else {
-                    $selectedOption.parent('li').removeClass('active');
+            $facet.on('change', 'input[type="radio"]', function(e) {
+                var $this = $(this);
+                var $facet = $this.parents('.search-facet');
+                $facet.find('dd').removeClass('active');
+                $this.parent('dd').addClass('active');
+
+                var $options = $('.search-facet dd.active input');
+                var $moreResults = $('#more-results');
+                var queryArgs = {};
+                var tempQueryArgs = $moreResults.attr('href').split("?")[1].split('&');
+                for(var query in tempQueryArgs){
+                    var arg = tempQueryArgs[query].split('=');
+                    queryArgs[arg[0]] = arg[1].split(',');
                 }
-                var $options = $('.search-facet li input[type="checkbox"]');
-                var $queryArr = [];
+
+                //takes us back to the first page
+                queryArgs['paged'] = [1];
+
                 $options.each(function(){
                     var $option = $(this);
-                    if($option.prop('checked')) {
-                        var name = $option.attr('name');
-                        var value = $option.attr('value');
-                        var found = false;
-                        for(var i in $queryArr){
-                            var object = $queryArr[i];
-                            if(object.name == name){
-                                object.values.push(value);
-                                found = true;
-                                break;
-                            }
-                        }
-                        if(!found) {
-                            $queryArr.push({name: name, values: [value]});
+
+                    var optionName = $option.attr('name');
+                    var optionValue = $option.attr('value');
+
+                    for(var name in queryArgs){
+                        if(optionName == name){
+                            queryArgs[name] = [optionValue];
+                            break;
                         }
                     }
                 });
+
                 var queryStrings = [];
-                if($queryArr.length > 0){
-                    $queryArr.push({name: "paged", values: [1]});
-                    for(var i in $queryArr){
-                        var queryObject = $queryArr[i];
-                        var valueString = queryObject.values.join(",");
-                        var queryString = queryObject.name + "=" + valueString;
-                        queryStrings.push(queryString);
-                    }
+                for(var name in queryArgs){
+                    var valueString = queryArgs[name].join(",");
+                    var queryString = name + "=" + valueString;
+                    queryStrings.push(queryString);
                 }
                 var url = location.origin + searchAjaxUrl + "?" + queryStrings.join('&');
-                var $list = $("<ul class='search-results'>");
-                $('#results').empty();
-                var $moreResults = $('#more-results');
-                $moreResults.attr('href', url);
-                $moreResults.click();
 
+                $('#results').empty();
+                $moreResults.attr('href', url).click();
             })
         },
 

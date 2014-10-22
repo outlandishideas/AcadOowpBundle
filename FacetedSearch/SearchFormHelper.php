@@ -10,6 +10,7 @@ namespace Outlandish\AcadOowpBundle\FacetedSearch;
 
 
 use Outlandish\AcadOowpBundle\FacetedSearch\Facets\Facet;
+use Outlandish\AcadOowpBundle\FacetedSearch\FacetOption\FacetOption;
 
 class SearchFormHelper {
 
@@ -41,56 +42,60 @@ class SearchFormHelper {
     public function generateHTML(Facet $facet)
     {
         $options = array();
-        if($facet->defaultAll){
+        if($facet->isDefaultAll()){
 //            $options[] = new FacetOption\FacetOption('', 'All', false);
         }
+        /** @var FacetOption[] $options */
         $options = array_merge($options, $facet->options);
 
         $classes = array();
-        if($facet->exclusive)
+        if($facet->isExclusive())
         {
             $classes[] = 'facet-exclusive';
         }
 
         $classes = implode(' ', $classes);
 
-        $html = "<ul id='{$facet->name}-group' class='search-facet inline-list {$classes}'>";
+        $html = "<dl id='{$facet->getName()}-group' class='search-facet {$classes}' role='menu'>";
+
+        $html .= "<dt>{$facet->getSection()}:</dt>";
 
         //create an all button
-
         $selectedOptions = $facet->getSelectedOptions();
-        if(!$facet->exclusive)
-        {
+        if(!$facet->isExclusive()){
+            $type = "radio";
             $optionNames = implode(',', array_map(function($a){
-                return $a->name;
+                return $a->getName();
             }, $options));
             $liClass = (count($selectedOptions) == count($options)) ? 'class="active"': null;
             $selected = (count($selectedOptions) == count($options)) ? 'checked' : '';
-            $li = "<li {$liClass}>";
-            $li .= "<label for='{$facet->name}-all'>All</label>";
-            $li .= "<input type='checkbox'
-                id='{$facet->name}-all'
-                name='{$facet->name}'
+            $li = "<dd {$liClass}>";
+            $li .= "<label for='{$facet->getName()}-all'>All</label>";
+            $li .= "<input type='{$type}'
+                id='{$facet->getName()}-all'
+                name='{$facet->getName()}'
                 value='{$optionNames}'
                 {$selected} />";
-            $li .= "</li>";
+            $li .= "</dd>";
             $html .= $li;
+        } else {
+            $type = "radio";
         }
 
-
+        /** @var FacetOption $option */
         foreach($options as $option) {
             $selected = $option->selected && (count($selectedOptions) != count($options)) ? 'checked' : '';
             $liClass = $option->selected && (count($selectedOptions) != count($options)) ? 'class="active"': null;
-            $html .= "<li {$liClass}>";
-            $html .= "<label for='{$facet->name}-{$option->name}'>{$option->label}</label>";
-            $html .= "<input type='checkbox'
-                id='{$facet->name}-{$option->name}'
-                name='{$facet->name}'
-                value='{$option->name}'
+            $html .= "<dd {$liClass}>";
+            $html .= "<label for='{$facet->getName()}-{$option->getName()}'>{$option->getLabel()}</label>";
+            $html .= "<input type='{$type}'
+                id='{$facet->getName()}-{$option->getName()}'
+                name='{$facet->getName()}'
+                value='{$option->getName()}'
                 {$selected} />";
-            $html .= "</li>";
+            $html .= "</dd>";
         }
-        $html .= "</ul>";
+        $html .= "</dl>";
         return $html;
     }
 

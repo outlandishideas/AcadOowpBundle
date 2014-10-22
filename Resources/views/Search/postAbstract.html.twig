@@ -1,1 +1,33 @@
 {% extends 'OutlandishAcadOowpBundle:Default:postAbstract.html.twig' %}
+
+{% block content_main %}
+
+    {# inherits from postAbstract so this just prints out the title and the content #}
+    {{ parent() }}
+
+    {{ render(controller('OutlandishAcadOowpBundle:Search:renderRelatedResources', {
+        'post': post,
+        'request': request
+    } )) }}
+
+{% endblock %}
+
+{% block content_sidebar %}
+
+    {{ parent() }}
+    {% for section in related_themes %}
+        <section class="related-themes">
+            <h3 class="block-heading">{{ section.title }}</h3>
+            <ul>
+                {% for item in section.items %}
+                    <li>{% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
+                        'item': item,
+                        'excerpt_length': 'none',
+                        'image':'avatar-square',
+                        'classes' : classes} %}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    {% endfor %}
+
+{% endblock %}

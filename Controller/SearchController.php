@@ -42,16 +42,142 @@ class SearchController extends DefaultController {
     }
 
     /**
+     * @param Request $request
+     * @return array
      * @Template("OutlandishAcadOowpBundle:Search:index.html.twig")
      */
     public function indexAction(Request $request)
     {
-        $single = $this->searchSingle($request);
-        //see if query term matches post title redirect to post page
-        if($single) return $this->redirect($single->permalink());
-        $response = $this->searchResponse($request);
-        $response['post'] = $this->querySingle(array('name' => 'search', 'post_type' => 'page'), true);
+        $response = array();
+        $response['post'] = $this->querySingle(array(
+            'page_id' => $this->getIndexPageId(),
+            'post_type' => Page::postType()
+        ), true);
+
+        $response['featured_post'] = null;
+        if($request->query->has('s')){
+            $name = sanitize_title($request->query->get('s'), null);
+            $queryManager = $this->get('outlandish_oowp.query_manager');
+            $results = $queryManager->query(array("name" => $name, "post_type" => "any", "posts_per_page" => 1));
+            if ($results->post_count == 1) $response['featured_post'] = $results->post;
+        }
+
+        if(!$request->query->has('post_type')){
+            $request->query->add(array('post_type' => $this->getSearchResultPostTypes()));
+        }
+
+        return array_merge($response, $this->processSearch($request));
+    }
+
+    /**
+     * @param $request
+     * @return array
+     */
+    protected function processSearch($request)
+    {
+        /** @var Search $search */
+        $search = $this->get('outlandish_acadoowp.faceted_search.search');
+        $search->setParams($request->query->all());
+
+        $results = $search->search();
+
+        $response['search'] = $results;
+        $response['items'] = null;
+
+        if($results->post_count > 0){
+            $response['items'] = $results->posts;
+            $response['moreResultsUrl'] = "?" . $search->queryString(1);
+        }
+
+        $response['helper'] = new SearchFormHelper($search);
+        $response['search_form'] = $response['helper']->getSearchFormElements();
+
         return $response;
+    }
+
+
+    /**
+     * @param Request $request
+     * @return array
+     * @Template("OutlandishAcadOowpBundle:Search:post.html.twig")
+     */
+    public function singleAction(Request $request, $name)
+    {
+        /** @var Post $post */
+        $post = $this->querySingle(array('name' => $name, 'post_type' => $this->postTypes()));
+
+        /** @var PostManager $postManager */
+        $postManager = $this->get('outlandish_oowp.post_manager');
+        $themes = array_filter($postManager->postTypeMapping(), function($class){
+                return $class::isTheme();
+        });
+        $relatedThemes = array();
+        foreach($themes as $name => $class){
+            $connected = $post->connected($class::postType(), false, array('orderby' => 'title'));
+            if($connected->post_count < 1) continue;
+            $relatedThemes[] = array(
+                'title' => $class::friendlyName(),
+                'items' => $connected->posts
+            );
+        }
+
+        return array(
+            'post' =>  $post,
+            'related_themes' => $relatedThemes,
+            'request' => $request
+        );
+
+    }
+
+    /**
+     * @param BasePost $post
+     * @param Request $request
+     * @return array
+     * @Template("OutlandishAcadOowpBundle:Partial:relatedResources.html.twig")
+     */
+    public function renderRelatedResourcesAction(BasePost $post, Request $request)
+    {
+        /** @var PostManager $postManager */
+        $postManager = $this->get('outlandish_oowp.post_manager');
+        $themes = array_filter($postManager->postTypeMapping(), function($class){
+            return $class::isTheme();
+        });
+
+        //add the $posts ID to post__not_in in order to not include this post in search results.
+        if($request->query->has('post__not_in')) {
+            //make sure that we are dealing with an array
+            $value = $request->query->get('post__not_in');
+            if(!is_array($value)) {
+                $request->query->set('post__not_in', array($value));
+            }
+            $params['post__not_in'][] = $post->ID;
+        } else {
+            $request->query->add(array('post__not_in' => array($post->ID)));
+        }
+
+        foreach($themes as $postType => $class){
+            $ids = array_reduce($post->connected($postType)->posts, function($carry, $post){
+                $carry[] = $post->ID;
+                return $carry;
+            }, array());
+            if(count($ids) > 0 ){
+                if(!$request->query->has($postType)){
+                    $request->query->add(array($postType => $ids));
+                }
+            }
+        }
+
+        return $this->processSearch($request);
+    }
+
+    protected function getIndexPageId()
+    {
+        return Page::SEARCH_ID;
+    }
+
+    protected function getSearchResultPostTypes()
+    {
+        return array();
     }
 
     /**
@@ -59,8 +185,7 @@ class SearchController extends DefaultController {
      */
     public function ajaxAction(Request $request)
     {
-        $response = $this->searchResponse($request->query->all());
-        return $response;
+        return $this->processSearch($request);
     }
 
     /**
@@ -322,94 +447,6 @@ class SearchController extends DefaultController {
         } else {
             return null;
         }
-    }
-
-    /**
-     * generates post to post facet using post class
-     * @param $postType
-     * @param $class
-     * @return null|FacetPostType
-     */
-    public function generatePostToPostFacet($postType, $class){
-        $posts = $class::fetchAll();
-        if($posts->post_count < 1) return null;
-
-        $facet = new FacetPostToPost($postType, $class::friendlyNamePlural(), $postType);
-        foreach($posts as $post){
-            $option = new FacetOptionPost($post);
-            $facet->addOption($option);
-        }
-        return $facet;
-    }
-
-    /**
-     * generates post type facet from list of post types
-     * @param $postTypes
-     * @return FacetPostType
-     */
-    public function generatePostTypeFacet($postTypes)
-    {
-        $facet = new FacetPostType('post_type', 'Post Type');
-
-        /** @var PostManager $postManager */
-        $postManager = $this->get('outlandish_oowp.post_manager');
-        $postClasses = array_intersect_key($postManager->postTypeMapping(), array_flip($postTypes));
-        foreach($postClasses as $postType => $class){
-            $option  = new FacetOption($postType, $class::friendlyName());
-            $facet->addOption($option);
-        }
-        return $facet;
-    }
-
-    /**
-     * returns only the post types that we consider to be resources
-     * These will be returned in search results, whereas others will used as categories
-     * @return array
-     */
-    public function getResourcePostTypes()
-    {
-        /** @var PostManager $postManager */
-        $postManager = $this->get('outlandish_oowp.post_manager');
-
-        $postTypes = array();
-        foreach($postManager->postTypeMapping() as $postType => $class) {
-            if($class::isResource()) $postTypes[] = $postType;
-        }
-        return $postTypes;
-    }
-
-    /**
-     * returns only the post types that we consider to be themes
-     * These will be used as categories
-     * @return array
-     */
-    public function getThemePostTypes()
-    {
-        /** @var PostManager $postManager */
-        $postManager = $this->get('outlandish_oowp.post_manager');
-
-        $postTypes = array();
-        foreach($postManager->postTypeMapping() as $postType => $class) {
-            if($class::isTheme()) $postTypes[] = $postType;
-        }
-        return $postTypes;
-    }
-
-    /**
-     * returns only the post types that we consider to be themes
-     * These will be used as categories
-     * @return array
-     */
-    public function getFilterPostTypes()
-    {
-        /** @var PostManager $postManager */
-        $postManager = $this->get('outlandish_oowp.post_manager');
-
-        $postTypes = array();
-        foreach($postManager->postTypeMapping() as $postType => $class) {
-            if($class::isTheme() && $class::isFilter()) $postTypes[] = $postType;
-        }
-        return $postTypes;
     }
 
     /**

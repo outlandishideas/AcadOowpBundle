@@ -18,27 +18,8 @@ class EventController extends ResourceController {
      * @Template("OutlandishAcadOowpBundle:Event:index.html.twig")
      */
     public function indexAction(Request $request) {
-        $response = array();
-
-        $post = $this->querySingle(array('page_id' => Event::postTypeParentId()));
-
-        //fetch future events and sort by month
-        $items = Event::fetchFutureEvents();
-//        $itemsByMonth = Event::sortByMonth($items);
-
-        //only past events fetched here
-        $previousItems = array(
-            array(
-                'title' => 'Previous events',
-                'items' => Event::fetchPastEvents()
-            )
-        );
-
-        $response['post'] = $post;
-        $response['items'] = $items;
-        $response['sections'] = $post->sections();
-        $response['previousItems'] = $previousItems;
-        return $response;
+        return parent::indexAction($request);
+        //todo: show events properly
     }
 
     /**

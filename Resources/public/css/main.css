@@ -1600,15 +1600,22 @@ ul.social li a:hover  {
     color: #fff;
 }
 
-.button .text-loading {
+#more-results .text-loading,
+#more-results .text-no-results {
     display: none;
 }
 
-.button.loading .text {
+#more-results.loading .text,
+#more-results.no-results .text,
+#more-results.loading .text-no-results {
     display: none;
 }
 
-.button.loading .text-loading {
+#more-results.no-results .text-no-results {
+    display: inline;
+}
+
+#more-results.loading .text-loading {
     display: inline;
 }
 /*Document*/
@@ -2227,3 +2234,49 @@ ul.search-results.sidebar .main.image-overlay .columns:first-of-type p.date {
 .post-item.image-overlay .columns:first-of-type:after, .post-item.image-overlay.dark .columns:first-of-type:after {
     background: transparent\9;
 }
+
+/* Search Facet */
+
+dl.search-facet {
+    background-color: rgb(242, 242, 242);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+dl.search-facet dt, dl.search-facet dd {
+    display: inline-block;
+    margin: 0;
+}
+
+dl.search-facet dt {
+    color: rgb(102, 102, 102);
+    padding: 0.8rem 1rem;
+}
+
+dl.search-facet dd label {
+    padding: 0.8rem 1.5rem;
+    color: rgb(153, 153, 153);
+    background-color: rgb(242, 242, 242);
+    text-transform: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+}
+
+dl.search-facet dd input {
+    display: none;
+}
+
+dl.search-facet :checked ~ label,
+dl.search-facet dd.active label {
+    background-color: #666;
+    color: rgb(242, 242, 242);
+    transition: background-color 200ms ease-in, color 200ms ease-in;
+}
+
+/* related themes */
+
+.related-themes ul {
+    list-style: none;
+}
+
