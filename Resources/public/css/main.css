@@ -253,8 +253,25 @@ hr {
     line-height: 1.4;
 }
 
-.header .bottom-header li.social-icon {
+.header .bottom-header li.social-icon.nav-icon:hover .fa-share-alt {
+    background: #334B57;
+    -moz-transition: none;
+    -webkit-transition: none;
+    transition: none;
+}
+
+.header .bottom-header li.social-icon.nav-icon {
+    height: 3.2em;
     float: right;
+}
+
+.header .bottom-header .fa-share-alt {
+    color: #C6D5DC;
+    font-size: 2em;
+    padding: 0.3em 0.4em 0 0.4em;
+}
+
+.header .bottom-header li.social-icon {
     border-right: 1px solid #fff;
 }
 
@@ -271,6 +288,24 @@ hr {
     -webkit-transition: none;
     transition: none;
 }
+
+.header .bottom-header li.social-icon ul.children {
+    margin: 1px -22px -10px 0;
+    list-style: none;
+    position: absolute;
+    z-index: 1000;
+    top: 50px;
+    right: 48px;
+    width: 344px;
+}
+
+.header .bottom-header .social-text {
+    padding-left: 40px;
+    white-space: nowrap;
+    line-height: 2;
+    color: #fff;
+}
+
 
 .main-title a {
     color: #FFFFFF;
