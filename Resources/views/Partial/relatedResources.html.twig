@@ -1,5 +1,9 @@
-<h3 class="block-heading">Related Resources</h3>
+{% if items | length > 0 %}
 
-{#{{ search_form.post_type | raw }}#}
+    <h3 class="block-heading">Related Resources</h3>
 
-{% include 'OutlandishAcadOowpBundle:Partial:searchResults.html.twig' %}
+    {#{{ search_form.post_type | raw }}#}
+
+    {% include 'OutlandishAcadOowpBundle:Partial:searchResults.html.twig' %}
+
+{% endif %}

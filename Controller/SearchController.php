@@ -164,6 +164,8 @@ class SearchController extends DefaultController {
                 if(!$request->query->has($postType)){
                     $request->query->add(array($postType => $ids));
                 }
+            } else {
+                return array();
             }
         }
 

@@ -1,44 +1,63 @@
 {% extends 'OutlandishAcadOowpBundle:Resource:postAbstract.html.twig' %}
 
-{% block content %}
+{% block content_sidebar %}
 
-    {{ parent() }}
-
-    {% for item in selected_items %}
-        <li>
-            {% block itemInclude %}
-                {% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
-                'item': item,
-                'excerpt_length': 300,
-                'image': 'medium',
-                'classes': 'image-overlay'} %}
-            {% endblock %}
-        </li>
-    {% endfor %}
-
-
-        {% block related %}
-            {{ render(controller('OutlandishAcadOowpBundle:Related:renderResources', {
-            'post': post
-            })) }}
-        {% endblock %}
-
-
-{% endblock %}
-
-{% block postDate %}<p class="date">{{ post.dateString() }}</p>{% endblock %}
-
-{% block sideBar %}
     {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
     'post': post,
     'title': 'event'} %}
 
-    {% include "OutlandishAcadOowpBundle:Event:event.html.twig" with {
-    'post': post,
-    'title': 'event',
-    'latitude' : event_latitude,
-    'longitude' : event_longitude
-    } %}
+    <section class="event-details">
+        {% set latitude = post.latitude() %}
+        {% set longitude = post.longitude() %}
+        {% if post.dateString or post.address or latitude %}
 
+            <h3 class="block-heading">Event details</h3>
+
+            {%  if post.endDateString() %}
+                <p>Start date: {{ post.startDateString("j F Y") }}</p>
+                <p>End date: {{ post.endDateString() }}</p>
+            {% elseif post.dateString() %}
+                <p>Date: {{ post.dateString("j F Y")}}</p>
+            {% endif %}
+
+            {%  if post.startTime() %}
+                <p>Time: {{ post.startTime() }}</p>
+            {% endif %}
+
+            {%  if post.address() %}
+                <p>Location: {{ post.address() | raw }}</p>
+            {% endif %}
+
+            {% if latitude | length > 0 and longitude | length > 0  %}
+                <div class="google-map">
+                    <div class="map" data-marker="true" data-lat="{{ latitude }}" data-lng="{{ longitude }}" data-zoom="12"></div>
+                </div>
+            {% else %}
+                <hr>
+            {% endif %}
+
+        {% endif %}
+    </section>
+
+    {% for section in related_themes %}
+        <section class="related-themes">
+            <h3 class="block-heading">{{ section.title }}</h3>
+            <ul>
+                {% for item in section.items %}
+                    <li>{% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
+                        'item': item,
+                        'excerpt_length': 'none',
+                        'image':'avatar-square',
+                        'classes' : classes} %}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    {% endfor %}
+
+{% endblock %}
+
+{% block scripts_footer %}
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    {{ parent() }}
 {% endblock %}
 
