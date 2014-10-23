@@ -234,6 +234,7 @@ class SearchController extends DefaultController {
         if(!$sections || !is_array($sections)){
             return array();
         }
+        $search = $this->get('outlandish_acadoowp.faceted_search.search');
         foreach($sections as $s => $section){
             if(!isset($section['acf_fc_layout'])){
                 unset($sections[$s]);
@@ -245,17 +246,11 @@ class SearchController extends DefaultController {
                 case "search_posts":
                     $params = array();
                     /** @var Search $search */
-                    $search = clone $this->get('outlandish_acadoowp.faceted_search.search');
-
                     $params['s'] = $section['query'];
                     unset($section['query']);
 
                     if(!empty($section['post_types'])){
-                        $params['post_types'] = $section['post_types'];
-                        $facet = $search->addFacetPostType('post_types', "");
-                        foreach($section['post_types'] as $postType){
-                            $facet->addOption(new FacetOption($postType, ""));
-                        }
+                        $params['post_type'] = $section['post_types'];
                     }
                     unset($section['post_types']);
 
