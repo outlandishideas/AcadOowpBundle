@@ -26,7 +26,7 @@ class NotFoundListener {
             $wp_query->post = $post;
             $wp_query->is_404 = true;
 
-            $content = $this->templateEngine->render('OutlandishAcadOowpBundle:Default:404.html.twig', array('post'=> $post));
+            $content = $this->templateEngine->render('OutlandishAcadOowpBundle::404.html.twig', array('post'=> $post));
 
             $event->setResponse(new Response($content));
 		}

@@ -7,6 +7,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Outlandish\SiteBundle\PostType\Person;
 use Outlandish\SiteBundle\PostType\Role;
+use Outlandish\SiteBundle\PostType\Page;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class PersonController extends ThemeController {
@@ -20,22 +21,27 @@ class PersonController extends ThemeController {
      * @Template("OutlandishAcadOowpBundle:Person:index.html.twig")
      */
     public function indexAction(Request $request) {
-        $response = array();
-        $post = $this->querySingle(array('page_id' => Person::postTypeParentId()));
+        $post = $this->querySingle(array(
+            'page_id' => $this->getIndexPageId(),
+            'post_type' => Page::postType()
+        ));
+
 		$roles = Role::fetchAll();
-		if ( $roles && $roles->post_count > 0 ) {
-			foreach ( $roles as &$role ) {
+
+		if ( $roles->post_count > 0 ) {
+			foreach ( $roles as $role ) {
 				$role->people = $role->connected( Person::postType() );
 			}
+            $people = array();
 		} else {
-			$people            = Person::fetchAll();
-			$response['people'] = $people;
+			$people = Person::fetchAll()->posts;
 		}
 
-        $response['post'] = $post;
-        $response['roles'] = $roles;
-
-        return $response;
+        return array(
+            'post' => $post,
+            'roles' => $roles->posts,
+            'people' => $people
+        );
     }
 
     /**
