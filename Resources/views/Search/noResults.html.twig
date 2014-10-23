@@ -1,6 +1,11 @@
 <div class="row">
-    <div class="large-24 columns">
-        <h2>Unfortunately, we couldn't find anything for "{{ search.query_vars.s }}". The below recently added resources might interest you.</h2>
+    <div class="large-16 columns">
+        <h2 class="no-results">Unfortunately, we couldn't find anything for "{{ search.query_vars.s }}". The below recently added resources might interest you.</h2>
+    </div>
+    <div class="columns large-7">
+        {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
+        'post': post,
+        'title': 'page'} %}
     </div>
 </div>
 
