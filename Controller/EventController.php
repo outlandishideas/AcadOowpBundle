@@ -6,6 +6,7 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Outlandish\SiteBundle\PostType\Event;
+use Outlandish\SiteBundle\PostType\Page;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class EventController extends ResourceController {
@@ -17,8 +18,31 @@ class EventController extends ResourceController {
      * @Template("OutlandishAcadOowpBundle:Event:index.html.twig")
      */
     public function indexAction(Request $request) {
-        return parent::indexAction($request);
-        //todo: show events properly
+        $request->query->set('meta_query', array(
+            array(
+                'key'=>'start_date',
+                'value'=> date('Y/m/d'),
+                'compare'=>'>',
+                'type'=>'DATE'
+            )
+        ));
+        $request->query->set('orderby', 'meta_value');
+        $request->query->set('meta_key', 'start_date');
+        $request->query->set('order', 'asc');
+        $post = $this->querySingle(array(
+            'page_id' => $this->getIndexPageId(),
+            'post_type' => Page::postType()
+        ));
+
+        $items = Event::fetchFutureEvents();
+
+        $pastItems = Event::fetchPastEvents();
+
+        return array(
+            'post' => $post,
+            'items' => $items,
+            'past_items' => $pastItems
+        );
     }
 
     /**
