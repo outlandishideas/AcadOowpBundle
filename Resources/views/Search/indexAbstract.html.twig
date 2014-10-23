@@ -7,16 +7,18 @@
 
     {% if items | length > 0 %}
 
-        {% if featuredItem %}
-            {% block featuredItemContent %}
-                {% include "OutlandishAcadOowpBundle:Item:featuredItem.html.twig" with {'item': featuredItem} %}
-            {% endblock %}
-        {% endif %}
+        {% block content_main_results %}
+            {% if featuredItem %}
+                {% block featuredItemContent %}
+                    {% include "OutlandishAcadOowpBundle:Item:featuredItem.html.twig" with {'item': featuredItem} %}
+                {% endblock %}
+            {% endif %}
 
-        {{ search_form.orderby | raw }}
-        {{ search_form.order | raw }}
+            {{ search_form.orderby | raw }}
+            {#{{ search_form.order | raw }}#}
 
-        {% include 'OutlandishAcadOowpBundle:Partial:searchResults.html.twig' %}
+            {% include 'OutlandishAcadOowpBundle:Partial:searchResults.html.twig' %}
+        {% endblock %}
 
     {% elseif sections | length > 0 %}
 
@@ -26,7 +28,7 @@
 
     {% else %}
 
-        {% block noSearchResults %}
+        {% block content_main_no_results %}
             {% include 'OutlandishAcadOowpBundle:Search:noResults.html.twig' %}
         {% endblock %}
 

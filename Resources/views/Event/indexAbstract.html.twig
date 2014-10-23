@@ -1,71 +1,45 @@
 {% extends 'OutlandishAcadOowpBundle:Resource:indexAbstract.html.twig' %}
 
-{% block itemsIndex %}
+{% block content_main_results %}
 
-    {% include 'OutlandishAcadOowpBundle:Search:searchSection.html.twig' with {
-    'facets': 'false',
-    'resultsMessage' : 'false',
-    'excerpt_length' : 80
-    } %}
+    <h3 class="block-heading">Upcoming Events</h3>
+    {% include 'OutlandishAcadOowpBundle:Partial:searchResults.html.twig' %}
 
 {% endblock %}
 
-{% block searchResults %}
+{% block content_main_no_results %}
 
-    {% if items | first ['month'] is defined %}
+    <h3 class="block-heading">Upcoming Events</h3>
+    <p>There are currently no upcoming events.</p>
 
-        {% for month in items %}
+    {% if past_items | length > 0 %}
 
-            {% if not loop.first %} <hr> {% endif %}
+        <p>See below for some recent events.</p>
 
-            <h3 class="block-heading">{{ month.month | raw }}</h3>
-
-            {% for item in month['posts'] %}
-                <li>
-                    {% block itemInclude %}
-                        {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
-                        'item': item,
-                        'excerpt_length': 300,
-                        'image': 'item-image-12',
-                        'classes': 'image-overlay'} %}
-                    {% endblock %}
-                </li>
-            {% endfor %}
-        {% endfor %}
-
-    {% else %}
-
-        {% for item in items %}
-            <li>
-                {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
-                'item': item,
-                'excerpt_length': 300,
-                'image': 'item-image-12'} %}
-            </li>
-        {% endfor %}
+        {% include 'OutlandishAcadOowpBundle:Partial:searchResults.html.twig' with {
+        'items': past_items} %}
 
     {% endif %}
 
 {% endblock %}
 
-{% block noSearchResults %}
+{% block content_sidebar %}
 
-    <div class="row">
-        <div class="columns 20-large">
-            <p>No future events found.</p>
+    {{ parent() }}
 
-            {% if previousItems | length > 0 %}
+    {% if past_items | length > 0 %}
 
-                <p>See below for our past events:</p>
-                <br>
+        <section class="related-themes">
+            <h3 class="block-heading">Recent Event</h3>
+            <ul>
+                <li>{% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
+                    'item': past_items | first,
+                    'excerpt_length': 'none',
+                    'image':'avatar-square',
+                    'classes' : classes} %}</li>
+            </ul>
+        </section>
 
-                {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
-                'connectedItems': previousItems,
-                'classes': 'none'} %}
-
-            {% endif %}
-
-        </div>
-    </div>
+    {% endif %}
 
 {% endblock %}
