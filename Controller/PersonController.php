@@ -45,7 +45,7 @@ class PersonController extends ThemeController {
      *
      * @Template("OutlandishAcadOowpBundle:Person:post.html.twig")
      */
-    public function singleAction(Request, $request, $name) {
+    public function singleAction(Request $request, $name) {
         return parent::singleAction($request, $name);
     }
 
