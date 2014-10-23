@@ -5,7 +5,7 @@
     {% if size == 'small' %}
 
         <a href="{{ item.permalink() }}" class="people-item">
-            {% include "OutlandishAcadOowpBundle:Partial:avatar.html.twig" with {
+            {% include "OutlandishAcadOowpBundle:Person:avatar.html.twig" with {
             'post': item,
             'size': 'avatar-square' } %}
             <h4>{{ item.title() | raw }}</h4>
