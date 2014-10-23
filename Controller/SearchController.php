@@ -37,6 +37,11 @@ class SearchController extends DefaultController {
     {
         /** @var Page $post */
         $post = $this->querySingle(array('page_id' => get_option('page_on_front')));$featuredPost = null;
+
+        if(!$request->query->has('post_type')){
+            $request->query->add(array('post_type' => $this->getSearchResultPostTypes()));
+        }
+
         if($request->query->has('s')){
             $name = sanitize_title($request->query->get('s'), null);
             $queryManager = $this->get('outlandish_oowp.query_manager');
@@ -44,18 +49,24 @@ class SearchController extends DefaultController {
             if ($results->post_count == 1) $featuredPost = $results->post;
             $sections = array();
         } else {
-            $sections = $post->sections();
+            $sections = $this->sections($post->sections());
         }
 
-        if(!$request->query->has('post_type')){
-            $request->query->add(array('post_type' => $this->getSearchResultPostTypes()));
-        }
-
-        return array_merge(array(
+        $response = array(
             'post' => $post,
             'featured_post' => $featuredPost,
             'sections' => $sections
-        ), $this->processSearch($request));
+        );
+
+        if(!empty($sections)){
+            return $response;
+        } else {
+            return array_merge(array(
+                'post' => $post,
+                'featured_post' => $featuredPost,
+                'sections' => $sections
+            ), $this->processSearch($request));
+        }
     }
 
     /**
@@ -130,7 +141,7 @@ class SearchController extends DefaultController {
         /** @var PostManager $postManager */
         $postManager = $this->get('outlandish_oowp.post_manager');
         $themes = array_filter($postManager->postTypeMapping(), function($class){
-                return $class::isTheme();
+            return $class::isTheme();
         });
         $relatedThemes = array();
         foreach($themes as $name => $class){
