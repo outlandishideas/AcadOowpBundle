@@ -13,6 +13,8 @@
                     <div class="content-main">
                         {% block content_main %}
                             <h1>{{ post.title() | raw }}</h1>
+                            {{ post.featuredImage('item-image-12') | raw}}
+                            <p></p>
                             {{ post.content() | raw }}
                         {% endblock %}
                     </div>
