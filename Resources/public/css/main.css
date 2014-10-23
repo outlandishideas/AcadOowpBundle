@@ -224,6 +224,7 @@ hr {
     text-align: left;
     background: #268b85;
     margin-top: 1px;
+    min-width: 200px;
 }
 
 .header .bottom-header ul.children li:hover {
@@ -300,7 +301,7 @@ hr {
     z-index: 1000;
     top: 50px;
     right: 48px;
-    width: 344px;
+    width: 349px;
 }
 
 .header .bottom-header .social-text {
