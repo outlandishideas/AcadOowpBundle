@@ -15,7 +15,7 @@
             {% for item in post.recentResources() %}
                 <li>
                     {% block itemInclude %}
-                        {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
+                        {% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
                         'item': item,
                         'excerpt_length': '150',
                         'classes' : classes} %}

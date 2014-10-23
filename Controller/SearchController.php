@@ -36,9 +36,26 @@ class SearchController extends DefaultController {
     public function frontPageAction(Request $request)
     {
         /** @var Page $post */
-        $post = $this->querySingle(array('page_id' => get_option('page_on_front')));
-        $response = $this->indexResponse($post, $request);
-        return $response;
+        $post = $this->querySingle(array('page_id' => get_option('page_on_front')));$featuredPost = null;
+        if($request->query->has('s')){
+            $name = sanitize_title($request->query->get('s'), null);
+            $queryManager = $this->get('outlandish_oowp.query_manager');
+            $results = $queryManager->query(array("name" => $name, "post_type" => "any", "posts_per_page" => 1));
+            if ($results->post_count == 1) $featuredPost = $results->post;
+            $sections = array();
+        } else {
+            $sections = $post->sections();
+        }
+
+        if(!$request->query->has('post_type')){
+            $request->query->add(array('post_type' => $this->getSearchResultPostTypes()));
+        }
+
+        return array_merge(array(
+            'post' => $post,
+            'featured_post' => $featuredPost,
+            'sections' => $sections
+        ), $this->processSearch($request));
     }
 
     /**
@@ -48,25 +65,29 @@ class SearchController extends DefaultController {
      */
     public function indexAction(Request $request)
     {
-        $response = array();
-        $response['post'] = $this->querySingle(array(
+        /** @var Page $post */
+        $post = $this->querySingle(array(
             'page_id' => $this->getIndexPageId(),
             'post_type' => Page::postType()
         ), true);
 
-        $response['featured_post'] = null;
+        $featuredPost = null;
         if($request->query->has('s')){
             $name = sanitize_title($request->query->get('s'), null);
             $queryManager = $this->get('outlandish_oowp.query_manager');
             $results = $queryManager->query(array("name" => $name, "post_type" => "any", "posts_per_page" => 1));
-            if ($results->post_count == 1) $response['featured_post'] = $results->post;
+            if ($results->post_count == 1) $featuredPost = $results->post;
         }
 
         if(!$request->query->has('post_type')){
             $request->query->add(array('post_type' => $this->getSearchResultPostTypes()));
         }
 
-        return array_merge($response, $this->processSearch($request));
+        return array_merge(array(
+            'post' => $post,
+            'featured_post' => $featuredPost,
+            'sections' => $post->sections()
+        ), $this->processSearch($request));
     }
 
     /**
@@ -191,68 +212,6 @@ class SearchController extends DefaultController {
     }
 
     /**
-     * method to generate response for index pages
-     * returns either a response with items (if a search has been placed)
-     * or a response with sections if sections have been created for a page
-     *
-     * @param \Outlandish\OowpBundle\PostType\Post $post
-     * @param Request $request
-     * @param array $postType
-     * @return array
-     */
-    public function indexResponse(BasePost $post, Request $request, $postType = array())
-    {
-        $response = array();
-        $response['post'] = $post;
-        //if a search item does not appear in request
-        //look for sections on the page
-        if(!$request->query->has('s')){
-            $sections = $this->sections($post->sections());
-            if($sections) $response['sections'] = $sections;
-        }
-        //if section has not been set get items
-        if(!array_key_exists('sections', $response)){
-            $response = array_merge($response, $this->searchResponse($request->query->all(), $postType));
-        }
-        return $response;
-    }
-
-    /**
-     * takes Request object and array postTypes and returns search object
-     *
-     * @param Request $request
-     * @param array $postTypes
-     * @return Search
-     */
-    protected function items(Request $request, $postTypes = array()){
-        if(!$request->query->has('s')) return null;
-        $params = $request->query->all();
-
-        /** @var Search $search */
-        $search = $this->get('outlandish_acadoowp.faceted_search.search');
-        if(!empty($postTypes)){
-            $params['post_types'] = $postTypes;
-            $facet = $search->addFacetPostType('post_types', "");
-            foreach($postTypes as $postType){
-                $facet->addOption($postType, "");
-            }
-            $facet->setHidden(true);
-        }
-
-        foreach(Theme::childTypes(true) as $postType => $class) {
-            $search->addFacetPostToPost(
-                $class::postType(),
-                $class::friendlyName(),
-                $class::postType(),
-                $class::fetchAll()->posts
-            );
-        }
-
-        $search->setParams($params);
-        return $search;
-    }
-
-    /**
      * Generates an array of sections that can be display on a page
      * Uses the sections metadata for a page to generate a list of sections and their content
      *
@@ -359,123 +318,6 @@ class SearchController extends DefaultController {
             }
         }
         return $sections;
-    }
-
-    public function renderRelatedPostsAction( OowpPost $post, $s = null) {
-        if($post->postType() == Page::postType()) return new Response();
-        $args = array(
-            's' => $s
-        );
-        if($post::isResource()){
-            $themes = $post->connected($this->getThemePostTypes());
-            if($themes->post_count > 0){
-                foreach($themes->posts as $theme){
-                    if(!array_key_exists($theme->postType(), $args)){
-                        $args[$theme->postType()] = array();
-                    }
-                    $args[$theme->postType()][] = $theme->ID;
-                }
-                $args['post__not_in'] = array($post->ID);
-            }
-        } else {
-            $args[$post->postType()] = array($post->ID);
-        }
-        $response = $this->searchResponse($args);
-        return $this->render(
-            'OutlandishAcadOowpBundle:Search:relatedSection.html.twig',
-            $response
-        );
-    }
-
-    public function slugify($string)
-    {
-        $string = strtolower($string);
-        $string = str_replace(' ', '-', $string);
-        return $string;
-
-    }
-
-    public function search(array $postType = array())
-    {
-        /** @var PostManager $postManager */
-        $postManager = $this->get('outlandish_oowp.post_manager');
-        $postMap = $postManager->postTypeMapping();
-
-
-        /** @var Search $search */
-        $search = $this->get('outlandish_acadoowp.faceted_search.search');
-        //if post types have been passed through, use them
-        //otherwise use all the resources
-//        $resources = array_keys(array_intersect_key($postMap, array_flip($postType)));
-//        if(empty($resources)) $resources = $this->getResourcePostTypes();
-        $resources = $this->getResourcePostTypes();
-        $themes = $this->getFilterPostTypes();
-
-        // adding FacetPostType to search
-        $search->addFacet($this->generatePostTypeFacet($resources));
-
-        foreach($themes as $postType){
-            if(!array_key_exists($postType, $postMap)) continue;
-            $class = $postMap[$postType];
-            $facet = $this->generatePostToPostFacet($postType, $class);
-            if(!$facet) continue;
-            $search->addFacet($facet);
-        }
-
-        $search->addFacet(new FacetOrder('order', 'Order'));
-        $search->addFacet(new FacetOrderBy('orderby', 'Order By'));
-        return $search;
-    }
-
-    /**
-     * @param array $params
-     * @return null|Post
-     */
-    public function searchSingle(array $params)
-    {
-        if(!array_key_exists('s', $params)) return null;
-
-        /** @var QueryManager $queryManager */
-        $queryManager = $this->get('outlandish_oowp.query_manager');
-
-        $args = array(
-            'name' => sanitize_title($params['s']),
-            'posts_per_page' => 1
-        );
-
-        $results = $queryManager->query($args);
-        if($results->post_count == 1){
-            return $results->post;
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * @param array $params
-     * @param array $postType
-     * @return mixed
-     */
-    public function searchResponse(array $params, array $postType = array())
-    {
-        $response = array(
-            'featuredItem' => $this->searchSingle($params),
-            'items' => null,
-            'moreResultsUrl' => null
-        );
-        $search = $this->search($postType);
-        if(!empty($postType)) $params['post_type'] = $postType;
-        $search->setParams($params);
-        $query = $search->search();
-        $response['search'] = $query;
-        if ($query->post_count > 0) {
-            $response['items'] = $query->posts;
-//            $uriParts = explode("?", $params->getUri());
-            $response['moreResultsUrl'] = "?" . $search->queryString(1);
-        }
-        $response['helper'] = new SearchFormHelper($search);
-        $response['formElements'] = $response['helper']->getSearchFormElements();
-        return $response;
     }
 
     /**
