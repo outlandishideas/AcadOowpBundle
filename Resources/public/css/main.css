@@ -253,6 +253,10 @@ hr {
     line-height: 1.4;
 }
 
+.header .bottom-header .fa-search {
+    margin: 0 -5px 0 10px;
+}
+
 .header .bottom-header li.social-icon.nav-icon:hover .fa-share-alt {
     background: #334B57;
     -moz-transition: none;
