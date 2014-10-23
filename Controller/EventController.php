@@ -11,7 +11,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class EventController extends ResourceController {
 
     /**
-     *
      * @param Request $request
      * @return array
      *
@@ -25,6 +24,7 @@ class EventController extends ResourceController {
     /**
      * @param Request $request
      * @return array
+     *
      * @Template("OutlandishAcadOowpBundle:Event:index.html.twig")
      */
     public function previousAction(Request $request) {
@@ -40,18 +40,24 @@ class EventController extends ResourceController {
     }
 
     /**
+     * @param Request $request
+     * @param mixed $name
+     * @return array
+     *
      * @Template("OutlandishAcadOowpBundle:Event:post.html.twig")
      */
-    public function singleAction($name) {
-        $response = array();
+    public function singleAction(Request $request, $name) {
+        return parent::singleAction($request, $name);
+    }
 
-        $post = $this->querySingle(array('name' => $name, 'post_type' => Event::postType()));
+    protected function getIndexPageId()
+    {
+        return Event::postTypeParentId();
+    }
 
-        $response['post'] = $post;
-        $response['event_latitude'] =  $post->latitude();
-        $response['event_longitude'] = $post->longitude();
-
-        return $response;
+    protected function getSearchResultPostTypes()
+    {
+        return array(Event::postType());
     }
 
     public function postTypes()

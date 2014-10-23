@@ -11,7 +11,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class PersonController extends ThemeController {
 
+    protected $class = "Outlandish\\SiteBundle\\PostType\\Person";
+
     /**
+     * @param Request $request
+     * @return array
+     *
      * @Template("OutlandishAcadOowpBundle:Person:index.html.twig")
      */
     public function indexAction(Request $request) {
@@ -34,31 +39,25 @@ class PersonController extends ThemeController {
     }
 
     /**
+     * @param Request $request
+     * @param mixed $name
+     * @return array
+     *
      * @Template("OutlandishAcadOowpBundle:Person:post.html.twig")
      */
-    public function singleAction($name) {
-        $response = array();
-
-		$post = $this->querySingle(array('name' => $name, 'post_type' => Person::postType()));
-
-        $sideItems = array (
-            $post->connectedPeople(),
-            $post->connectedEvents(),
-            $post->connectedPlaces()
-        );
-
-        $bottomItems = array(
-            $post->connectedDocuments(),
-            $post->connectedNews()
-        );
-
-        $response['post'] = $post;
-        $response['sideItems'] = $sideItems;
-        $response['bottomItems'] = $bottomItems;
-
-        return $response;
+    public function singleAction(Request, $request, $name) {
+        return parent::singleAction($request, $name);
     }
 
+    protected function getIndexPageId()
+    {
+        return Person::postTypeParentId();
+    }
+
+    protected function getSearchResultPostTypes()
+    {
+        return array(Person::postType());
+    }
 
     public function postTypes()
     {
