@@ -1959,16 +1959,12 @@ ul.terms {
     }
 
     #hamburger {
-        text-align: left;
-        font-size: 25px;
-        color: #fff;
         display: block;
-        text-decoration: none;
-        padding: 11.5px 13px 13px 13px;
+        top: 10px;
+        left: 10px;
+        text-align: left;
+        color: #fff;
         cursor: pointer;
-        position: absolute;
-        background: #011E2E;
-        top: 0;
     }
 
     #filter-panel {
@@ -2010,13 +2006,13 @@ ul.terms {
     a.search-icon.submit {
         display: block;
         position: absolute;
-        right: 55px;
         color: #fff!important;
         line-height: 1rem;
         z-index: 1;
         width: 10px;
         top: 10px;
         right: 30px;
+        padding-top: 0.55rem!important;
     }
 
     .breadcrumbs {
