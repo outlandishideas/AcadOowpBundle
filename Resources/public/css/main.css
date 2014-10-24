@@ -1593,6 +1593,8 @@ img.place-theme-image {
 h4.place-theme-heading {
     text-align: center;
     width: 150px;
+    font-weight: bold;
+    padding: 0.5em 0 0 1.250em;
 }
 
 /* Social Sharing */
