@@ -55,6 +55,8 @@
         {{ post.documentText()  |  raw  }}
     {%  endif %}
 
+    {% include "OutlandishAcadOowpBundle:Partial:connectedResources.html.twig" %}
+
     {{ render(controller('OutlandishAcadOowpBundle:Search:renderRelatedResources', {
     'post': post,
     'request': request
