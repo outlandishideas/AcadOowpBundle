@@ -8,6 +8,7 @@ abstract class Document extends Resource {
 	public static $menuIcon = 'dashicons-format-aside';
 
     public static $connections = array(
+        'document' => array('sortable' => 'any','cardinality' => 'many-to-many'),
         'event' => array('sortable' => 'any','cardinality' => 'many-to-many'),
         'news' => array('sortable' => 'any','cardinality' => 'many-to-many'),
         'person' => array('sortable' => 'any','cardinality' => 'many-to-many'),

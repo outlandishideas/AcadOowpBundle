@@ -11,6 +11,7 @@ abstract class Event extends Resource {
 	public static $menuIcon = 'dashicons-location-alt';
 
     public static $connections = array(
+        'event' => array('sortable' => 'any','cardinality' => 'many-to-many'),
         'news' => array('sortable' => 'any','cardinality' => 'many-to-many'),
         'person' => array('sortable' => 'any','cardinality' => 'many-to-many'),
         'place' => array('sortable' => 'any','cardinality' => 'many-to-many'),

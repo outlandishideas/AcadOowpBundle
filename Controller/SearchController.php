@@ -153,10 +153,15 @@ class SearchController extends DefaultController {
             );
         }
 
+        $resources = array_filter($postManager->postTypeMapping(), function($class){
+            return $class::isResource();
+        });
+
         return array(
             'post' =>  $post,
             'related_themes' => $relatedThemes,
-            'request' => $request
+            'request' => $request,
+            'connected_resources' => $post->connected(array_keys($resources))->posts
         );
 
     }
