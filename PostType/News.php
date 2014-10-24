@@ -8,6 +8,7 @@ abstract class News extends Resource {
 	public static $menuIcon = 'dashicons-megaphone';
 
     public static $connections = array(
+        'news' => array('sortable' => 'any','cardinality' => 'many-to-many'),
         'person' => array('sortable' => 'any','cardinality' => 'many-to-many'),
         'place' => array('sortable' => 'any','cardinality' => 'many-to-many'),
         'project' => array('sortable' => 'any','cardinality' => 'many-to-many'),
