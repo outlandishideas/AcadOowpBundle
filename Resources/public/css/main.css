@@ -620,6 +620,16 @@ nav .inline-list .search-icon span {
     padding: 0.625em;
 }
 
+.block-grid-new-padding.block-grid-link li a {
+    display: block;
+    text-align: center;
+}
+
+.block-grid-new-padding.block-grid-link li a h4 {
+    font-weight: bold;
+    text-align: left;
+}
+
 /* breadcrumbs */
 
 

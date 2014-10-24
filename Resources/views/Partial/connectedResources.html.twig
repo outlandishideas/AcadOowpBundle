@@ -1,0 +1,15 @@
+{% if connected_resources | length > 0 %}
+
+    <h3 class="block-heading">Connected Resources</h3>
+    <ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-3 block-grid-new-padding block-grid-link">
+        {% for item in connected_resources %}
+            <li>
+                <a href="{{ item.permalink() }}">
+                    {{ item.featuredImage() | raw }}
+                    <h4>{{ item.title() | raw }}</h4>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endif %}
