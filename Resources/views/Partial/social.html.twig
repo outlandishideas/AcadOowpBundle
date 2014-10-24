@@ -1,7 +1,7 @@
 {% if socialmedia | length > 0 %}
     {% for media in socialmedia %}
         <li class="social-icon">
-            <a title="{{ media.title | raw }}" href="{{ media.url | raw }}">
+            <a title="{{ media.title | raw }}" href="{{ media.url | raw }}" target="_blank">
                  <span class="fa-stack fa-lg">
                   <i class="fa fa-circle fa-stack-2x"></i>
                   <i class="fa {{ media.type | raw }} fa-stack-1x fa-inverse"></i>
