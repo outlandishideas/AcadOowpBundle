@@ -1212,7 +1212,7 @@ h2.search-query-heading {
 }
 
 ul.search-results {
-    margin: 20px 0 0 0;
+    margin: 0;
     padding: 0;
 }
 
@@ -1220,18 +1220,12 @@ ul.search-results>li {
     list-style: none;
 }
 
-ul.search-results>li:not(first-of-type):before {
+ul.search-results>li:before {
     content: "";
     display: block;
     height: 1px;
     background: #B0B0B0;
     margin-bottom: 3rem;
-}
-
-ul.search-results>li:first-child, .search-results>li:first-child:before {
-    border-top-color: transparent;
-    background: transparent;
-    margin-bottom: 0;
 }
 
 ul.search-results .post-item {
@@ -1667,6 +1661,10 @@ ul.social li a:hover  {
 
 #more-results.loading .text-loading {
     display: inline;
+}
+
+#more-results.no-results {
+    display: none;
 }
 /*Document*/
 

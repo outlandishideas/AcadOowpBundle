@@ -27,6 +27,11 @@ abstract class Post extends BasePost {
      */
     public static $searchFilter = false;
 
+    public static function isSearchFilter()
+    {
+        return static::$searchFilter;
+    }
+
     /**
      * this lists the connections for this post
      * array key = internal name of post type (eg. post)
