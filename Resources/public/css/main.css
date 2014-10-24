@@ -1575,6 +1575,11 @@ img.avatar.photo {
     margin-top: 0;
 }
 
+img.place-theme-image {
+    float: left;
+    padding-right: 20px;
+}
+
 /* Social Sharing */
 
 .share {

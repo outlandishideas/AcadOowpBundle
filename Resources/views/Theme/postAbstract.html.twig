@@ -15,7 +15,7 @@
     'post': post} %}
 
     <h3 class="block-heading">{{ post.title() | raw }}</h3>
-    {{ post.featuredImage() | raw }}
+    <img class="place-theme-image" src="{{ post.featuredImageUrl() }}" alt="{{ post.title() | raw }}">
     {{ post.content() | raw }}
 
     {{ render(controller('OutlandishAcadOowpBundle:Navigation:renderSideMenu', {
