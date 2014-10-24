@@ -27,7 +27,7 @@
                         {#display items 1-2 at 50% width by showing image in separate li#}
                         {% if loop.index <= 2  %}
                             <li>
-                                <a href="{{ item.permalink() }}">{{ item.featuredImage('item-image-12') | raw }}</a>                                {
+                                <a href="{{ item.permalink() }}">{{ item.featuredImage('item-image-12') | raw }}</a>
                             </li>
                             {% set excerpt_length = 80 %}
                         {% endif %}
