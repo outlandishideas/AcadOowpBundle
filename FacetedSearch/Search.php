@@ -243,6 +243,13 @@ class Search {
     public function search()
     {
         $args = $this->generateArguments();
+
+        //default title to order ASC
+        if(array_key_exists('orderby', $args) && $args['orderby'] == 'title')
+        {
+            $args['order'] = "ASC";
+        }
+
         return $this->queryManager->query(array_filter($args));
     }
 
