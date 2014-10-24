@@ -1590,6 +1590,11 @@ img.place-theme-image {
     padding-right: 20px;
 }
 
+h4.place-theme-heading {
+    text-align: center;
+    width: 150px;
+}
+
 /* Social Sharing */
 
 .share {
