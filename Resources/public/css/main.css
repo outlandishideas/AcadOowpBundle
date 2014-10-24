@@ -273,7 +273,7 @@ hr {
 .header .bottom-header .fa-share-alt {
     color: #C6D5DC;
     font-size: 2em;
-    padding: 0.3em 0.4em 0 0.4em;
+    padding: 0.3em 0.4em 0.3em 0.4em;
 }
 
 .header .bottom-header li.social-icon {
@@ -301,7 +301,7 @@ hr {
     z-index: 1000;
     top: 50px;
     right: 48px;
-    width: 349px;
+    width: 348px;
 }
 
 .header .bottom-header .social-text {
