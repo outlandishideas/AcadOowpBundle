@@ -5,12 +5,14 @@
     </ul>
 </div>
 
-<div class="row">
-    <div class="columns large-12 large-centered">
-        <a class="button" href="{{ moreResultsUrl }}" id="more-results">
-            <span class="text">More Results</span>
-            <span class="text-loading"><span class="fa fa-circle-o-notch fa-spin"></span> Loading</span>
-            <span class="text-no-results">No Results</span>
-        </a>
+{% if search.post_count > 9 and moreResultsUrl %}
+    <div class="row">
+        <div class="columns large-12 large-centered">
+            <a class="button" href="{{ moreResultsUrl }}" id="more-results">
+                <span class="text">More Results</span>
+                <span class="text-loading"><span class="fa fa-circle-o-notch fa-spin"></span> Loading</span>
+                <span class="text-no-results">No Results</span>
+            </a>
+        </div>
     </div>
-</div>
+{% endif %}
