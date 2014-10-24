@@ -31,11 +31,11 @@
         {{ post.content() | raw }}
     </div>
 
-    <h3 class="block-heading">Related Resources</h3>
-
-    {{ search_form.orderby | raw }}
-
-    {% include 'OutlandishAcadOowpBundle:Partial:searchResults.html.twig' %}
+    {% if items | length > 0 %}
+        <h3 class="block-heading">Related Resources</h3>
+        {{ search_form.orderby | raw }}
+        {% include 'OutlandishAcadOowpBundle:Partial:searchResults.html.twig' %}
+    {% endif %}
 
 {% endblock %}
 
