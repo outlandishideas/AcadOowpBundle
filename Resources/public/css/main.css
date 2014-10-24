@@ -1662,6 +1662,10 @@ ul.social li a:hover  {
 #more-results.loading .text-loading {
     display: inline;
 }
+
+#more-results.no-results {
+    display: none;
+}
 /*Document*/
 
 .document-external {
