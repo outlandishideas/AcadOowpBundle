@@ -1535,6 +1535,11 @@ img.avatar.photo {
     width: 1.8em;
     height: 1.8em;
     margin-left: -9px;
+    display: inline;
+}
+
+.vcard .person-details .url {
+    word-wrap: break-word;
 }
 
 .equalise {
