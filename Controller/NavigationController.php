@@ -4,8 +4,8 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 
-use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
 use Outlandish\OowpBundle\PostType\Post as OowpPost;
+use Outlandish\OowpBundle\Manager\PostManager;
 use Outlandish\SiteBundle\PostType\Post;
 use Outlandish\SiteBundle\PostType\Page;
 use Outlandish\OowpBundle\PostType\MiscPost;
@@ -44,24 +44,36 @@ class NavigationController extends SearchController {
 	}
 
     public function renderFilterPanelAction( OowpPost $currentPost) {
-        $args = array();
+        /** @var PostManager $postManager */
+        $postManager = $this->get('outlandish_oowp.post_manager');
+        /** @var FacetedSearch $search */
         $search = $this->get('outlandish_acadoowp.faceted_search.search');
-        $args['facets'] = $search->getPostToPostFacets();
+
+        $facets = $search->getPostToPostFacets();
+
+        $panelFacets = array_filter($facets, function($facet) use ($postManager) {
+            $class = $postManager->postTypeClass($facet->getName());
+            if(!$class) return false;
+            return $class::isSearchFilter();
+        });
+
         if($currentPost->postType() != "page"){
             $parent = $currentPost->parent();
             if(!$parent){
                 $parent = Page::fetchById(get_option('page_on_front'));
             }
-            $args["formAction"] = $parent->permalink();
+            $formAction = $parent->permalink();
         } else {
-            $args["formAction"] = $currentPost->permalink();
+            $formAction = $currentPost->permalink();
         }
         return $this->render(
             'OutlandishAcadOowpBundle:Search:filterPanel.html.twig',
-            $args
+            array(
+                'formAction' => $formAction,
+                'facets' => $panelFacets
+            )
         );
     }
-
 
     /**
      * @param OowpPost $rootPost
