@@ -136,7 +136,7 @@ h6.subhead {
     text-decoration : underline;
 }
 
-p, .content li {
+p, .content li, .content-main li {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size : 18px;
