@@ -520,11 +520,11 @@ a.search-icon {
     top: 0;
     right: 30px;
     height: 4rem;
-    line-height: 2.8rem;
+    line-height: 2.5rem;
 }
 
 .main-search .fa-search {
-    font-size: 22px;
+    font-size: 1.8em;
     color: #4c4c4c;
 }
 
