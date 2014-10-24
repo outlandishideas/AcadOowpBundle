@@ -27,6 +27,20 @@ abstract class Post extends BasePost {
      */
     public static $searchFilter = false;
 
+    /**
+     * id of media in db that is the default image id
+     * @var int
+     */
+    protected $defaultImageId;
+
+    public function getDefaultImageId()
+    {
+        return $this->defaultImageId;
+    }
+
+    /**
+     * @return bool
+     */
     public static function isSearchFilter()
     {
         return static::$searchFilter;
@@ -73,6 +87,15 @@ abstract class Post extends BasePost {
      */
     public function postTypeIcon() {
         return static::$menuIcon;
+    }
+
+    protected function featuredImageAttachmentId()
+    {
+        $id = parent::featuredImageAttachmentId();
+        if(!is_numeric($id)){
+            $id = $this->getDefaultImageId();
+        }
+        return $id;
     }
 
     public function featuredImageTitle() {
