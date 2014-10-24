@@ -1,129 +1,111 @@
-{% extends '::layout.html.twig' %}
+{% extends 'OutlandishAcadOowpBundle:Theme:postAbstract.html.twig' %}
 
-{% block title %}{{ post.title() | raw }}{% endblock %}
+{% block content_main %}
 
-{% block content %}
-    <article class="section vcard">
-        <div class="row">
-            <div class="medium-16 columns">
-                <div class="content main">
-                    <div class="row">
-                        {% block postAvatar %}
-                            <div class="medium-5 columns">
-                                {% include "OutlandishAcadOowpBundle:Person:avatar.html.twig" with {
-                                'post': post,
-                                'size': 'avatar-square',
-                                'classes': 'photo' } %}
-                            </div>
-                        {% endblock %}
-
-                        {% block postTitle %}
-                            <div class="medium-19 columns">
-                                <div class="person-heading">
-                                    <h1>
-                                        <span class="fn">{{ post.title() | raw }}</span>
-                                    </h1>
-                                    <span class="role">{{ post.role() | raw }}</span>
-
-                                    <span class="n">
-                                        <span class="honorific-prefix">{{ post.metadata('honorific_prefix') | raw }}</span>
-                                        <span class="given-name">{{ post.metadata('given_name') | raw }}</span>
-                                        <span class="family-name">{{ post.metadata('family_name') | raw }}</span>
-                                    </span>
-                                </div>
-
-                            </div>
-                        {% endblock %}
-                    </div>
-                    <div class="row">
-                        <div class="large-20 columns">
-                            <div class="content post note">
-                                {{ post.content() | raw }}
-                            </div>
-                        </div>
-                    </div>
-
-                    {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
-                    'connectedItems': bottomItems,
-                    'classes': 'none'} %}
-
-                </div>
-            </div>
-            <div class="medium-8 columns">
-                {% block sideBar %}
-                    {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
-                    'post': post } %}
-                {% endblock %}
-
-                {%  if post.metadata('role') or post.metadata('email') or post.metadata('tel') %}
-
-                    <h3 class="block-heading">Personal Details</h3>
-
-                    <div class="person-details vcard">
-
-                        <p><span class="fn">{{ post.title() | raw }}</span></p>
-
-                        {%  if post.role() %}
-                            <p><span class="role">{{ post.role() | raw }}</span></p>
-                        {% endif %}
-
-                        {%  if post.metadata('email') %}
-                            <p>
-                                <span class="fa-stack fa-lg"><i class="fa fa-envelope fa-stack-1x"></i></span>
-                                <span class="email">{{ post.metadata('email') | raw }}</span>
-                            </p>
-                        {% endif %}
-
-                        {%  if post.metadata('tel') %}
-                            <p>
-                                <span class="fa-stack fa-lg"><i class="fa fa-phone fa-stack-1x"></i></span>
-                                <span class="tel">{{ post.metadata('tel') | raw }}</span>
-                            </p>
-                        {% endif %}
-
-                        {%  if post.metadata('twitter_handle') %}
-                            <p>
-                                <span class="fa-stack fa-lg"><i class="fa fa-twitter fa-stack-1x"></i></span>
-                                <span class="x-twitter">{{ post.metadata('twitter_handle') | raw }}</span>
-                            </p>
-                        {% endif %}
-
-                        {%  if post.metadata('blog') %}
-                            <p>
-                                <span class="fa-stack fa-lg"><i class="fa fa-pencil fa-stack-1x"></i></span>
-                                <span class="url">{{ post.metadata('blog') | raw }}</span>
-                            </p>
-                        {% endif %}
-
-                    </div>
-
-
-                {% endif %}
-
-                {% block connected_side_posts %}
-
-                    <div class="row">
-                        <div class="large-24 columns">
-
-                            {% include "OutlandishAcadOowpBundle:Partial:connected.html.twig" with {
-                            'connectedItems': sideItems,
-                            'classes' : 'side-items'
-                            } %}
-
-                        </div>
-                    </div>
-
-                {% endblock %}
-
-            </div>
+    <div class="row">
+        <div class="medium-5 columns">
+            {% include "OutlandishAcadOowpBundle:Person:avatar.html.twig" with {
+            'post': post,
+            'size': 'avatar-square',
+            'classes': 'photo' } %}
         </div>
-    </article>
 
-    {% block related %}
-        {{ render(controller('OutlandishAcadOowpBundle:Related:renderResources', {
-        'post': post
-        })) }}
-    {% endblock %}
+        <div class="medium-19 columns">
+            <div class="person-heading">
+                <h1>
+                    <span class="fn">{{ post.title() | raw }}</span>
+                </h1>
+                <span class="role">{{ post.role() | raw }}</span>
+
+                <span class="n">
+                    <span class="honorific-prefix">{{ post.metadata('honorific_prefix') | raw }}</span>
+                    <span class="given-name">{{ post.metadata('given_name') | raw }}</span>
+                    <span class="family-name">{{ post.metadata('family_name') | raw }}</span>
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="content post note">
+        {{ post.content() | raw }}
+    </div>
+
+    <h3 class="block-heading">Related Resources</h3>
+
+    {{ search_form.orderby | raw }}
+
+    {% include 'OutlandishAcadOowpBundle:Partial:searchResults.html.twig' %}
 
 {% endblock %}
 
+{% block content_sidebar %}
+
+    {% include "OutlandishAcadOowpBundle:Partial:share.html.twig" with {
+    'post': post } %}
+
+    {%  if post.metadata('role') or post.metadata('email') or post.metadata('tel') %}
+
+        <h3 class="block-heading">Personal Details</h3>
+
+        <div class="person-details vcard">
+
+            <p><span class="fn">{{ post.title() | raw }}</span></p>
+
+            {%  if post.role() %}
+                <p><span class="role">{{ post.role() | raw }}</span></p>
+            {% endif %}
+
+            {%  if post.metadata('email') %}
+                <p>
+                    <span class="fa-stack fa-lg"><i class="fa fa-envelope fa-stack-1x"></i></span>
+                    <span class="email">{{ post.metadata('email') | raw }}</span>
+                </p>
+            {% endif %}
+
+            {%  if post.metadata('tel') %}
+                <p>
+                    <span class="fa-stack fa-lg"><i class="fa fa-phone fa-stack-1x"></i></span>
+                    <span class="tel">{{ post.metadata('tel') | raw }}</span>
+                </p>
+            {% endif %}
+
+            {%  if post.metadata('twitter_handle') %}
+                <p>
+                    <span class="fa-stack fa-lg"><i class="fa fa-twitter fa-stack-1x"></i></span>
+                    <span class="x-twitter">{{ post.metadata('twitter_handle') | raw }}</span>
+                </p>
+            {% endif %}
+
+            {%  if post.metadata('blog') %}
+                <p>
+                    <span class="fa-stack fa-lg"><i class="fa fa-pencil fa-stack-1x"></i></span>
+                    <span class="url">{{ post.metadata('blog') | raw }}</span>
+                </p>
+            {% endif %}
+
+        </div>
+
+    {% endif %}
+
+    {% for section in related_themes %}
+        <section class="related-themes">
+            <h3 class="block-heading">{{ section.title }}</h3>
+            <ul>
+                {% for item in section.items %}
+                    <li>{% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
+                        'item': item,
+                        'excerpt_length': 'none',
+                        'image':'avatar-square',
+                        'classes' : classes} %}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    {% endfor %}
+
+    {{ render(controller('OutlandishAcadOowpBundle:Navigation:renderSideMenu', {
+    'maxDepth' : 3,
+    'rootPost': post.getRoot()
+    })) }}
+
+{% endblock %}

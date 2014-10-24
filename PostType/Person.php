@@ -7,6 +7,7 @@ abstract class Person extends Resource {
 
     public static $menuIcon = 'dashicons-businessman';
     public static $theme = true;
+    public static $searchFilter = false;
 
     public static $connections = array(
         'place' => array('sortable' => 'any','cardinality' => 'many-to-many'),
