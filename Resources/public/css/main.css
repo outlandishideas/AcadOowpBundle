@@ -1975,7 +1975,7 @@ ul.terms {
         border-left: 12px solid #00AA9D;
     }
 
-    nav .inline-list li.search, nav .inline-list li.filter-toggle, .header .bottom-header nav .inline-list li:hover ul.children {
+    nav .inline-list li.search, nav .inline-list li.filter-toggle {
         display: none;
     }
 
@@ -1997,6 +1997,17 @@ ul.terms {
     .header .bottom-header nav .inline-list li:hover a, .header .bottom-header nav .inline-list li.current_page_item a, .header .bottom-header nav .inline-list li.current_page_ancestor a {
         color: #fff;
         padding-left: 20px;
+    }
+
+    .header .bottom-header ul.children {
+        display: block;
+        top: 0;
+        position: relative;
+        margin: 0;
+    }
+
+    .header .bottom-header ul.children li a {
+        padding-left: 4rem;
     }
 
     .mobile-header {
