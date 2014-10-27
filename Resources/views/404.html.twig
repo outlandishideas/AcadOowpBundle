@@ -2,23 +2,31 @@
 
 {% block content %}
 
-    <h2>Unfortunately, the page you were looking for was not found. Perhaps these recent Articles may interest you?</h2>
+    {% if recent_resources | length > 0 %}
 
-    <div class="row">
-        <div class="large-16 large-centered columns">
-            <ul class="search-results">
-                {% for item in post.recentResources() %}
-                    <li>
-                        {% block itemInclude %}
-                            {% include 'OutlandishAcadOowpBundle:Default:defaultItem.html.twig' with {
-                            'item': item,
-                            'excerpt_length': '150',
-                            'classes' : classes} %}
-                        {% endblock %}
-                    </li>
-                {% endfor %}
-            </ul>
+        <h2>Unfortunately, the page you were looking for was not found. Perhaps these recent Articles may interest you?</h2>
+
+        <div class="row">
+            <div class="large-16 large-centered columns">
+                <ul class="search-results">
+                    {% for item in recent_resources %}
+                        <li>
+                            {% block itemInclude %}
+                                {% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
+                                'item': item,
+                                'excerpt_length': '150',
+                                'classes' : classes} %}
+                            {% endblock %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-    </div>
+
+    {% else %}
+
+        <h2>Unfortunately, the page you were looking for was not found. <a href="{{ path("home_page") }}">Head back to our home page to start your search again.</a></h2>
+
+    {% endif %}
 
 {% endblock %}
