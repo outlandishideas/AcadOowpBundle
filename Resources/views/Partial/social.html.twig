@@ -1,12 +1,27 @@
 {% if socialmedia | length > 0 %}
     {% for media in socialmedia %}
         <li class="social-icon">
-            <a title="{{ media.title | raw }}" href="{{ media.url | raw }}" target="_blank">
-                 <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa {{ media.type | raw }} fa-stack-1x fa-inverse"></i>
-                </span>
-            </a>
+
+            {% if media.url %}
+
+                <a title="{{ media.title | raw }}" href="{{ media.url | raw }}" target="_blank">
+                     <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa {{ media.type | raw }} fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+
+            {% elseif media.email_address %}
+
+                <a title="{{ media.title | raw }}" href="mailto:{{ media.email_address | raw }}">
+                     <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa {{ media.type | raw }} fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+
+            {% endif %}
+
         </li>
     {% endfor %}
 {% endif %}
