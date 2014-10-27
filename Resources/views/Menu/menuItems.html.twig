@@ -7,3 +7,35 @@
 {% for post in posts %}
     {% include "OutlandishOowpBundle:Helper:menuItem.html.twig" with { post: post, queryArgs: queryArgs, menuArgs: menuArgs } %}
 {% endfor %}
+
+{% if social_media | length > 0 %}
+    <li class="social-icon nav-icon">
+        <i class="fa fa-share-alt"></i>
+        <ul class="children">
+
+            {% for media in socialmedia %}
+                <li class="social-icon">
+                    <a title="{{ media.title | raw }}" href="{{ media.url | raw }}" target="_blank">
+                     <span class="fa-stack fa-lg">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa {{ media.type | raw }} fa-stack-1x fa-inverse"></i>
+                      <span class="social-text">{{ media.social_text }}</span>
+                    </span>
+                    </a>
+                </li>
+            {% endfor %}
+
+        </ul>
+    </li>
+{% endif %}
+
+{% if search_button %}
+    <li class="search filter-toggle right">
+        <a href="#" class="search-icon right">
+            {% if search_button_text %}
+                <span class="search-text">{{ search_button_text }}</span>
+            {% endif %}
+            <span class="fa fa-search"></span>
+        </a>
+    </li>
+{% endif %}
