@@ -18,8 +18,8 @@
     </a>
 {% else %}
     <a href="{{ item.permalink() }}" class="post-item post-{{ item.post_type }} {{ classes }}">
-        <div class="row">
-            <div class="columns large-{% if 'side-items' in classes %}8{% else %}10{% endif %} small-24">
+        <div class="row" data-equalizer>
+            <div class="columns large-{% if 'side-items' in classes %}8{% else %}10{% endif %} small-24" data-equalizer>
                 <div class="post-item-image">
                     {% block item_image %}
 
@@ -39,7 +39,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="columns large-{% if 'side-items' in classes %}16 equalise {% else %}14 {% endif %} small-24">
+            <div class="columns large-{% if 'side-items' in classes %}16 equalise {% else %}14 {% endif %} small-24" data-equalizer>
 
                 {% block itemInclude %}
                     {% include 'OutlandishAcadOowpBundle:Item:itemContent.html.twig' with {
