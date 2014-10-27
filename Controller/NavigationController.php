@@ -242,5 +242,17 @@ class NavigationController extends SearchController {
 	}
 
 
+    public function renderTopHeaderAction()
+    {
+        return $this->render(
+            'OutlandishAcadOowpBundle:Navigation:topHeader.html.twig',
+            array(
+                'header_image' => get_field('header_image', 'options'),
+                'header_text' => get_field('header_text', 'options')
+            )
+        );
+    }
+
+
 
 }
