@@ -46,7 +46,9 @@ class SearchController extends DefaultController {
             $name = sanitize_title($request->query->get('s'), null);
             $queryManager = $this->get('outlandish_oowp.query_manager');
             $results = $queryManager->query(array("name" => $name, "post_type" => "any", "posts_per_page" => 1));
-            if ($results->post_count == 1) $featuredPost = $results->post;
+            if ($results->post_count == 1) {
+                return $this->redirect($results->post->permalink());
+            }
             $sections = array();
         } else {
             $sections = $this->sections($post->sections());

@@ -50,7 +50,7 @@ app.init = {
         '#more-results': function( $button ) {
             $button.on('click', function(e) {
                 e.preventDefault();
-                $(this).addClass('loading');
+                $(this).addClass('loading').removeClass('no-results');
                 var href = $button.attr('href').split('?');
                 var query = href[1];
 
