@@ -2349,3 +2349,16 @@ dl.search-facet dd.active label {
     font-size: 1.1em;
 }
 
+/*video iframe*/
+
+iframe.video-iframe {
+    /*width: 700px;*/
+    /*height: 400px;*/
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
