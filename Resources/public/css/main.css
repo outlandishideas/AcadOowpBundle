@@ -1878,6 +1878,11 @@ ul.terms {
         display: none;
     }
 
+    iframe {
+        width: 100% !important;
+        height: auto !important;
+    }
+
     body, .bottom-header {
         -webkit-transition: all 0.3s;
         -moz-transition: all 0.3s;
