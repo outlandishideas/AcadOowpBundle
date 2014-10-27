@@ -957,6 +957,12 @@ ul.subtitle-list li {
     color: #E7E7E7;
 }
 
+/*video iframe*/
+
+iframe.video-iframe {
+    margin: 30px 0;
+}
+
 /* Carousel */
 
 .associated-organisations h3.block-heading {
@@ -2146,6 +2152,11 @@ ul.terms {
     ul.search-results.people li {
         padding: 20px;
     }
+
+    iframe.video-iframe {
+        width: 530px;
+        height: 300px;
+    }
 }
 
 @media only screen and (max-width: 640px)  {
@@ -2226,6 +2237,11 @@ ul.terms {
 
     .vcard .person-details .fa-stack {
         display: inline-block;
+    }
+
+    iframe.video-iframe {
+        width: 300px;
+        height: 170px;
     }
 
 
@@ -2348,10 +2364,3 @@ dl.search-facet dd.active label {
     font-weight: normal;
     font-size: 1.1em;
 }
-
-/*video iframe*/
-
-iframe.video-iframe {
-    margin: 30px 0;
-}
-
