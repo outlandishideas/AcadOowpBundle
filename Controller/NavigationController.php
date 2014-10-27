@@ -33,15 +33,24 @@ class NavigationController extends SearchController {
         );
     }
 
-	public function renderMenuAction( $maxDepth = 1, $menu = 'header' ){
+    public function renderMenuAction( $maxDepth = 1, $menu = 'header', $socialMedia = false, $searchButton = false ){
 
         $args = $this->generateMenuArguments($maxDepth, null, $menu);
 
-		return $this->render(
-			'OutlandishAcadOowpBundle:Menu:menuItems.html.twig',
+        if($socialMedia){
+            $args['social_media'] = get_field('social_media', 'options');
+        }
+
+        $args['search_button'] = $searchButton;
+        if($searchButton){
+            $args['search_button_text'] = get_field('search_text', 'options');
+        }
+
+        return $this->render(
+            'OutlandishAcadOowpBundle:Menu:menuItems.html.twig',
             $args
-		);
-	}
+        );
+    }
 
     public function renderFilterPanelAction( OowpPost $currentPost) {
         /** @var PostManager $postManager */
