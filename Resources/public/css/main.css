@@ -1833,6 +1833,11 @@ ul.terms {
     .associated-organisations img {
         max-width: 110px!important;
     }
+
+    iframe.video-iframe {
+        width: 400px;
+        height: 230px;
+    }
 }
 
 @media screen and (max-width: 980px) {
@@ -2151,11 +2156,6 @@ ul.terms {
 
     ul.search-results.people li {
         padding: 20px;
-    }
-
-    iframe.video-iframe {
-        width: 530px;
-        height: 300px;
     }
 }
 
