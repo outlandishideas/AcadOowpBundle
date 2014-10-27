@@ -41,5 +41,21 @@ class OutlandishAcadOowpBundle extends Bundle {
                 }
             );
         }
+
+        if(function_exists('add_shortcode')){
+            add_shortcode( 'video', 'getVideo' );
+        }
+
 	}
+
+    function getVideo() {
+        global $post;
+        $video = '';
+        if ($videoURL = $post->metadata('youtube_video_url')) {
+            $id = str_replace('http://vimeo.com/', '', $videoURL);
+            $video = '<iframe class="video-iframe" src="//player.vimeo.com/video/'. $id .'?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+        }
+        return $video;
+    }
+
 }
