@@ -2352,13 +2352,6 @@ dl.search-facet dd.active label {
 /*video iframe*/
 
 iframe.video-iframe {
-    /*width: 700px;*/
-    /*height: 400px;*/
-    margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    margin: 30px 0;
 }
 
