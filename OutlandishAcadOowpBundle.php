@@ -43,12 +43,12 @@ class OutlandishAcadOowpBundle extends Bundle {
         }
 
         if(function_exists('add_shortcode')){
-            add_shortcode( 'video', 'getVideo' );
+            add_shortcode( 'addVideo', 'getVideo' );
         }
 
 	}
 
-    function getVideo() {
+    function getVideo($atts) {
         global $post;
         $video = '';
         if ($videoURL = $post->metadata('youtube_video_url')) {
