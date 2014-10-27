@@ -43,7 +43,7 @@ class OutlandishAcadOowpBundle extends Bundle {
         }
 
         if(function_exists('add_shortcode')){
-            add_shortcode( 'addVideo', 'getVideo' );
+            add_shortcode( 'outlandish_video', 'getVideo' );
         }
 
 	}
