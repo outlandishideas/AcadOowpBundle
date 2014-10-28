@@ -9,9 +9,16 @@
 
         {% block content_main_results %}
             {% if featuredItem %}
+
+                {% if not featured_heading %}{% set featured_heading = '' %}{% endif %}
+
                 {% block featuredItemContent %}
-                    {% include "OutlandishAcadOowpBundle:Item:featuredItem.html.twig" with {'item': featuredItem} %}
+                    {% include "OutlandishAcadOowpBundle:Item:featuredItem.html.twig" with {
+                        'item': featuredItem,
+                        'featured_heading' : featured_heading
+                    } %}
                 {% endblock %}
+
             {% endif %}
 
             {{ search_form.orderby | raw }}

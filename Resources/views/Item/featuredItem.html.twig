@@ -1,9 +1,13 @@
 <div class="featured-item">
-    <div class="row">
-        <div class="large-12 columns">
-            <h2>Featured result</h2>
+
+    {% if featured_heading != 'none' %}
+        <div class="row">
+            <div class="large-12 columns">
+                <h2>Featured result</h2>
+            </div>
         </div>
-    </div>
+    {%  endif %}
+
     <div class="row">
         <div class="large-12 columns">
             {{ item.featuredImage('item-image-12') | raw }}
