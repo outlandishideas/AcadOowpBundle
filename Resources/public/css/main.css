@@ -1556,8 +1556,8 @@ img.avatar.photo {
     display: inline;
 }
 
-.vcard .person-details .url {
-    word-wrap: break-word;
+.person-details.vcard .url {
+    word-break: break-all;
 }
 
 .equalise {
