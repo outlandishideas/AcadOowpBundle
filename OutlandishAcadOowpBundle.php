@@ -25,6 +25,7 @@ class OutlandishAcadOowpBundle extends Bundle {
         if(function_exists('add_image_size')) {
             add_image_size('avatar-square', '100', '100', array('center', 'center'));
             add_image_size('item-image-12', '630', '380', array('center', 'center'));
+            add_image_size('item-image-12-small', '630', '290', array('center', 'center'));
             add_image_size('item-image-6', '307', '190', array('center', 'center'));
             add_image_size('item-image-4', '198', '122', array('center', 'center'));
         }
