@@ -1088,6 +1088,10 @@ a:hover h2, a.post-item h3:hover, a.post-item a h3:focus, a.post-item h3.feature
     margin-right: -0.9375em;
 }
 
+.section.featured .featured-item {
+    margin-bottom: 0;
+}
+
 /*Large grid section styles*/
 
 .section.large-grid .post-item-image img {
