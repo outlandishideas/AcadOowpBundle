@@ -11,8 +11,8 @@
             <div class="row">
                 {% if not excerpt_length %}{% set excerpt_length = 150 %}{% endif %}
                 {% for item in section.items %}
-                    {% if not loop.first and loop.index <= 3 %}
-                        <div class="large-12 columns">
+                    {% if not loop.first and loop.index <= 4 %}
+                        <div class="large-8 columns">
                             <hr>
                             {% include "OutlandishAcadOowpBundle:Default:item.html.twig" with {
                             'item': item,
