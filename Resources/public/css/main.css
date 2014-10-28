@@ -1083,7 +1083,7 @@ a:hover h2, a.post-item h3:hover, a.post-item a h3:focus, a.post-item h3.feature
 
 /*Featured section styles*/
 
-.featured-item .row .row {
+.section.featured .row .row {
     margin-left: -0.9375em;
     margin-right: -0.9375em;
 }
