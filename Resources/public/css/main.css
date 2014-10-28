@@ -1236,6 +1236,7 @@ ul.search-results>li {
     list-style: none;
 }
 
+
 ul.search-results>li:not(:first-child):before {
     content: "";
     display: block;
