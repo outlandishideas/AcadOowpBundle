@@ -51,13 +51,14 @@ class OutlandishAcadOowpBundle extends Bundle {
 
     function getVideo($atts) {
 
-        if ($atts['vimeo']) {
+        if (array_key_exists('vimeo', $atts)) {
             print '<iframe class="video-iframe vimeo-iframe" width="600" height="342" src="//player.vimeo.com/video/'. $atts['vimeo'] .'?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
         }
 
-        if ($atts['youtube']) {
+        if (array_key_exists('youtube', $atts)) {
             print '<iframe class="video-iframe youtube-iframe" width="560" height="315" src="//www.youtube.com/embed/'. $atts['youtube'] .'" frameborder="0" allowfullscreen></iframe>';
         }
+
     }
 
 }
