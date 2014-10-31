@@ -1062,23 +1062,21 @@ a:hover h2, a.post-item h3:hover, a.post-item a h3:focus, a.post-item h3.feature
     margin-top: 10px;
 }
 
-.section.featured-and-small .small-featured .columns {
-    padding-left: 0.3rem;
-    padding-right: 0.3rem;
+.section.featured-and-small .small-featured ul {
+    padding: 0 2.2rem;
 }
 
-.section.featured-and-small .small-featured .columns:first-child {
+.section.featured-and-small .small-featured li:first-child {
+    padding-left: 0;
+}
+
+.section.featured-and-small .small-featured li {
     padding-left: 0.8rem;
-}
-
-.section.featured-and-small .small-featured .columns:last-child {
-    padding-right: 0.8rem;
+    padding-right: 0.3rem;
 }
 
 .section.featured-and-small .small-featured hr {
     color: #ddd;
-    margin-left: 0.7rem;
-    margin-right: 0.3rem;
 }
 
 /*Featured section styles*/

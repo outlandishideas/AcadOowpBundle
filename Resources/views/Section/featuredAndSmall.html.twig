@@ -16,20 +16,21 @@
     </div>
     <div class="large-24 columns">
         <div class="row small-featured">
-            {% for item in section.items %}
-                {% if not loop.first and loop.index <= 7 %}
-                    <div class="large-4 medium-12 small-24 columns">
-                        <hr>
-                        {% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
-                        'item': item,
-                        'classes': 'main',
-                        'image' : 'item-image-12',
-                        'tags' : '',
-                        'excerpt_length': 'none' } %}
-
-                    </div>
-                {% endif %}
-            {% endfor %}
+            <ul class="small-block-grid-2 large-block-grid-6">
+                {% for item in section.items %}
+                    {% if not loop.first and loop.index <= 7 %}
+                        <li>
+                            <hr>
+                            {% include 'OutlandishAcadOowpBundle:Default:item.html.twig' with {
+                            'item': item,
+                            'classes': 'main',
+                            'image' : 'item-image-12',
+                            'tags' : '',
+                            'excerpt_length': 'none' } %}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </div>
