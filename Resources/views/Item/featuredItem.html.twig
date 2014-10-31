@@ -10,7 +10,9 @@
 
     <div class="row">
         <div class="large-12 columns">
-            {{ item.featuredImage('item-image-12-small') | raw }}
+            <a href="{{ item.permalink() }}">
+                {{ item.featuredImage('item-image-12-small') | raw }}
+            </a>
         </div>
         <div class="large-12 columns">
             <a href="{{ item.permalink() }}" class="post-item">
