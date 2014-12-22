@@ -187,6 +187,10 @@ hr {
     font-size: 17px;
 }
 
+.header .top-header p.supporting-text {
+    margin-bottom: 3px;
+}
+
 #hamburger, .mobile-header {
     display: none;
 }
