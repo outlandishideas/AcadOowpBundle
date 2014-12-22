@@ -1,14 +1,24 @@
 <div class="row top-header">
-    <div class="large-6 medium-8 small-24 small-centered medium-uncentered large-uncentered columns">
+    <div class="large-6 medium-4 small-24 small-centered medium-uncentered large-uncentered columns">
         {%  if header_image %}
             <a href="{{ site_url() }}">
                 <img class="logo" src="{{ header_image }}">
             </a>
         {% endif %}
     </div>
-    <div class="large-10 medium-16 small-24 columns small-centered large-uncentered">
+    <div class="large-8 end medium-15 small-24 columns small-centered large-uncentered pull-left">
         {%  if header_text %}
             <p>{{ header_text }}</p>
+        {% endif %}
+    </div>
+    <div class="large-6 medium-4 small-24 small-centered medium-uncentered large-uncentered columns mobile-hide">
+        {%  if qmul_text %}
+            <p>{{ qmul_text }}</p>
+        {% endif %}
+        {%  if qmul_image %}
+            <a href="{{ qmul_link }}" target="_blank">
+                <img class="logo" src="{{ qmul_image }}">
+            </a>
         {% endif %}
     </div>
 </div>

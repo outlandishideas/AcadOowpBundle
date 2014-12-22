@@ -1,25 +1,42 @@
 {% if carousel_organisations | length > 0 %}
     {% block carousel_organisations %}
-
-        <div class="row">
-            <div class="large-24 columns">
-                <div class="associated-organisations">
-                    <div class="row">
-                        <div class="large-24 columns">
-                            <h3 class="block-heading">In partnership with</h3>
+        <div class="footer-carousel">
+            <div class="row">
+                <div class="large-6 medium-8 small-24 columns">
+                    <div class="supporting-organisation">
+                        <div class="row background">
+                            <div class="large-24 columns">
+                                <h3 class="block-heading">{{ supporting_text }}</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-24 columns">
+                                <a href="{{ supporting_link }}" target="_blank">
+                                    <img src="{{ supporting_image }}">
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="large-24 columns">
-                            <ul class="carousel">
-                                {% for org in carousel_organisations %}
-                                    <li>
-                                        <a href="{{ org.url }}" target="_blank">
-                                            <img src="{{ org.logo }}">
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
+                </div>
+                <div class="large-18 medium-16 columns">
+                    <div class="associated-organisations">
+                        <div class="row">
+                            <div class="large-24 columns">
+                                <h3 class="block-heading">In partnership with</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-24 columns">
+                                <ul class="carousel">
+                                    {% for org in carousel_organisations %}
+                                        <li>
+                                            <a href="{{ org.url }}" target="_blank">
+                                                <img src="{{ org.logo }}">
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

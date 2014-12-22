@@ -20,6 +20,10 @@ class CarouselController extends BaseController {
 
 	public function getCarousel( $args = array() )
 	{
+        $supportingOrganisation = get_field('qmul_image', 'options');
+        $supportingText = get_field('qmul_text', 'options');
+        $supportingLink = get_field('qmul_link', 'options');
+
         $organisations = get_field('associated_organisations', 'options');
         $carouselOrganisations = array();
         if(is_array($organisations)){
@@ -30,6 +34,9 @@ class CarouselController extends BaseController {
             }
         }
 
+        $args['supporting_image'] = $supportingOrganisation;
+        $args['supporting_text'] = $supportingText;
+        $args['supporting_link'] = $supportingLink;
         $args['carousel_organisations'] = $carouselOrganisations;
 
         return $args;

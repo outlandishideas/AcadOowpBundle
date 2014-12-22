@@ -257,7 +257,10 @@ class NavigationController extends SearchController {
             'OutlandishAcadOowpBundle:Navigation:topHeader.html.twig',
             array(
                 'header_image' => get_field('header_image', 'options'),
-                'header_text' => get_field('header_text', 'options')
+                'header_text' => get_field('header_text', 'options'),
+                'qmul_image' => get_field('qmul_image', 'options'),
+                'qmul_text' => get_field('qmul_text', 'options'),
+                'qmul_link' => get_field('qmul_link', 'options'),
             )
         );
     }
