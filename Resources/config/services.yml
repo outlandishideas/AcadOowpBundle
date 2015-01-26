@@ -3,6 +3,10 @@ services:
         class: Outlandish\AcadOowpBundle\FacetedSearch\Search
         arguments: [@outlandish_routemaster.query_manager, @outlandish_oowp.post_manager]
 
+    outlandish_acadoowp.acf:
+        class: Outlandish\AcadOowpBundle\Command\Acf
+        arguments: [@outlandish_oowp.helper.wp]
+
     kernel.listener.outlandish.notfound:
         class: Outlandish\AcadOowpBundle\EventListener\NotFoundListener
         arguments: [@templating.engine.twig]

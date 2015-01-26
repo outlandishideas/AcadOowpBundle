@@ -2,7 +2,8 @@
     "name": "outlandish/acadoowp-bundle",
     "description": "AcadOowp Bundle for Symfony 2",
 	"require": {
-        "outlandish/oowp-bundle": "dev-master"
+        "outlandish/oowp-bundle": "dev-master",
+        "outlandish/oowp-search-bundle": "dev-master"
 	},
 	"autoload": {
 		"psr-0": {
