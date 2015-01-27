@@ -19,14 +19,14 @@
                                 <ul class="small-block-grid-4 large-block-grid-6 block-grid-new-padding block-grid-link">
                                     {% for option in facet.options %}
                                         <li>
-                                            <a href="{{ option.post.permalink() }}">
+                                            <a href="{{ option.permalink() }}">
 
-                                                {% if option.post.featuredImage()  %}
-                                                    {{ option.post.featuredImage('item-image-6') | raw }}
+                                                {% if option.featuredImage()  %}
+                                                    {{ option.featuredImage('item-image-6') | raw }}
                                                 {% else %}
                                                     <img src="{{ asset('bundles/outlandishacadoowp/images/placeholder.png') }}">
                                                 {% endif %}
-                                                <h4>{{ option.post.title() }}</h4>
+                                                <h4>{{ option.title() }}</h4>
                                             </a>
                                         </li>
                                     {% endfor %}

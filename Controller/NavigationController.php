@@ -55,16 +55,6 @@ class NavigationController extends SearchController {
     public function renderFilterPanelAction( OowpPost $currentPost) {
         /** @var PostManager $postManager */
         $postManager = $this->get('outlandish_oowp.post_manager');
-        /** @var FacetedSearch $search */
-        $search = $this->get('outlandish_acadoowp.faceted_search.search');
-
-        $facets = $search->getPostToPostFacets();
-
-        $panelFacets = array_filter($facets, function($facet) use ($postManager) {
-            $class = $postManager->postTypeClass($facet->getName());
-            if(!$class) return false;
-            return $class::isSearchFilter();
-        });
 
         if($currentPost->postType() != "page"){
             $parent = $currentPost->parent();
@@ -79,7 +69,17 @@ class NavigationController extends SearchController {
             'OutlandishAcadOowpBundle:Search:filterPanel.html.twig',
             array(
                 'formAction' => $formAction,
-                'facets' => $panelFacets
+                'facets' => array(
+                    array(
+                        'section' => Place::friendlyNamePlural(),
+                        'options' => Place::fetchAll()->posts
+                    ),
+                    array(
+                        'section' => Theme::friendlyNamePlural(),
+                        'options' => Theme::fetchAll()->posts
+                    )
+
+                )
             )
         );
     }
