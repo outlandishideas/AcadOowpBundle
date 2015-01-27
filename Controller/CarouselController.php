@@ -4,8 +4,6 @@
 namespace Outlandish\AcadOowpBundle\Controller;
 
 
-use Outlandish\AcadOowpBundle\Controller\DefaultController as BaseController;
-
 class CarouselController extends BaseController {
 
 	public function renderCarouselAction(){
