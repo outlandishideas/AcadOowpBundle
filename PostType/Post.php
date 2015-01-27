@@ -418,4 +418,24 @@ abstract class Post extends BasePost {
         return get_field('header_text', 'options');
     }
 
+    public function relatedThemes(array $postTypes, $sections = false)
+    {
+        $relatedThemes = array();
+        $mapping = array_intersect_key(self::$postManager->postTypeMapping(), $postTypes);
+        if($sections){
+            foreach($mapping as $postType => $class){
+                $connected = $this->connected($postType, false, array('orderby' => 'title'));
+                if($connected->post_count < 1) continue;
+                $relatedThemes[] = array(
+                    'title' => $class::friendlyName(),
+                    'items' => $connected->posts
+                );
+            }
+        } else {
+            $relatedThemes = $this->connected(array_keys($mapping), false, array('orderby' => 'title'));
+        }
+
+        return $relatedThemes;
+    }
+
 }
