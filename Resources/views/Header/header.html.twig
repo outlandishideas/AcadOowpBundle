@@ -1,0 +1,12 @@
+<div class="row top-header">
+    <div class="large-6 medium-8 small-24 small-centered medium-uncentered large-uncentered columns">
+        {%  if headerImage %}
+            <a href="{{ site_url() }}">
+                <img class="logo" src="{{ headerImage }}">
+            </a>
+        {% endif %}
+    </div>
+    <div class="large-10 medium-16 small-24 columns small-centered large-uncentered">
+        <p>{{ headerText }}</p>
+    </div>
+</div>
