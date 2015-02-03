@@ -1,0 +1,9 @@
+<ul class="bread-nav inline-list">
+    {% for crumb in breadcrumbs %}
+        {% if not crumb.url %}
+            <li>{{ crumb.label }}</li>
+        {% else %}
+            <li><a title="{{ crumb.title }}" href="{{ crumb.url }}">{{ crumb.label }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>

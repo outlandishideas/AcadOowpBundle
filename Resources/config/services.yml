@@ -3,6 +3,10 @@ services:
         class: Outlandish\AcadOowpBundle\Command\Acf
         arguments: [@outlandish_oowp.helper.wp]
 
+    outlandish_acadoowp.breadcrumb_helper:
+        class: Outlandish\AcadOowpBundle\Helper\BreadcrumbHelper
+        arguments: [@outlandish_oowp.post_manager, @outlandish_oowp.query_manager]
+
     kernel.listener.outlandish.notfound:
         class: Outlandish\AcadOowpBundle\EventListener\NotFoundListener
         arguments: [@templating.engine.twig]

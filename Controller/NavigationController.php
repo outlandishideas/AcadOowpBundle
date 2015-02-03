@@ -166,53 +166,13 @@ class NavigationController extends SearchController {
         );
     }
 
-	public function renderBreadcrumbsAction() {
-		global $wp_query;
-		$post = $wp_query->get_queried_object();
-
-		$this->queryManager = $this->get('outlandish_oowp.query_manager');
-		$this->postManager = $this->get('outlandish_oowp.post_manager');
-		$postType = $post->post_type;
-
-		$html =  '<ul class="bread-nav inline-list">';
-
-		if ( $post->ID != get_option('page_on_front') ) {
-			$html .= '<li><a title="Back to Home" href="' . home_url() . '">Home</a></li>';
-		}
-
-		if ( is_search() ) {
-			$html .= "<li>  Search Results</li>";
-		} elseif ( is_404() ) {
-			$html .= "<li>  404 Not Found</li>";
-		} elseif ( is_single() && $postType != 'page' ) {
-			$class = $this->postManager->postTypeClass($postType);
-			$parent_id  = $class::postTypeParentId();
-			$html .= $this->breadcrumbItem( $parent_id );
-
-			$html .= '<li>' .the_title( '', '', false ) . "</li>";
-		} elseif ( $postType == 'page' ) {
-
-			$parents = get_post_ancestors( $post->ID );
-			if ( $parents ) {
-				$parents = array_reverse( $parents );
-				foreach ( $parents as $parent_id ) {
-					$html .= $this->breadcrumbItem( $parent_id );
-				}
-			}
-			$html .= "<li>  " . the_title( '', '', false ) . "</li>";
-		}
-		$html .= "</ul>";
-		echo $html;
-
-		return new Response();
-	}
-
-	private function breadcrumbItem( $id ) {
-		$title = get_the_title( $id );
-
-		return '<li><a href="' . esc_url( get_permalink( $id ) ) . '" title="Back to ' . $title . '">' . $title . '</a> </li>';
-	}
-
+    public function renderBreadcrumbsAction(OowpPost $post)
+    {
+        $breadcrumb = $this->get('outlandish_acadoowp.breadcrumb_helper');
+        return $this->render('OutlandishAcadOowpBundle:Partial:breadcrumbs.html.twig', [
+            'breadcrumbs' => $breadcrumb->make($post)
+        ]);
+    }
 
     /**
      * Returns pages in a menu object as an OOWP query
