@@ -19,7 +19,7 @@ class HeaderController extends BaseController {
     {
         /** @var WordpressHelper $wpHelper */
         $wpHelper = $this->get('outlandish_oowp.helper.wp');
-        return $this->render('OutlandishAcadOowp:Header:header.html.twig', [
+        return $this->render('OutlandishAcadOowpBundle:Header:header.html.twig', [
             'headerImage' => $wpHelper->acfOption('header_image'),
             'headerText' => $wpHelper->acfOption('header_text')
         ]);
