@@ -49,9 +49,7 @@
                                         })) }}
                                     {% endblock %}
 
-                                    {% include "OutlandishAcadOowpBundle:Partial:socialDropdown.html.twig" with {
-                                    'socialmedia' : post.socialMedia()
-                                    } %}
+                                    {{ render(controller('OutlandishAcadOowpBundle:Navigation:renderSocialMedia')) }}
 
                                     <li class="search filter-toggle right">
                                         <a href="#" class="search-icon right">

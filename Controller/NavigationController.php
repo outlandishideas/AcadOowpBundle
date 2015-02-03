@@ -20,6 +20,14 @@ use Outlandish\SiteBundle\PostType\Theme;
 
 class NavigationController extends SearchController {
 
+    public function renderSocialMediaAction()
+    {
+        $wpHelper = $this->get('outlandish_oowp.helper.wp');
+        return $this->render('@OutlandishAcadOowp/Partial/socialDropdown.html.twig', [
+            'socialMedia' => $wpHelper->acfOption('social_media')
+        ]);
+    }
+
     public function renderFooterAction(){
         $args = $this->generateFooterArguments();
 
