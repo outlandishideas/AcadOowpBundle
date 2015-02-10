@@ -6,11 +6,11 @@
  * Time: 19:58
  */
 
-namespace Outlandish\AcadOowpBundle\Command;
+namespace Outlandish\AcadOowpBundle\Helper;
 
 use Outlandish\OowpBundle\Helper\WordpressHelper;
 
-class Acf {
+class AcfHelper {
 
     /**
      * @var WordpressHelper

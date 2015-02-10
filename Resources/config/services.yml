@@ -1,6 +1,6 @@
 services:
     outlandish_acadoowp.acf:
-        class: Outlandish\AcadOowpBundle\Command\Acf
+        class: Outlandish\AcadOowpBundle\Helper\AcfHelper
         arguments: [@outlandish_oowp.helper.wp]
 
     outlandish_acadoowp.breadcrumb_helper:

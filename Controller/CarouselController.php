@@ -6,49 +6,49 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 class CarouselController extends BaseController {
 
-	public function renderCarouselAction(){
+	public function renderCarouselAction()
+    {
+        $wpHelper = $this->get('outlandish_oowp.helper.wp');
 
-		$args = $this->getCarousel();
+        $supporting_organisations = $wpHelper->acfOption('qmul_image');
+        $supporting_text = $wpHelper->acfOption('qmul_text');
+        $supporting_link = $wpHelper->acfOption('qmul_link');
+
+        $carousel_organisations = $this->parseOrganisations($wpHelper->acfOption('associated_organisations'));
 
 		return $this->render(
-					'OutlandishAcadOowpBundle:Carousel:carousel.html.twig',
-						$args
+                'OutlandishAcadOowpBundle:Carousel:carousel.html.twig',
+                compact(
+                    'supporting_organisations',
+                    'supporting_text',
+                    'supporting_link',
+                    'carousel_organisations'
+                )
 		);
 	}
 
-	public function getCarousel( $args = array() )
-	{
-        $supportingOrganisation = get_field('qmul_image', 'options');
-        $supportingText = get_field('qmul_text', 'options');
-        $supportingLink = get_field('qmul_link', 'options');
-
-        $organisations = get_field('associated_organisations', 'options');
-        $carouselOrganisations = array();
-        if(is_array($organisations)){
-            foreach ($organisations as $org) {
-                $org['url'] = $this->cleanUrl($org['url']);
-                $org['logo'] = $this->getImageWithId($org['logo'], 'medium');
-                $carouselOrganisations[] = $org;
-            }
-        }
-
-        $args['supporting_image'] = $supportingOrganisation;
-        $args['supporting_text'] = $supportingText;
-        $args['supporting_link'] = $supportingLink;
-        $args['carousel_organisations'] = $carouselOrganisations;
-
-        return $args;
-	}
-
-    public function cleanUrl($url) {
+    private function cleanUrl($url) {
 
         if($url == "" || $url == "http://" ) return null;
 
         return preg_replace('%^(?!https?://)(.*)%', 'http://$1', $url);
     }
 
-    public function getImageWithId($id, $image_size = 'thumbnail'){
+    private function getImageWithId($id, $image_size = 'thumbnail'){
         $image = wp_get_attachment_image_src($id, $image_size);
         return $image[0];
+    }
+
+    /**
+     * @param array $organisations
+     * @return array
+     */
+    private function parseOrganisations($organisations)
+    {
+        return array_map(function ($org) {
+            $org['url'] = $this->cleanUrl($org['url']);
+            $org['logo'] = $this->getImageWithId($org['logo'], 'medium');
+            return $org;
+        }, $organisations);
     }
 }
