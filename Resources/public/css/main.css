@@ -50,7 +50,7 @@ h1, .vcard h1 .fn, .section .post-item h3.featured  {
     font-weight: bold;
     font-size : 2.25rem;
     line-height : 2.75rem;
-    letter-spacing: 0px;
+    letter-spacing: 0;
     color: #2E2E2E;
 }
 
@@ -890,8 +890,7 @@ ul.subtitle-list li {
 }
 
 #footer hr {
-    border-color: darkgrey;
-    border-width: 2px;
+    border: 2px darkgrey;
     margin-bottom: 0.1em;
 }
 
@@ -1353,14 +1352,13 @@ ul.side-menu {
 
 .side-menu li>a {
     background: #f5f5f5;
-    padding: 15px 0;
     color: #565859;
-    padding-left: 25px;
+    padding: 15px 0 15px 25px;
     display: block;
     font-weight: 600;
     -moz-transition: none;
     -webkit-transition: none;
-    -o-transition: color 0 ease-in;
+    -o-transition: color 0s ease-in;
     transition: none;
 }
 
@@ -2113,9 +2111,8 @@ ul.terms {
     }
 
     .main-search {
-        margin: 10px 0 0px 0;
         display: block!important;
-        margin-left: 49px;
+        margin: 10px 0 0 49px;
         z-index: 1;
     }
 

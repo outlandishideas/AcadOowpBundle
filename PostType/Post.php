@@ -5,11 +5,14 @@ namespace Outlandish\AcadOowpBundle\PostType;
 use Outlandish\OowpBundle\PostType\RoutemasterPost as BasePost;
 use Outlandish\SiteBundle\PostType\Person;
 
-
-abstract class Post extends BasePost {
-
+/**
+ * Class Post
+ * @package Outlandish\AcadOowpBundle\PostType
+ */
+abstract class Post extends BasePost
+{
     /**
-     * return the name of the icon for this post type
+     * Return the name of the icon for this post type
      * todo: change this to the post icon from dashicons
      * @var string
      */
@@ -33,6 +36,9 @@ abstract class Post extends BasePost {
      */
     protected $defaultImageId;
 
+    /**
+     * @return int
+     */
     public function getDefaultImageId()
     {
         return $this->defaultImageId;
@@ -54,29 +60,48 @@ abstract class Post extends BasePost {
      */
     public static $connections = array();
 
-    public static function isResource(){
+    /**
+     * @return bool
+     */
+    public static function isResource()
+    {
         return static::$resource;
     }
 
-    public static function isTheme(){
+    /**
+     * @return bool
+     */
+    public static function isTheme()
+    {
         return static::$theme;
     }
 
-    public static function isFilter(){
+    /**
+     * @return bool
+     */
+    public static function isFilter()
+    {
         return static::$searchFilter;
     }
 
-    public static function onRegistrationComplete() {
+    /**
+     *
+     */
+    public static function onRegistrationComplete()
+    {
         parent::onRegistrationComplete();
         static::registerConnections();
     }
 
+    /**
+     *
+     */
     public static function registerConnections()
     {
         $class = get_called_class();
         $mapping = self::$postManager->postTypeMapping();
         $connections = array_intersect_key($class::$connections, $mapping);
-        foreach($connections as $postType => $args) {
+        foreach ($connections as $postType => $args) {
             $class::registerConnection($postType, $args);
         }
     }
@@ -85,24 +110,37 @@ abstract class Post extends BasePost {
      * wraps the static property $menuIcon
      * @return bool|string
      */
-    public function postTypeIcon() {
+    public function postTypeIcon()
+    {
         return static::$menuIcon;
     }
 
+    /**
+     * @return int
+     */
     protected function featuredImageAttachmentId()
     {
         $id = parent::featuredImageAttachmentId();
-        if(!is_numeric($id)){
+        if (!is_numeric($id)) {
             $id = $this->getDefaultImageId();
         }
+
         return $id;
     }
 
-    public function featuredImageTitle() {
+    /**
+     * @return mixed
+     */
+    public function featuredImageTitle()
+    {
         return $this->metadata('featured_image', true) ?: $this->metadata('title', true);
     }
 
-    public function featuredImageDescription() {
+    /**
+     * @return mixed
+     */
+    public function featuredImageDescription()
+    {
         return $this->metadata('featured_image', true) ?: $this->metadata('description', true);
     }
 
@@ -110,53 +148,69 @@ abstract class Post extends BasePost {
      * return custom page title
      * @return string|null
      */
-    public function customPageTitle() {
+    public function customPageTitle()
+    {
         return $this->metadata('page_title');
     }
 
+    /**
+     * @return mixed
+     */
     public function sections()
     {
         return $this->metadata('sections');
     }
 
+    /**
+     * @return mixed
+     */
     public function subtitle()
     {
         return $this->metadata('subtitle');
     }
 
+    /**
+     * @return mixed
+     */
     public function authorName()
     {
         return $this->metadata('author_name');
     }
 
+    /**
+     * @return mixed
+     */
     public function authorDesc()
     {
         return $this->metadata('author_description');
     }
 
+    /**
+     * @return array|null|\WP_User
+     */
     public function author()
     {
         $authorType = $this->metadata('author_type');
 
-        if(!$authorType) return null;
+        if (!$authorType) {
+            return null;
+        }
 
-        switch($authorType){
+        switch ($authorType) {
             case 'acf':
                 return array(
                     'name' => $this->authorName(),
                     'description' => $this->authorDesc()
                 );
-            break;
+                break;
             case 'post':
                 return $this->connected(Person::postType())->posts;
-            break;
+                break;
             default:
-                $person = Person::fetchByUser($this->post_author);
-                if($person) {
-                    return $person;
-                } else {
-                    return new \WP_User( $this->post_author);
-                }
+                $postAuthor = 'post_author';
+                $person = Person::fetchByUser($this->{$postAuthor});
+
+                return $person ?: new \WP_User($this->{$postAuthor});
         }
     }
 
@@ -164,66 +218,69 @@ abstract class Post extends BasePost {
      *  Returns date as
      *  (1) dd/mm - dd/mm/yyyy for events if end date set
      *  (2) post date title as dd/mm/yyyy for news
-     * @param bool $shortMonth (return 'Sep' instead of 'September')
+     * @param string $format     format to return date string as
+     * @param bool   $shortMonth (return 'Sep' instead of 'September')
      * @return int|string
      */
-    public function dateString($format = "j F Y", $shortMonth = false) {
-
+    public function dateString($format = "j F Y", $shortMonth = false)
+    {
         $date = '';
-
-        if ($this->post_type == Event::postType()) {
-
+        $postDate = "post_date";
+        if ($this->postType() == Event::postType()) {
             if ($this->endDateString()) {
-                $date = $shortMonth ? $this->startDateString("j M")." - " . $this->endDateString("j M Y") : $this->startDateString("j F")." - " . $this->endDateString("j F Y");
+                $date = $shortMonth ? $this->startDateString("j M") . " - " . $this->endDateString("j M Y") : $this->startDateString("j F") . " - " . $this->endDateString("j F Y");
             } else {
                 $date = $this->startDateString($format);
             }
-            if (!$date) {
-                $date = date($format, strtotime($this->post_date));
-            }
 
-        } elseif ($this->post_type == News::postType()) {
-            $date = date($format, strtotime($this->post_date));
+            if (!$date) {
+                $date = date($format, strtotime($this->{$postData}));
+            }
+        } elseif ($this->postType() == News::postType()) {
+            $date = date($format, strtotime($this->{$postDate}));
         }
-//        elseif ($this->post_type == Theme::postType() || $this->post_type == Person::postType()) {
-//            $date = date($format, strtotime($this->post_modified));
-//        }
 
         return $date;
     }
 
-	public static function childTypes( $isChild = true ) {
-		$types = array();
-		$self = get_called_class();
-		foreach (self::$postManager->postTypeMapping() as $postType => $class) {
+    /**
+     * @param bool $isChild
+     * @return array
+     */
+    public static function childTypes($isChild = true)
+    {
+        $types = array();
+        $self = get_called_class();
+        foreach (self::$postManager->postTypeMapping() as $postType => $class) {
+            if (in_array($self, class_parents($class)) && $isChild) {
+                // if the class is a child of self and we are looking for children
+                $types[$postType] = $class;
+            } else if (!in_array($self, class_parents($class)) && !$isChild) {
+                // if class not child of self and we are not looking for children
+                $types[$postType] = $class;
+            }
+        }
 
-			if ( in_array( $self, class_parents( $class) ) && $isChild ) {
-				// if the class is a child of self and we are looking for children
-				$types[$postType] = $class;
-			} else if (	! in_array( $self, class_parents( $class) ) && ! $isChild) {
-				// if class not child of self and we are not looking for children
-				$types[$postType] = $class;
-			}
-		}
-
-		return $types;
-	}
+        return $types;
+    }
 
     /**
      * @param array $types
      * @return array
      */
-    public function connectedTypes( $types = array() ) {
-		$post_types = self::connectedPostTypes();
+    public function connectedTypes($types = array())
+    {
+        $postTypes = self::connectedPostTypes();
 
-		return array_intersect( $post_types, $types);
-	}
+        return array_intersect($postTypes, $types);
+    }
 
     /**
      * Returns posts, grouped and titled by post type, connected to current post
      * @return array
      */
-    public function allConnectedPosts() {
+    public function allConnectedPosts()
+    {
         $allConnectedPosts = array(
             $this->connectedThemes(),
             $this->connectedDocuments(),
@@ -233,6 +290,7 @@ abstract class Post extends BasePost {
             $this->connectedPlaces(),
             $this->connectedProjects()
         );
+
         return $allConnectedPosts;
     }
 
@@ -242,7 +300,8 @@ abstract class Post extends BasePost {
      * @param string $title
      * @return array
      */
-    public function connectedDocuments($title = 'Related documents') {
+    public function connectedDocuments($title = 'Related documents')
+    {
         return array(
             'title' => $title,
             'items' => $this->connected(Document::postType()),
@@ -255,7 +314,8 @@ abstract class Post extends BasePost {
      * @param string $title
      * @return array
      */
-    public function connectedEvents($title = 'Related events') {
+    public function connectedEvents($title = 'Related events')
+    {
         return array(
             'title' => $title,
             'items' => $this->connected(Event::postType()),
@@ -268,7 +328,8 @@ abstract class Post extends BasePost {
      * @param string $title
      * @return array
      */
-    public function connectedNews($title = 'Related news') {
+    public function connectedNews($title = 'Related news')
+    {
         return array(
             'title' => $title,
             'items' => $this->connected(News::postType()),
@@ -281,7 +342,8 @@ abstract class Post extends BasePost {
      * @param string $title
      * @return array
      */
-    public function connectedPeople($title = 'Related people') {
+    public function connectedPeople($title = 'Related people')
+    {
         return array(
             'title' => $title,
             'items' => $this->connected(Person::postType()),
@@ -294,7 +356,8 @@ abstract class Post extends BasePost {
      * @param string $title
      * @return array
      */
-    public function connectedPlaces($title = 'Related places') {
+    public function connectedPlaces($title = 'Related places')
+    {
         return array(
             'title' => $title,
             'items' => $this->connected(Place::postType()),
@@ -307,7 +370,8 @@ abstract class Post extends BasePost {
      * @param string $title
      * @return array
      */
-    public function connectedProjects($title = 'Related projects') {
+    public function connectedProjects($title = 'Related projects')
+    {
         return array(
             'title' => $title,
             'items' => $this->connected(Project::postType()),
@@ -320,7 +384,8 @@ abstract class Post extends BasePost {
      * @param string $title
      * @return array
      */
-    public function connectedThemes($title = 'Related themes') {
+    public function connectedThemes($title = 'Related themes')
+    {
         return array(
             'title' => $title,
             'items' => $this->connected(Theme::postType()),
@@ -332,14 +397,20 @@ abstract class Post extends BasePost {
      * returns the authors connected with a post
      * @return null|\Outlandish\OowpBundle\PostType\Post|\Outlandish\OowpBundle\Query\OowpQuery
      */
-    public function authors() {
-        return $this->connected( Person::postType() );
+    public function authors()
+    {
+        return $this->connected(Person::postType());
     }
 
+    /**
+     * @return bool
+     */
     public function hasAuthors()
     {
         $authors = $this->authors();
-        return $authors->post_count != 0;
+        $postCount = 'postCount';
+
+        return $authors->$postCount != 0;
     }
 
     /**
@@ -348,84 +419,103 @@ abstract class Post extends BasePost {
      */
     public function authorTitles()
     {
+        $postCount = 'postCount';
         $authors = $this->authors();
-        if($authors->post_count < 1) return array();
-        return array_map(function($a){
+
+        if ($authors->{$postCount} < 1) {
+            return array();
+        }
+
+        return array_map(function ($a) {
             return $a->title();
         }, $authors->posts);
 
     }
 
-    public function author_names() {
+    /**
+     * @return bool|string
+     */
+    public function authorNames()
+    {
         $authors = $this->authors();
         $names = array();
-        foreach( $authors as $author ) {
+        foreach ($authors as $author) {
             $names[] = $author->title();
         }
 
-        return ( count( $names ) > 0 ) ? implode( ', ', $names ) : false;
+        return (count($names) > 0) ? implode(', ', $names) : false;
     }
 
+    /**
+     * @return mixed
+     */
     public function themes()
     {
         $themes = array();
-        foreach(self::$postManager->postTypeMapping() as $postType => $class) {
-            if($class::isTheme()) $themes[] = $postType;
+        foreach (self::$postManager->postTypeMapping() as $postType => $class) {
+            if ($class::isTheme()) {
+                $themes[] = $postType;
+            }
         }
+
         return $this->connected($themes);
     }
 
+    /**
+     * @return bool
+     */
     public function hasThemes()
     {
         $themes = $this->themes();
-        return $themes->post_count != 0;
+        $postCount = 'post_count';
+
+        return $themes->{$postCount} != 0;
     }
 
+    /**
+     * @return array
+     */
     public function themeTitles()
     {
         $themes = $this->themes();
-        if($themes->post_count < 1) return array();
-        return array_map(function($a){
+        $postCount = 'post_count';
+        if ($themes->{$postCount} < 1) {
+            return array();
+        }
+
+        return array_map(function ($a) {
             return $a->title();
         }, $themes->posts);
     }
 
-    public function recentResources () {
-        $recentResources = Post::fetchAll(array(
-            'post_type' =>
-                array(
-                    'news',
-                    'event',
-                    'document'
-            ),
-            'posts_per_page' => 10));
-        return $recentResources;
+    /**
+     * @return mixed
+     */
+    public function recentResources()
+    {
+        $queryArguments = array(
+            'post_type' => ['news', 'event', 'document'],
+            'posts_per_page' => 10
+        );
+
+        return Post::fetchAll($queryArguments);
     }
 
-    public function socialMedia() {
-        return get_field('social_media', 'options');
-    }
-
-    public function searchButtonText() {
-        return get_field('search_text', 'options');
-    }
-
-    public function headerImage() {
-        return get_field('header_image', 'options');
-    }
-
-    public function headerText() {
-        return get_field('header_text', 'options');
-    }
-
+    /**
+     * @param array $postTypes
+     * @param bool  $sections
+     * @return array
+     */
     public function relatedThemes(array $postTypes, $sections = false)
     {
         $relatedThemes = array();
         $mapping = array_intersect_key(self::$postManager->postTypeMapping(), $postTypes);
-        if($sections){
-            foreach($mapping as $postType => $class){
+        if ($sections) {
+            foreach ($mapping as $postType => $class) {
                 $connected = $this->connected($postType, false, array('orderby' => 'title'));
-                if($connected->post_count < 1) continue;
+                if ($connected->{$postCount} < 1) {
+                    continue;
+                }
                 $relatedThemes[] = array(
                     'title' => $class::friendlyName(),
                     'items' => $connected->posts

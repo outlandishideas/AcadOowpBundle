@@ -36,7 +36,7 @@ app.init = {
         },
 
 		'.google-map': function( $map_wrap ) {
-			$map = $map_wrap.find('.map');
+			var $map = $map_wrap.find('.map');
 			app.mapping.init( $map );
 		},
 
@@ -217,7 +217,7 @@ app.mapping = {
 		}
 
 	}
-}
+};
 
 app.init.bootstrap();
 

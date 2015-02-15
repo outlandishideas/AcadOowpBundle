@@ -9,7 +9,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class AddAcfGroupCommand extends ContainerAwareCommand {
+/**
+ * Class AddAcfGroupCommand
+ * @package Outlandish\AcadOowpBundle\Command
+ */
+class AddAcfGroupCommand extends ContainerAwareCommand
+{
 
     /** @var  OutputInterface */
     protected $output;
@@ -17,7 +22,8 @@ class AddAcfGroupCommand extends ContainerAwareCommand {
     /**
      * Configures the current command.
      */
-    protected function configure() {
+    protected function configure()
+    {
         $this->setName('acadoowp:acf:addGroup')
             ->addArgument('label', InputArgument::REQUIRED, 'ACF Group Label')
             ->addOption('name', null, InputOption::VALUE_OPTIONAL, 'Name of field.')
@@ -31,7 +37,8 @@ class AddAcfGroupCommand extends ContainerAwareCommand {
      *
      * @return null|int     null or 0 if everything went fine, or an error code
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $this->output = $output;
         $label = $input->getArgument('label');
         $name = $input->getOption('name');

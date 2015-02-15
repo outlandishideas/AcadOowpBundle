@@ -2,8 +2,12 @@
 
 namespace Outlandish\AcadOowpBundle\PostType;
 
-
-abstract class Page extends Post {
+/**
+ * Class Page
+ * @package Outlandish\AcadOowpBundle\PostType
+ */
+abstract class Page extends Post
+{
 
     //todo: change this to the dashicon for page
     public static $menuIcon = 'dashicons-location';
@@ -29,7 +33,7 @@ abstract class Page extends Post {
         $contactPeopleData = $this->metadata('contact_people');
         $contactPeople = array();
 
-        if(is_array($contactPeopleData)) {
+        if (is_array($contactPeopleData)) {
             foreach ($contactPeopleData as $person) {
                 $contactPerson = array(
                     'name' => array(
@@ -53,11 +57,11 @@ abstract class Page extends Post {
                 );
                 if ($person['contact_person_type'] == 'existing_contact_person') {
                     $wpPost = $person['contact_person_existing'];
-                    if($wpPost instanceof \WP_Post){
+                    if ($wpPost instanceof \WP_Post) {
                         $id = $wpPost->ID;
                         /** @var Person $personObject */
                         $personObject = Person::fetchById($id);
-                        if($personObject instanceof Person){
+                        if ($personObject instanceof Person) {
                             $contactPerson['name']['content'] = $personObject->title();
                             $contactPerson['email']['content'] = $personObject->email();
                             $contactPerson['phone']['content'] = $personObject->phone();
@@ -73,11 +77,19 @@ abstract class Page extends Post {
                 $contactPeople[] = $contactPerson;
             }
         }
+
         return $contactPeople;
     }
 
-    public function imageUrlOnPage($id, $image_size = 'thumbnail'){
-        $image = wp_get_attachment_image_src($id, $image_size);
+    /**
+     * @param int    $id
+     * @param string $imageSize
+     * @return mixed
+     */
+    public function imageUrlOnPage($id, $imageSize = 'thumbnail')
+    {
+        $image = wp_get_attachment_image_src($id, $imageSize);
+
         return $image[0];
     }
 

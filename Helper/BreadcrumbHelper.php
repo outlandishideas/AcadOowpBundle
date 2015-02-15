@@ -13,7 +13,12 @@ use Outlandish\OowpBundle\Manager\PostManager;
 use Outlandish\OowpBundle\Manager\QueryManager;
 use Outlandish\OowpBundle\PostType\Post as OowpPost;
 
-class BreadcrumbHelper {
+/**
+ * Class BreadcrumbHelper
+ * @package Outlandish\AcadOowpBundle\Helper
+ */
+class BreadcrumbHelper
+{
 
     /**
      * @var PostManager
@@ -25,19 +30,23 @@ class BreadcrumbHelper {
     private $queryManager;
 
     /**
-     * @param PostManager $postManager
+     * @param PostManager  $postManager
      * @param QueryManager $queryManager
      */
-    function __construct(PostManager $postManager, QueryManager $queryManager)
+    public function __construct(PostManager $postManager, QueryManager $queryManager)
     {
         $this->postManager = $postManager;
         $this->queryManager = $queryManager;
     }
 
 
+    /**
+     * @param OowpPost $post
+     * @return array
+     */
     public function make(OowpPost $post)
     {
-        $postType = $post->post_type;
+        $postType = $post->postType();
 
         $crumbs = array();
 
@@ -46,7 +55,7 @@ class BreadcrumbHelper {
         } elseif ( is_404() ) {
             $crumbs[] = $this->createCrumb('  404 Not Found');
         } elseif ( is_single() && $postType != 'page' ) {
-            $crumbs[] = $this->createCrumbFromId( $this->getParentId($postType) );
+            $crumbs[] = $this->createCrumbFromId($this->getParentId($postType));
             $crumbs[] = $this->createCrumbFromPost($post, false);
         } elseif ( $postType == 'page' ) {
             $parents = $this->getAncestorsAsCrumbs($post);
@@ -77,15 +86,19 @@ class BreadcrumbHelper {
      */
     private function createCrumbFromId($id, $url = true)
     {
-        $post = $this->queryManager->query([
+        $queryArguments = [
             'page_id' => $id,
             'post_type' => 'page'
-        ])->post;
-        if(! $post) return null;
-        return $this->createCrumb(
-            $post->title(),
-            $post->title(),
-            $url ? $post->permalink() : null);
+        ];
+
+        /** @var OowpPost $post */
+        $post = $this->queryManager->query($queryArguments)->post;
+
+        if (!$post) {
+            return null;
+        }
+
+        return $this->createCrumbFromPost($post, $url);
     }
 
     /**
@@ -98,7 +111,8 @@ class BreadcrumbHelper {
         return $this->createCrumb(
             $post->title(),
             $post->title(),
-            $url ? $post->permalink() : null);
+            $url ? $post->permalink() : null
+        );
     }
 
     /**
@@ -108,6 +122,7 @@ class BreadcrumbHelper {
     private function getParentId($postType)
     {
         $class = $this->postManager->postTypeClass($postType);
+
         return $class::postTypeParentId();
     }
 
@@ -118,14 +133,17 @@ class BreadcrumbHelper {
     private function getAncestorsAsCrumbs(OowpPost $post)
     {
         $ids = get_post_ancestors($post->ID);
-        if(empty($ids))
-            return [];
+        if (empty($ids)) {
+            return array();
+        }
 
-        $parents = $this->queryManager->query([
+        $queryArguments = [
             'post_type' => 'page',
             'post__in' => $ids,
             'orderby' => 'post__in'
-        ])->posts;
+        ];
+        $parents = $this->queryManager->query($queryArguments)->posts;
+
         return array_map([$this, 'createCrumbFromPost'], $parents);
     }
 

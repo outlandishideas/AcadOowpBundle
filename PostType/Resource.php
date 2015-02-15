@@ -2,8 +2,12 @@
 
 namespace Outlandish\AcadOowpBundle\PostType;
 
-
-abstract class Resource extends Search {
+/**
+ * Class Resource
+ * @package Outlandish\AcadOowpBundle\PostType
+ */
+abstract class Resource extends Search
+{
 
     public static $resource = true;
 

@@ -10,7 +10,12 @@ namespace Outlandish\AcadOowpBundle\Helper;
 
 use Outlandish\OowpBundle\Helper\WordpressHelper;
 
-class AcfHelper {
+/**
+ * Class AcfHelper
+ * @package Outlandish\AcadOowpBundle\Helper
+ */
+class AcfHelper
+{
 
     /**
      * @var WordpressHelper
@@ -20,7 +25,7 @@ class AcfHelper {
     /**
      * @param WordpressHelper $wpHelper
      */
-    function __construct(WordpressHelper $wpHelper)
+    public function __construct(WordpressHelper $wpHelper)
     {
         $this->wpHelper = $wpHelper;
     }
@@ -29,7 +34,7 @@ class AcfHelper {
     /**
      * Add a new ACF group (post) to the database
      *
-     * @param string $label
+     * @param string      $label
      * @param null|string $name
      *
      * @return bool success or failure of adding group
@@ -47,30 +52,15 @@ class AcfHelper {
             'post_title'     => $label,
             'post_status'    => 'publish',
             'post_type'      => 'acf',
-//              'post_author'    => [ <user ID> ] // The user ID number of the author. Default is the current user ID.
-//              'ping_status'    => [ 'closed' | 'open' ] // Pingbacks or trackbacks allowed. Default is the option 'default_ping_status'.
-//              'post_parent'    => [ <post ID> ] // Sets the parent of the new post, if any. Default 0.
-//              'menu_order'     => [ <order> ] // If new post is a page, sets the order in which it should appear in supported menus. Default 0.
-//              'to_ping'        => // Space or carriage return-separated list of URLs to ping. Default empty string.
-//              'pinged'         => // Space or carriage return-separated list of URLs that have been pinged. Default empty string.
-//              'post_password'  => [ <string> ] // Password for post, if any. Default empty string.
-//              'guid'           => // Skip this and let Wordpress handle it, usually.
-//              'post_content_filtered' => // Skip this and let Wordpress handle it, usually.
-//              'post_excerpt'   => [ <string> ] // For all your post excerpt needs.
             'post_date'      => date('Y-m-d H:i:s'),
             'post_date_gmt'  => date('Y-m-d H:i:s')
-//              'comment_status' => [ 'closed' | 'open' ] // Default is the option 'default_comment_status', or 'closed'.
-//              'post_category'  => [ array(<category id>, ...) ] // Default empty.
-//              'tags_input'     => [ '<tag>, <tag>, ...' | array ] // Default empty.
-//              'tax_input'      => [ array( <taxonomy> => <array | string> ) ] // For custom taxonomies. Default empty.
-//              'page_template'  => [ <string> ] // Requires name of template file, eg template.php. Default empty.
         );
 
         return wp_insert_post($post);
     }
 
     /**
-     * @param int $id
+     * @param int    $id
      * @param string $label
      * @param string $name
      * @param string $type
@@ -79,15 +69,11 @@ class AcfHelper {
      */
     public function addField($id, $label, $name, $type, $instructions)
     {
-
         $acfs = $this->getAcfs($id);
-
-        $field_types = apply_filters('acf/registered_fields', array());
+        $fieldTypes = apply_filters('acf/registered_fields', array());
 
         $found = false;
-
-        foreach ($field_types as $group) {
-
+        foreach ($fieldTypes as $group) {
             if (array_key_exists($type, $group)) {
                 $found = true;
                 break;
@@ -99,10 +85,12 @@ class AcfHelper {
         }
 
         wp_reset_postdata();
+
         $acf = $acfs[0];
-        $metadata = get_post_meta( $acf->ID );
+        $metadata = get_post_meta($acf->ID);
+
         $count = 0;
-        foreach ($metadata as $key=>$value) {
+        foreach ($metadata as $key => $value) {
             if (substr($key, 0, 6) == 'field_') {
                 $count++;
             }
@@ -135,8 +123,8 @@ class AcfHelper {
     }
 
     /**
-     * @param int $id
-     * @param string $name
+     * @param int         $id
+     * @param string      $name
      * @param null|string $newName
      * @param null|string $newLabel
      */
@@ -150,8 +138,8 @@ class AcfHelper {
         $acfs = $this->getAcfs($id);
 
         $acf = $acfs[0];
-        $metadata = get_post_meta( $acf->ID );
-        foreach ($metadata as $key=>$value) {
+        $metadata = get_post_meta($acf->ID);
+        foreach ($metadata as $key => $value) {
             if (substr($key, 0, 6) != 'field_') {
                 continue;
             }
@@ -161,7 +149,7 @@ class AcfHelper {
                 if ($newLabel) {
                     $acfArgs['label'] = $newLabel;
                 }
-                update_post_meta( $acf->ID, $key, $acfArgs );
+                update_post_meta($acf->ID, $key, $acfArgs);
                 break;
             }
         }
@@ -184,12 +172,11 @@ class AcfHelper {
             'p' => $id
         );
 
-        $acfs = get_posts( $args );
+        $acfs = get_posts($args);
         if (!$acfs) {
             throw new \RuntimeException('ACF group not found');
         }
+
         return $acfs;
     }
-
-
 }

@@ -2,59 +2,74 @@
 
 namespace Outlandish\AcadOowpBundle\PostType;
 
-
-abstract class Person extends Resource {
+/**
+ * Class Person
+ * @package Outlandish\AcadOowpBundle\PostType
+ */
+abstract class Person extends Resource
+{
 
     public static $menuIcon = 'dashicons-businessman';
     public static $theme = true;
     public static $searchFilter = false;
 
     public static $connections = array(
-        'place' => array('sortable' => 'any','cardinality' => 'many-to-many'),
-        'project' => array('sortable' => 'any','cardinality' => 'many-to-many'),
-        'theme' => array('sortable' => 'any','cardinality' => 'many-to-many'),
+        'place' => array('sortable' => 'any', 'cardinality' => 'many-to-many'),
+        'project' => array('sortable' => 'any', 'cardinality' => 'many-to-many'),
+        'theme' => array('sortable' => 'any', 'cardinality' => 'many-to-many'),
     );
 
-    static function getRegistrationArgs($defaults) {
+    /**
+     * @param array $defaults
+     * @return mixed
+     */
+    public static function getRegistrationArgs(array $defaults)
+    {
 
         $defaults['hierarchical'] = true;
 
         // Adds menu icon using the $menu_icon property if set
-        if ( static::$menuIcon ) {
+        if (static::$menuIcon) {
             $defaults['menu_icon'] = static::$menuIcon;
         }
 
         return $defaults;
     }
 
-    public static function friendlyNamePlural(){
+    /**
+     * @return string
+     */
+    public static function friendlyNamePlural()
+    {
         return "People";
     }
 
     /**
-     * @param $userId
-     * @return void|Person
+     * @param int $userId
+     * @return null|Person
      */
     public static function fetchByUser($userId)
     {
-        $user = new \WP_User($userId);
-        $connectionName = self::getConnectionName('user');
-        return self::fetchOne(array(
-                'connected_type' => $connectionName,
-                'connected_items' => $user
-            ));
+        $queryArguments = array(
+            'connected_type' => self::getConnectionName('user'),
+            'connected_items' => new \WP_User($userId)
+        );
+
+        return self::fetchOne($queryArguments);
     }
 
-	/**
-	 * Get the role for th person
-	 *
-	 * @return mixed|string|void
-	 */
-	public function role() {
-		$role = $this->connected( Role::postType(), true );
+    /**
+     * Get the role for the person
+     *
+     * @return string
+     */
+    public function role()
+    {
+        $role = $this->connected(Role::postType(), true);
 
-		return ( $role ) ? $role->title() : '';
-	}
+        return ($role) ? $role->title() : '';
+    }
+
     /**
      * @return string
      */

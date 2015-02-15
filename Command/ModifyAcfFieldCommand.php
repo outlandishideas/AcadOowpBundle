@@ -9,7 +9,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ModifyAcfFieldCommand extends ContainerAwareCommand {
+/**
+ * Class ModifyAcfFieldCommand
+ * @package Outlandish\AcadOowpBundle\Command
+ */
+class ModifyAcfFieldCommand extends ContainerAwareCommand
+{
 
     /** @var  OutputInterface */
     protected $output;
@@ -17,7 +22,8 @@ class ModifyAcfFieldCommand extends ContainerAwareCommand {
     /**
      * Configures the current command.
      */
-    protected function configure() {
+    protected function configure()
+    {
         $this->setName('acadoowp:acf:modify')
             ->addArgument('id', InputArgument::REQUIRED, 'ACF group ID')
             ->addArgument('name', InputArgument::REQUIRED, 'ACF Field Name')
@@ -33,7 +39,8 @@ class ModifyAcfFieldCommand extends ContainerAwareCommand {
      *
      * @return null|int     null or 0 if everything went fine, or an error code
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $this->output = $output;
         $id = $input->getArgument('id');
         $name = $input->getArgument('name');

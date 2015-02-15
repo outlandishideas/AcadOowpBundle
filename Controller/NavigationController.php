@@ -18,21 +18,33 @@ use Outlandish\SiteBundle\PostType\Document;
 use Outlandish\SiteBundle\PostType\Place;
 use Outlandish\SiteBundle\PostType\Theme;
 
-class NavigationController extends SearchController {
+/**
+ * Class NavigationController
+ * @package Outlandish\AcadOowpBundle\Controller
+ */
+class NavigationController extends SearchController
+{
 
+    /**
+     * @return mixed
+     */
     public function renderSocialMediaAction()
     {
         $wpHelper = $this->get('outlandish_oowp.helper.wp');
-        return $this->render('@OutlandishAcadOowp/Partial/socialDropdown.html.twig', [
-            'socialMedia' => $wpHelper->acfOption('social_media')
-        ]);
+
+        return $this->render(
+            '@OutlandishAcadOowp/Partial/socialDropdown.html.twig',
+            ['socialMedia' => $wpHelper->acfOption('social_media')]
+        );
     }
 
-    public function renderFooterAction(){
+    /**
+     * @return mixed
+     */
+    public function renderFooterAction()
+    {
         $args = $this->generateFooterArguments();
-
         $footerAbout = $this->wpMenu('footer_about');
-
         $args['footer_about'] = $footerAbout;
 
         return $this->render(
@@ -41,16 +53,24 @@ class NavigationController extends SearchController {
         );
     }
 
-    public function renderMenuAction( $maxDepth = 1, $menu = 'header', $socialMedia = false, $searchButton = false ){
+    /**
+     * @param int    $maxDepth
+     * @param string $menu
+     * @param bool   $socialMedia
+     * @param bool   $searchButton
+     * @return mixed
+     */
+    public function renderMenuAction($maxDepth = 1, $menu = 'header', $socialMedia = false, $searchButton = false)
+    {
 
         $args = $this->generateMenuArguments($maxDepth, null, $menu);
 
-        if($socialMedia){
+        if ($socialMedia) {
             $args['social_media'] = get_field('social_media', 'options');
         }
 
         $args['search_button'] = $searchButton;
-        if($searchButton){
+        if ($searchButton) {
             $args['search_button_text'] = get_field('search_text', 'options');
         }
 
@@ -60,49 +80,52 @@ class NavigationController extends SearchController {
         );
     }
 
-    public function renderFilterPanelAction( OowpPost $currentPost) {
-        /** @var PostManager $postManager */
-        $postManager = $this->get('outlandish_oowp.post_manager');
-
-        if($currentPost->postType() != "page"){
+    /**
+     * @param OowpPost $currentPost
+     * @return mixed
+     */
+    public function renderFilterPanelAction(OowpPost $currentPost)
+    {
+        if ($currentPost->postType() != "page") {
             $parent = $currentPost->parent();
-            if(!$parent){
+            if (!$parent) {
                 $parent = Page::fetchById(get_option('page_on_front'));
             }
             $formAction = $parent->permalink();
         } else {
             $formAction = $currentPost->permalink();
         }
-        return $this->render(
-            'OutlandishAcadOowpBundle:Search:filterPanel.html.twig',
-            array(
-                'formAction' => $formAction,
-                'facets' => array(
-                    array(
-                        'section' => Place::friendlyNamePlural(),
-                        'options' => Place::fetchAll()->posts
-                    ),
-                    array(
-                        'section' => Theme::friendlyNamePlural(),
-                        'options' => Theme::fetchAll()->posts
-                    )
 
+        $templateData = array(
+            'formAction' => $formAction,
+            'facets' => array(
+                array(
+                    'section' => Place::friendlyNamePlural(),
+                    'options' => Place::fetchAll()->posts
+                ),
+                array(
+                    'section' => Theme::friendlyNamePlural(),
+                    'options' => Theme::fetchAll()->posts
                 )
             )
+        );
+
+        return $this->render(
+            'OutlandishAcadOowpBundle:Search:filterPanel.html.twig',
+            $templateData
         );
     }
 
     /**
      * @param OowpPost $rootPost
-     * @param int $maxDepth
+     * @param int      $maxDepth
      * @return Response
      */
-    public function renderSideMenuAction( OowpPost $rootPost, $maxDepth = 1 ){
+    public function renderSideMenuAction(OowpPost $rootPost, $maxDepth = 1)
+    {
 
         $args = $this->generateMenuArguments($maxDepth, $rootPost);
 
-        /*add slash to root post title*/
-        $rootPost->post_title = $rootPost->post_title;
         /*override homepage as parent post*/
         $args['parent_post'] = $rootPost;
 
@@ -112,10 +135,16 @@ class NavigationController extends SearchController {
         );
     }
 
+    /**
+     * @param int  $maxDepth
+     * @param null $rootPost
+     * @param null $menu
+     * @return array
+     */
     public function generateMenuArguments($maxDepth = 1, $rootPost = null, $menu = null)
     {
-        $this->queryManager = $this->get('outlandish_oowp.query_manager');
-        $this->postManager = $this->get('outlandish_oowp.post_manager');
+        $queryManager = $this->get('outlandish_oowp.query_manager');
+        $postManager = $this->get('outlandish_oowp.post_manager');
         $postType = 'page';
 
         $queryArgs = array(
@@ -123,7 +152,9 @@ class NavigationController extends SearchController {
             'orderby' => 'menu_order',
             'order' => 'asc'
         );
-        if ($rootPost) {
+        if ($menu) {
+            $posts = $this->wpMenu($menu);
+        } else if ($rootPost) {
             $posts = $rootPost->children($queryArgs);
         } else {
             $class = $this->postManager->postTypeClass($postType);
@@ -140,19 +171,20 @@ class NavigationController extends SearchController {
         return array(
             'posts' => $posts,
             'queryArgs' => $queryArgs,
-            'menuArgs' => (object)$menuArgs
+            'menuArgs' => (object) $menuArgs
         );
     }
 
-    public function generateFooterArguments( $menu = 'footer' )
+    /**
+     * @param string $menu
+     * @return array
+     */
+    public function generateFooterArguments($menu = 'footer')
     {
+        $queryManager = $this->get('outlandish_oowp.query_manager');
 
-        $this->queryManager = $this->get('outlandish_oowp.query_manager');
-        $this->postManager = $this->get('outlandish_oowp.post_manager');
-
-        $homePage = $this->queryManager->query(array(
-            'page_id' => get_option('page_on_front')
-        ))->post;
+        $queryArguments = ['page_id' => get_option('page_on_front')];
+        $homePage = $queryManager->query($queryArguments)->post;
 
         $pages = $this->wpMenu($menu);
 
@@ -174,12 +206,20 @@ class NavigationController extends SearchController {
         );
     }
 
+    /**
+     * @param OowpPost $post
+     * @return mixed
+     */
     public function renderBreadcrumbsAction(OowpPost $post)
     {
         $breadcrumb = $this->get('outlandish_acadoowp.breadcrumb_helper');
-        return $this->render('OutlandishAcadOowpBundle:Partial:breadcrumbs.html.twig', [
-            'breadcrumbs' => $breadcrumb->make($post)
-        ]);
+
+        return $this->render(
+            'OutlandishAcadOowpBundle:Partial:breadcrumbs.html.twig',
+            [
+                'breadcrumbs' => $breadcrumb->make($post)
+            ]
+        );
     }
 
     /**
@@ -187,38 +227,40 @@ class NavigationController extends SearchController {
      * @param null $menu
      * @return array
      */
-    private function wpMenu($menu = null ) {
-
+    private function wpMenu($menu = null)
+    {
         $posts = array();
+        $queryManager = $this->get('outlandish_oowp.query_manager');
+        $menuLocations = get_nav_menu_locations();
 
-        $this->queryManager = $this->get('outlandish_oowp.query_manager');
+        if ($menu && array_key_exists($menu, $menuLocations)) {
+            $menuObject = get_term($menuLocations[$menu], 'nav_menu');
+            if (!is_wp_error($menuObject)) {
+                $termId = 'term_id';
+                $items = wp_get_nav_menu_items($menuObject->{$termId});
+                if (is_array($items) && count($items) > 0) {
+                    $items = array_map(function($a) {
+                        $objectId = 'object_id';
 
-        $menu_locations = get_nav_menu_locations();
-
-        if ( $menu && array_key_exists($menu, $menu_locations) ) {
-			$menu_obj       = get_term( $menu_locations[$menu], 'nav_menu' );
-			if ( !is_wp_error( $menu_obj ) ) {
-				$items = wp_get_nav_menu_items( $menu_obj->term_id );
-				if ( is_array( $items ) && count( $items ) > 0 ) {
-					$items = array_map(function($a){
-                        return $a->object_id;
+                        return $a->{$objectId};
                     }, $items);
 
                     $args = array(
                         'post__in' => $items,
                         'orderby' => 'post__in'
                     );
+                    $posts = $queryManager->query($args)->posts;
+                }
+            }
+        }
 
-                    $posts = $this->queryManager->query($args)->posts;
-
-				}
-			}
-		}
-
-		return $posts;
-	}
+        return $posts;
+    }
 
 
+    /**
+     * @return mixed
+     */
     public function renderTopHeaderAction()
     {
         return $this->render(
@@ -232,7 +274,6 @@ class NavigationController extends SearchController {
             )
         );
     }
-
 
 
 }

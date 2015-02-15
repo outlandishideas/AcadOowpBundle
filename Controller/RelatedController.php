@@ -8,32 +8,42 @@ use Outlandish\SiteBundle\PostType\Post;
 use Outlandish\SiteBundle\PostType\Person;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Class RelatedController
+ * @package Outlandish\AcadOowpBundle\Controller
+ */
+class RelatedController extends Controller
+{
+    /**
+     * @param array $array
+     * @param array|mixed $values
+     */
+    private function unsetByValue(&$array, $values)
+    {
+        if (!is_array($values)) {
+            $values = array($values);
+        }
+        foreach ($values as $value) {
+            if (($key = array_search($value, $array)) !== false) {
+                unset($array[$key]);
+            }
+        }
+    }
 
-class RelatedController extends Controller{
+    /**
+     * @param OowpPost $post
+     * @return mixed
+     */
+    public function renderResourcesAction(OowpPost $post)
+    {
+        $types = Theme::childTypes(false);
+        $this->unsetByValue($types, array('person', 'role', 'theme', 'place'));
+        $connectedTypes = $post->connectedTypes($types);
+        $items = $post->connected($connectedTypes);
 
-	private function unsetByValue( &$array, $values) {
-		if ( ! is_array( $values ) ) {
-			$values = array( $values );
-		}
-		foreach( $values as $value ) {
-			if ( ( $key = array_search( $value, $array ) ) !== false ) {
-				unset( $array[$key] );
-			}
-		}
-	}
-	public function renderResourcesAction( $post ) {
-		$types = Theme::childTypes( false );
-		$this->unsetByValue( $types, array( 'person', 'role', 'theme', 'place' ) );
-
-		$connected_types = $post->connectedTypes( $types );
-
-		$items = $post->connected( $connected_types );
-
-		return $this->render(
-			'OutlandishAcadOowpBundle:Partial:items.html.twig',
-			array( 'items' => $items )
-		);
-
-	}
-
+        return $this->render(
+            'OutlandishAcadOowpBundle:Partial:items.html.twig',
+            ['items' => $items]
+        );
+    }
 } 

@@ -10,8 +10,12 @@ namespace Outlandish\AcadOowpBundle\Controller;
 
 use Outlandish\OowpBundle\Helper\WordpressHelper;
 
-class HeaderController extends BaseController {
-
+/**
+ * Class HeaderController
+ * @package Outlandish\AcadOowpBundle\Controller
+ */
+class HeaderController extends BaseController
+{
     /**
      * @return mixed
      */
@@ -19,10 +23,13 @@ class HeaderController extends BaseController {
     {
         /** @var WordpressHelper $wpHelper */
         $wpHelper = $this->get('outlandish_oowp.helper.wp');
-        return $this->render('OutlandishAcadOowpBundle:Header:header.html.twig', [
-            'headerImage' => $wpHelper->acfOption('header_image'),
-            'headerText' => $wpHelper->acfOption('header_text')
-        ]);
-    }
 
+        return $this->render(
+            'OutlandishAcadOowpBundle:Header:header.html.twig',
+            [
+                'headerImage' => $wpHelper->acfOption('header_image'),
+                'headerText' => $wpHelper->acfOption('header_text')
+            ]
+        );
+    }
 }

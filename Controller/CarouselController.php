@@ -3,52 +3,73 @@
 
 namespace Outlandish\AcadOowpBundle\Controller;
 
+/**
+ * Class CarouselController
+ * @package Outlandish\AcadOowpBundle\Controller
+ */
+class CarouselController extends BaseController
+{
 
-class CarouselController extends BaseController {
-
-	public function renderCarouselAction()
+    /**
+     * @return mixed
+     */
+    public function renderCarouselAction()
     {
         $wpHelper = $this->get('outlandish_oowp.helper.wp');
 
-        $supporting_organisations = $wpHelper->acfOption('qmul_image');
-        $supporting_text = $wpHelper->acfOption('qmul_text');
-        $supporting_link = $wpHelper->acfOption('qmul_link');
+        $supportingOrganisations = $wpHelper->acfOption('qmul_image');
+        $supportingText = $wpHelper->acfOption('qmul_text');
+        $supportingLink = $wpHelper->acfOption('qmul_link');
 
-        $carousel_organisations = $this->parseOrganisations($wpHelper->acfOption('associated_organisations'));
+        $carouselOrganisations = $this->parseOrganisations(
+            $wpHelper->acfOption('associated_organisations')
+        );
 
-		return $this->render(
-                'OutlandishAcadOowpBundle:Carousel:carousel.html.twig',
-                compact(
-                    'supporting_organisations',
-                    'supporting_text',
-                    'supporting_link',
-                    'carousel_organisations'
-                )
-		);
-	}
-
-    private function cleanUrl($url) {
-
-        if($url == "" || $url == "http://" ) return null;
-
-        return preg_replace('%^(?!https?://)(.*)%', 'http://$1', $url);
-    }
-
-    private function getImageWithId($id, $image_size = 'thumbnail'){
-        $image = wp_get_attachment_image_src($id, $image_size);
-        return $image[0];
+        return $this->render('OutlandishAcadOowpBundle:Carousel:carousel.html.twig', [
+                    'supporting_organisations' => $supportingOrganisations,
+                    'supporting_text' => $supportingText,
+                    'supporting_link' => $supportingLink,
+                    'carousel_organisations' => $carouselOrganisations
+                ]
+        );
     }
 
     /**
      * @param array $organisations
      * @return array
      */
-    private function parseOrganisations($organisations)
+    private function parseOrganisations(array $organisations)
     {
         return array_map(function ($org) {
             $org['url'] = $this->cleanUrl($org['url']);
             $org['logo'] = $this->getImageWithId($org['logo'], 'medium');
+
             return $org;
         }, $organisations);
+    }
+
+    /**
+     * @param $url
+     * @return mixed|null
+     */
+    private function cleanUrl($url)
+    {
+        if ($url == "" || $url == "http://" ) {
+            return null;
+        }
+
+        return preg_replace('%^(?!https?://)(.*)%', 'http://$1', $url);
+    }
+
+    /**
+     * @param $id
+     * @param string $imageSize
+     * @return mixed
+     */
+    private function getImageWithId($id, $imageSize = 'thumbnail')
+    {
+        $image = wp_get_attachment_image_src($id, $imageSize);
+
+        return $image[0];
     }
 }

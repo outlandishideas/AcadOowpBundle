@@ -1,19 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Matthew
- * Date: 26/01/2015
- * Time: 19:18
- */
 
 namespace Outlandish\AcadOowpBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Outlandish\OowpBundle\PostType\Post;
+use Symfony\Component\HttpFoundation\Request;
+use Outlandish\RoutemasterBundle\Controller\BaseController as ParentController;
 
-class BaseController extends \Outlandish\RoutemasterBundle\Controller\BaseController {
+/**
+ * Class BaseController
+ * @package Outlandish\AcadOowpBundle\Controller
+ */
+class BaseController extends ParentController
+{
 
     /**
+     * returns a featured post if that post name was passed through
      * @param string $searchQuery search query that will be converted into a post_name
      * @return null|Post
      */
@@ -21,7 +22,9 @@ class BaseController extends \Outlandish\RoutemasterBundle\Controller\BaseContro
     {
         $name = sanitize_title($searchQuery, null);
         $results = $this->query(array("name" => $name, "post_type" => "any", "posts_per_page" => 1));
-        return ($results->post_count == 1) ? $results->post : null;
+        $postCount = 'post_count';
+
+        return ($results->{$postCount} == 1) ? $results->post : null;
     }
 
     /**
@@ -33,7 +36,12 @@ class BaseController extends \Outlandish\RoutemasterBundle\Controller\BaseContro
     protected function queryPost($name, $postTypes = 'any', $redirectCanonical = false)
     {
         $slugBits = explode('/', trim($name, '/'));
-        return $this->querySingle(array('name' => $slugBits[count($slugBits) - 1], 'post_type' => $postTypes), $redirectCanonical);
+        $queryArguments = array(
+            'name' => $slugBits[count($slugBits) - 1],
+            'post_type' => $postTypes
+        );
+
+        return $this->querySingle($queryArguments, $redirectCanonical);
     }
 
     /**
@@ -43,11 +51,11 @@ class BaseController extends \Outlandish\RoutemasterBundle\Controller\BaseContro
      */
     protected function queryPage($id, $redirectCanonical = false)
     {
-        return $this->querySingle(array(
+        $queryArguments = array(
             'page_id' => $id,
             'post_type' => 'page'
-        ), $redirectCanonical);
+        );
+
+        return $this->querySingle($queryArguments, $redirectCanonical);
     }
-
-
 }

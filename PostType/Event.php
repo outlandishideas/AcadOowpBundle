@@ -2,36 +2,50 @@
 
 namespace Outlandish\AcadOowpBundle\PostType;
 
-abstract class Event extends Resource {
+/**
+ * Class Event
+ * @package Outlandish\AcadOowpBundle\PostType
+ */
+abstract class Event extends Resource
+{
 
     const PREVIOUS_EVENTS_PAGE_ID = 1720;
 
     const NOT_FOUND_MESSAGE = 'NOT_FOUND_ENTER_POSTCODE_OR_ENTER_ADDRESS_OR_AMEND_TITLE';
 
-	public static $menuIcon = 'dashicons-location-alt';
+    public static $menuIcon = 'dashicons-location-alt';
 
     public static $connections = array(
-        'event' => array('sortable' => 'any','cardinality' => 'many-to-many'),
-        'news' => array('sortable' => 'any','cardinality' => 'many-to-many'),
-        'person' => array('sortable' => 'any','cardinality' => 'many-to-many'),
-        'place' => array('sortable' => 'any','cardinality' => 'many-to-many'),
-        'project' => array('sortable' => 'any','cardinality' => 'many-to-many'),
-        'theme' => array('sortable' => 'any','cardinality' => 'many-to-many'),
+        'event' => array('sortable' => 'any', 'cardinality' => 'many-to-many'),
+        'news' => array('sortable' => 'any', 'cardinality' => 'many-to-many'),
+        'person' => array('sortable' => 'any', 'cardinality' => 'many-to-many'),
+        'place' => array('sortable' => 'any', 'cardinality' => 'many-to-many'),
+        'project' => array('sortable' => 'any', 'cardinality' => 'many-to-many'),
+        'theme' => array('sortable' => 'any', 'cardinality' => 'many-to-many'),
     );
 
-    public function postTypeIcon() {
+    /**
+     * @return string
+     */
+    public function postTypeIcon()
+    {
         return self::$menuIcon;
     }
 
-    public static function fetchFutureEvents($queryArgs = array()) {
-        $defaults = array (
+    /**
+     * @param array $queryArgs
+     * @return mixed
+     */
+    public static function fetchFutureEvents($queryArgs = array())
+    {
+        $defaults = array(
             'posts_per_page' => -1,
-            'meta_query'=>array(
+            'meta_query' => array(
                 array(
-                    'key'=>'start_date',
-                    'value'=> date('Y/m/d'),
-                    'compare'=>'>',
-                    'type'=>'DATE'
+                    'key' => 'start_date',
+                    'value' => date('Y/m/d'),
+                    'compare' => '>',
+                    'type' => 'DATE'
                 )
             ),
             'orderby' => 'meta_value',
@@ -45,21 +59,25 @@ abstract class Event extends Resource {
         return $futureEvents;
     }
 
-    public static function fetchPastEvents($queryArgs = array()) {
-        $defaults = array (
+    /**
+     * @param array $queryArgs
+     * @return mixed
+     */
+    public static function fetchPastEvents($queryArgs = array())
+    {
+        $defaults = array(
             'posts_per_page' => -1,
-            'meta_query'=>array(
+            'meta_query' => array(
                 array(
-                    'key'=>'end_date',
-                    'value'=> date('Y/m/d'),
-                    'compare'=>'<=',
-                    'type'=>'DATE'
+                    'key' => 'end_date',
+                    'value' => date('Y/m/d'),
+                    'compare' => '<=',
+                    'type' => 'DATE'
                 )
             ),
             'orderby' => 'meta_value',
             'meta_key' => 'start_date',
             'order' => 'desc'
-
         );
 
         $queryArgs = wp_parse_args($queryArgs, $defaults);
@@ -68,28 +86,33 @@ abstract class Event extends Resource {
         return $pastEvents;
     }
 
-    public static function sortByMonth($events) {
+    /**
+     * @param Event[] $events
+     * @return array
+     */
+    public static function sortByMonth(array $events)
+    {
 
         $eventsByMonth = array();
-        foreach($events as $event){
+        foreach ($events as $event) {
             $monthYear = $event->startMonthYearString();
             $position = '';
-            foreach($eventsByMonth as $key => $value)
-            {
-                if($monthYear == $value['month']) {
+            foreach ($eventsByMonth as $key => $value) {
+                if ($monthYear == $value['month']) {
                     $position = $key;
                     break;
                 }
             }
             if (!is_int($position)) {
-                $eventsByMonth[] = array (
-                    'month' =>  $monthYear,
+                $eventsByMonth[] = array(
+                    'month' => $monthYear,
                     'posts' => array($event)
                 );
             } else {
                 $eventsByMonth[$position]['posts'][] = $event;
             }
         }
+
         return $eventsByMonth;
     }
 
@@ -98,7 +121,8 @@ abstract class Event extends Resource {
      * @param string $format
      * @return bool|string
      */
-    public function startMonthYearString($format = "F Y"){
+    public function startMonthYearString($format = "F Y")
+    {
         return date($format, $this->startDate());
     }
 
@@ -107,7 +131,8 @@ abstract class Event extends Resource {
      * @param string $format | put in date format here
      * @return bool|string
      */
-    public function startDateString($format = "j F Y"){
+    public function startDateString($format = "j F Y")
+    {
         return $this->startDate() ? date($format, $this->startDate()) : false;
     }
 
@@ -116,7 +141,8 @@ abstract class Event extends Resource {
      * @param string $format
      * @return bool|string
      */
-    public function endDateString($format = "j F Y"){
+    public function endDateString($format = "j F Y")
+    {
         return $this->endDate() ? date($format, $this->endDate()) : false;
     }
 
@@ -124,7 +150,8 @@ abstract class Event extends Resource {
      * return the start date as a DateTime object
      * @return int
      */
-    public function startDate(){
+    public function startDate()
+    {
         return strtotime($this->metadata('start_date'));
     }
 
@@ -132,7 +159,8 @@ abstract class Event extends Resource {
      * return the end date as a DateTime object
      * @return int
      */
-    public function endDate(){
+    public function endDate()
+    {
         return $this->metadata('end_date') ? strtotime($this->metadata('end_date')) : false;
     }
 
@@ -140,38 +168,43 @@ abstract class Event extends Resource {
      * return the start time as a DateTime object
      * @return int
      */
-    public function startTime(){
+    public function startTime()
+    {
         return $this->metadata('start_time_');
-
     }
 
-    /**return address
+    /**
+     * return address
      * @return array|string
      */
-    public function address()  {
+    public function address()
+    {
         $address = $this->metadata('event_address', true);
-        if (!$address) $address = $this->postcode();
-        return $address;
+
+        return $address ?: $this->postcode();
     }
 
     /**
      * @return array|string
      */
-    public function postcode()  {
+    public function postcode()
+    {
         return $this->metadata('event_postcode', true);
     }
 
     /**
      * @return int
      */
-    function latitude() {
+    public function latitude()
+    {
         return $this->latitudeLongitudeNumber(0);
     }
 
     /**
      * @return int
      */
-    function longitude() {
+    public function longitude()
+    {
         return $this->latitudeLongitudeNumber(1);
     }
 
@@ -187,16 +220,18 @@ abstract class Event extends Resource {
      * Get latitude(index = 0) and longitude (index = 1) for event by their index number
      * Return false if latitudeLongitude not found, or if index parameter is > 2 or < 0
      *
-     * @param $index
+     * @param int $index
      * @return bool
      */
     public function latitudeLongitudeNumber($index)
     {
-        if(!$this->latitudeLongitude()) return false;
-        $lat_lng = explode(",", $this->latitudeLongitude());
-        if(count($lat_lng) > 2 || $index > 1 || $index < 0) return false;
+        $latitudeLongitude = explode(",", $this->latitudeLongitude());
 
-        return $lat_lng[$index];
+        if (count($latitudeLongitude) > 2 || $index > 1 || $index < 0) {
+            return false;
+        }
+
+        return $latitudeLongitude[$index];
     }
 
     /**
@@ -206,9 +241,15 @@ abstract class Event extends Resource {
      * * If unsuccessful, insert NOT_FOUND_MESSAGE in 'event_latitude_longitude' acf    *
      *
      * return false
-     * */
-    public function onSave($postData) {
-        if ($this->post_type == Event::postType() && ($this->latitudeLongitude() == '' || $this->latitudeLongitude() == self::NOT_FOUND_MESSAGE )){
+     * @param array $postData
+     * @return bool
+     */
+    public function onSave($postData)
+    {
+        if ($this->postType() == Event::postType() &&
+            ($this->latitudeLongitude() == '' ||
+                $this->latitudeLongitude() == self::NOT_FOUND_MESSAGE)
+        ) {
             $location = urlencode($this->address() . $this->postcode());
             $data = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address={$location}&sensor=false"));
             if ($data->status == 'OK') {
@@ -220,6 +261,7 @@ abstract class Event extends Resource {
             }
             update_post_meta($this->ID, "event_latitude_longitude", $value);
         }
+
         return false;
     }
 }

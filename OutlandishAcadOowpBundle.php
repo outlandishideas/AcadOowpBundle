@@ -6,12 +6,20 @@ namespace Outlandish\AcadOowpBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class OutlandishAcadOowpBundle extends Bundle {
+/**
+ * Class OutlandishAcadOowpBundle
+ * @package Outlandish\AcadOowpBundle
+ */
+class OutlandishAcadOowpBundle extends Bundle
+{
 
-
-	function __construct() {
-
-        if(function_exists('add_theme_support') ) {
+    /**
+     * Acts as functions.php for AcadOowps WordPress functionality
+     *
+     */
+    public function __construct()
+    {
+        if (function_exists('add_theme_support')) {
             add_theme_support('menus');
             register_nav_menus(
                 array(
@@ -22,7 +30,7 @@ class OutlandishAcadOowpBundle extends Bundle {
             );
         }
 
-        if(function_exists('add_image_size')) {
+        if (function_exists('add_image_size')) {
             add_image_size('avatar-square', '100', '100', array('center', 'center'));
             add_image_size('item-image-12', '630', '380', array('center', 'center'));
             add_image_size('item-image-12-small', '630', '290', array('center', 'center'));
@@ -30,12 +38,10 @@ class OutlandishAcadOowpBundle extends Bundle {
             add_image_size('item-image-4', '198', '122', array('center', 'center'));
         }
 
-        if(function_exists('add_action')){
-            add_action(
-                'admin_menu', function () {
-                    remove_menu_page( 'themes.php' );
-                }
-            );
+        if (function_exists('add_action')) {
+            add_action('admin_menu', function(){
+                remove_menu_page('themes.php');
+            });
             add_action(
                 'admin_menu', function () {
                     add_menu_page('Menus', 'Menus', 'manage_options', 'nav-menus.php', '', 'dashicons-admin-appearance', 64);
@@ -43,15 +49,16 @@ class OutlandishAcadOowpBundle extends Bundle {
             );
         }
 
-        if(function_exists('add_shortcode')){
-
+        if (function_exists('add_shortcode')) {
             add_shortcode('outlandish_video', array($this, 'getVideo'));
         }
+    }
 
-	}
-
-    function getVideo($atts) {
-
+    /**
+     * @param array $atts
+     */
+    public function getVideo(array $atts)
+    {
         if (array_key_exists('vimeo', $atts)) {
             print '<iframe class="video-iframe vimeo-iframe" width="600" height="342" src="//player.vimeo.com/video/'. $atts['vimeo'] .'?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
         }
@@ -59,7 +66,6 @@ class OutlandishAcadOowpBundle extends Bundle {
         if (array_key_exists('youtube', $atts)) {
             print '<iframe class="video-iframe youtube-iframe" width="560" height="315" src="//www.youtube.com/embed/'. $atts['youtube'] .'" frameborder="0" allowfullscreen></iframe>';
         }
-
     }
 
 }

@@ -18,7 +18,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * 3. Renames any P2P connections that the posts have to use new post type name
  *
  */
-class InstallPostTypeCommand extends ContainerAwareCommand {
+class InstallPostTypeCommand extends ContainerAwareCommand
+{
 
     /** @var  OutputInterface */
     protected $output;
@@ -28,7 +29,8 @@ class InstallPostTypeCommand extends ContainerAwareCommand {
      * @input Old name of post type
      * @input New name of post type
      */
-    protected function configure() {
+    protected function configure()
+    {
         $this->setName('acadoowp:install:post-type')
             ->addArgument('inherit', InputArgument::REQUIRED, 'Post Type to inherit from')
             ->addArgument('name', InputArgument::OPTIONAL, 'name of the new Post Type class')
@@ -44,19 +46,22 @@ class InstallPostTypeCommand extends ContainerAwareCommand {
      *
      * @return null|int     null or 0 if everything went fine, or an error code
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $this->output = $output;
 
-        $inherit = $input->getArgument('inherit');
-        $name = $input->getArgument('name');
-        $friendlyName = $input->getArgument('friendlyName');
-        $friendlyNamePlural = $input->getArgument('friendlyNamePlural');
+//        $inherit = $input->getArgument('inherit');
+//        $name = $input->getArgument('name');
+//        $friendlyName = $input->getArgument('friendlyName');
+//        $friendlyNamePlural = $input->getArgument('friendlyNamePlural');
 
         //check to see that the SiteBundle exists. If not exit with error
-        if(!$this->siteBundleExists()) return false;
+        if (!$this->siteBundleExists()) {
+            return false;
+        }
 
-        //find best fit for $inheirt PostType
-        $inherit = $this->findPostType($inherit);
+        //find best fit for $inherit PostType
+//        $inherit = $this->findPostType($inherit);
 
         //create PostType dir in @OutlandishSiteBundle if it doesn't exist
         //todo: mkdir PostTypes ...
@@ -87,7 +92,7 @@ class InstallPostTypeCommand extends ContainerAwareCommand {
 
         //check that class exists
         //todo: find out how we can check that the class exists as we expect it to
-
+        return 0;
     }
 
     /**

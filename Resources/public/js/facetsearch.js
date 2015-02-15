@@ -146,7 +146,7 @@
 
 	FacetSearch.prototype.isSelected = function(selection) {
 		return $.inArray(selection, this.selections) > -1;
-	}
+	};
 
 	FacetSearch.prototype.setSearchTerm = function(searchTerm) {
 		this.searchTerm = searchTerm;

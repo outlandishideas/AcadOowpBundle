@@ -22,7 +22,12 @@ use Outlandish\RoutemasterBundle\Annotation\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-class SearchController extends DefaultController {
+/**
+ * Class SearchController
+ * @package Outlandish\AcadOowpBundle\Controller
+ */
+class SearchController extends DefaultController
+{
 
     public $search = null;
 
@@ -31,22 +36,22 @@ class SearchController extends DefaultController {
      *
      * @param Request $request
      * @return array
-     * @Template("OutlandishAcadOowpBundle:Page:pageFront.html.twig")
      */
     public function frontPageAction(Request $request)
     {
         /** @var Page $post */
         $post = $this->querySingle(array('page_id' => get_option('page_on_front')));$featuredPost = null;
 
-        if(!$request->query->has('post_type')){
+        if (!$request->query->has('post_type')) {
             $request->query->add(array('post_type' => $this->getSearchResultPostTypes()));
         }
 
-        if($request->query->has('s')){
+        if ($request->query->has('s')) {
             $name = sanitize_title($request->query->get('s'), null);
             $queryManager = $this->get('outlandish_oowp.query_manager');
             $results = $queryManager->query(array("name" => $name, "post_type" => "any", "posts_per_page" => 1));
-            if ($results->post_count == 1) {
+            $postCount = 'post_count';
+            if ($results->{$postCount} == 1) {
                 return $this->redirect($results->post->permalink());
             }
             $sections = array();
@@ -54,21 +59,20 @@ class SearchController extends DefaultController {
             $sections = $this->sections($post->sections());
         }
 
-        $response = array(
+        $templateData = array(
             'post' => $post,
             'featured_post' => $featuredPost,
             'sections' => $sections
         );
 
-        if(!empty($sections)){
-            return $response;
-        } else {
-            return array_merge(array(
-                'post' => $post,
-                'featured_post' => $featuredPost,
-                'sections' => $sections
-            ), $this->processSearch($request));
+        if (empty($sections)) {
+            $templateData = array_merge($templateData, $this->processSearch($request));
         }
+
+        return $this->render(
+            "OutlandishAcadOowpBundle:Page:pageFront.html.twig",
+            $templateData
+        );
     }
 
     /**
@@ -79,28 +83,38 @@ class SearchController extends DefaultController {
     public function indexAction(Request $request)
     {
         /** @var Page $post */
-        $post = $this->querySingle(array(
+        $queryArguments = array(
             'page_id' => $this->getIndexPageId(),
             'post_type' => Page::postType()
-        ), true);
+        );
+        $post = $this->querySingle($queryArguments, true);
 
         $featuredPost = null;
-        if($request->query->has('s')){
+        if ($request->query->has('s')) {
             $name = sanitize_title($request->query->get('s'), null);
             $queryManager = $this->get('outlandish_oowp.query_manager');
             $results = $queryManager->query(array("name" => $name, "post_type" => "any", "posts_per_page" => 1));
-            if ($results->post_count == 1) $featuredPost = $results->post;
+            $postCount = 'post_count';
+            if ($results->{$postCount} == 1) {
+                $featuredPost = $results->post;
+            }
         }
 
-        if(!$request->query->has('post_type')){
+        if (!$request->query->has('post_type')) {
             $request->query->add(array('post_type' => $this->getSearchResultPostTypes()));
         }
 
-        return array_merge(array(
+        $templateData = array(
             'post' => $post,
             'featured_post' => $featuredPost,
             'sections' => $post->sections()
-        ), $this->processSearch($request));
+        );
+        $templateData = array_merge($templateData, $this->processSearch($request));
+
+        return $this->render(
+            "OutlandishAcadOowpBundle:Search:index.html.twig",
+            $templateData
+        );
     }
 
     /**
@@ -118,7 +132,8 @@ class SearchController extends DefaultController {
         $response['search'] = $results;
         $response['items'] = null;
 
-        if($results->post_count > 0){
+        $postCount = 'post_count';
+        if ($results->$postCount > 0) {
             $response['items'] = $results->posts;
             $response['moreResultsUrl'] = "?" . $search->queryString(1);
         }
@@ -131,9 +146,9 @@ class SearchController extends DefaultController {
 
 
     /**
-     * @param Request $request
+     * @param Request $request symfony request object
+     * @param mixed   $name    slug to be used to get post
      * @return array
-     * @Template("OutlandishAcadOowpBundle:Search:post.html.twig")
      */
     public function singleAction(Request $request, $name)
     {
@@ -146,9 +161,12 @@ class SearchController extends DefaultController {
             return $class::isTheme();
         });
         $relatedThemes = array();
-        foreach($themes as $name => $class){
+        foreach ($themes as $name => $class) {
             $connected = $post->connected($class::postType(), false, array('orderby' => 'title'));
-            if($connected->post_count < 1) continue;
+            $postCount = 'post_count';
+            if ($connected->{$postCount} < 1) {
+                continue;
+            }
             $relatedThemes[] = array(
                 'title' => $class::friendlyName(),
                 'items' => $connected->posts
@@ -170,7 +188,7 @@ class SearchController extends DefaultController {
 
     /**
      * @param BasePost $post
-     * @param Request $request
+     * @param Request  $request
      * @return array
      * @Template("OutlandishAcadOowpBundle:Partial:relatedResources.html.twig")
      */
@@ -183,10 +201,10 @@ class SearchController extends DefaultController {
         });
 
         //add the $posts ID to post__not_in in order to not include this post in search results.
-        if($request->query->has('post__not_in')) {
+        if ($request->query->has('post__not_in')) {
             //make sure that we are dealing with an array
             $value = $request->query->get('post__not_in');
-            if(!is_array($value)) {
+            if (!is_array($value)) {
                 $request->query->set('post__not_in', array($value));
             }
             $params['post__not_in'][] = $post->ID;
@@ -194,13 +212,15 @@ class SearchController extends DefaultController {
             $request->query->add(array('post__not_in' => array($post->ID)));
         }
 
-        foreach($themes as $postType => $class){
+        foreach ($themes as $postType => $class) {
             $ids = array_reduce($post->connected($postType)->posts, function($carry, $post){
                 $carry[] = $post->ID;
+
                 return $carry;
             }, array());
-            if(count($ids) > 0 ){
-                if(!$request->query->has($postType)){
+
+            if (count($ids) > 0 ) {
+                if (!$request->query->has($postType)) {
                     $request->query->add(array($postType => $ids));
                 }
             } else {
@@ -211,11 +231,17 @@ class SearchController extends DefaultController {
         return $this->processSearch($request);
     }
 
+    /**
+     * @return mixed
+     */
     protected function getIndexPageId()
     {
         return Page::SEARCH_ID;
     }
 
+    /**
+     * @return array
+     */
     protected function getSearchResultPostTypes()
     {
         return array();
@@ -223,6 +249,8 @@ class SearchController extends DefaultController {
 
     /**
      * @Template("OutlandishAcadOowpBundle:Search:ajax.html.twig")
+     * @param Request $request
+     * @return array
      */
     public function ajaxAction(Request $request)
     {
@@ -238,12 +266,12 @@ class SearchController extends DefaultController {
      */
     protected function sections($sections)
     {
-        if(!$sections || !is_array($sections)){
+        if (!$sections || !is_array($sections)) {
             return array();
         }
         $search = $this->get('outlandish_acadoowp.faceted_search.search');
-        foreach($sections as $s => $section){
-            if(!isset($section['acf_fc_layout'])){
+        foreach ($sections as $s => $section) {
+            if (!isset($section['acf_fc_layout'])) {
                 unset($sections[$s]);
                 break;
             }
@@ -256,29 +284,30 @@ class SearchController extends DefaultController {
                     $params['s'] = $section['query'];
                     unset($section['query']);
 
-                    if(!empty($section['post_types'])){
+                    if (!empty($section['post_types'])) {
                         $params['post_type'] = $section['post_types'];
                     }
                     unset($section['post_types']);
 
-                    if(!empty($section['connected_to'])){
+                    if (!empty($section['connected_to'])) {
                         //get posts from array of post ids in $section['connected_to']
                         $query = Post::fetchAll(array('post_type' => 'any', 'post__in' => $section['connected_to']));
-                        if($query->post_count > 0){
+                        $postCount = 'post_count';
+                        if ($query->{$postCount} > 0) {
                             $postTypes = array();
                             //sort posts from query by post type
-                            foreach($query->posts as $post){
+                            foreach ($query->posts as $post) {
                                 /** @var Post $post */
-                                if(!isset($postTypes[$post->post_type])){
-                                    $postTypes[$post->post_type] = array();
+                                if (!isset($postTypes[$post->postType()])) {
+                                    $postTypes[$post->postType()] = array();
                                 }
-                                $postTypes[$post->post_type][] = $post->ID;
+                                $postTypes[$post->postType()][] = $post->ID;
                             }
                             //create facet for each post type
-                            foreach($postTypes as $postType => $posts){
+                            foreach ($postTypes as $postType => $posts) {
                                 $params[$postType] = $posts;
                                 $facet = $search->addFacetPostToPost($postType, "", $postType);
-                                foreach($posts as $postId){
+                                foreach ($posts as $postId) {
                                     $option = new FacetOption($postId, "");
                                     $facet->addOption($option);
                                 }
@@ -287,18 +316,18 @@ class SearchController extends DefaultController {
                     }
                     unset($section['connected_to']);
 
-                    if(!empty($section['order'])){
+                    if (!empty($section['order'])) {
                         $search->addFacetOrder('order', "");
                         $params['order'] = $section['order'];
                     }
 
-                    if(!empty($section['orderby'])){
+                    if (!empty($section['orderby'])) {
                         $search->addFacetOrderBy('orderby', "");
                         $params['orderby'] = $section['orderby'];
                     }
 
                     //todo: create a generic class for adding search parameters to use here instead of AddFacetOrderBy
-                    if(!empty($section['search_posts_limit'])){
+                    if (!empty($section['search_posts_limit'])) {
                         $search->addFacetOrderBy('posts_per_page', "");
                         $params['posts_per_page'] = $section['search_posts_limit'];
                     }
@@ -309,17 +338,20 @@ class SearchController extends DefaultController {
                 //if curated posts convert WP_Post items to ooPost items
                 case "curated_posts":
                     $ids = array();
-                    foreach($section['items'] as $item){
-                        if($item instanceof \WP_Post){
+                    foreach ($section['items'] as $item) {
+                        if ($item instanceof \WP_Post) {
                             $ids[] = $item->ID;
                         } else {
                             $ids[] = $item;
                         }
                     }
                     $queryArgs = array('post_type' => 'any', 'post__in' => $ids);
-                    if (!$section['order_by_date']) {$queryArgs['orderby'] = 'post__in';}
+                    if (!$section['order_by_date']) {
+                        $queryArgs['orderby'] = 'post__in';
+                    }
                     $query = Post::fetchAll($queryArgs);
-                    if($query->post_count > 0){
+                    $postCount = 'post_count';
+                    if ($query->{$postCount} > 0) {
                         $items = $query->posts;
                     } else {
                         $items = array();
@@ -330,6 +362,7 @@ class SearchController extends DefaultController {
                     unset($sections[$s]);
             }
         }
+
         return $sections;
     }
 
