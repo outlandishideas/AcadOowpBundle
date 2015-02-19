@@ -6,6 +6,14 @@ use Outlandish\OowpBundle\Manager\PostManager;
 use Outlandish\OowpSearchBundle\Form\EventSubscriber\WPFormEventSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * Creates a form that produces WP Query arguments
+ *
+ * Call the create method and pass through the $postTypes and $
+ *
+ * Class ItemSearchManager
+ * @package Outlandish\AcadOowpBundle\Manager
+ */
 class ItemSearchManager
 {
     /**

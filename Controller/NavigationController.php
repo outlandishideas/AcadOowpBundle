@@ -24,7 +24,6 @@ use Outlandish\SiteBundle\PostType\Theme;
  */
 class NavigationController extends SearchController
 {
-
     /**
      * @return mixed
      */
