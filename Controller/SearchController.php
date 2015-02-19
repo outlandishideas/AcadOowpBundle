@@ -317,7 +317,9 @@ class SearchController extends DefaultController {
                         }
                     }
                     $queryArgs = array('post_type' => 'any', 'post__in' => $ids);
-                    if (!$section['order_by_date']) {$queryArgs['orderby'] = 'post__in';}
+                    if (!array_key_exists('order_by_date', $section) || !$section['order_by_date']) {
+                        $queryArgs['orderby'] = 'post__in';
+                    }
                     $query = Post::fetchAll($queryArgs);
                     if($query->post_count > 0){
                         $items = $query->posts;
