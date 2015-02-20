@@ -1,9 +1,19 @@
 services:
-    outlandish_acadoowp.acf:
+    outlandish_acadoowp.wordpress.wrapper:
+        class: Outlandish\AcadOowpBundle\Wordpress\WordpressWrapper
+
+    outlandish_acadoowp.helper.wordpress_menu:
+        class: Outlandish\AcadOowpBundle\Helper\WordpressMenuHelper
+        arguments: [ @outlandish_routemaster.query_manager, @outlandish_acadoowp.wordpress.wrapper ]
+
+    outlandish_acadoowp.page_sections.builder:
+        class: Outlandish\AcadOowpBundle\PageSections\PageSectionsBuilder
+
+    outlandish_acadoowp.helper.acf:
         class: Outlandish\AcadOowpBundle\Helper\AcfHelper
         arguments: [@outlandish_oowp.helper.wp]
 
-    outlandish_acadoowp.breadcrumb_helper:
+    outlandish_acadoowp.helper.breadcrumb:
         class: Outlandish\AcadOowpBundle\Helper\BreadcrumbHelper
         arguments: [@outlandish_oowp.post_manager, @outlandish_oowp.query_manager]
 
@@ -12,3 +22,14 @@ services:
         arguments: [@templating.engine.twig]
         tags:
             - {name: kernel.event_listener, event: kernel.exception, method: onKernelException}
+
+    outlandish_acadoowp.template_component.footer:
+        class: Outlandish\AcadOowpBundle\TemplateComponent\FooterComponent
+        arguments: [ @outlandish_oowp.helper.wp, @outlandish_acadoowp.helper.wordpress_menu, @outlandish_acadoowp.page_sections.builder ]
+
+    outlandish_acadoowp.controller.footer:
+        class: Outlandish\AcadOowpBundle\Controller\ComponentController
+        arguments: [ @templating.engine.twig ]
+        calls:
+            - [ setTemplate, [ OutlandishAcadOowpBundle:Navigation:Footer.html.twig ] ]
+            - [ addComponent, [ @outlandish_acadoowp.template_component.footer ] ]
