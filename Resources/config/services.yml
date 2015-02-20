@@ -27,9 +27,20 @@ services:
         class: Outlandish\AcadOowpBundle\TemplateComponent\FooterComponent
         arguments: [ @outlandish_oowp.helper.wp, @outlandish_acadoowp.helper.wordpress_menu, @outlandish_acadoowp.page_sections.builder ]
 
+    outlandish_acadoowp.template_component.header:
+        class: Outlandish\AcadOowpBundle\TemplateComponent\HeaderComponent
+        arguments: [ @outlandish_oowp.helper.wp ]
+
     outlandish_acadoowp.controller.footer:
         class: Outlandish\AcadOowpBundle\Controller\ComponentController
         arguments: [ @templating.engine.twig ]
         calls:
             - [ setTemplate, [ OutlandishAcadOowpBundle:Navigation:Footer.html.twig ] ]
             - [ addComponent, [ @outlandish_acadoowp.template_component.footer ] ]
+
+    outlandish_acadoowp.controller.header:
+        class: Outlandish\AcadOowpBundle\Controller\ComponentController
+        arguments: [ @templating.engine.twig ]
+        calls:
+            - [ setTemplate, [ OutlandishAcadOowpBundle:Header:header.html.twig ] ]
+            - [ addComponent, [ @outlandish_acadoowp.template_component.header ] ]
