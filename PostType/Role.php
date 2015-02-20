@@ -20,7 +20,7 @@ abstract class Role extends Theme
      * @param array $defaults
      * @return mixed
      */
-    public static function getRegistrationArgs(array $defaults)
+    public static function getRegistrationArgs($defaults)
     {
         $defaults['hierarchical'] = true;
 
