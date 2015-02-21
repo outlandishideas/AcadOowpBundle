@@ -8,6 +8,8 @@
 
 namespace Outlandish\AcadOowpBundle\Wordpress;
 
+use Outlandish\OowpBundle\PostType\Post as OowpPost;
+
 /**
  * Wraps Wordpress functions to aid testing and cleaner code
  *
@@ -17,6 +19,8 @@ namespace Outlandish\AcadOowpBundle\Wordpress;
 class WordpressWrapper
 {
     /**
+     * Wraps the is_wp_error() Wordpress function
+     *
      * @param $thing
      * @return bool
      */
@@ -26,6 +30,8 @@ class WordpressWrapper
     }
 
     /**
+     * Wraps the get_nav_menu_locations() Wordpress function
+     *
      * @return array
      */
     public function getNavMenuLocations()
@@ -34,6 +40,8 @@ class WordpressWrapper
     }
 
     /**
+     * Wraps the get_term() Wordpress function
+     *
      * @param $term
      * @param $taxonomy
      * @param string $output
@@ -46,6 +54,8 @@ class WordpressWrapper
     }
 
     /**
+     * Wraps the wp_get_nav_menu_items() Wordpress function
+     *
      * @param $menu
      * @param array $args
      * @return mixed
@@ -53,5 +63,65 @@ class WordpressWrapper
     public function getNavMenuItems($menu, $args = array())
     {
         return wp_get_nav_menu_items($menu, $args);
+    }
+
+    /**
+     * Wraps the is_search() Wordpress function
+     *
+     * @return bool
+     */
+    public function isSearch()
+    {
+        return is_search();
+    }
+
+    /**
+     * Wraps the is_404() Wordpress function
+     *
+     * @return bool
+     */
+    public function is404()
+    {
+        return is_404();
+    }
+
+    /**
+     * Wraps the is_single() Wordpress function
+     *
+     * @return bool
+     */
+    public function isSingle()
+    {
+        return is_single();
+    }
+
+    /**
+     * Wraps the get_post_ancestors() Wordpress function
+     *
+     * @param int|OowpPost|\WP_Post $post can either pass the post object or the post objects ids
+     *
+     * @return array
+     */
+    public function getPostAncestors($post)
+    {
+        return get_post_ancestors($post);
+    }
+
+    /**
+     * Wraps the home_url() Wordpress function
+     *
+     * @return string|void
+     */
+    public function homeUrl()
+    {
+        return home_url();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHome()
+    {
+        return is_home();
     }
 }
