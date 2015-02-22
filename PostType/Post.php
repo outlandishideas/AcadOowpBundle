@@ -9,7 +9,7 @@ use Outlandish\SiteBundle\PostType\Person;
  * Class Post
  * @package Outlandish\AcadOowpBundle\PostType
  */
-abstract class Post extends BasePost
+abstract class Post extends BasePost implements PostInterface
 {
     /**
      * Return the name of the icon for this post type
