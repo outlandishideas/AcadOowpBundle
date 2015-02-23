@@ -44,3 +44,26 @@ services:
         calls:
             - [ setTemplate, [ OutlandishAcadOowpBundle:Header:header.html.twig ] ]
             - [ addComponent, [ @outlandish_acadoowp.template_component.header ] ]
+
+    outlandish_acadoowp.controller.breadcrumb:
+        class: Outlandish\AcadOowpBundle\Controller\ComponentController
+        arguments: [ @templating.engine.twig ]
+        calls:
+            - [ setTemplate, [ OutlandishAcadOowpBundle:Partial:breadcrumbs.html.twig ] ]
+            - [ addComponent, [ @outlandish_acadoowp.template_component.breadcrumb ] ]
+
+    outlandish_acadoowp.repository.post_repository:
+        class: Outlandish\AcadOowpBundle\Repository\PostRepository
+        arguments: [ @outlandish_oowp.query_manager ]
+
+    outlandish_acadoowp.breadcrumb.breadcrumb_trail:
+        class: Outlandish\AcadOowpBundle\Breadcrumb\BreadcrumbTrail
+        arguments: [ @outlandish_acadoowp.wordpress.wrapper, @outlandish_acadoowp.breadcrumb.factory ]
+
+    outlandish_acadoowp.breadcrumb.factory:
+        class: Outlandish\AcadOowpBundle\Breadcrumb\BreadcrumbFactory
+        arguments: [ @outlandish_acadoowp.wordpress.wrapper, @outlandish_acadoowp.repository.post_repository ]
+
+    outlandish_acadoowp.template_component.breadcrumb:
+        class: Outlandish\AcadOowpBundle\TemplateComponent\BreadcrumbComponent
+        arguments: [ @request_stack, @outlandish_acadoowp.breadcrumb.breadcrumb_trail, @outlandish_acadoowp.repository.post_repository ]

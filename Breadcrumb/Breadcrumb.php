@@ -5,19 +5,19 @@ namespace Outlandish\AcadOowpBundle\Breadcrumb;
 
 class Breadcrumb
 {
-    private $label;
-    private $url;
-    private $hover;
+    public $label;
+    public $url;
+    public $title;
 
     /**
      * @param string $label
      * @param string $url
-     * @param string $hover
+     * @param string $title
      */
-    public function __construct($label, $url, $hover)
+    public function __construct($label, $url, $title)
     {
         $this->label = $label;
         $this->url = $url;
-        $this->hover = $hover;
+        $this->title = $title;
     }
 }

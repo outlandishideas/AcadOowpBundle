@@ -2,6 +2,7 @@
 
 namespace Outlandish\AcadOowpBundle\Breadcrumb;
 
+use Outlandish\AcadOowpBundle\Repository\Repository;
 use Outlandish\AcadOowpBundle\Wordpress\WordpressWrapper;
 use Outlandish\OowpBundle\Manager\QueryManager;
 use Outlandish\AcadOowpBundle\PostType\PostInterface as Post;
@@ -14,14 +15,14 @@ class BreadcrumbFactory
      */
     private $wordpress;
     /**
-     * @var QueryManager
+     * @var Repository
      */
-    private $queryManager;
+    private $repository;
 
-    public function __construct(WordpressWrapper $wordpress, QueryManager $queryManager)
+    public function __construct(WordpressWrapper $wordpress, Repository $repository)
     {
         $this->wordpress = $wordpress;
-        $this->queryManager = $queryManager;
+        $this->repository = $repository;
     }
 
     /**
@@ -81,39 +82,36 @@ class BreadcrumbFactory
      */
     public function makeFromAncestors(Post $post)
     {
-        $ids = $this->wordpress->getPostAncestors($post);
-
-        $args = [
-            'post__in' => $ids,
-            'orderby' => 'post__in',
-        ];
-
-        $posts = $this->queryManager->query($args)->posts;
-
         $crumbs = [];
 
+        $ids = $this->wordpress->getPostAncestors($post);
+
+        if (count($ids) < 1) {
+            return $crumbs;
+        }
+
+        $posts = $this->repository->fetchMany($ids);
+
         foreach($posts as $post) {
-            $crumbs[] = $this->makeFromPost($post);
+            $crumbs = array_merge($crumbs, $this->makeFromPost($post));
         }
 
         return $crumbs;
     }
 
     /**
-     * @param OowpPost $post
+     * @param Post $post
      *
      * @return Breadcrumb[]
      */
     public function makeFromParent(Post $post)
     {
-        $parentId = $post->postTypeParentId();
+        $parent = $post->parent();
 
-        $post = $this->queryManager->query(['page_id' => $parentId])->post;
-
-        if (!$post) {
-            return array();
+        if (!$parent) {
+            return [];
         }
 
-        return [$this->makeFromPost($post)];
+        return $this->makeFromPost($parent);
     }
 }

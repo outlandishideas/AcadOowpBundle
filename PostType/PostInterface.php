@@ -3,8 +3,15 @@
 namespace Outlandish\AcadOowpBundle\PostType;
 
 
-interface PostInterface {
+interface PostInterface
+{
 
-    public function postType();
+    public static function postType();
+
+    public function parent();
+
+    public function title();
+
+    public function permalink();
 
 }

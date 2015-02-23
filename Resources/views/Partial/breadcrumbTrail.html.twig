@@ -1,0 +1,11 @@
+<section id="breadcrumbs" class="section">
+    <div class="row">
+        <div class="large-24 columns">
+            <div class="breadcrumbs">
+                {% block bead_links %}
+                    {{ render(controller('outlandish_acadoowp.controller.breadcrumb:render', {}, {'post_id': post.ID} )) }}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</section>

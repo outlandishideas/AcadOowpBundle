@@ -3,6 +3,7 @@
         {% if not crumb.url %}
             <li>{{ crumb.label }}</li>
         {% else %}
+            {{ dump(crumb) }}
             <li><a title="{{ crumb.title }}" href="{{ crumb.url }}">{{ crumb.label }}</a></li>
         {% endif %}
     {% endfor %}
